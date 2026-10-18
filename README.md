@@ -9,6 +9,15 @@ timeline me jodta hai, aur har step ka hash-based chain of custody rakhta hai.
 
 > **Version note (7 Oct 2026):** `correlate.py`, `pipeline.py`, `main.py`, `cloudstate.py`, `make_dashboard.py` aur `tests/test_rules_and_pipeline.py` dobara likhe gaye (purani zip ki ye files kharab ho gayi thi). Is README ke saare numbers isi version ko dobara chala ke liye gaye hain (`main.py evaluate`, `main.py real-eval`, `main.py selftest`, `main.py triage`).
 
+
+**🌐 Live demo (GitHub Pages):** https://jayveerv.github.io/DFIR-Framework-WebApp/
+- Research dashboard: https://jayveerv.github.io/DFIR-Framework-WebApp/results/dashboard.html
+- Evaluation report: https://jayveerv.github.io/DFIR-Framework-WebApp/results/evaluation_report.html
+- Sample forensic report: https://jayveerv.github.io/DFIR-Framework-WebApp/cases/DEMO/report.html
+
+**Web console ko online deploy karna (Render.com, free):** repo me `render.yaml` hai. Render pe *New → Blueprint* → is repo ko chuno →
+`DFIR_ADMIN_PASSWORD` set karo (login: `demo` / wahi password). Public mode me live triage / SSH / Windows export band rehte hain.
+
 ---
 
 ## ★ Web Application: CP-DFIR Investigation Console (NEW)
