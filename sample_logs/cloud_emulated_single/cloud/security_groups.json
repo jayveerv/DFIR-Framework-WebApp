@@ -1,0 +1,99 @@
+{
+ "regions": [
+  "us-east-1"
+ ],
+ "items": [
+  {
+   "group_id": "sg-340212a633113335d",
+   "name": "default",
+   "vpc": "vpc-8c2604d9a5fb4e6c3",
+   "region": "us-east-1",
+   "rules": []
+  },
+  {
+   "group_id": "sg-896b09af2c35a3c06",
+   "name": "ssh-world",
+   "vpc": "vpc-8c2604d9a5fb4e6c3",
+   "region": "us-east-1",
+   "rules": [
+    {
+     "protocol": "tcp",
+     "from_port": 22,
+     "to_port": 22,
+     "cidrs": [
+      "0.0.0.0/0"
+     ],
+     "groups": []
+    }
+   ]
+  },
+  {
+   "group_id": "sg-369dc0053cd4fc9ca",
+   "name": "rdp-world",
+   "vpc": "vpc-8c2604d9a5fb4e6c3",
+   "region": "us-east-1",
+   "rules": [
+    {
+     "protocol": "tcp",
+     "from_port": 3389,
+     "to_port": 3389,
+     "cidrs": [
+      "0.0.0.0/0"
+     ],
+     "groups": []
+    }
+   ]
+  },
+  {
+   "group_id": "sg-d055578cb5d19d0a7",
+   "name": "all-open",
+   "vpc": "vpc-8c2604d9a5fb4e6c3",
+   "region": "us-east-1",
+   "rules": [
+    {
+     "protocol": "-1",
+     "from_port": null,
+     "to_port": null,
+     "cidrs": [
+      "0.0.0.0/0"
+     ],
+     "groups": []
+    }
+   ]
+  },
+  {
+   "group_id": "sg-a103687542fb53a8a",
+   "name": "web-443",
+   "vpc": "vpc-8c2604d9a5fb4e6c3",
+   "region": "us-east-1",
+   "rules": [
+    {
+     "protocol": "tcp",
+     "from_port": 443,
+     "to_port": 443,
+     "cidrs": [
+      "0.0.0.0/0"
+     ],
+     "groups": []
+    }
+   ]
+  },
+  {
+   "group_id": "sg-680e20539c4169546",
+   "name": "db-internal",
+   "vpc": "vpc-8c2604d9a5fb4e6c3",
+   "region": "us-east-1",
+   "rules": [
+    {
+     "protocol": "tcp",
+     "from_port": 5432,
+     "to_port": 5432,
+     "cidrs": [
+      "10.0.0.0/8"
+     ],
+     "groups": []
+    }
+   ]
+  }
+ ]
+}

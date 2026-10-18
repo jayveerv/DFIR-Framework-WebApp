@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CP-DFIR Framework</title>
+<style>
+:root{--bg:#0b1020;--card:#141b30;--fg:#e6e9f2;--mut:#9aa3b8;--acc:#4fd1c5;--bd:#26304d}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]){--bg:#f5f7fb;--card:#fff;--fg:#141b30;--mut:#5a6378;--acc:#0f8f86;--bd:#dde2ec}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 system-ui,Segoe UI,Roboto,sans-serif}
+main{max-width:960px;margin:0 auto;padding:40px 16px}
+h1{font-size:28px;margin:0 0 6px}p.sub{color:var(--mut);margin:0 0 28px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+a.card{display:block;background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:18px;color:inherit;text-decoration:none}
+a.card:hover{border-color:var(--acc)}a.card b{color:var(--acc)}a.card span{display:block;color:var(--mut);font-size:14px;margin-top:4px}
+h2{font-size:18px;margin:34px 0 12px}.shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+.shots img{width:100%;border-radius:10px;border:1px solid var(--bd)}footer{color:var(--mut);font-size:13px;margin-top:40px}
+</style></head><body><main>
+<h1>A Scalable Cross-Platform DFIR Framework</h1>
+<p class="sub">Automated evidence collection, correlation and cloud forensic investigation across Windows, Linux and AWS. M.Tech (Cyber Security) Phase-II, PIET, Parul University: Jayveer Vasava.</p>
+<div class="grid">
+<a class="card" id="live" href="#"><b>Live web console</b><span>The working CP-DFIR Investigation Console (Flask app)</span></a>
+<a class="card" href="results/dashboard.html"><b>Research dashboard</b><span>Overview, correlation, MITRE, cloud, custody, scale</span></a>
+<a class="card" href="results/evaluation_report.html"><b>Evaluation report</b><span>Scenario S1 to S5 detection metrics</span></a>
+<a class="card" href="results/real_data_report.html"><b>Real-data report</b><span>Results on public EVTX attack samples</span></a>
+<a class="card" href="cases/DEMO/report.html"><b>Sample forensic report</b><span>Generated case report (DEMO case)</span></a>
+<a class="card" href="https://github.com/jayveerv/DFIR-Framework-WebApp"><b>Source code</b><span>GitHub repository with README and tests</span></a>
+</div>
+<h2>Screenshots</h2>
+<div class="shots">
+<img src="screenshots/webapp_overview.png" alt="Web console overview">
+<img src="screenshots/webapp_investigation.png" alt="Investigation graph">
+<img src="screenshots/webapp_custody.png" alt="Chain of custody">
+<img src="screenshots/webapp_mitre.png" alt="MITRE ATT&amp;CK">
+<img src="screenshots/webapp_cloud_posture.png" alt="Cloud posture">
+<img src="screenshots/webapp_tamper_detected.png" alt="Tampering detected">
+</div>
+<footer>Guides: Dr. Ankita Gandhi, Dr. Kruti Kamal Sutaria</footer>
+</main>
+<script>var L="";var a=document.getElementById("live");if(L){a.href=L}else{a.querySelector("span").textContent="Coming soon"}</script>
+</body></html>

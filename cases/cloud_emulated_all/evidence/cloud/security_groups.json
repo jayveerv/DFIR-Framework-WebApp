@@ -1,0 +1,412 @@
+{
+ "regions": [
+  "af-south-1",
+  "ap-east-1",
+  "ap-east-2",
+  "ap-northeast-1",
+  "ap-northeast-2",
+  "ap-northeast-3",
+  "ap-south-1",
+  "ap-south-2",
+  "ap-southeast-1",
+  "ap-southeast-2",
+  "ap-southeast-3",
+  "ap-southeast-4",
+  "ap-southeast-5",
+  "ap-southeast-6",
+  "ap-southeast-7",
+  "ca-central-1",
+  "ca-west-1",
+  "cn-north-1",
+  "cn-northwest-1",
+  "eu-central-1",
+  "eu-central-2",
+  "eu-north-1",
+  "eu-south-1",
+  "eu-south-2",
+  "eu-west-1",
+  "eu-west-2",
+  "eu-west-3",
+  "il-central-1",
+  "me-central-1",
+  "me-south-1",
+  "mx-central-1",
+  "sa-east-1",
+  "us-east-1",
+  "us-east-2",
+  "us-gov-east-1",
+  "us-gov-west-1",
+  "us-west-1",
+  "us-west-2"
+ ],
+ "items": [
+  {
+   "group_id": "sg-988fe569bbd475d0e",
+   "name": "default",
+   "vpc": "vpc-af8a3fa3cf880587a",
+   "region": "af-south-1",
+   "rules": []
+  },
+  {
+   "group_id": "sg-0509ffe2d42fe87f3",
+   "name": "default",
+   "vpc": "vpc-8edd39dba8e22bf0a",
+   "region": "ap-east-1",
+   "rules": []
+  },
+  {
+   "group_id": "sg-6ee72293f373b5683",
+   "name": "default",
+   "vpc": "vpc-0a9714cb8a3baf18d",
+   "region": "ap-east-2",
+   "rules": []
+  },
+  {
+   "group_id": "sg-09c14dfc60d862cdb",
+   "name": "default",
+   "vpc": "vpc-907259a11a165f2e8",
+   "region": "ap-northeast-1",
+   "rules": []
+  },
+  {
+   "group_id": "sg-98e7f3ad05c062654",
+   "name": "default",
+   "vpc": "vpc-af8407184db0fb913",
+   "region": "ap-northeast-2",
+   "rules": []
+  },
+  {
+   "group_id": "sg-521a58989616528ce",
+   "name": "default",
+   "vpc": "vpc-cd04945483ae32213",
+   "region": "ap-northeast-3",
+   "rules": []
+  },
+  {
+   "group_id": "sg-9574dccf22576c933",
+   "name": "default",
+   "vpc": "vpc-dc404da15ccfbbebf",
+   "region": "ap-south-1",
+   "rules": []
+  },
+  {
+   "group_id": "sg-dda1d5befc2ed0381",
+   "name": "default",
+   "vpc": "vpc-b3f7564b30c6cd150",
+   "region": "ap-south-2",
+   "rules": []
+  },
+  {
+   "group_id": "sg-c8b392805dd9817d1",
+   "name": "default",
+   "vpc": "vpc-be6349a4022151b40",
+   "region": "ap-southeast-1",
+   "rules": []
+  },
+  {
+   "group_id": "sg-5b26780a2058000c0",
+   "name": "default",
+   "vpc": "vpc-23ee02894c43495e3",
+   "region": "ap-southeast-2",
+   "rules": []
+  },
+  {
+   "group_id": "sg-6683f17b784d137ec",
+   "name": "default",
+   "vpc": "vpc-2f8ff50c0f5f12216",
+   "region": "ap-southeast-3",
+   "rules": []
+  },
+  {
+   "group_id": "sg-3cb1fd04629106ef4",
+   "name": "default",
+   "vpc": "vpc-2dd011a6eb25e0e72",
+   "region": "ap-southeast-4",
+   "rules": []
+  },
+  {
+   "group_id": "sg-873e2a6f8f45d11f0",
+   "name": "default",
+   "vpc": "vpc-1221e1c3cdeba3232",
+   "region": "ap-southeast-5",
+   "rules": []
+  },
+  {
+   "group_id": "sg-0174df280c9afd8e9",
+   "name": "default",
+   "vpc": "vpc-411ccdcdd61774d62",
+   "region": "ap-southeast-6",
+   "rules": []
+  },
+  {
+   "group_id": "sg-9bbcd2cbc431a1202",
+   "name": "default",
+   "vpc": "vpc-bb4bb5d94dbba8bcb",
+   "region": "ap-southeast-7",
+   "rules": []
+  },
+  {
+   "group_id": "sg-4827d664d57dd762f",
+   "name": "default",
+   "vpc": "vpc-143966d3cccb33dc9",
+   "region": "ca-central-1",
+   "rules": []
+  },
+  {
+   "group_id": "sg-23eff2fd3618bb11f",
+   "name": "default",
+   "vpc": "vpc-f10f7afcebd4d7708",
+   "region": "ca-west-1",
+   "rules": []
+  },
+  {
+   "group_id": "sg-c4aef4aa9bf14faa3",
+   "name": "default",
+   "vpc": "vpc-4fb5dd650061f3c68",
+   "region": "cn-north-1",
+   "rules": []
+  },
+  {
+   "group_id": "sg-3cee558390c0e8fe1",
+   "name": "default",
+   "vpc": "vpc-e605d6889e5062348",
+   "region": "cn-northwest-1",
+   "rules": []
+  },
+  {
+   "group_id": "sg-2eb06ba5760218799",
+   "name": "default",
+   "vpc": "vpc-665ded9f8a03641d7",
+   "region": "eu-central-1",
+   "rules": []
+  },
+  {
+   "group_id": "sg-ce5b40ef425c5d135",
+   "name": "default",
+   "vpc": "vpc-8e7d069e07924f04c",
+   "region": "eu-central-2",
+   "rules": []
+  },
+  {
+   "group_id": "sg-00d1403a609eee915",
+   "name": "default",
+   "vpc": "vpc-c270cc6f772af2a51",
+   "region": "eu-north-1",
+   "rules": []
+  },
+  {
+   "group_id": "sg-18f2a2e2e7c55ca9e",
+   "name": "default",
+   "vpc": "vpc-508ec215c7722dc31",
+   "region": "eu-south-1",
+   "rules": []
+  },
+  {
+   "group_id": "sg-49e40dc8ed82f45d9",
+   "name": "default",
+   "vpc": "vpc-8f3a4e8a12c0ca143",
+   "region": "eu-south-2",
+   "rules": []
+  },
+  {
+   "group_id": "sg-ce31439b60f936d47",
+   "name": "default",
+   "vpc": "vpc-00a5126f05f2610c7",
+   "region": "eu-west-1",
+   "rules": []
+  },
+  {
+   "group_id": "sg-21df57f4f4807adf9",
+   "name": "default",
+   "vpc": "vpc-56dda79fe1e512b4f",
+   "region": "eu-west-2",
+   "rules": []
+  },
+  {
+   "group_id": "sg-6449e897e23aa96cc",
+   "name": "default",
+   "vpc": "vpc-36bd929934d883867",
+   "region": "eu-west-3",
+   "rules": []
+  },
+  {
+   "group_id": "sg-40ed6d7228fcbd0bc",
+   "name": "default",
+   "vpc": "vpc-0e9318f079bdc1520",
+   "region": "il-central-1",
+   "rules": []
+  },
+  {
+   "group_id": "sg-6831109af13ac6274",
+   "name": "default",
+   "vpc": "vpc-880bcfe6fb945d455",
+   "region": "me-central-1",
+   "rules": []
+  },
+  {
+   "group_id": "sg-c825ef3ab3a728c7c",
+   "name": "default",
+   "vpc": "vpc-a7b130c5253be5419",
+   "region": "me-south-1",
+   "rules": []
+  },
+  {
+   "group_id": "sg-89e40c3e427c33b09",
+   "name": "default",
+   "vpc": "vpc-55c54d915aeb7bca0",
+   "region": "mx-central-1",
+   "rules": []
+  },
+  {
+   "group_id": "sg-b47a1ff0efac006a6",
+   "name": "default",
+   "vpc": "vpc-65a9b1cb50979cf6b",
+   "region": "sa-east-1",
+   "rules": []
+  },
+  {
+   "group_id": "sg-340212a633113335d",
+   "name": "default",
+   "vpc": "vpc-8c2604d9a5fb4e6c3",
+   "region": "us-east-1",
+   "rules": []
+  },
+  {
+   "group_id": "sg-896b09af2c35a3c06",
+   "name": "ssh-world",
+   "vpc": "vpc-8c2604d9a5fb4e6c3",
+   "region": "us-east-1",
+   "rules": [
+    {
+     "protocol": "tcp",
+     "from_port": 22,
+     "to_port": 22,
+     "cidrs": [
+      "0.0.0.0/0"
+     ],
+     "groups": []
+    }
+   ]
+  },
+  {
+   "group_id": "sg-369dc0053cd4fc9ca",
+   "name": "rdp-world",
+   "vpc": "vpc-8c2604d9a5fb4e6c3",
+   "region": "us-east-1",
+   "rules": [
+    {
+     "protocol": "tcp",
+     "from_port": 3389,
+     "to_port": 3389,
+     "cidrs": [
+      "0.0.0.0/0"
+     ],
+     "groups": []
+    }
+   ]
+  },
+  {
+   "group_id": "sg-d055578cb5d19d0a7",
+   "name": "all-open",
+   "vpc": "vpc-8c2604d9a5fb4e6c3",
+   "region": "us-east-1",
+   "rules": [
+    {
+     "protocol": "-1",
+     "from_port": null,
+     "to_port": null,
+     "cidrs": [
+      "0.0.0.0/0"
+     ],
+     "groups": []
+    }
+   ]
+  },
+  {
+   "group_id": "sg-a103687542fb53a8a",
+   "name": "web-443",
+   "vpc": "vpc-8c2604d9a5fb4e6c3",
+   "region": "us-east-1",
+   "rules": [
+    {
+     "protocol": "tcp",
+     "from_port": 443,
+     "to_port": 443,
+     "cidrs": [
+      "0.0.0.0/0"
+     ],
+     "groups": []
+    }
+   ]
+  },
+  {
+   "group_id": "sg-680e20539c4169546",
+   "name": "db-internal",
+   "vpc": "vpc-8c2604d9a5fb4e6c3",
+   "region": "us-east-1",
+   "rules": [
+    {
+     "protocol": "tcp",
+     "from_port": 5432,
+     "to_port": 5432,
+     "cidrs": [
+      "10.0.0.0/8"
+     ],
+     "groups": []
+    }
+   ]
+  },
+  {
+   "group_id": "sg-be2a22a096c7803e2",
+   "name": "default",
+   "vpc": "vpc-4202b37433a9e0438",
+   "region": "us-east-2",
+   "rules": []
+  },
+  {
+   "group_id": "sg-6bd37b3c3b96517c4",
+   "name": "default",
+   "vpc": "vpc-0be067a4e1e792343",
+   "region": "us-gov-east-1",
+   "rules": []
+  },
+  {
+   "group_id": "sg-52e332754a3c69801",
+   "name": "default",
+   "vpc": "vpc-ece769836394b4898",
+   "region": "us-gov-west-1",
+   "rules": []
+  },
+  {
+   "group_id": "sg-903cdc35a9c566ac4",
+   "name": "default",
+   "vpc": "vpc-cece095e568121ea1",
+   "region": "us-west-1",
+   "rules": []
+  },
+  {
+   "group_id": "sg-63eb9865d99bdb737",
+   "name": "default",
+   "vpc": "vpc-54d14bedd0ef0a744",
+   "region": "us-west-2",
+   "rules": []
+  },
+  {
+   "group_id": "sg-cb1df414b2cdd5f86",
+   "name": "ssh-world-west",
+   "vpc": "vpc-54d14bedd0ef0a744",
+   "region": "us-west-2",
+   "rules": [
+    {
+     "protocol": "tcp",
+     "from_port": 22,
+     "to_port": 22,
+     "cidrs": [
+      "0.0.0.0/0"
+     ],
+     "groups": []
+    }
+   ]
+  }
+ ]
+}

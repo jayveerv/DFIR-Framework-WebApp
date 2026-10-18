@@ -1,0 +1,132 @@
+{
+ "listed": true,
+ "items": [
+  {
+   "user": "alice",
+   "created": "2026-10-07T05:59:43Z",
+   "password_last_used": null,
+   "is_admin": true,
+   "admin_via": [
+    "policy PowerAll"
+   ],
+   "policies": [
+    "PowerAll"
+   ],
+   "groups": [],
+   "group_policies": [],
+   "mfa_devices": 0,
+   "keys": [
+    {
+     "key_id": "AKIARZPUZDIKOHSBIVEZ",
+     "status": "Active",
+     "created": "2026-10-07T05:59:43Z",
+     "last_used": null,
+     "last_service": "N/A",
+     "last_region": "N/A"
+    }
+   ]
+  },
+  {
+   "user": "bob",
+   "created": "2026-10-07T05:59:43Z",
+   "password_last_used": null,
+   "is_admin": true,
+   "admin_via": [
+    "group admins"
+   ],
+   "policies": [],
+   "groups": [
+    "admins"
+   ],
+   "group_policies": [
+    "AdministratorAccess"
+   ],
+   "mfa_devices": 1,
+   "keys": []
+  },
+  {
+   "user": "carol",
+   "created": "2026-10-07T05:59:43Z",
+   "password_last_used": null,
+   "is_admin": false,
+   "admin_via": [],
+   "policies": [],
+   "groups": [],
+   "group_policies": [],
+   "mfa_devices": 0,
+   "keys": [
+    {
+     "key_id": "AKIARZPUZDIKAKZWCIJV",
+     "status": "Inactive",
+     "created": "2026-10-07T05:59:43Z",
+     "last_used": null,
+     "last_service": "N/A",
+     "last_region": "N/A"
+    }
+   ]
+  },
+  {
+   "user": "app-uploader",
+   "created": "2026-10-07T05:59:43Z",
+   "password_last_used": null,
+   "is_admin": false,
+   "admin_via": [],
+   "policies": [],
+   "groups": [],
+   "group_policies": [],
+   "mfa_devices": 0,
+   "keys": [
+    {
+     "key_id": "AKIARZPUZDIKKBDGDLWY",
+     "status": "Active",
+     "created": "2026-10-07T05:59:43Z",
+     "last_used": null,
+     "last_service": "N/A",
+     "last_region": "N/A"
+    }
+   ]
+  },
+  {
+   "user": "ci-bot",
+   "created": "2026-10-07T05:59:43Z",
+   "password_last_used": null,
+   "is_admin": false,
+   "admin_via": [],
+   "policies": [],
+   "groups": [],
+   "group_policies": [],
+   "mfa_devices": 0,
+   "keys": [
+    {
+     "key_id": "AKIARZPUZDIKLDZ5NJCU",
+     "status": "Active",
+     "created": "2026-10-07T05:59:43Z",
+     "last_used": null,
+     "last_service": "N/A",
+     "last_region": "N/A"
+    }
+   ]
+  },
+  {
+   "user": "fresh",
+   "created": "2027-04-15T05:59:43Z",
+   "password_last_used": null,
+   "is_admin": false,
+   "admin_via": [],
+   "policies": [],
+   "groups": [],
+   "group_policies": [],
+   "mfa_devices": 0,
+   "keys": [
+    {
+     "key_id": "AKIARZPUZDIKFEFPL25C",
+     "status": "Active",
+     "created": "2027-04-15T05:59:43Z",
+     "last_used": null,
+     "last_service": "N/A",
+     "last_region": "N/A"
+    }
+   ]
+  }
+ ]
+}

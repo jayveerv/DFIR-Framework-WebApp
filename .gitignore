@@ -1,0 +1,7 @@
+webapp_data/
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+*.key

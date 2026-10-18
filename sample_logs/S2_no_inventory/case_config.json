@@ -1,0 +1,10 @@
+{
+  "case_id": "CASE-S2",
+  "investigator": "Jayveer Vasava",
+  "linux_timezone_offset": "+05:30",
+  "linux_log_year": 2026,
+  "internal_ranges": [
+    "198.51.100.0/24"
+  ],
+  "credential_inventory": {}
+}

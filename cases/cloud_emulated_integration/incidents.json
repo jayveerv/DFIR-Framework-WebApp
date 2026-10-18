@@ -1,0 +1,207 @@
+{
+ "incidents": [
+  {
+   "start": "2026-09-20T09:40:00Z",
+   "end": "2027-04-25T05:59:44Z",
+   "start_epoch": 1789897200.0,
+   "platforms": [
+    "aws"
+   ],
+   "cross_platform": false,
+   "event_ids": [
+    "E000001",
+    "E000002",
+    "E000003",
+    "E000004",
+    "E000005",
+    "E000006",
+    "E000007",
+    "E000008",
+    "E000009",
+    "E000010",
+    "E000011",
+    "E000012",
+    "E000013",
+    "E000014",
+    "E000015",
+    "E000016",
+    "E000036"
+   ],
+   "event_count": 17,
+   "alert_count": 17,
+   "severity": "High",
+   "entities": [
+    {
+     "id": "key:AKIAQ3EXAMPLENEW0002",
+     "kind": "key",
+     "platforms": [
+      "aws"
+     ],
+     "events": 14
+    },
+    {
+     "id": "ip:203.0.113.45",
+     "kind": "ip",
+     "platforms": [
+      "aws"
+     ],
+     "events": 16
+    },
+    {
+     "id": "key:AKIARZPUZDIKKBDGDLWY",
+     "kind": "key",
+     "platforms": [
+      "aws"
+     ],
+     "events": 4
+    }
+   ],
+   "links": [
+    {
+     "a": "key:AKIAQ3EXAMPLENEW0002",
+     "b": "key:AKIARZPUZDIKKBDGDLWY",
+     "reason": "key created by key",
+     "events": 1
+    },
+    {
+     "a": "key:AKIAQ3EXAMPLENEW0002",
+     "b": "ip:203.0.113.45",
+     "reason": "same API call",
+     "events": 13
+    },
+    {
+     "a": "ip:203.0.113.45",
+     "b": "key:AKIARZPUZDIKKBDGDLWY",
+     "reason": "same API call",
+     "events": 3
+    }
+   ],
+   "stages": [
+    {
+     "flag": "external_api_use",
+     "technique": "T1078.004",
+     "name": "Valid Accounts: Cloud Accounts (use from outside network)",
+     "severity": "medium",
+     "count": 16,
+     "first": "2026-09-20T09:40:00Z",
+     "last": "2026-09-20T09:45:50Z",
+     "sources": [
+      "aws"
+     ],
+     "hosts": [
+      "ap-south-1"
+     ],
+     "first_epoch": 1789897200.0,
+     "posture": false
+    },
+    {
+     "flag": "access_key_created",
+     "technique": "T1098.001",
+     "name": "Account Manipulation: Additional Cloud Credentials",
+     "severity": "high",
+     "count": 1,
+     "first": "2026-09-20T09:42:00Z",
+     "last": "2026-09-20T09:42:00Z",
+     "sources": [
+      "aws"
+     ],
+     "hosts": [
+      "ap-south-1"
+     ],
+     "first_epoch": 1789897320.0,
+     "posture": false
+    },
+    {
+     "flag": "logging_disabled",
+     "technique": "T1562.008",
+     "name": "Impair Defenses: Disable or Modify Cloud Logs",
+     "severity": "high",
+     "count": 1,
+     "first": "2026-09-20T09:43:00Z",
+     "last": "2026-09-20T09:43:00Z",
+     "sources": [
+      "aws"
+     ],
+     "hosts": [
+      "ap-south-1"
+     ],
+     "first_epoch": 1789897380.0,
+     "posture": false
+    },
+    {
+     "flag": "bulk_download",
+     "technique": "T1530",
+     "name": "Data from Cloud Storage (bulk download)",
+     "severity": "high",
+     "count": 12,
+     "first": "2026-09-20T09:44:00Z",
+     "last": "2026-09-20T09:45:50Z",
+     "sources": [
+      "aws"
+     ],
+     "hosts": [
+      "ap-south-1"
+     ],
+     "first_epoch": 1789897440.0,
+     "posture": false
+    },
+    {
+     "flag": "stale_access_key",
+     "technique": "T1078.004",
+     "name": "Active access key unused (or never used) for a long time",
+     "severity": "medium",
+     "count": 1,
+     "first": "2027-04-25T05:59:44Z",
+     "last": "2027-04-25T05:59:44Z",
+     "sources": [
+      "aws"
+     ],
+     "hosts": [
+      "123456789012"
+     ],
+     "first_epoch": 1808632784.0,
+     "posture": true
+    }
+   ],
+   "techniques": [
+    "T1078.004",
+    "T1098.001",
+    "T1530",
+    "T1562.008"
+   ],
+   "id": "INC-1"
+  }
+ ],
+ "unlinked_alerts": [
+  "E000018",
+  "E000019",
+  "E000020",
+  "E000024",
+  "E000028",
+  "E000029",
+  "E000032",
+  "E000034",
+  "E000039",
+  "E000041",
+  "E000042",
+  "E000047",
+  "E000049"
+ ],
+ "alert_events": 30,
+ "rules_fired": {
+  "external_api_use": 16,
+  "access_key_created": 1,
+  "logging_disabled": 1,
+  "bulk_download": 12,
+  "root_mfa_missing": 1,
+  "admin_without_mfa": 1,
+  "stale_access_key": 3,
+  "trail_logging_off": 1,
+  "sg_world_open_admin_port": 3,
+  "trail_no_log_validation": 1,
+  "role_trusts_anyone": 1,
+  "role_trusts_external_account": 1,
+  "public_bucket": 1,
+  "bucket_public_access_not_blocked": 1
+ }
+}

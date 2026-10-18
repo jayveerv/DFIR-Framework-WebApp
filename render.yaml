@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: cp-dfir-console
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python webapp/app.py --host 0.0.0.0 --no-browser
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: DFIR_PUBLIC_MODE
+        value: "1"
+      - key: DFIR_MAX_UPLOAD_MB
+        value: "50"
+      - key: DFIR_ADMIN_USER
+        value: demo
+      - key: DFIR_ADMIN_NAME
+        value: Demo Analyst
+      - key: DFIR_ADMIN_PASSWORD
+        sync: false

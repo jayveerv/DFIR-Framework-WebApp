@@ -1,0 +1,153 @@
+{
+ "incidents": [
+  {
+   "start": "2026-09-20T09:10:00Z",
+   "end": "2026-09-20T09:20:00Z",
+   "start_epoch": 1789895400.0,
+   "platforms": [
+    "linux"
+   ],
+   "cross_platform": false,
+   "event_ids": [
+    "E000091",
+    "E000092",
+    "E000093",
+    "E000094",
+    "E000095",
+    "E000096",
+    "E000097",
+    "E000098",
+    "E000099",
+    "E000100"
+   ],
+   "event_count": 10,
+   "alert_count": 10,
+   "severity": "High",
+   "entities": [
+    {
+     "id": "ip:203.0.113.45",
+     "kind": "ip",
+     "platforms": [
+      "linux"
+     ],
+     "events": 10
+    },
+    {
+     "id": "cred:web01:/home/ubuntu/.aws/credentials",
+     "kind": "cred",
+     "platforms": [
+      "linux"
+     ],
+     "events": 1
+    },
+    {
+     "id": "key:AKIAQ3EXAMPLEAPP0001",
+     "kind": "key",
+     "platforms": [
+      "linux"
+     ],
+     "events": 1
+    }
+   ],
+   "links": [
+    {
+     "a": "ip:203.0.113.45",
+     "b": "cred:web01:/home/ubuntu/.aws/credentials",
+     "reason": "credential file read in session",
+     "events": 1
+    },
+    {
+     "a": "cred:web01:/home/ubuntu/.aws/credentials",
+     "b": "key:AKIAQ3EXAMPLEAPP0001",
+     "reason": "credential inventory (file holds key)",
+     "events": 1
+    }
+   ],
+   "stages": [
+    {
+     "flag": "brute_force",
+     "technique": "T1110",
+     "name": "Brute Force",
+     "severity": "medium",
+     "count": 6,
+     "first": "2026-09-20T09:10:00Z",
+     "last": "2026-09-20T09:11:00Z",
+     "sources": [
+      "linux"
+     ],
+     "hosts": [
+      "web01"
+     ],
+     "first_epoch": 1789895400.0,
+     "posture": false
+    },
+    {
+     "flag": "brute_force_success",
+     "technique": "T1078",
+     "name": "Valid Accounts (login after brute force)",
+     "severity": "high",
+     "count": 1,
+     "first": "2026-09-20T09:11:12Z",
+     "last": "2026-09-20T09:11:12Z",
+     "sources": [
+      "linux"
+     ],
+     "hosts": [
+      "web01"
+     ],
+     "first_epoch": 1789895472.0,
+     "posture": false
+    },
+    {
+     "flag": "sudo_untrusted",
+     "technique": "T1548.003",
+     "name": "Sudo and Sudo Caching (untrusted session)",
+     "severity": "medium",
+     "count": 3,
+     "first": "2026-09-20T09:12:12Z",
+     "last": "2026-09-20T09:20:00Z",
+     "sources": [
+      "linux"
+     ],
+     "hosts": [
+      "web01"
+     ],
+     "first_epoch": 1789895532.0,
+     "posture": false
+    },
+    {
+     "flag": "credential_access",
+     "technique": "T1552.001",
+     "name": "Unsecured Credentials: Credentials In Files",
+     "severity": "high",
+     "count": 1,
+     "first": "2026-09-20T09:12:12Z",
+     "last": "2026-09-20T09:12:12Z",
+     "sources": [
+      "linux"
+     ],
+     "hosts": [
+      "web01"
+     ],
+     "first_epoch": 1789895532.0,
+     "posture": false
+    }
+   ],
+   "techniques": [
+    "T1078",
+    "T1110",
+    "T1548.003",
+    "T1552.001"
+   ],
+   "id": "INC-1"
+  }
+ ],
+ "unlinked_alerts": [],
+ "alert_events": 10,
+ "rules_fired": {
+  "brute_force": 6,
+  "brute_force_success": 1,
+  "sudo_untrusted": 3,
+  "credential_access": 1
+ }
+}

@@ -1,0 +1,33 @@
+{
+ "incidents": [],
+ "unlinked_alerts": [
+  "E000002",
+  "E000003",
+  "E000004",
+  "E000008",
+  "E000013",
+  "E000016",
+  "E000020",
+  "E000025",
+  "E000026",
+  "E000031",
+  "E000033",
+  "E000061",
+  "E000062",
+  "E000063",
+  "E000071"
+ ],
+ "alert_events": 15,
+ "rules_fired": {
+  "root_mfa_missing": 1,
+  "admin_without_mfa": 1,
+  "stale_access_key": 3,
+  "trail_logging_off": 1,
+  "trail_no_log_validation": 1,
+  "role_trusts_anyone": 1,
+  "role_trusts_external_account": 1,
+  "public_bucket": 1,
+  "bucket_public_access_not_blocked": 1,
+  "sg_world_open_admin_port": 4
+ }
+}

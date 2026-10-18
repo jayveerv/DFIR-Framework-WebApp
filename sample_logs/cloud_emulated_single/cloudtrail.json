@@ -1,0 +1,338 @@
+{
+ "Records": [
+  {
+   "eventVersion": "1.08",
+   "userIdentity": {
+    "type": "IAMUser",
+    "userName": "app-uploader",
+    "accessKeyId": "AKIARZPUZDIKKBDGDLWY"
+   },
+   "eventTime": "2026-09-20T09:40:00Z",
+   "eventSource": "sts.amazonaws.com",
+   "eventName": "GetCallerIdentity",
+   "awsRegion": "ap-south-1",
+   "sourceIPAddress": "203.0.113.45",
+   "userAgent": "aws-cli/2.15.0",
+   "requestParameters": null,
+   "responseElements": null,
+   "eventID": "00000001-aaaa-bbbb-cccc-000000000000",
+   "eventType": "AwsApiCall"
+  },
+  {
+   "eventVersion": "1.08",
+   "userIdentity": {
+    "type": "IAMUser",
+    "userName": "app-uploader",
+    "accessKeyId": "AKIARZPUZDIKKBDGDLWY"
+   },
+   "eventTime": "2026-09-20T09:40:40Z",
+   "eventSource": "s3.amazonaws.com",
+   "eventName": "ListBuckets",
+   "awsRegion": "ap-south-1",
+   "sourceIPAddress": "203.0.113.45",
+   "userAgent": "aws-cli/2.15.0",
+   "requestParameters": null,
+   "responseElements": null,
+   "eventID": "00000002-aaaa-bbbb-cccc-000000000000",
+   "eventType": "AwsApiCall"
+  },
+  {
+   "eventVersion": "1.08",
+   "userIdentity": {
+    "type": "IAMUser",
+    "userName": "app-uploader",
+    "accessKeyId": "AKIARZPUZDIKKBDGDLWY"
+   },
+   "eventTime": "2026-09-20T09:42:00Z",
+   "eventSource": "iam.amazonaws.com",
+   "eventName": "CreateAccessKey",
+   "awsRegion": "ap-south-1",
+   "sourceIPAddress": "203.0.113.45",
+   "userAgent": "aws-cli/2.15.0",
+   "requestParameters": {
+    "userName": "app-uploader"
+   },
+   "responseElements": {
+    "accessKey": {
+     "accessKeyId": "AKIAQ3EXAMPLENEW0002",
+     "userName": "app-uploader",
+     "status": "Active"
+    }
+   },
+   "eventID": "00000003-aaaa-bbbb-cccc-000000000000",
+   "eventType": "AwsApiCall"
+  },
+  {
+   "eventVersion": "1.08",
+   "userIdentity": {
+    "type": "IAMUser",
+    "userName": "app-uploader",
+    "accessKeyId": "AKIAQ3EXAMPLENEW0002"
+   },
+   "eventTime": "2026-09-20T09:43:00Z",
+   "eventSource": "cloudtrail.amazonaws.com",
+   "eventName": "StopLogging",
+   "awsRegion": "ap-south-1",
+   "sourceIPAddress": "203.0.113.45",
+   "userAgent": "aws-cli/2.15.0",
+   "requestParameters": {
+    "name": "management-trail"
+   },
+   "responseElements": null,
+   "eventID": "00000004-aaaa-bbbb-cccc-000000000000",
+   "eventType": "AwsApiCall"
+  },
+  {
+   "eventVersion": "1.08",
+   "userIdentity": {
+    "type": "IAMUser",
+    "userName": "app-uploader",
+    "accessKeyId": "AKIAQ3EXAMPLENEW0002"
+   },
+   "eventTime": "2026-09-20T09:44:00Z",
+   "eventSource": "s3.amazonaws.com",
+   "eventName": "GetObject",
+   "awsRegion": "ap-south-1",
+   "sourceIPAddress": "203.0.113.45",
+   "userAgent": "aws-cli/2.15.0",
+   "requestParameters": {
+    "bucketName": "finance-reports",
+    "key": "2026/q3/statement_00.xlsx"
+   },
+   "responseElements": null,
+   "eventID": "00000005-aaaa-bbbb-cccc-000000000000",
+   "eventType": "AwsApiCall"
+  },
+  {
+   "eventVersion": "1.08",
+   "userIdentity": {
+    "type": "IAMUser",
+    "userName": "app-uploader",
+    "accessKeyId": "AKIAQ3EXAMPLENEW0002"
+   },
+   "eventTime": "2026-09-20T09:44:10Z",
+   "eventSource": "s3.amazonaws.com",
+   "eventName": "GetObject",
+   "awsRegion": "ap-south-1",
+   "sourceIPAddress": "203.0.113.45",
+   "userAgent": "aws-cli/2.15.0",
+   "requestParameters": {
+    "bucketName": "finance-reports",
+    "key": "2026/q3/statement_01.xlsx"
+   },
+   "responseElements": null,
+   "eventID": "00000006-aaaa-bbbb-cccc-000000000000",
+   "eventType": "AwsApiCall"
+  },
+  {
+   "eventVersion": "1.08",
+   "userIdentity": {
+    "type": "IAMUser",
+    "userName": "app-uploader",
+    "accessKeyId": "AKIAQ3EXAMPLENEW0002"
+   },
+   "eventTime": "2026-09-20T09:44:20Z",
+   "eventSource": "s3.amazonaws.com",
+   "eventName": "GetObject",
+   "awsRegion": "ap-south-1",
+   "sourceIPAddress": "203.0.113.45",
+   "userAgent": "aws-cli/2.15.0",
+   "requestParameters": {
+    "bucketName": "finance-reports",
+    "key": "2026/q3/statement_02.xlsx"
+   },
+   "responseElements": null,
+   "eventID": "00000007-aaaa-bbbb-cccc-000000000000",
+   "eventType": "AwsApiCall"
+  },
+  {
+   "eventVersion": "1.08",
+   "userIdentity": {
+    "type": "IAMUser",
+    "userName": "app-uploader",
+    "accessKeyId": "AKIAQ3EXAMPLENEW0002"
+   },
+   "eventTime": "2026-09-20T09:44:30Z",
+   "eventSource": "s3.amazonaws.com",
+   "eventName": "GetObject",
+   "awsRegion": "ap-south-1",
+   "sourceIPAddress": "203.0.113.45",
+   "userAgent": "aws-cli/2.15.0",
+   "requestParameters": {
+    "bucketName": "finance-reports",
+    "key": "2026/q3/statement_03.xlsx"
+   },
+   "responseElements": null,
+   "eventID": "00000008-aaaa-bbbb-cccc-000000000000",
+   "eventType": "AwsApiCall"
+  },
+  {
+   "eventVersion": "1.08",
+   "userIdentity": {
+    "type": "IAMUser",
+    "userName": "app-uploader",
+    "accessKeyId": "AKIAQ3EXAMPLENEW0002"
+   },
+   "eventTime": "2026-09-20T09:44:40Z",
+   "eventSource": "s3.amazonaws.com",
+   "eventName": "GetObject",
+   "awsRegion": "ap-south-1",
+   "sourceIPAddress": "203.0.113.45",
+   "userAgent": "aws-cli/2.15.0",
+   "requestParameters": {
+    "bucketName": "finance-reports",
+    "key": "2026/q3/statement_04.xlsx"
+   },
+   "responseElements": null,
+   "eventID": "00000009-aaaa-bbbb-cccc-000000000000",
+   "eventType": "AwsApiCall"
+  },
+  {
+   "eventVersion": "1.08",
+   "userIdentity": {
+    "type": "IAMUser",
+    "userName": "app-uploader",
+    "accessKeyId": "AKIAQ3EXAMPLENEW0002"
+   },
+   "eventTime": "2026-09-20T09:44:50Z",
+   "eventSource": "s3.amazonaws.com",
+   "eventName": "GetObject",
+   "awsRegion": "ap-south-1",
+   "sourceIPAddress": "203.0.113.45",
+   "userAgent": "aws-cli/2.15.0",
+   "requestParameters": {
+    "bucketName": "finance-reports",
+    "key": "2026/q3/statement_05.xlsx"
+   },
+   "responseElements": null,
+   "eventID": "00000010-aaaa-bbbb-cccc-000000000000",
+   "eventType": "AwsApiCall"
+  },
+  {
+   "eventVersion": "1.08",
+   "userIdentity": {
+    "type": "IAMUser",
+    "userName": "app-uploader",
+    "accessKeyId": "AKIAQ3EXAMPLENEW0002"
+   },
+   "eventTime": "2026-09-20T09:45:00Z",
+   "eventSource": "s3.amazonaws.com",
+   "eventName": "GetObject",
+   "awsRegion": "ap-south-1",
+   "sourceIPAddress": "203.0.113.45",
+   "userAgent": "aws-cli/2.15.0",
+   "requestParameters": {
+    "bucketName": "finance-reports",
+    "key": "2026/q3/statement_06.xlsx"
+   },
+   "responseElements": null,
+   "eventID": "00000011-aaaa-bbbb-cccc-000000000000",
+   "eventType": "AwsApiCall"
+  },
+  {
+   "eventVersion": "1.08",
+   "userIdentity": {
+    "type": "IAMUser",
+    "userName": "app-uploader",
+    "accessKeyId": "AKIAQ3EXAMPLENEW0002"
+   },
+   "eventTime": "2026-09-20T09:45:10Z",
+   "eventSource": "s3.amazonaws.com",
+   "eventName": "GetObject",
+   "awsRegion": "ap-south-1",
+   "sourceIPAddress": "203.0.113.45",
+   "userAgent": "aws-cli/2.15.0",
+   "requestParameters": {
+    "bucketName": "finance-reports",
+    "key": "2026/q3/statement_07.xlsx"
+   },
+   "responseElements": null,
+   "eventID": "00000012-aaaa-bbbb-cccc-000000000000",
+   "eventType": "AwsApiCall"
+  },
+  {
+   "eventVersion": "1.08",
+   "userIdentity": {
+    "type": "IAMUser",
+    "userName": "app-uploader",
+    "accessKeyId": "AKIAQ3EXAMPLENEW0002"
+   },
+   "eventTime": "2026-09-20T09:45:20Z",
+   "eventSource": "s3.amazonaws.com",
+   "eventName": "GetObject",
+   "awsRegion": "ap-south-1",
+   "sourceIPAddress": "203.0.113.45",
+   "userAgent": "aws-cli/2.15.0",
+   "requestParameters": {
+    "bucketName": "finance-reports",
+    "key": "2026/q3/statement_08.xlsx"
+   },
+   "responseElements": null,
+   "eventID": "00000013-aaaa-bbbb-cccc-000000000000",
+   "eventType": "AwsApiCall"
+  },
+  {
+   "eventVersion": "1.08",
+   "userIdentity": {
+    "type": "IAMUser",
+    "userName": "app-uploader",
+    "accessKeyId": "AKIAQ3EXAMPLENEW0002"
+   },
+   "eventTime": "2026-09-20T09:45:30Z",
+   "eventSource": "s3.amazonaws.com",
+   "eventName": "GetObject",
+   "awsRegion": "ap-south-1",
+   "sourceIPAddress": "203.0.113.45",
+   "userAgent": "aws-cli/2.15.0",
+   "requestParameters": {
+    "bucketName": "finance-reports",
+    "key": "2026/q3/statement_09.xlsx"
+   },
+   "responseElements": null,
+   "eventID": "00000014-aaaa-bbbb-cccc-000000000000",
+   "eventType": "AwsApiCall"
+  },
+  {
+   "eventVersion": "1.08",
+   "userIdentity": {
+    "type": "IAMUser",
+    "userName": "app-uploader",
+    "accessKeyId": "AKIAQ3EXAMPLENEW0002"
+   },
+   "eventTime": "2026-09-20T09:45:40Z",
+   "eventSource": "s3.amazonaws.com",
+   "eventName": "GetObject",
+   "awsRegion": "ap-south-1",
+   "sourceIPAddress": "203.0.113.45",
+   "userAgent": "aws-cli/2.15.0",
+   "requestParameters": {
+    "bucketName": "finance-reports",
+    "key": "2026/q3/statement_10.xlsx"
+   },
+   "responseElements": null,
+   "eventID": "00000015-aaaa-bbbb-cccc-000000000000",
+   "eventType": "AwsApiCall"
+  },
+  {
+   "eventVersion": "1.08",
+   "userIdentity": {
+    "type": "IAMUser",
+    "userName": "app-uploader",
+    "accessKeyId": "AKIAQ3EXAMPLENEW0002"
+   },
+   "eventTime": "2026-09-20T09:45:50Z",
+   "eventSource": "s3.amazonaws.com",
+   "eventName": "GetObject",
+   "awsRegion": "ap-south-1",
+   "sourceIPAddress": "203.0.113.45",
+   "userAgent": "aws-cli/2.15.0",
+   "requestParameters": {
+    "bucketName": "finance-reports",
+    "key": "2026/q3/statement_11.xlsx"
+   },
+   "responseElements": null,
+   "eventID": "00000016-aaaa-bbbb-cccc-000000000000",
+   "eventType": "AwsApiCall"
+  }
+ ]
+}

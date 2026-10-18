@@ -1,0 +1,471 @@
+{
+ "incidents": [
+  {
+   "start": "2026-09-20T10:00:00Z",
+   "end": "2026-09-20T10:08:00Z",
+   "start_epoch": 1789898400.0,
+   "platforms": [
+    "windows"
+   ],
+   "cross_platform": false,
+   "event_ids": [
+    "E000097",
+    "E000098",
+    "E000099",
+    "E000100",
+    "E000101",
+    "E000102",
+    "E000103",
+    "E000104",
+    "E000105",
+    "E000106",
+    "E000107",
+    "E000110",
+    "E000112",
+    "E000120"
+   ],
+   "event_count": 14,
+   "alert_count": 14,
+   "severity": "High",
+   "entities": [
+    {
+     "id": "ip:203.0.113.150",
+     "kind": "ip",
+     "platforms": [
+      "windows"
+     ],
+     "events": 14
+    }
+   ],
+   "links": [],
+   "stages": [
+    {
+     "flag": "brute_force",
+     "technique": "T1110",
+     "name": "Brute Force",
+     "severity": "medium",
+     "count": 8,
+     "first": "2026-09-20T10:00:00Z",
+     "last": "2026-09-20T10:01:45Z",
+     "sources": [
+      "windows"
+     ],
+     "hosts": [
+      "WS-HR-02"
+     ],
+     "first_epoch": 1789898400.0,
+     "posture": false
+    },
+    {
+     "flag": "brute_force_success",
+     "technique": "T1078",
+     "name": "Valid Accounts (login after brute force)",
+     "severity": "high",
+     "count": 1,
+     "first": "2026-09-20T10:02:00Z",
+     "last": "2026-09-20T10:02:00Z",
+     "sources": [
+      "windows"
+     ],
+     "hosts": [
+      "WS-HR-02"
+     ],
+     "first_epoch": 1789898520.0,
+     "posture": false
+    },
+    {
+     "flag": "privileged_session",
+     "technique": "T1078",
+     "name": "Valid Accounts (privileged logon from untrusted IP)",
+     "severity": "medium",
+     "count": 1,
+     "first": "2026-09-20T10:02:01Z",
+     "last": "2026-09-20T10:02:01Z",
+     "sources": [
+      "windows"
+     ],
+     "hosts": [
+      "WS-HR-02"
+     ],
+     "first_epoch": 1789898521.0,
+     "posture": false
+    },
+    {
+     "flag": "encoded_powershell",
+     "technique": "T1059.001",
+     "name": "PowerShell (encoded command)",
+     "severity": "medium",
+     "count": 1,
+     "first": "2026-09-20T10:04:00Z",
+     "last": "2026-09-20T10:04:00Z",
+     "sources": [
+      "windows"
+     ],
+     "hosts": [
+      "WS-HR-02"
+     ],
+     "first_epoch": 1789898640.0,
+     "posture": false
+    },
+    {
+     "flag": "suspicious_powershell",
+     "technique": "T1059.001",
+     "name": "PowerShell (download cradle / in-memory attack code)",
+     "severity": "high",
+     "count": 1,
+     "first": "2026-09-20T10:04:00Z",
+     "last": "2026-09-20T10:04:00Z",
+     "sources": [
+      "windows"
+     ],
+     "hosts": [
+      "WS-HR-02"
+     ],
+     "first_epoch": 1789898640.0,
+     "posture": false
+    },
+    {
+     "flag": "account_created",
+     "technique": "T1136.001",
+     "name": "Create Account: Local Account",
+     "severity": "high",
+     "count": 1,
+     "first": "2026-09-20T10:05:00Z",
+     "last": "2026-09-20T10:05:00Z",
+     "sources": [
+      "windows"
+     ],
+     "hosts": [
+      "WS-HR-02"
+     ],
+     "first_epoch": 1789898700.0,
+     "posture": false
+    },
+    {
+     "flag": "privilege_group_add",
+     "technique": "T1098",
+     "name": "Account Manipulation (added to admin group)",
+     "severity": "high",
+     "count": 1,
+     "first": "2026-09-20T10:05:20Z",
+     "last": "2026-09-20T10:05:20Z",
+     "sources": [
+      "windows"
+     ],
+     "hosts": [
+      "WS-HR-02"
+     ],
+     "first_epoch": 1789898720.0,
+     "posture": false
+    },
+    {
+     "flag": "log_cleared",
+     "technique": "T1070.001",
+     "name": "Indicator Removal: Clear Windows Event Logs",
+     "severity": "high",
+     "count": 1,
+     "first": "2026-09-20T10:08:00Z",
+     "last": "2026-09-20T10:08:00Z",
+     "sources": [
+      "windows"
+     ],
+     "hosts": [
+      "WS-HR-02"
+     ],
+     "first_epoch": 1789898880.0,
+     "posture": false
+    }
+   ],
+   "techniques": [
+    "T1059.001",
+    "T1070.001",
+    "T1078",
+    "T1098",
+    "T1110",
+    "T1136.001"
+   ],
+   "id": "INC-1"
+  },
+  {
+   "start": "2026-09-20T10:05:00Z",
+   "end": "2026-09-20T10:35:50Z",
+   "start_epoch": 1789898700.0,
+   "platforms": [
+    "aws",
+    "linux"
+   ],
+   "cross_platform": true,
+   "event_ids": [
+    "E000109",
+    "E000111",
+    "E000113",
+    "E000114",
+    "E000115",
+    "E000116",
+    "E000117",
+    "E000119",
+    "E000127",
+    "E000128",
+    "E000129",
+    "E000130",
+    "E000131",
+    "E000132",
+    "E000133",
+    "E000134",
+    "E000135",
+    "E000136",
+    "E000137",
+    "E000138",
+    "E000139",
+    "E000140",
+    "E000141",
+    "E000142"
+   ],
+   "event_count": 24,
+   "alert_count": 24,
+   "severity": "High",
+   "entities": [
+    {
+     "id": "ip:203.0.113.210",
+     "kind": "ip",
+     "platforms": [
+      "linux"
+     ],
+     "events": 8
+    },
+    {
+     "id": "cred:db01:/home/deploy/.aws/credentials",
+     "kind": "cred",
+     "platforms": [
+      "linux"
+     ],
+     "events": 1
+    },
+    {
+     "id": "key:AKIAQ3EXAMPLEDPL0005",
+     "kind": "key",
+     "platforms": [
+      "aws",
+      "linux"
+     ],
+     "events": 4
+    },
+    {
+     "id": "ip:203.0.113.99",
+     "kind": "ip",
+     "platforms": [
+      "aws"
+     ],
+     "events": 16
+    },
+    {
+     "id": "key:AKIAQ3EXAMPLENEW0003",
+     "kind": "key",
+     "platforms": [
+      "aws"
+     ],
+     "events": 14
+    }
+   ],
+   "links": [
+    {
+     "a": "ip:203.0.113.210",
+     "b": "cred:db01:/home/deploy/.aws/credentials",
+     "reason": "credential file read in session",
+     "events": 1
+    },
+    {
+     "a": "cred:db01:/home/deploy/.aws/credentials",
+     "b": "key:AKIAQ3EXAMPLEDPL0005",
+     "reason": "credential inventory (file holds key)",
+     "events": 1
+    },
+    {
+     "a": "key:AKIAQ3EXAMPLEDPL0005",
+     "b": "ip:203.0.113.99",
+     "reason": "same API call",
+     "events": 3
+    },
+    {
+     "a": "key:AKIAQ3EXAMPLEDPL0005",
+     "b": "key:AKIAQ3EXAMPLENEW0003",
+     "reason": "key created by key",
+     "events": 1
+    },
+    {
+     "a": "ip:203.0.113.99",
+     "b": "key:AKIAQ3EXAMPLENEW0003",
+     "reason": "same API call",
+     "events": 13
+    }
+   ],
+   "stages": [
+    {
+     "flag": "brute_force",
+     "technique": "T1110",
+     "name": "Brute Force",
+     "severity": "medium",
+     "count": 5,
+     "first": "2026-09-20T10:05:00Z",
+     "last": "2026-09-20T10:05:48Z",
+     "sources": [
+      "linux"
+     ],
+     "hosts": [
+      "db01"
+     ],
+     "first_epoch": 1789898700.0,
+     "posture": false
+    },
+    {
+     "flag": "brute_force_success",
+     "technique": "T1078",
+     "name": "Valid Accounts (login after brute force)",
+     "severity": "high",
+     "count": 1,
+     "first": "2026-09-20T10:06:00Z",
+     "last": "2026-09-20T10:06:00Z",
+     "sources": [
+      "linux"
+     ],
+     "hosts": [
+      "db01"
+     ],
+     "first_epoch": 1789898760.0,
+     "posture": false
+    },
+    {
+     "flag": "sudo_untrusted",
+     "technique": "T1548.003",
+     "name": "Sudo and Sudo Caching (untrusted session)",
+     "severity": "medium",
+     "count": 2,
+     "first": "2026-09-20T10:07:00Z",
+     "last": "2026-09-20T10:08:00Z",
+     "sources": [
+      "linux"
+     ],
+     "hosts": [
+      "db01"
+     ],
+     "first_epoch": 1789898820.0,
+     "posture": false
+    },
+    {
+     "flag": "credential_access",
+     "technique": "T1552.001",
+     "name": "Unsecured Credentials: Credentials In Files",
+     "severity": "high",
+     "count": 1,
+     "first": "2026-09-20T10:07:00Z",
+     "last": "2026-09-20T10:07:00Z",
+     "sources": [
+      "linux"
+     ],
+     "hosts": [
+      "db01"
+     ],
+     "first_epoch": 1789898820.0,
+     "posture": false
+    },
+    {
+     "flag": "external_api_use",
+     "technique": "T1078.004",
+     "name": "Valid Accounts: Cloud Accounts (use from outside network)",
+     "severity": "medium",
+     "count": 16,
+     "first": "2026-09-20T10:30:00Z",
+     "last": "2026-09-20T10:35:50Z",
+     "sources": [
+      "aws"
+     ],
+     "hosts": [
+      "ap-south-1"
+     ],
+     "first_epoch": 1789900200.0,
+     "posture": false
+    },
+    {
+     "flag": "access_key_created",
+     "technique": "T1098.001",
+     "name": "Account Manipulation: Additional Cloud Credentials",
+     "severity": "high",
+     "count": 1,
+     "first": "2026-09-20T10:32:00Z",
+     "last": "2026-09-20T10:32:00Z",
+     "sources": [
+      "aws"
+     ],
+     "hosts": [
+      "ap-south-1"
+     ],
+     "first_epoch": 1789900320.0,
+     "posture": false
+    },
+    {
+     "flag": "logging_disabled",
+     "technique": "T1562.008",
+     "name": "Impair Defenses: Disable or Modify Cloud Logs",
+     "severity": "high",
+     "count": 1,
+     "first": "2026-09-20T10:33:00Z",
+     "last": "2026-09-20T10:33:00Z",
+     "sources": [
+      "aws"
+     ],
+     "hosts": [
+      "ap-south-1"
+     ],
+     "first_epoch": 1789900380.0,
+     "posture": false
+    },
+    {
+     "flag": "bulk_download",
+     "technique": "T1530",
+     "name": "Data from Cloud Storage (bulk download)",
+     "severity": "high",
+     "count": 12,
+     "first": "2026-09-20T10:34:00Z",
+     "last": "2026-09-20T10:35:50Z",
+     "sources": [
+      "aws"
+     ],
+     "hosts": [
+      "ap-south-1"
+     ],
+     "first_epoch": 1789900440.0,
+     "posture": false
+    }
+   ],
+   "techniques": [
+    "T1078",
+    "T1078.004",
+    "T1098.001",
+    "T1110",
+    "T1530",
+    "T1548.003",
+    "T1552.001",
+    "T1562.008"
+   ],
+   "id": "INC-2"
+  }
+ ],
+ "unlinked_alerts": [],
+ "alert_events": 38,
+ "rules_fired": {
+  "brute_force": 13,
+  "brute_force_success": 2,
+  "privileged_session": 1,
+  "encoded_powershell": 1,
+  "suspicious_powershell": 1,
+  "account_created": 1,
+  "privilege_group_add": 1,
+  "sudo_untrusted": 2,
+  "credential_access": 1,
+  "log_cleared": 1,
+  "external_api_use": 16,
+  "access_key_created": 1,
+  "logging_disabled": 1,
+  "bulk_download": 12
+ }
+}

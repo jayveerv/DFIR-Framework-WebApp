@@ -1,0 +1,7 @@
+{
+ "collected_at": "2027-04-25T05:59:44Z",
+ "account": "123456789012",
+ "arn": "arn:aws:sts::123456789012:user/moto",
+ "region": "us-east-1",
+ "known": true
+}

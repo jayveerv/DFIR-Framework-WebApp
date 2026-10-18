@@ -1,0 +1,98 @@
+{
+ "listed": true,
+ "items": [
+  {
+   "bucket": "trail-logs-a",
+   "created": "2026-10-07T05:59:43Z",
+   "block_config": {
+    "BlockPublicAcls": true,
+    "IgnorePublicAcls": true,
+    "BlockPublicPolicy": true,
+    "RestrictPublicBuckets": true
+   },
+   "block_all": true,
+   "policy_public": false,
+   "public_how": "no bucket policy",
+   "checked": true
+  },
+  {
+   "bucket": "trail-logs-b",
+   "created": "2026-10-07T05:59:44Z",
+   "block_config": {
+    "BlockPublicAcls": true,
+    "IgnorePublicAcls": true,
+    "BlockPublicPolicy": true,
+    "RestrictPublicBuckets": true
+   },
+   "block_all": true,
+   "policy_public": false,
+   "public_how": "no bucket policy",
+   "checked": true
+  },
+  {
+   "bucket": "trail-logs-c",
+   "created": "2026-10-07T05:59:44Z",
+   "block_config": {
+    "BlockPublicAcls": true,
+    "IgnorePublicAcls": true,
+    "BlockPublicPolicy": true,
+    "RestrictPublicBuckets": true
+   },
+   "block_all": true,
+   "policy_public": false,
+   "public_how": "no bucket policy",
+   "checked": true
+  },
+  {
+   "bucket": "logs-private",
+   "created": "2026-10-07T05:59:44Z",
+   "block_config": {
+    "BlockPublicAcls": true,
+    "IgnorePublicAcls": true,
+    "BlockPublicPolicy": true,
+    "RestrictPublicBuckets": true
+   },
+   "block_all": true,
+   "policy_public": false,
+   "public_how": "no bucket policy",
+   "checked": true
+  },
+  {
+   "bucket": "backups",
+   "created": "2026-10-07T05:59:44Z",
+   "block_config": {
+    "BlockPublicAcls": true,
+    "IgnorePublicAcls": true,
+    "BlockPublicPolicy": true,
+    "RestrictPublicBuckets": true
+   },
+   "block_all": true,
+   "policy_public": false,
+   "public_how": "no bucket policy",
+   "checked": true
+  },
+  {
+   "bucket": "data-public",
+   "created": "2026-10-07T05:59:44Z",
+   "block_config": {
+    "BlockPublicAcls": false,
+    "IgnorePublicAcls": false,
+    "BlockPublicPolicy": false,
+    "RestrictPublicBuckets": false
+   },
+   "block_all": false,
+   "policy_public": true,
+   "public_how": "policy evaluated by the collector",
+   "checked": true
+  },
+  {
+   "bucket": "reports-open",
+   "created": "2026-10-07T05:59:44Z",
+   "block_config": null,
+   "block_all": false,
+   "policy_public": false,
+   "public_how": "no bucket policy",
+   "checked": true
+  }
+ ]
+}

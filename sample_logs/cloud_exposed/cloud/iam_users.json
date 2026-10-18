@@ -1,0 +1,109 @@
+{
+ "items": [
+  {
+   "user": "alice",
+   "is_admin": true,
+   "mfa_devices": 0,
+   "keys": [
+    {
+     "key_id": "AKIAQ3EXAMPLEALICE01",
+     "status": "Active",
+     "created": "2025-11-24T12:00:00Z",
+     "last_used": "2026-03-04T12:00:00Z",
+     "last_service": "s3",
+     "last_region": "ap-south-1"
+    }
+   ],
+   "created": "2025-05-08T12:00:00Z",
+   "password_last_used": null,
+   "policies": [
+    "AdministratorAccess"
+   ],
+   "groups": [],
+   "group_policies": []
+  },
+  {
+   "user": "bob",
+   "is_admin": true,
+   "mfa_devices": 0,
+   "keys": [],
+   "created": "2025-05-08T12:00:00Z",
+   "password_last_used": null,
+   "policies": [
+    "AdministratorAccess"
+   ],
+   "groups": [],
+   "group_policies": []
+  },
+  {
+   "user": "carol",
+   "is_admin": true,
+   "mfa_devices": 1,
+   "keys": [
+    {
+     "key_id": "AKIAQ3EXAMPLECAROL1",
+     "status": "Active",
+     "created": "2026-03-04T12:00:00Z",
+     "last_used": "2026-09-17T12:00:00Z",
+     "last_service": "s3",
+     "last_region": "ap-south-1"
+    }
+   ],
+   "created": "2025-05-08T12:00:00Z",
+   "password_last_used": null,
+   "policies": [
+    "AdministratorAccess"
+   ],
+   "groups": [],
+   "group_policies": []
+  },
+  {
+   "user": "app-uploader",
+   "is_admin": false,
+   "mfa_devices": 0,
+   "keys": [
+    {
+     "key_id": "AKIAQ3EXAMPLEAPP0001",
+     "status": "Active",
+     "created": "2026-01-13T12:00:00Z",
+     "last_used": "2026-09-20T12:00:00Z",
+     "last_service": "s3",
+     "last_region": "ap-south-1"
+    }
+   ],
+   "created": "2025-05-08T12:00:00Z",
+   "password_last_used": null,
+   "policies": [],
+   "groups": [],
+   "group_policies": []
+  },
+  {
+   "user": "ci-bot",
+   "is_admin": false,
+   "mfa_devices": 0,
+   "keys": [
+    {
+     "key_id": "AKIAQ3EXAMPLECIBOT01",
+     "status": "Active",
+     "created": "2025-08-16T12:00:00Z",
+     "last_used": "2026-05-23T12:00:00Z",
+     "last_service": "s3",
+     "last_region": "ap-south-1"
+    },
+    {
+     "key_id": "AKIAQ3EXAMPLECIBOT02",
+     "status": "Active",
+     "created": "2026-04-23T12:00:00Z",
+     "last_used": null,
+     "last_service": "s3",
+     "last_region": "ap-south-1"
+    }
+   ],
+   "created": "2025-05-08T12:00:00Z",
+   "password_last_used": null,
+   "policies": [],
+   "groups": [],
+   "group_policies": []
+  }
+ ]
+}

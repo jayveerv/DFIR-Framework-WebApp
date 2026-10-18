@@ -1,0 +1,18 @@
+{
+ "listed": true,
+ "items": [
+  {
+   "name": "management-trail",
+   "arn": "arn:aws:cloudtrail:ap-south-1:111122223333:trail/management-trail",
+   "home_region": "ap-south-1",
+   "multi_region": true,
+   "organization": false,
+   "log_validation": true,
+   "bucket": "trail-bucket",
+   "is_logging": true,
+   "stop_logging_time": null,
+   "latest_delivery": "2026-09-20T12:00:00Z",
+   "delivery_error": null
+  }
+ ]
+}

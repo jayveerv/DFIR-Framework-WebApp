@@ -1,0 +1,28 @@
+{
+ "incidents": [],
+ "unlinked_alerts": [
+  "E000001",
+  "E000002",
+  "E000003",
+  "E000004",
+  "E000005",
+  "E000006",
+  "E000007",
+  "E000008",
+  "E000009",
+  "E000012",
+  "E000017",
+  "E000019",
+  "E000020"
+ ],
+ "alert_events": 13,
+ "rules_fired": {
+  "trail_logging_off": 1,
+  "root_mfa_missing": 1,
+  "admin_without_mfa": 2,
+  "stale_access_key": 3,
+  "public_bucket": 2,
+  "sg_world_open_admin_port": 3,
+  "bucket_public_access_not_blocked": 1
+ }
+}

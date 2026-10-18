@@ -1,0 +1,44 @@
+{
+ "listed": true,
+ "items": [
+  {
+   "name": "trail-a",
+   "arn": "arn:aws:cloudtrail:us-east-1:123456789012:trail/trail-a",
+   "home_region": "us-east-1",
+   "multi_region": true,
+   "organization": false,
+   "log_validation": true,
+   "bucket": "trail-logs-a",
+   "is_logging": true,
+   "stop_logging_time": null,
+   "latest_delivery": "2026-10-07T05:59:45Z",
+   "delivery_error": null
+  },
+  {
+   "name": "trail-b",
+   "arn": "arn:aws:cloudtrail:us-east-1:123456789012:trail/trail-b",
+   "home_region": "us-east-1",
+   "multi_region": true,
+   "organization": false,
+   "log_validation": true,
+   "bucket": "trail-logs-b",
+   "is_logging": false,
+   "stop_logging_time": "2026-10-07T05:59:44Z",
+   "latest_delivery": null,
+   "delivery_error": null
+  },
+  {
+   "name": "trail-c",
+   "arn": "arn:aws:cloudtrail:us-east-1:123456789012:trail/trail-c",
+   "home_region": "us-east-1",
+   "multi_region": true,
+   "organization": false,
+   "log_validation": false,
+   "bucket": "trail-logs-c",
+   "is_logging": true,
+   "stop_logging_time": null,
+   "latest_delivery": "2026-10-07T05:59:45Z",
+   "delivery_error": null
+  }
+ ]
+}

@@ -1,0 +1,222 @@
+﻿event_id,time_utc,source,host,event_type,user,src_ip,target,outcome,detail,session_id,key_id,new_key_id,severity,flags,techniques,incident,source_file,line_ref
+E000001,2026-09-20T03:49:55Z,linux,bastion,auth_success,devops,10.0.4.192,,success,ssh login,,,,info,,,,auth.log,2
+E000002,2026-09-20T03:50:55Z,linux,bastion,command_exec,devops,,/usr/bin/apt update,success,sudo as root,,,,info,,,,auth.log,3
+E000003,2026-09-20T03:52:01Z,aws,ap-south-1,api_call,ec2.amazonaws.com,ec2.amazonaws.com,,success,DescribeVolumes,,,,info,,,,cloudtrail.json,1
+E000004,2026-09-20T03:54:51Z,aws,ap-south-1,api_call,devops,198.51.100.10,,success,DescribeInstances,,AKIAQ3EXAMPLEOPS0009,,info,,,,cloudtrail.json,2
+E000005,2026-09-20T04:03:46Z,aws,ap-south-1,api_call,devops,198.51.100.10,,success,ListBuckets,,AKIAQ3EXAMPLEOPS0009,,info,,,,cloudtrail.json,3
+E000006,2026-09-20T04:15:47Z,linux,bastion,auth_failure,devops,10.0.9.63,,failure,ssh failed login,,,,info,,,,auth.log,5
+E000007,2026-09-20T04:16:07Z,linux,bastion,auth_success,devops,10.0.9.63,,success,ssh login,,,,info,,,,auth.log,6
+E000008,2026-09-20T04:24:08Z,linux,web01,auth_success,admin1,10.0.5.22,,success,ssh login,,,,info,,,,auth.log,7
+E000009,2026-09-20T04:25:08Z,linux,web01,command_exec,admin1,,/usr/bin/apt update,success,sudo as root,,,,info,,,,auth.log,8
+E000010,2026-09-20T04:30:57Z,linux,bastion,auth_success,admin1,10.0.5.134,,success,ssh login,,,,info,,,,auth.log,9
+E000011,2026-09-20T04:31:57Z,linux,bastion,command_exec,admin1,,/usr/bin/apt update,success,sudo as root,,,,info,,,,auth.log,10
+E000012,2026-09-20T04:36:03Z,windows,WS-DEV-03,auth_success,dave,,,success,logon type 2,0x3f0c0,,,info,,,,windows_security.xml,1
+E000013,2026-09-20T04:37:03Z,windows,WS-DEV-03,process_create,dave,,C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE,success,-,0x3f0c0,,,info,,,,windows_security.xml,2
+E000014,2026-09-20T04:41:17Z,linux,app01,auth_success,monitor,10.0.4.63,,success,ssh login,,,,info,,,,auth.log,11
+E000015,2026-09-20T04:42:17Z,linux,app01,command_exec,monitor,,/usr/bin/apt update,success,sudo as root,,,,info,,,,auth.log,12
+E000016,2026-09-20T04:47:36Z,aws,ap-south-1,api_call,app-uploader,198.51.100.10,app-uploads,success,PutObject,,AKIAQ3EXAMPLEAPP0001,,info,,,,cloudtrail.json,4
+E000017,2026-09-20T04:49:51Z,windows,SRV-FILE-01,auth_failure,carol,,,failure,failed logon status 0xC000006A,,,,info,,,,windows_security.xml,3
+E000018,2026-09-20T04:56:33Z,windows,WS-FIN-01,auth_success,alice,10.0.5.187,,success,logon type 3,0x445b1,,,info,,,,windows_security.xml,4
+E000019,2026-09-20T04:58:31Z,aws,ap-south-1,api_call,ec2.amazonaws.com,ec2.amazonaws.com,,success,DescribeVolumes,,,,info,,,,cloudtrail.json,5
+E000020,2026-09-20T05:00:06Z,aws,ap-south-1,api_call,devops,198.51.100.10,,success,ListBuckets,,AKIAQ3EXAMPLEOPS0009,,info,,,,cloudtrail.json,6
+E000021,2026-09-20T05:01:46Z,windows,WS-HR-02,auth_success,alice,,,success,logon type 2,0x3edde,,,info,,,,windows_security.xml,5
+E000022,2026-09-20T05:02:46Z,windows,WS-HR-02,process_create,alice,,C:\Program Files\Google\Chrome\Application\chrome.exe,success,-,0x3edde,,,info,,,,windows_security.xml,6
+E000023,2026-09-20T05:03:01Z,aws,ap-south-1,api_call,ec2.amazonaws.com,ec2.amazonaws.com,,success,DescribeVolumes,,,,info,,,,cloudtrail.json,7
+E000024,2026-09-20T05:13:57Z,aws,ap-south-1,api_call,app-uploader,198.51.100.10,app-uploads,success,PutObject,,AKIAQ3EXAMPLEAPP0001,,info,,,,cloudtrail.json,8
+E000025,2026-09-20T05:22:01Z,aws,ap-south-1,api_call,ec2.amazonaws.com,ec2.amazonaws.com,,success,DescribeVolumes,,,,info,,,,cloudtrail.json,9
+E000026,2026-09-20T05:30:59Z,windows,WS-HR-02,logoff,erin,,,success,,0x3e7,,,info,,,,windows_security.xml,7
+E000027,2026-09-20T05:40:23Z,windows,WS-HR-02,auth_success,alice,,,success,logon type 2,0x4645d,,,info,,,,windows_security.xml,8
+E000028,2026-09-20T05:41:23Z,windows,WS-HR-02,process_create,alice,,C:\Program Files\Google\Chrome\Application\chrome.exe,success,-,0x4645d,,,info,,,,windows_security.xml,9
+E000029,2026-09-20T05:44:18Z,aws,ap-south-1,api_call,devops,198.51.100.10,,success,ListBuckets,,AKIAQ3EXAMPLEOPS0009,,info,,,,cloudtrail.json,10
+E000030,2026-09-20T05:49:36Z,windows,SRV-FILE-01,auth_success,dave,,,success,logon type 2,0x3facb,,,info,,,,windows_security.xml,10
+E000031,2026-09-20T05:50:36Z,windows,SRV-FILE-01,process_create,dave,,C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE,success,-,0x3facb,,,info,,,,windows_security.xml,11
+E000032,2026-09-20T06:03:57Z,aws,ap-south-1,api_call,devops,198.51.100.10,,success,DescribeInstances,,AKIAQ3EXAMPLEOPS0009,,info,,,,cloudtrail.json,11
+E000033,2026-09-20T06:11:36Z,aws,ap-south-1,api_call,devops,198.51.100.10,,success,ListBuckets,,AKIAQ3EXAMPLEOPS0009,,info,,,,cloudtrail.json,12
+E000034,2026-09-20T06:20:00Z,linux,web01,auth_failure,test,192.0.2.77,,failure,ssh failed login,,,,info,,,,auth.log,20
+E000035,2026-09-20T06:20:10Z,linux,web01,auth_failure,test,192.0.2.77,,failure,ssh failed login,,,,info,,,,auth.log,21
+E000036,2026-09-20T06:20:20Z,linux,web01,auth_failure,test,192.0.2.77,,failure,ssh failed login,,,,info,,,,auth.log,22
+E000037,2026-09-20T06:24:02Z,windows,SRV-FILE-01,logoff,bob,,,success,,0x3e7,,,info,,,,windows_security.xml,13
+E000038,2026-09-20T06:30:27Z,windows,SRV-FILE-01,auth_success,alice,10.0.5.28,,success,logon type 3,0x44bbf,,,info,,,,windows_security.xml,14
+E000039,2026-09-20T06:31:18Z,windows,WS-DEV-03,auth_failure,carol,,,failure,failed logon status 0xC000006A,,,,info,,,,windows_security.xml,15
+E000040,2026-09-20T06:31:31Z,windows,SRV-FILE-01,auth_success,carol,10.0.5.189,,success,logon type 3,0x46d46,,,info,,,,windows_security.xml,16
+E000041,2026-09-20T06:41:59Z,linux,app01,auth_success,devops,10.0.8.166,,success,ssh login,,,,info,,,,auth.log,23
+E000042,2026-09-20T06:42:59Z,linux,app01,command_exec,devops,,/usr/bin/apt update,success,sudo as root,,,,info,,,,auth.log,24
+E000043,2026-09-20T06:49:34Z,linux,web01,auth_failure,admin1,10.0.8.61,,failure,ssh failed login,,,,info,,,,auth.log,25
+E000044,2026-09-20T06:49:54Z,linux,web01,auth_success,admin1,10.0.8.61,,success,ssh login,,,,info,,,,auth.log,26
+E000045,2026-09-20T06:50:06Z,aws,ap-south-1,api_call,ec2.amazonaws.com,ec2.amazonaws.com,,success,DescribeVolumes,,,,info,,,,cloudtrail.json,13
+E000046,2026-09-20T06:50:32Z,windows,WS-FIN-01,auth_success,carol,,,success,logon type 2,0x4393a,,,info,,,,windows_security.xml,17
+E000047,2026-09-20T06:51:32Z,windows,WS-FIN-01,process_create,carol,,C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE,success,-,0x4393a,,,info,,,,windows_security.xml,18
+E000048,2026-09-20T06:53:35Z,aws,ap-south-1,api_call,devops,198.51.100.10,,success,ListBuckets,,AKIAQ3EXAMPLEOPS0009,,info,,,,cloudtrail.json,14
+E000049,2026-09-20T06:56:06Z,linux,bastion,auth_success,devops,10.0.9.147,,success,ssh login,,,,info,,,,auth.log,28
+E000050,2026-09-20T06:57:06Z,linux,bastion,command_exec,devops,,/usr/bin/apt update,success,sudo as root,,,,info,,,,auth.log,29
+E000051,2026-09-20T06:59:13Z,linux,web01,account_created,,,svc92,success,local account created,,,,info,,,,auth.log,30
+E000052,2026-09-20T07:00:00Z,linux,db01,auth_success,deploy,10.0.4.9,,success,ssh login,,,,info,,,,auth.log,31
+E000053,2026-09-20T07:03:41Z,windows,WS-FIN-01,auth_success,carol,,,success,logon type 2,0x471d4,,,info,,,,windows_security.xml,19
+E000054,2026-09-20T07:04:41Z,windows,WS-FIN-01,process_create,carol,,C:\Program Files\Google\Chrome\Application\chrome.exe,success,-,0x471d4,,,info,,,,windows_security.xml,20
+E000055,2026-09-20T07:05:00Z,linux,db01,command_exec,deploy,,/usr/bin/systemctl status postgresql,success,sudo as root,,,,info,,,,auth.log,32
+E000056,2026-09-20T07:13:57Z,windows,WS-HR-02,logoff,alice,,,success,,0x3edde,,,info,,,,windows_security.xml,21
+E000057,2026-09-20T07:16:27Z,linux,app01,auth_failure,admin1,10.0.4.78,,failure,ssh failed login,,,,info,,,,auth.log,34
+E000058,2026-09-20T07:16:47Z,linux,app01,auth_success,admin1,10.0.4.78,,success,ssh login,,,,info,,,,auth.log,35
+E000059,2026-09-20T07:30:00Z,linux,web01,auth_success,ubuntu,10.0.3.21,,success,ssh login,,,,info,,,,auth.log,37
+E000060,2026-09-20T07:31:21Z,aws,ap-south-1,api_call,devops,198.51.100.10,,success,DescribeInstances,,AKIAQ3EXAMPLEOPS0009,,info,,,,cloudtrail.json,15
+E000061,2026-09-20T07:32:21Z,linux,web01,auth_failure,svc-app,10.0.2.46,,failure,ssh failed login,,,,info,,,,auth.log,38
+E000062,2026-09-20T07:32:41Z,linux,web01,auth_success,svc-app,10.0.2.46,,success,ssh login,,,,info,,,,auth.log,39
+E000063,2026-09-20T07:34:24Z,aws,ap-south-1,api_call,ec2.amazonaws.com,ec2.amazonaws.com,,success,DescribeVolumes,,,,info,,,,cloudtrail.json,16
+E000064,2026-09-20T07:35:00Z,linux,web01,command_exec,ubuntu,,/usr/bin/systemctl restart nginx,success,sudo as root,,,,info,,,,auth.log,40
+E000065,2026-09-20T07:42:02Z,windows,SRV-FILE-01,logoff,erin,,,success,,0x3e7,,,info,,,,windows_security.xml,22
+E000066,2026-09-20T07:43:39Z,aws,ap-south-1,api_call,ec2.amazonaws.com,ec2.amazonaws.com,,success,DescribeVolumes,,,,info,,,,cloudtrail.json,17
+E000067,2026-09-20T07:43:54Z,linux,bastion,account_created,,,svc45,success,local account created,,,,info,,,,auth.log,41
+E000068,2026-09-20T07:49:46Z,windows,WS-DEV-03,priv_assign,SYSTEM,,,success,SeTcbPrivilege,0x3e7,,,info,,,,windows_security.xml,23
+E000069,2026-09-20T08:00:00Z,windows,SRV-FILE-01,auth_success,administrator,10.0.5.10,,success,logon type 3,0x1a2b3,,,info,,,,windows_security.xml,24
+E000070,2026-09-20T08:00:01Z,windows,SRV-FILE-01,priv_assign,administrator,,,success,SeBackupPrivilege,0x1a2b3,,,info,,,,windows_security.xml,25
+E000071,2026-09-20T08:00:41Z,aws,ap-south-1,api_call,devops,198.51.100.10,,success,ListBuckets,,AKIAQ3EXAMPLEOPS0009,,info,,,,cloudtrail.json,18
+E000072,2026-09-20T08:10:11Z,windows,WS-FIN-01,priv_assign,SYSTEM,,,success,SeTcbPrivilege,0x3e7,,,info,,,,windows_security.xml,26
+E000073,2026-09-20T08:11:25Z,aws,ap-south-1,data_download,devops,198.51.100.10,build-artifacts/b/41.zip,success,GetObject,,AKIAQ3EXAMPLEOPS0009,,info,,,,cloudtrail.json,19
+E000074,2026-09-20T08:15:21Z,windows,SRV-FILE-01,auth_failure,carol,,,failure,failed logon status 0xC000006A,,,,info,,,,windows_security.xml,28
+E000075,2026-09-20T08:18:03Z,aws,ap-south-1,api_call,devops,198.51.100.10,,success,ListBuckets,,AKIAQ3EXAMPLEOPS0009,,info,,,,cloudtrail.json,20
+E000076,2026-09-20T08:24:08Z,windows,WS-DEV-03,logoff,dave,,,success,,0x3f0c0,,,info,,,,windows_security.xml,29
+E000077,2026-09-20T08:26:43Z,windows,WS-DEV-03,auth_success,alice,10.0.5.122,,success,logon type 3,0x45f04,,,info,,,,windows_security.xml,30
+E000078,2026-09-20T08:29:16Z,linux,web01,auth_failure,devops,10.0.8.60,,failure,ssh failed login,,,,info,,,,auth.log,44
+E000079,2026-09-20T08:29:36Z,linux,web01,auth_success,devops,10.0.8.60,,success,ssh login,,,,info,,,,auth.log,45
+E000080,2026-09-20T08:31:39Z,windows,SRV-FILE-01,logoff,dave,,,success,,0x3facb,,,info,,,,windows_security.xml,31
+E000081,2026-09-20T08:39:49Z,aws,ap-south-1,data_download,devops,198.51.100.10,build-artifacts/b/105.zip,success,GetObject,,AKIAQ3EXAMPLEOPS0009,,info,,,,cloudtrail.json,21
+E000082,2026-09-20T08:51:01Z,windows,SRV-FILE-01,auth_success,dave,10.0.5.195,,success,logon type 3,0x43149,,,info,,,,windows_security.xml,34
+E000083,2026-09-20T08:56:32Z,windows,WS-FIN-01,auth_success,bob,,,success,logon type 2,0x40b56,,,info,,,,windows_security.xml,35
+E000084,2026-09-20T08:57:32Z,windows,WS-FIN-01,process_create,bob,,C:\Program Files\Google\Chrome\Application\chrome.exe,success,-,0x40b56,,,info,,,,windows_security.xml,36
+E000085,2026-09-20T09:00:00Z,linux,web01,auth_success,ubuntu,10.0.3.21,,success,ssh login,,,,info,,,,auth.log,47
+E000086,2026-09-20T09:00:37Z,linux,bastion,auth_success,monitor,10.0.1.50,,success,ssh login,,,,info,,,,auth.log,48
+E000087,2026-09-20T09:00:58Z,linux,web01,account_created,,,svc26,success,local account created,,,,info,,,,auth.log,49
+E000088,2026-09-20T09:01:37Z,linux,bastion,command_exec,monitor,,/usr/bin/apt update,success,sudo as root,,,,info,,,,auth.log,50
+E000089,2026-09-20T09:04:49Z,aws,ap-south-1,api_call,devops,198.51.100.10,,success,ListBuckets,,AKIAQ3EXAMPLEOPS0009,,info,,,,cloudtrail.json,22
+E000090,2026-09-20T09:08:21Z,windows,WS-FIN-01,logoff,carol,,,success,,0x4393a,,,info,,,,windows_security.xml,37
+E000091,2026-09-20T09:10:00Z,linux,web01,auth_failure,admin,203.0.113.45,,failure,ssh failed login,,,,medium,brute_force,T1110,INC-1,auth.log,51
+E000092,2026-09-20T09:10:12Z,linux,web01,auth_failure,admin,203.0.113.45,,failure,ssh failed login,,,,medium,brute_force,T1110,INC-1,auth.log,52
+E000093,2026-09-20T09:10:24Z,linux,web01,auth_failure,admin,203.0.113.45,,failure,ssh failed login,,,,medium,brute_force,T1110,INC-1,auth.log,53
+E000094,2026-09-20T09:10:36Z,linux,web01,auth_failure,ubuntu,203.0.113.45,,failure,ssh failed login,,,,medium,brute_force,T1110,INC-1,auth.log,54
+E000095,2026-09-20T09:10:48Z,linux,web01,auth_failure,ubuntu,203.0.113.45,,failure,ssh failed login,,,,medium,brute_force,T1110,INC-1,auth.log,55
+E000096,2026-09-20T09:11:00Z,linux,web01,auth_failure,ubuntu,203.0.113.45,,failure,ssh failed login,,,,medium,brute_force,T1110,INC-1,auth.log,56
+E000097,2026-09-20T09:11:12Z,linux,web01,auth_success,ubuntu,203.0.113.45,,success,ssh login,,,,high,brute_force_success,T1078,INC-1,auth.log,57
+E000098,2026-09-20T09:12:12Z,linux,web01,command_exec,ubuntu,,/bin/cat /home/ubuntu/.aws/credentials,success,sudo as root,,,,high,sudo_untrusted; credential_access,T1548.003; T1552.001,INC-1,auth.log,58
+E000099,2026-09-20T09:13:12Z,linux,web01,command_exec,ubuntu,,/usr/bin/id,success,sudo as root,,,,medium,sudo_untrusted,T1548.003,INC-1,auth.log,59
+E000100,2026-09-20T09:20:00Z,linux,web01,command_exec,ubuntu,,/usr/bin/journalctl -u nginx,success,sudo as root,,,,medium,sudo_untrusted,T1548.003,INC-1,auth.log,60
+E000101,2026-09-20T09:23:01Z,windows,WS-FIN-01,logoff,carol,,,success,,0x471d4,,,info,,,,windows_security.xml,38
+E000102,2026-09-20T09:25:09Z,windows,WS-DEV-03,auth_failure,dave,,,failure,failed logon status 0xC000006A,,,,info,,,,windows_security.xml,39
+E000103,2026-09-20T09:28:19Z,linux,bastion,auth_success,devops,10.0.1.75,,success,ssh login,,,,info,,,,auth.log,61
+E000104,2026-09-20T09:29:19Z,linux,bastion,command_exec,devops,,/usr/bin/apt update,success,sudo as root,,,,info,,,,auth.log,62
+E000105,2026-09-20T09:30:11Z,aws,ap-south-1,api_call,devops,198.51.100.10,,success,ListBuckets,,AKIAQ3EXAMPLEOPS0009,,info,,,,cloudtrail.json,23
+E000106,2026-09-20T09:48:00Z,aws,ap-south-1,api_call,devops,198.51.100.10,,success,ListBuckets,,AKIAQ3EXAMPLEOPS0009,,info,,,,cloudtrail.json,24
+E000107,2026-09-20T09:57:37Z,linux,app01,account_created,,,svc49,success,local account created,,,,info,,,,auth.log,64
+E000108,2026-09-20T10:04:56Z,aws,ap-south-1,api_call,devops,198.51.100.10,,success,DescribeInstances,,AKIAQ3EXAMPLEOPS0009,,info,,,,cloudtrail.json,25
+E000109,2026-09-20T10:07:06Z,windows,WS-HR-02,auth_success,bob,,,success,logon type 2,0x3f88e,,,info,,,,windows_security.xml,40
+E000110,2026-09-20T10:08:06Z,windows,WS-HR-02,process_create,bob,,C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE,success,-,0x3f88e,,,info,,,,windows_security.xml,41
+E000111,2026-09-20T10:09:29Z,linux,bastion,auth_success,monitor,10.0.3.150,,success,ssh login,,,,info,,,,auth.log,65
+E000112,2026-09-20T10:10:29Z,linux,bastion,command_exec,monitor,,/usr/bin/apt update,success,sudo as root,,,,info,,,,auth.log,66
+E000113,2026-09-20T10:10:37Z,aws,ap-south-1,api_call,ec2.amazonaws.com,ec2.amazonaws.com,,success,DescribeVolumes,,,,info,,,,cloudtrail.json,26
+E000114,2026-09-20T10:14:38Z,windows,SRV-FILE-01,priv_assign,SYSTEM,,,success,SeTcbPrivilege,0x3e7,,,info,,,,windows_security.xml,42
+E000115,2026-09-20T10:28:00Z,linux,web01,account_created,,,svc12,success,local account created,,,,info,,,,auth.log,67
+E000116,2026-09-20T10:43:23Z,aws,ap-south-1,api_call,devops,198.51.100.10,,success,DescribeInstances,,AKIAQ3EXAMPLEOPS0009,,info,,,,cloudtrail.json,27
+E000117,2026-09-20T10:53:58Z,linux,db01,auth_success,svc-app,10.0.1.127,,success,ssh login,,,,info,,,,auth.log,68
+E000118,2026-09-20T10:54:58Z,linux,db01,command_exec,svc-app,,/usr/bin/apt update,success,sudo as root,,,,info,,,,auth.log,69
+E000119,2026-09-20T11:00:00Z,windows,SRV-FILE-01,auth_success,administrator,10.0.5.99,,success,logon type 3,0x3e62e,,,info,,,INC-2,windows_security.xml,43
+E000120,2026-09-20T11:00:01Z,windows,SRV-FILE-01,priv_assign,administrator,,,success,SeDebugPrivilege,0x3e62e,,,high,privileged_logon_unexpected_source; privileged_session,T1078,INC-2,windows_security.xml,44
+E000121,2026-09-20T11:01:13Z,windows,WS-DEV-03,priv_assign,SYSTEM,,,success,SeTcbPrivilege,0x3e7,,,info,,,,windows_security.xml,45
+E000122,2026-09-20T11:02:00Z,windows,SRV-FILE-01,account_created,administrator,,svc_temp,success,local account created,0x3e62e,,,high,account_created,T1136.001,INC-2,windows_security.xml,46
+E000123,2026-09-20T11:02:20Z,windows,SRV-FILE-01,group_add,administrator,,Administrators,success,member CN=svc_temp,0x3e62e,,,high,privilege_group_add,T1098,INC-2,windows_security.xml,47
+E000124,2026-09-20T11:06:29Z,aws,ap-south-1,api_call,devops,198.51.100.10,,success,DescribeInstances,,AKIAQ3EXAMPLEOPS0009,,info,,,,cloudtrail.json,28
+E000125,2026-09-20T11:12:02Z,windows,WS-FIN-01,logoff,dave,,,success,,0x3e7,,,info,,,,windows_security.xml,48
+E000126,2026-09-20T11:12:10Z,windows,WS-HR-02,logoff,alice,,,success,,0x4645d,,,info,,,,windows_security.xml,49
+E000127,2026-09-20T11:15:14Z,linux,web01,auth_success,admin1,10.0.7.23,,success,ssh login,,,,info,,,,auth.log,70
+E000128,2026-09-20T11:16:14Z,linux,web01,command_exec,admin1,,/usr/bin/apt update,success,sudo as root,,,,info,,,,auth.log,71
+E000129,2026-09-20T11:19:48Z,windows,WS-FIN-01,auth_failure,bob,,,failure,failed logon status 0xC000006A,,,,info,,,,windows_security.xml,51
+E000130,2026-09-20T11:20:36Z,aws,ap-south-1,api_call,ec2.amazonaws.com,ec2.amazonaws.com,,success,DescribeVolumes,,,,info,,,,cloudtrail.json,29
+E000131,2026-09-20T11:21:21Z,linux,app01,auth_failure,monitor,10.0.6.94,,failure,ssh failed login,,,,info,,,,auth.log,72
+E000132,2026-09-20T11:21:41Z,linux,app01,auth_success,monitor,10.0.6.94,,success,ssh login,,,,info,,,,auth.log,73
+E000133,2026-09-20T11:22:00Z,windows,WS-FIN-01,auth_success,erin,,,success,logon type 2,0x44181,,,info,,,,windows_security.xml,52
+E000134,2026-09-20T11:23:00Z,windows,WS-FIN-01,process_create,erin,,C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE,success,-,0x44181,,,info,,,,windows_security.xml,53
+E000135,2026-09-20T11:23:38Z,aws,ap-south-1,api_call,devops,198.51.100.10,,success,DescribeInstances,,AKIAQ3EXAMPLEOPS0009,,info,,,,cloudtrail.json,30
+E000136,2026-09-20T11:47:13Z,linux,db01,auth_failure,devops,10.0.5.73,,failure,ssh failed login,,,,info,,,,auth.log,75
+E000137,2026-09-20T11:47:33Z,linux,db01,auth_success,devops,10.0.5.73,,success,ssh login,,,,info,,,,auth.log,76
+E000138,2026-09-20T11:48:17Z,windows,SRV-FILE-01,logoff,alice,,,success,,0x3e7,,,info,,,,windows_security.xml,55
+E000139,2026-09-20T11:55:41Z,aws,ap-south-1,api_call,devops,198.51.100.10,,success,DescribeInstances,,AKIAQ3EXAMPLEOPS0009,,info,,,,cloudtrail.json,31
+E000140,2026-09-20T11:58:14Z,aws,ap-south-1,api_call,ec2.amazonaws.com,ec2.amazonaws.com,,success,DescribeVolumes,,,,info,,,,cloudtrail.json,32
+E000141,2026-09-20T12:00:00Z,linux,web01,auth_success,ubuntu,10.0.3.21,,success,ssh login,,,,info,,,,auth.log,77
+E000142,2026-09-20T12:00:31Z,aws,ap-south-1,api_call,devops,198.51.100.10,,success,ListBuckets,,AKIAQ3EXAMPLEOPS0009,,info,,,,cloudtrail.json,33
+E000143,2026-09-20T12:05:00Z,linux,web01,command_exec,ubuntu,,/usr/bin/tail /var/log/syslog,success,sudo as root,,,,info,,,,auth.log,78
+E000144,2026-09-20T12:06:30Z,windows,WS-FIN-01,auth_success,bob,10.0.5.166,,success,logon type 3,0x4123e,,,info,,,,windows_security.xml,56
+E000145,2026-09-20T12:06:39Z,windows,WS-HR-02,auth_success,erin,,,success,logon type 2,0x41e79,,,info,,,,windows_security.xml,57
+E000146,2026-09-20T12:07:39Z,windows,WS-HR-02,process_create,erin,,C:\Program Files\Google\Chrome\Application\chrome.exe,success,-,0x41e79,,,info,,,,windows_security.xml,58
+E000147,2026-09-20T12:22:02Z,windows,WS-FIN-01,logoff,bob,,,success,,0x40b56,,,info,,,,windows_security.xml,59
+E000148,2026-09-20T12:34:03Z,windows,WS-FIN-01,auth_success,bob,10.0.5.97,,success,logon type 3,0x417a8,,,info,,,,windows_security.xml,60
+E000149,2026-09-20T12:34:35Z,aws,ap-south-1,api_call,ec2.amazonaws.com,ec2.amazonaws.com,,success,DescribeVolumes,,,,info,,,,cloudtrail.json,34
+E000150,2026-09-20T12:34:40Z,windows,WS-FIN-01,logoff,erin,,,success,,0x44181,,,info,,,,windows_security.xml,61
+E000151,2026-09-20T12:57:32Z,windows,WS-HR-02,auth_success,bob,,,success,logon type 2,0x43d72,,,info,,,,windows_security.xml,62
+E000152,2026-09-20T12:58:32Z,windows,WS-HR-02,process_create,bob,,C:\Program Files\Google\Chrome\Application\chrome.exe,success,-,0x43d72,,,info,,,,windows_security.xml,63
+E000153,2026-09-20T13:00:00Z,linux,db01,auth_success,deploy,10.0.4.9,,success,ssh login,,,,info,,,,auth.log,81
+E000154,2026-09-20T13:20:25Z,windows,WS-HR-02,auth_success,carol,,,success,logon type 2,0x3f2c1,,,info,,,,windows_security.xml,64
+E000155,2026-09-20T13:21:25Z,windows,WS-HR-02,process_create,carol,,C:\Program Files\Google\Chrome\Application\chrome.exe,success,-,0x3f2c1,,,info,,,,windows_security.xml,65
+E000156,2026-09-20T13:22:08Z,aws,ap-south-1,api_call,devops,198.51.100.10,,success,DescribeInstances,,AKIAQ3EXAMPLEOPS0009,,info,,,,cloudtrail.json,35
+E000157,2026-09-20T13:27:36Z,linux,bastion,auth_failure,svc-app,10.0.4.68,,failure,ssh failed login,,,,info,,,,auth.log,82
+E000158,2026-09-20T13:27:44Z,windows,WS-HR-02,logoff,erin,,,success,,0x41e79,,,info,,,,windows_security.xml,66
+E000159,2026-09-20T13:27:56Z,linux,bastion,auth_success,svc-app,10.0.4.68,,success,ssh login,,,,info,,,,auth.log,83
+E000160,2026-09-20T13:35:49Z,linux,web01,auth_success,svc-app,10.0.9.159,,success,ssh login,,,,info,,,,auth.log,84
+E000161,2026-09-20T13:36:49Z,linux,web01,command_exec,svc-app,,/usr/bin/apt update,success,sudo as root,,,,info,,,,auth.log,85
+E000162,2026-09-20T13:38:44Z,linux,db01,auth_failure,monitor,10.0.6.106,,failure,ssh failed login,,,,info,,,,auth.log,86
+E000163,2026-09-20T13:39:04Z,linux,db01,auth_success,monitor,10.0.6.106,,success,ssh login,,,,info,,,,auth.log,87
+E000164,2026-09-20T13:55:52Z,windows,WS-HR-02,auth_success,erin,10.0.5.145,,success,logon type 3,0x41fe7,,,info,,,,windows_security.xml,68
+E000165,2026-09-20T13:57:11Z,windows,WS-DEV-03,logoff,erin,,,success,,0x3e7,,,info,,,,windows_security.xml,69
+E000166,2026-09-20T14:04:21Z,linux,db01,auth_success,devops,10.0.3.94,,success,ssh login,,,,info,,,,auth.log,89
+E000167,2026-09-20T14:05:21Z,linux,db01,command_exec,devops,,/usr/bin/apt update,success,sudo as root,,,,info,,,,auth.log,90
+E000168,2026-09-20T14:05:57Z,aws,ap-south-1,api_call,devops,198.51.100.10,,success,DescribeInstances,,AKIAQ3EXAMPLEOPS0009,,info,,,,cloudtrail.json,36
+E000169,2026-09-20T14:06:38Z,linux,bastion,auth_success,devops,10.0.9.20,,success,ssh login,,,,info,,,,auth.log,91
+E000170,2026-09-20T14:07:38Z,linux,bastion,command_exec,devops,,/usr/bin/apt update,success,sudo as root,,,,info,,,,auth.log,92
+E000171,2026-09-20T14:13:11Z,windows,WS-FIN-01,auth_success,bob,,,success,logon type 2,0x42eee,,,info,,,,windows_security.xml,70
+E000172,2026-09-20T14:14:11Z,windows,WS-FIN-01,process_create,bob,,C:\Program Files\Google\Chrome\Application\chrome.exe,success,-,0x42eee,,,info,,,,windows_security.xml,71
+E000173,2026-09-20T14:15:08Z,windows,WS-FIN-01,priv_assign,SYSTEM,,,success,SeTcbPrivilege,0x3e7,,,info,,,,windows_security.xml,72
+E000174,2026-09-20T14:16:11Z,linux,bastion,auth_success,svc-app,10.0.1.43,,success,ssh login,,,,info,,,,auth.log,93
+E000175,2026-09-20T14:16:43Z,aws,ap-south-1,api_call,devops,198.51.100.10,,success,DescribeInstances,,AKIAQ3EXAMPLEOPS0009,,info,,,,cloudtrail.json,37
+E000176,2026-09-20T14:17:11Z,linux,bastion,command_exec,svc-app,,/usr/bin/apt update,success,sudo as root,,,,info,,,,auth.log,94
+E000177,2026-09-20T14:20:05Z,windows,SRV-FILE-01,auth_failure,carol,,,failure,failed logon status 0xC000006A,,,,info,,,,windows_security.xml,73
+E000178,2026-09-20T14:40:11Z,windows,WS-HR-02,auth_success,dave,10.0.5.30,,success,logon type 3,0x4069b,,,info,,,,windows_security.xml,75
+E000179,2026-09-20T14:41:01Z,linux,bastion,auth_success,svc-app,10.0.8.48,,success,ssh login,,,,info,,,,auth.log,96
+E000180,2026-09-20T14:42:01Z,linux,bastion,command_exec,svc-app,,/usr/bin/apt update,success,sudo as root,,,,info,,,,auth.log,97
+E000181,2026-09-20T15:13:28Z,linux,db01,auth_success,devops,10.0.1.20,,success,ssh login,,,,info,,,,auth.log,98
+E000182,2026-09-20T15:13:46Z,aws,ap-south-1,api_call,devops,198.51.100.10,,success,DescribeInstances,,AKIAQ3EXAMPLEOPS0009,,info,,,,cloudtrail.json,38
+E000183,2026-09-20T15:14:28Z,linux,db01,command_exec,devops,,/usr/bin/apt update,success,sudo as root,,,,info,,,,auth.log,99
+E000184,2026-09-20T15:15:30Z,windows,SRV-FILE-01,auth_success,carol,,,success,logon type 2,0x43461,,,info,,,,windows_security.xml,77
+E000185,2026-09-20T15:16:30Z,windows,SRV-FILE-01,process_create,carol,,C:\Program Files\Google\Chrome\Application\chrome.exe,success,-,0x43461,,,info,,,,windows_security.xml,78
+E000186,2026-09-20T15:24:36Z,aws,ap-south-1,data_download,devops,198.51.100.10,build-artifacts/b/151.zip,success,GetObject,,AKIAQ3EXAMPLEOPS0009,,info,,,,cloudtrail.json,39
+E000187,2026-09-20T15:26:18Z,linux,web01,auth_success,monitor,10.0.9.150,,success,ssh login,,,,info,,,,auth.log,100
+E000188,2026-09-20T15:27:18Z,linux,web01,command_exec,monitor,,/usr/bin/apt update,success,sudo as root,,,,info,,,,auth.log,101
+E000189,2026-09-20T15:29:39Z,windows,WS-HR-02,logoff,bob,,,success,,0x3f88e,,,info,,,,windows_security.xml,79
+E000190,2026-09-20T15:35:20Z,windows,WS-HR-02,logoff,bob,,,success,,0x43d72,,,info,,,,windows_security.xml,80
+E000191,2026-09-20T15:37:41Z,windows,SRV-FILE-01,auth_success,dave,10.0.5.133,,success,logon type 3,0x414e6,,,info,,,,windows_security.xml,81
+E000192,2026-09-20T15:39:57Z,windows,SRV-FILE-01,auth_success,erin,10.0.5.60,,success,logon type 3,0x456ae,,,info,,,,windows_security.xml,82
+E000193,2026-09-20T15:46:58Z,windows,WS-HR-02,auth_success,erin,,,success,logon type 2,0x43a86,,,info,,,,windows_security.xml,83
+E000194,2026-09-20T15:47:58Z,windows,WS-HR-02,process_create,erin,,C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE,success,-,0x43a86,,,info,,,,windows_security.xml,84
+E000195,2026-09-20T15:49:04Z,aws,ap-south-1,api_call,ec2.amazonaws.com,ec2.amazonaws.com,,success,DescribeVolumes,,,,info,,,,cloudtrail.json,40
+E000196,2026-09-20T15:49:37Z,aws,ap-south-1,api_call,ec2.amazonaws.com,ec2.amazonaws.com,,success,DescribeVolumes,,,,info,,,,cloudtrail.json,41
+E000197,2026-09-20T16:15:20Z,windows,SRV-FILE-01,auth_failure,carol,,,failure,failed logon status 0xC000006A,,,,info,,,,windows_security.xml,85
+E000198,2026-09-20T16:19:46Z,windows,SRV-FILE-01,logoff,carol,,,success,,0x43461,,,info,,,,windows_security.xml,86
+E000199,2026-09-20T16:34:53Z,aws,ap-south-1,api_call,devops,198.51.100.10,,success,DescribeInstances,,AKIAQ3EXAMPLEOPS0009,,info,,,,cloudtrail.json,42
+E000200,2026-09-20T16:37:04Z,windows,WS-DEV-03,auth_success,bob,10.0.5.129,,success,logon type 3,0x44ef1,,,info,,,,windows_security.xml,87
+E000201,2026-09-20T16:37:55Z,aws,ap-south-1,api_call,devops,198.51.100.10,,success,ListBuckets,,AKIAQ3EXAMPLEOPS0009,,info,,,,cloudtrail.json,43
+E000202,2026-09-20T16:40:21Z,windows,SRV-FILE-01,auth_success,carol,,,success,logon type 2,0x3fdaa,,,info,,,,windows_security.xml,88
+E000203,2026-09-20T16:41:21Z,windows,SRV-FILE-01,process_create,carol,,C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE,success,-,0x3fdaa,,,info,,,,windows_security.xml,89
+E000204,2026-09-20T16:50:04Z,aws,ap-south-1,api_call,devops,198.51.100.10,,success,DescribeInstances,,AKIAQ3EXAMPLEOPS0009,,info,,,,cloudtrail.json,44
+E000205,2026-09-20T16:54:31Z,windows,WS-FIN-01,logoff,bob,,,success,,0x42eee,,,info,,,,windows_security.xml,90
+E000206,2026-09-20T16:56:44Z,linux,bastion,account_created,,,svc77,success,local account created,,,,info,,,,auth.log,102
+E000207,2026-09-20T17:00:14Z,windows,WS-HR-02,priv_assign,SYSTEM,,,success,SeTcbPrivilege,0x3e7,,,info,,,,windows_security.xml,91
+E000208,2026-09-20T17:26:07Z,windows,WS-HR-02,logoff,carol,,,success,,0x3f2c1,,,info,,,,windows_security.xml,92
+E000209,2026-09-20T17:35:44Z,aws,ap-south-1,api_call,devops,198.51.100.10,,success,DescribeInstances,,AKIAQ3EXAMPLEOPS0009,,info,,,,cloudtrail.json,45
+E000210,2026-09-20T17:40:56Z,windows,WS-FIN-01,auth_failure,alice,,,failure,failed logon status 0xC000006A,,,,info,,,,windows_security.xml,94
+E000211,2026-09-20T17:58:02Z,windows,SRV-FILE-01,logoff,carol,,,success,,0x3fdaa,,,info,,,,windows_security.xml,95
+E000212,2026-09-20T18:00:57Z,aws,ap-south-1,api_call,devops,198.51.100.10,,success,DescribeInstances,,AKIAQ3EXAMPLEOPS0009,,info,,,,cloudtrail.json,46
+E000213,2026-09-20T18:02:31Z,aws,ap-south-1,data_download,devops,198.51.100.10,build-artifacts/b/468.zip,success,GetObject,,AKIAQ3EXAMPLEOPS0009,,info,,,,cloudtrail.json,47
+E000214,2026-09-20T18:05:41Z,aws,ap-south-1,api_call,devops,198.51.100.10,,success,DescribeInstances,,AKIAQ3EXAMPLEOPS0009,,info,,,,cloudtrail.json,48
+E000215,2026-09-20T18:12:52Z,aws,ap-south-1,api_call,ec2.amazonaws.com,ec2.amazonaws.com,,success,DescribeVolumes,,,,info,,,,cloudtrail.json,49
+E000216,2026-09-20T18:14:54Z,windows,WS-HR-02,logoff,dave,,,success,,0x3e7,,,info,,,,windows_security.xml,96
+E000217,2026-09-20T18:25:45Z,aws,ap-south-1,api_call,devops,198.51.100.10,,success,DescribeInstances,,AKIAQ3EXAMPLEOPS0009,,info,,,,cloudtrail.json,50
+E000218,2026-09-20T18:40:55Z,windows,SRV-FILE-01,auth_success,carol,,,success,logon type 2,0x42669,,,info,,,,windows_security.xml,97
+E000219,2026-09-20T18:41:55Z,windows,SRV-FILE-01,process_create,carol,,C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE,success,-,0x42669,,,info,,,,windows_security.xml,98
+E000220,2026-09-20T20:39:55Z,windows,WS-HR-02,logoff,erin,,,success,,0x43a86,,,info,,,,windows_security.xml,99
+E000221,2026-09-20T23:43:29Z,windows,SRV-FILE-01,logoff,carol,,,success,,0x42669,,,info,,,,windows_security.xml,100

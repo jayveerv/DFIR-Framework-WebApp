@@ -1,0 +1,6 @@
+{
+ "collected_at": "2026-09-20T12:00:00Z",
+ "account": "111122223333",
+ "arn": "arn:aws:iam::111122223333:user/auditor",
+ "region": "ap-south-1"
+}

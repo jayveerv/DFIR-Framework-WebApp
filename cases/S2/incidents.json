@@ -1,0 +1,280 @@
+{
+ "incidents": [
+  {
+   "start": "2026-09-20T09:10:00Z",
+   "end": "2026-09-20T09:45:50Z",
+   "start_epoch": 1789895400.0,
+   "platforms": [
+    "aws",
+    "linux"
+   ],
+   "cross_platform": true,
+   "event_ids": [
+    "E000090",
+    "E000091",
+    "E000092",
+    "E000093",
+    "E000094",
+    "E000095",
+    "E000096",
+    "E000097",
+    "E000098",
+    "E000104",
+    "E000105",
+    "E000106",
+    "E000107",
+    "E000108",
+    "E000109",
+    "E000110",
+    "E000111",
+    "E000112",
+    "E000113",
+    "E000114",
+    "E000115",
+    "E000116",
+    "E000117",
+    "E000118",
+    "E000119"
+   ],
+   "event_count": 25,
+   "alert_count": 25,
+   "severity": "High",
+   "entities": [
+    {
+     "id": "ip:203.0.113.45",
+     "kind": "ip",
+     "platforms": [
+      "linux"
+     ],
+     "events": 9
+    },
+    {
+     "id": "cred:web01:/home/ubuntu/.aws/credentials",
+     "kind": "cred",
+     "platforms": [
+      "linux"
+     ],
+     "events": 1
+    },
+    {
+     "id": "key:AKIAQ3EXAMPLEAPP0001",
+     "kind": "key",
+     "platforms": [
+      "aws",
+      "linux"
+     ],
+     "events": 4
+    },
+    {
+     "id": "ip:203.0.113.99",
+     "kind": "ip",
+     "platforms": [
+      "aws"
+     ],
+     "events": 16
+    },
+    {
+     "id": "key:AKIAQ3EXAMPLENEW0002",
+     "kind": "key",
+     "platforms": [
+      "aws"
+     ],
+     "events": 14
+    }
+   ],
+   "links": [
+    {
+     "a": "ip:203.0.113.45",
+     "b": "cred:web01:/home/ubuntu/.aws/credentials",
+     "reason": "credential file read in session",
+     "events": 1
+    },
+    {
+     "a": "cred:web01:/home/ubuntu/.aws/credentials",
+     "b": "key:AKIAQ3EXAMPLEAPP0001",
+     "reason": "credential inventory (file holds key)",
+     "events": 1
+    },
+    {
+     "a": "key:AKIAQ3EXAMPLEAPP0001",
+     "b": "ip:203.0.113.99",
+     "reason": "same API call",
+     "events": 3
+    },
+    {
+     "a": "key:AKIAQ3EXAMPLEAPP0001",
+     "b": "key:AKIAQ3EXAMPLENEW0002",
+     "reason": "key created by key",
+     "events": 1
+    },
+    {
+     "a": "ip:203.0.113.99",
+     "b": "key:AKIAQ3EXAMPLENEW0002",
+     "reason": "same API call",
+     "events": 13
+    }
+   ],
+   "stages": [
+    {
+     "flag": "brute_force",
+     "technique": "T1110",
+     "name": "Brute Force",
+     "severity": "medium",
+     "count": 6,
+     "first": "2026-09-20T09:10:00Z",
+     "last": "2026-09-20T09:11:00Z",
+     "sources": [
+      "linux"
+     ],
+     "hosts": [
+      "web01"
+     ],
+     "first_epoch": 1789895400.0,
+     "posture": false
+    },
+    {
+     "flag": "brute_force_success",
+     "technique": "T1078",
+     "name": "Valid Accounts (login after brute force)",
+     "severity": "high",
+     "count": 1,
+     "first": "2026-09-20T09:11:12Z",
+     "last": "2026-09-20T09:11:12Z",
+     "sources": [
+      "linux"
+     ],
+     "hosts": [
+      "web01"
+     ],
+     "first_epoch": 1789895472.0,
+     "posture": false
+    },
+    {
+     "flag": "sudo_untrusted",
+     "technique": "T1548.003",
+     "name": "Sudo and Sudo Caching (untrusted session)",
+     "severity": "medium",
+     "count": 2,
+     "first": "2026-09-20T09:12:12Z",
+     "last": "2026-09-20T09:13:12Z",
+     "sources": [
+      "linux"
+     ],
+     "hosts": [
+      "web01"
+     ],
+     "first_epoch": 1789895532.0,
+     "posture": false
+    },
+    {
+     "flag": "credential_access",
+     "technique": "T1552.001",
+     "name": "Unsecured Credentials: Credentials In Files",
+     "severity": "high",
+     "count": 1,
+     "first": "2026-09-20T09:12:12Z",
+     "last": "2026-09-20T09:12:12Z",
+     "sources": [
+      "linux"
+     ],
+     "hosts": [
+      "web01"
+     ],
+     "first_epoch": 1789895532.0,
+     "posture": false
+    },
+    {
+     "flag": "external_api_use",
+     "technique": "T1078.004",
+     "name": "Valid Accounts: Cloud Accounts (use from outside network)",
+     "severity": "medium",
+     "count": 16,
+     "first": "2026-09-20T09:40:00Z",
+     "last": "2026-09-20T09:45:50Z",
+     "sources": [
+      "aws"
+     ],
+     "hosts": [
+      "ap-south-1"
+     ],
+     "first_epoch": 1789897200.0,
+     "posture": false
+    },
+    {
+     "flag": "access_key_created",
+     "technique": "T1098.001",
+     "name": "Account Manipulation: Additional Cloud Credentials",
+     "severity": "high",
+     "count": 1,
+     "first": "2026-09-20T09:42:00Z",
+     "last": "2026-09-20T09:42:00Z",
+     "sources": [
+      "aws"
+     ],
+     "hosts": [
+      "ap-south-1"
+     ],
+     "first_epoch": 1789897320.0,
+     "posture": false
+    },
+    {
+     "flag": "logging_disabled",
+     "technique": "T1562.008",
+     "name": "Impair Defenses: Disable or Modify Cloud Logs",
+     "severity": "high",
+     "count": 1,
+     "first": "2026-09-20T09:43:00Z",
+     "last": "2026-09-20T09:43:00Z",
+     "sources": [
+      "aws"
+     ],
+     "hosts": [
+      "ap-south-1"
+     ],
+     "first_epoch": 1789897380.0,
+     "posture": false
+    },
+    {
+     "flag": "bulk_download",
+     "technique": "T1530",
+     "name": "Data from Cloud Storage (bulk download)",
+     "severity": "high",
+     "count": 12,
+     "first": "2026-09-20T09:44:00Z",
+     "last": "2026-09-20T09:45:50Z",
+     "sources": [
+      "aws"
+     ],
+     "hosts": [
+      "ap-south-1"
+     ],
+     "first_epoch": 1789897440.0,
+     "posture": false
+    }
+   ],
+   "techniques": [
+    "T1078",
+    "T1078.004",
+    "T1098.001",
+    "T1110",
+    "T1530",
+    "T1548.003",
+    "T1552.001",
+    "T1562.008"
+   ],
+   "id": "INC-1"
+  }
+ ],
+ "unlinked_alerts": [],
+ "alert_events": 25,
+ "rules_fired": {
+  "brute_force": 6,
+  "brute_force_success": 1,
+  "sudo_untrusted": 2,
+  "credential_access": 1,
+  "external_api_use": 16,
+  "access_key_created": 1,
+  "logging_disabled": 1,
+  "bulk_download": 12
+ }
+}

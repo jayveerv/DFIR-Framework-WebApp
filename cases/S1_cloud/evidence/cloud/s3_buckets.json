@@ -1,0 +1,73 @@
+{
+ "listed": true,
+ "items": [
+  {
+   "bucket": "finance-reports",
+   "created": "2025-11-24T12:00:00Z",
+   "block_config": null,
+   "block_all": false,
+   "policy_public": true,
+   "checked": true
+  },
+  {
+   "bucket": "public-assets",
+   "created": "2025-11-24T12:00:00Z",
+   "block_config": null,
+   "block_all": false,
+   "policy_public": true,
+   "checked": true
+  },
+  {
+   "bucket": "hr-payroll",
+   "created": "2025-11-24T12:00:00Z",
+   "block_config": {
+    "BlockPublicAcls": true,
+    "IgnorePublicAcls": false,
+    "BlockPublicPolicy": true,
+    "RestrictPublicBuckets": false
+   },
+   "block_all": false,
+   "policy_public": false,
+   "checked": true
+  },
+  {
+   "bucket": "app-uploads",
+   "created": "2025-11-24T12:00:00Z",
+   "block_config": {
+    "BlockPublicAcls": true,
+    "IgnorePublicAcls": true,
+    "BlockPublicPolicy": true,
+    "RestrictPublicBuckets": true
+   },
+   "block_all": true,
+   "policy_public": false,
+   "checked": true
+  },
+  {
+   "bucket": "build-artifacts",
+   "created": "2025-11-24T12:00:00Z",
+   "block_config": {
+    "BlockPublicAcls": true,
+    "IgnorePublicAcls": true,
+    "BlockPublicPolicy": true,
+    "RestrictPublicBuckets": true
+   },
+   "block_all": true,
+   "policy_public": false,
+   "checked": true
+  },
+  {
+   "bucket": "backups",
+   "created": "2025-11-24T12:00:00Z",
+   "block_config": {
+    "BlockPublicAcls": true,
+    "IgnorePublicAcls": true,
+    "BlockPublicPolicy": true,
+    "RestrictPublicBuckets": true
+   },
+   "block_all": true,
+   "policy_public": false,
+   "checked": true
+  }
+ ]
+}

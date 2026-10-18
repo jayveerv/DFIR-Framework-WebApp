@@ -1,0 +1,46 @@
+{
+ "relevant": [
+  "cloudtrail.json#1",
+  "cloudtrail.json#2",
+  "cloudtrail.json#3",
+  "cloudtrail.json#4",
+  "cloudtrail.json#5",
+  "cloudtrail.json#6",
+  "cloudtrail.json#7",
+  "cloudtrail.json#8",
+  "cloudtrail.json#9",
+  "cloudtrail.json#10",
+  "cloudtrail.json#11",
+  "cloudtrail.json#12",
+  "cloudtrail.json#13",
+  "cloudtrail.json#14",
+  "cloudtrail.json#15",
+  "cloudtrail.json#16"
+ ],
+ "incident_events": {
+  "INC-1": [
+   "cloudtrail.json#1",
+   "cloudtrail.json#2",
+   "cloudtrail.json#3",
+   "cloudtrail.json#4",
+   "cloudtrail.json#5",
+   "cloudtrail.json#6",
+   "cloudtrail.json#7",
+   "cloudtrail.json#8",
+   "cloudtrail.json#9",
+   "cloudtrail.json#10",
+   "cloudtrail.json#11",
+   "cloudtrail.json#12",
+   "cloudtrail.json#13",
+   "cloudtrail.json#14",
+   "cloudtrail.json#15",
+   "cloudtrail.json#16"
+  ]
+ },
+ "counts": {
+  "windows": 0,
+  "linux": 0,
+  "aws": 16
+ },
+ "total_records": 16
+}

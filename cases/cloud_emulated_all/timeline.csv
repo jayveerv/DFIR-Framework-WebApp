@@ -1,0 +1,72 @@
+﻿event_id,time_utc,source,host,event_type,user,src_ip,target,outcome,detail,session_id,key_id,new_key_id,severity,flags,techniques,incident,source_file,line_ref
+E000001,2027-04-25T05:59:44Z,aws,123456789012,trail_state,,,trail-a,success,"trail logging=True, multi-region=True",,,,info,,,,cloud/trails.json,1
+E000002,2027-04-25T05:59:44Z,aws,123456789012,account_state,,,root account,success,root MFA enabled=False,,,,high,root_mfa_missing,T1078.004,,cloud/iam_account.json,1
+E000003,2027-04-25T05:59:44Z,aws,123456789012,iam_user_state,alice,,alice,success,"admin=True, MFA devices=0, keys=1",,,,high,admin_without_mfa,T1078.004,,cloud/iam_users.json,1
+E000004,2027-04-25T05:59:44Z,aws,123456789012,access_key_state,alice,,AKIARZPUZDIKOHSBIVEZ,success,"key Active, last used never",,AKIARZPUZDIKOHSBIVEZ,,medium,stale_access_key,T1078.004,,cloud/iam_users.json,1
+E000005,2027-04-25T05:59:44Z,aws,123456789012,role_state,,,same-account,success,trusts 1 principal(s): arn:aws:iam::123456789012:root,,,,info,,,,cloud/iam_roles.json,1
+E000006,2027-04-25T05:59:44Z,aws,123456789012,bucket_state,,,trail-logs-a,success,"public access block complete=True, public policy=False",,,,info,,,,cloud/s3_buckets.json,1
+E000007,2027-04-25T05:59:44Z,aws,123456789012,sg_state,,,sg-988fe569bbd475d0e,success,default,,,,info,,,,cloud/security_groups.json,1
+E000008,2027-04-25T05:59:44Z,aws,123456789012,trail_state,,,trail-b,success,"trail logging=False, multi-region=True",,,,high,trail_logging_off,T1562.008,,cloud/trails.json,2
+E000009,2027-04-25T05:59:44Z,aws,123456789012,iam_user_state,bob,,bob,success,"admin=True, MFA devices=1, keys=0",,,,info,,,,cloud/iam_users.json,2
+E000010,2027-04-25T05:59:44Z,aws,123456789012,role_state,,,open-but-conditioned,success,trusts 1 principal(s): *,,,,info,,,,cloud/iam_roles.json,2
+E000011,2027-04-25T05:59:44Z,aws,123456789012,bucket_state,,,trail-logs-b,success,"public access block complete=True, public policy=False",,,,info,,,,cloud/s3_buckets.json,2
+E000012,2027-04-25T05:59:44Z,aws,123456789012,sg_state,,,sg-0509ffe2d42fe87f3,success,default,,,,info,,,,cloud/security_groups.json,2
+E000013,2027-04-25T05:59:44Z,aws,123456789012,trail_state,,,trail-c,success,"trail logging=True, multi-region=True",,,,medium,trail_no_log_validation,T1565.001,,cloud/trails.json,3
+E000014,2027-04-25T05:59:44Z,aws,123456789012,iam_user_state,carol,,carol,success,"admin=False, MFA devices=0, keys=1",,,,info,,,,cloud/iam_users.json,3
+E000015,2027-04-25T05:59:44Z,aws,123456789012,access_key_state,carol,,AKIARZPUZDIKAKZWCIJV,success,"key Inactive, last used never",,AKIARZPUZDIKAKZWCIJV,,info,,,,cloud/iam_users.json,3
+E000016,2027-04-25T05:59:44Z,aws,123456789012,role_state,,,open-role,success,trusts 1 principal(s): *,,,,high,role_trusts_anyone,T1098,,cloud/iam_roles.json,3
+E000017,2027-04-25T05:59:44Z,aws,123456789012,bucket_state,,,trail-logs-c,success,"public access block complete=True, public policy=False",,,,info,,,,cloud/s3_buckets.json,3
+E000018,2027-04-25T05:59:44Z,aws,123456789012,sg_state,,,sg-6ee72293f373b5683,success,default,,,,info,,,,cloud/security_groups.json,3
+E000019,2027-04-25T05:59:44Z,aws,123456789012,iam_user_state,app-uploader,,app-uploader,success,"admin=False, MFA devices=0, keys=1",,,,info,,,,cloud/iam_users.json,4
+E000020,2027-04-25T05:59:44Z,aws,123456789012,access_key_state,app-uploader,,AKIARZPUZDIKKBDGDLWY,success,"key Active, last used never",,AKIARZPUZDIKKBDGDLWY,,medium,stale_access_key,T1078.004,,cloud/iam_users.json,4
+E000021,2027-04-25T05:59:44Z,aws,123456789012,role_state,,,svc-role,success,trusts 1 principal(s): ec2.amazonaws.com,,,,info,,,,cloud/iam_roles.json,4
+E000022,2027-04-25T05:59:44Z,aws,123456789012,bucket_state,,,logs-private,success,"public access block complete=True, public policy=False",,,,info,,,,cloud/s3_buckets.json,4
+E000023,2027-04-25T05:59:44Z,aws,123456789012,sg_state,,,sg-09c14dfc60d862cdb,success,default,,,,info,,,,cloud/security_groups.json,4
+E000024,2027-04-25T05:59:44Z,aws,123456789012,iam_user_state,ci-bot,,ci-bot,success,"admin=False, MFA devices=0, keys=1",,,,info,,,,cloud/iam_users.json,5
+E000025,2027-04-25T05:59:44Z,aws,123456789012,access_key_state,ci-bot,,AKIARZPUZDIKLDZ5NJCU,success,"key Active, last used never",,AKIARZPUZDIKLDZ5NJCU,,medium,stale_access_key,T1078.004,,cloud/iam_users.json,5
+E000026,2027-04-25T05:59:44Z,aws,123456789012,role_state,,,cross-acct,success,trusts 1 principal(s): arn:aws:iam::999999999999:root,,,,medium,role_trusts_external_account,T1199,,cloud/iam_roles.json,5
+E000027,2027-04-25T05:59:44Z,aws,123456789012,bucket_state,,,backups,success,"public access block complete=True, public policy=False",,,,info,,,,cloud/s3_buckets.json,5
+E000028,2027-04-25T05:59:44Z,aws,123456789012,sg_state,,,sg-98e7f3ad05c062654,success,default,,,,info,,,,cloud/security_groups.json,5
+E000029,2027-04-25T05:59:44Z,aws,123456789012,iam_user_state,fresh,,fresh,success,"admin=False, MFA devices=0, keys=1",,,,info,,,,cloud/iam_users.json,6
+E000030,2027-04-25T05:59:44Z,aws,123456789012,access_key_state,fresh,,AKIARZPUZDIKFEFPL25C,success,"key Active, last used never",,AKIARZPUZDIKFEFPL25C,,info,,,,cloud/iam_users.json,6
+E000031,2027-04-25T05:59:44Z,aws,123456789012,bucket_state,,,data-public,success,"public access block complete=False, public policy=True",,,,high,public_bucket,T1530,,cloud/s3_buckets.json,6
+E000032,2027-04-25T05:59:44Z,aws,123456789012,sg_state,,,sg-521a58989616528ce,success,default,,,,info,,,,cloud/security_groups.json,6
+E000033,2027-04-25T05:59:44Z,aws,123456789012,bucket_state,,,reports-open,success,"public access block complete=False, public policy=False",,,,medium,bucket_public_access_not_blocked,T1530,,cloud/s3_buckets.json,7
+E000034,2027-04-25T05:59:44Z,aws,123456789012,sg_state,,,sg-9574dccf22576c933,success,default,,,,info,,,,cloud/security_groups.json,7
+E000035,2027-04-25T05:59:44Z,aws,123456789012,sg_state,,,sg-dda1d5befc2ed0381,success,default,,,,info,,,,cloud/security_groups.json,8
+E000036,2027-04-25T05:59:44Z,aws,123456789012,sg_state,,,sg-c8b392805dd9817d1,success,default,,,,info,,,,cloud/security_groups.json,9
+E000037,2027-04-25T05:59:44Z,aws,123456789012,sg_state,,,sg-5b26780a2058000c0,success,default,,,,info,,,,cloud/security_groups.json,10
+E000038,2027-04-25T05:59:44Z,aws,123456789012,sg_state,,,sg-6683f17b784d137ec,success,default,,,,info,,,,cloud/security_groups.json,11
+E000039,2027-04-25T05:59:44Z,aws,123456789012,sg_state,,,sg-3cb1fd04629106ef4,success,default,,,,info,,,,cloud/security_groups.json,12
+E000040,2027-04-25T05:59:44Z,aws,123456789012,sg_state,,,sg-873e2a6f8f45d11f0,success,default,,,,info,,,,cloud/security_groups.json,13
+E000041,2027-04-25T05:59:44Z,aws,123456789012,sg_state,,,sg-0174df280c9afd8e9,success,default,,,,info,,,,cloud/security_groups.json,14
+E000042,2027-04-25T05:59:44Z,aws,123456789012,sg_state,,,sg-9bbcd2cbc431a1202,success,default,,,,info,,,,cloud/security_groups.json,15
+E000043,2027-04-25T05:59:44Z,aws,123456789012,sg_state,,,sg-4827d664d57dd762f,success,default,,,,info,,,,cloud/security_groups.json,16
+E000044,2027-04-25T05:59:44Z,aws,123456789012,sg_state,,,sg-23eff2fd3618bb11f,success,default,,,,info,,,,cloud/security_groups.json,17
+E000045,2027-04-25T05:59:44Z,aws,123456789012,sg_state,,,sg-c4aef4aa9bf14faa3,success,default,,,,info,,,,cloud/security_groups.json,18
+E000046,2027-04-25T05:59:44Z,aws,123456789012,sg_state,,,sg-3cee558390c0e8fe1,success,default,,,,info,,,,cloud/security_groups.json,19
+E000047,2027-04-25T05:59:44Z,aws,123456789012,sg_state,,,sg-2eb06ba5760218799,success,default,,,,info,,,,cloud/security_groups.json,20
+E000048,2027-04-25T05:59:44Z,aws,123456789012,sg_state,,,sg-ce5b40ef425c5d135,success,default,,,,info,,,,cloud/security_groups.json,21
+E000049,2027-04-25T05:59:44Z,aws,123456789012,sg_state,,,sg-00d1403a609eee915,success,default,,,,info,,,,cloud/security_groups.json,22
+E000050,2027-04-25T05:59:44Z,aws,123456789012,sg_state,,,sg-18f2a2e2e7c55ca9e,success,default,,,,info,,,,cloud/security_groups.json,23
+E000051,2027-04-25T05:59:44Z,aws,123456789012,sg_state,,,sg-49e40dc8ed82f45d9,success,default,,,,info,,,,cloud/security_groups.json,24
+E000052,2027-04-25T05:59:44Z,aws,123456789012,sg_state,,,sg-ce31439b60f936d47,success,default,,,,info,,,,cloud/security_groups.json,25
+E000053,2027-04-25T05:59:44Z,aws,123456789012,sg_state,,,sg-21df57f4f4807adf9,success,default,,,,info,,,,cloud/security_groups.json,26
+E000054,2027-04-25T05:59:44Z,aws,123456789012,sg_state,,,sg-6449e897e23aa96cc,success,default,,,,info,,,,cloud/security_groups.json,27
+E000055,2027-04-25T05:59:44Z,aws,123456789012,sg_state,,,sg-40ed6d7228fcbd0bc,success,default,,,,info,,,,cloud/security_groups.json,28
+E000056,2027-04-25T05:59:44Z,aws,123456789012,sg_state,,,sg-6831109af13ac6274,success,default,,,,info,,,,cloud/security_groups.json,29
+E000057,2027-04-25T05:59:44Z,aws,123456789012,sg_state,,,sg-c825ef3ab3a728c7c,success,default,,,,info,,,,cloud/security_groups.json,30
+E000058,2027-04-25T05:59:44Z,aws,123456789012,sg_state,,,sg-89e40c3e427c33b09,success,default,,,,info,,,,cloud/security_groups.json,31
+E000059,2027-04-25T05:59:44Z,aws,123456789012,sg_state,,,sg-b47a1ff0efac006a6,success,default,,,,info,,,,cloud/security_groups.json,32
+E000060,2027-04-25T05:59:44Z,aws,123456789012,sg_state,,,sg-340212a633113335d,success,default,,,,info,,,,cloud/security_groups.json,33
+E000061,2027-04-25T05:59:44Z,aws,123456789012,sg_state,,,sg-896b09af2c35a3c06,success,ssh-world,,,,high,sg_world_open_admin_port,T1133,,cloud/security_groups.json,34
+E000062,2027-04-25T05:59:44Z,aws,123456789012,sg_state,,,sg-369dc0053cd4fc9ca,success,rdp-world,,,,high,sg_world_open_admin_port,T1133,,cloud/security_groups.json,35
+E000063,2027-04-25T05:59:44Z,aws,123456789012,sg_state,,,sg-d055578cb5d19d0a7,success,all-open,,,,high,sg_world_open_admin_port,T1133,,cloud/security_groups.json,36
+E000064,2027-04-25T05:59:44Z,aws,123456789012,sg_state,,,sg-a103687542fb53a8a,success,web-443,,,,info,,,,cloud/security_groups.json,37
+E000065,2027-04-25T05:59:44Z,aws,123456789012,sg_state,,,sg-680e20539c4169546,success,db-internal,,,,info,,,,cloud/security_groups.json,38
+E000066,2027-04-25T05:59:44Z,aws,123456789012,sg_state,,,sg-be2a22a096c7803e2,success,default,,,,info,,,,cloud/security_groups.json,39
+E000067,2027-04-25T05:59:44Z,aws,123456789012,sg_state,,,sg-6bd37b3c3b96517c4,success,default,,,,info,,,,cloud/security_groups.json,40
+E000068,2027-04-25T05:59:44Z,aws,123456789012,sg_state,,,sg-52e332754a3c69801,success,default,,,,info,,,,cloud/security_groups.json,41
+E000069,2027-04-25T05:59:44Z,aws,123456789012,sg_state,,,sg-903cdc35a9c566ac4,success,default,,,,info,,,,cloud/security_groups.json,42
+E000070,2027-04-25T05:59:44Z,aws,123456789012,sg_state,,,sg-63eb9865d99bdb737,success,default,,,,info,,,,cloud/security_groups.json,43
+E000071,2027-04-25T05:59:44Z,aws,123456789012,sg_state,,,sg-cb1df414b2cdd5f86,success,ssh-world-west,,,,high,sg_world_open_admin_port,T1133,,cloud/security_groups.json,44

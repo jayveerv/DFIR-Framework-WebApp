@@ -1,0 +1,25 @@
+﻿event_id,time_utc,source,host,event_type,user,src_ip,target,outcome,detail,session_id,key_id,new_key_id,severity,flags,techniques,incident,source_file,line_ref
+E000001,2026-09-20T12:00:00Z,aws,111122223333,trail_state,,,management-trail,success,"trail logging=True, multi-region=True",,,,info,,,,cloud/trails.json,1
+E000002,2026-09-20T12:00:00Z,aws,111122223333,account_state,,,root account,success,root MFA enabled=True,,,,info,,,,cloud/iam_account.json,1
+E000003,2026-09-20T12:00:00Z,aws,111122223333,iam_user_state,alice,,alice,success,"admin=True, MFA devices=1, keys=1",,,,info,,,,cloud/iam_users.json,1
+E000004,2026-09-20T12:00:00Z,aws,111122223333,access_key_state,alice,,AKIAQ3EXAMPLEALICE01,success,"key Active, last used 2026-09-19T12:00:00Z",,AKIAQ3EXAMPLEALICE01,,info,,,,cloud/iam_users.json,1
+E000005,2026-09-20T12:00:00Z,aws,111122223333,bucket_state,,,finance-reports,success,"public access block complete=True, public policy=False",,,,info,,,,cloud/s3_buckets.json,1
+E000006,2026-09-20T12:00:00Z,aws,111122223333,sg_state,,,sg-ssh,success,ssh,,,,info,,,,cloud/security_groups.json,1
+E000007,2026-09-20T12:00:00Z,aws,111122223333,iam_user_state,bob,,bob,success,"admin=True, MFA devices=1, keys=0",,,,info,,,,cloud/iam_users.json,2
+E000008,2026-09-20T12:00:00Z,aws,111122223333,bucket_state,,,public-assets,success,"public access block complete=True, public policy=False",,,,info,,,,cloud/s3_buckets.json,2
+E000009,2026-09-20T12:00:00Z,aws,111122223333,sg_state,,,sg-rdp,success,rdp,,,,info,,,,cloud/security_groups.json,2
+E000010,2026-09-20T12:00:00Z,aws,111122223333,iam_user_state,carol,,carol,success,"admin=True, MFA devices=1, keys=1",,,,info,,,,cloud/iam_users.json,3
+E000011,2026-09-20T12:00:00Z,aws,111122223333,access_key_state,carol,,AKIAQ3EXAMPLECAROL1,success,"key Active, last used 2026-09-17T12:00:00Z",,AKIAQ3EXAMPLECAROL1,,info,,,,cloud/iam_users.json,3
+E000012,2026-09-20T12:00:00Z,aws,111122223333,bucket_state,,,hr-payroll,success,"public access block complete=True, public policy=False",,,,info,,,,cloud/s3_buckets.json,3
+E000013,2026-09-20T12:00:00Z,aws,111122223333,sg_state,,,sg-web,success,web,,,,info,,,,cloud/security_groups.json,3
+E000014,2026-09-20T12:00:00Z,aws,111122223333,iam_user_state,app-uploader,,app-uploader,success,"admin=False, MFA devices=0, keys=1",,,,info,,,,cloud/iam_users.json,4
+E000015,2026-09-20T12:00:00Z,aws,111122223333,access_key_state,app-uploader,,AKIAQ3EXAMPLEAPP0001,success,"key Active, last used 2026-09-20T12:00:00Z",,AKIAQ3EXAMPLEAPP0001,,info,,,,cloud/iam_users.json,4
+E000016,2026-09-20T12:00:00Z,aws,111122223333,bucket_state,,,app-uploads,success,"public access block complete=True, public policy=False",,,,info,,,,cloud/s3_buckets.json,4
+E000017,2026-09-20T12:00:00Z,aws,111122223333,sg_state,,,sg-all,success,all,,,,info,,,,cloud/security_groups.json,4
+E000018,2026-09-20T12:00:00Z,aws,111122223333,iam_user_state,ci-bot,,ci-bot,success,"admin=False, MFA devices=0, keys=2",,,,info,,,,cloud/iam_users.json,5
+E000019,2026-09-20T12:00:00Z,aws,111122223333,access_key_state,ci-bot,,AKIAQ3EXAMPLECIBOT01,success,"key Active, last used 2026-09-18T12:00:00Z",,AKIAQ3EXAMPLECIBOT01,,info,,,,cloud/iam_users.json,5
+E000020,2026-09-20T12:00:00Z,aws,111122223333,access_key_state,ci-bot,,AKIAQ3EXAMPLECIBOT02,success,"key Active, last used 2026-09-15T12:00:00Z",,AKIAQ3EXAMPLECIBOT02,,info,,,,cloud/iam_users.json,5
+E000021,2026-09-20T12:00:00Z,aws,111122223333,bucket_state,,,build-artifacts,success,"public access block complete=True, public policy=False",,,,info,,,,cloud/s3_buckets.json,5
+E000022,2026-09-20T12:00:00Z,aws,111122223333,sg_state,,,sg-db,success,db,,,,info,,,,cloud/security_groups.json,5
+E000023,2026-09-20T12:00:00Z,aws,111122223333,bucket_state,,,backups,success,"public access block complete=True, public policy=False",,,,info,,,,cloud/s3_buckets.json,6
+E000024,2026-09-20T12:00:00Z,aws,111122223333,sg_state,,,sg-app,success,app,,,,info,,,,cloud/security_groups.json,6

@@ -1,0 +1,262 @@
+{
+ "incidents": [
+  {
+   "start": "2026-09-20T09:10:00Z",
+   "end": "2026-09-20T09:20:00Z",
+   "start_epoch": 1789895400.0,
+   "platforms": [
+    "linux"
+   ],
+   "cross_platform": false,
+   "event_ids": [
+    "E000091",
+    "E000092",
+    "E000093",
+    "E000094",
+    "E000095",
+    "E000096",
+    "E000097",
+    "E000098",
+    "E000099",
+    "E000100"
+   ],
+   "event_count": 10,
+   "alert_count": 10,
+   "severity": "High",
+   "entities": [
+    {
+     "id": "ip:203.0.113.45",
+     "kind": "ip",
+     "platforms": [
+      "linux"
+     ],
+     "events": 10
+    },
+    {
+     "id": "cred:web01:/home/ubuntu/.aws/credentials",
+     "kind": "cred",
+     "platforms": [
+      "linux"
+     ],
+     "events": 1
+    },
+    {
+     "id": "key:AKIAQ3EXAMPLEAPP0001",
+     "kind": "key",
+     "platforms": [
+      "linux"
+     ],
+     "events": 1
+    }
+   ],
+   "links": [
+    {
+     "a": "ip:203.0.113.45",
+     "b": "cred:web01:/home/ubuntu/.aws/credentials",
+     "reason": "credential file read in session",
+     "events": 1
+    },
+    {
+     "a": "cred:web01:/home/ubuntu/.aws/credentials",
+     "b": "key:AKIAQ3EXAMPLEAPP0001",
+     "reason": "credential inventory (file holds key)",
+     "events": 1
+    }
+   ],
+   "stages": [
+    {
+     "flag": "brute_force",
+     "technique": "T1110",
+     "name": "Brute Force",
+     "severity": "medium",
+     "count": 6,
+     "first": "2026-09-20T09:10:00Z",
+     "last": "2026-09-20T09:11:00Z",
+     "sources": [
+      "linux"
+     ],
+     "hosts": [
+      "web01"
+     ],
+     "first_epoch": 1789895400.0,
+     "posture": false
+    },
+    {
+     "flag": "brute_force_success",
+     "technique": "T1078",
+     "name": "Valid Accounts (login after brute force)",
+     "severity": "high",
+     "count": 1,
+     "first": "2026-09-20T09:11:12Z",
+     "last": "2026-09-20T09:11:12Z",
+     "sources": [
+      "linux"
+     ],
+     "hosts": [
+      "web01"
+     ],
+     "first_epoch": 1789895472.0,
+     "posture": false
+    },
+    {
+     "flag": "sudo_untrusted",
+     "technique": "T1548.003",
+     "name": "Sudo and Sudo Caching (untrusted session)",
+     "severity": "medium",
+     "count": 3,
+     "first": "2026-09-20T09:12:12Z",
+     "last": "2026-09-20T09:20:00Z",
+     "sources": [
+      "linux"
+     ],
+     "hosts": [
+      "web01"
+     ],
+     "first_epoch": 1789895532.0,
+     "posture": false
+    },
+    {
+     "flag": "credential_access",
+     "technique": "T1552.001",
+     "name": "Unsecured Credentials: Credentials In Files",
+     "severity": "high",
+     "count": 1,
+     "first": "2026-09-20T09:12:12Z",
+     "last": "2026-09-20T09:12:12Z",
+     "sources": [
+      "linux"
+     ],
+     "hosts": [
+      "web01"
+     ],
+     "first_epoch": 1789895532.0,
+     "posture": false
+    }
+   ],
+   "techniques": [
+    "T1078",
+    "T1110",
+    "T1548.003",
+    "T1552.001"
+   ],
+   "id": "INC-1"
+  },
+  {
+   "start": "2026-09-20T11:00:00Z",
+   "end": "2026-09-20T11:02:20Z",
+   "start_epoch": 1789902000.0,
+   "platforms": [
+    "windows"
+   ],
+   "cross_platform": false,
+   "event_ids": [
+    "E000119",
+    "E000120",
+    "E000122",
+    "E000123"
+   ],
+   "event_count": 4,
+   "alert_count": 3,
+   "severity": "High",
+   "entities": [
+    {
+     "id": "ip:10.0.5.99",
+     "kind": "ip",
+     "platforms": [
+      "windows"
+     ],
+     "events": 4
+    }
+   ],
+   "links": [],
+   "stages": [
+    {
+     "flag": "privileged_logon_unexpected_source",
+     "technique": "T1078",
+     "name": "Valid Accounts (admin logon from a source outside the allowlist)",
+     "severity": "high",
+     "count": 1,
+     "first": "2026-09-20T11:00:01Z",
+     "last": "2026-09-20T11:00:01Z",
+     "sources": [
+      "windows"
+     ],
+     "hosts": [
+      "SRV-FILE-01"
+     ],
+     "first_epoch": 1789902001.0,
+     "posture": false
+    },
+    {
+     "flag": "privileged_session",
+     "technique": "T1078",
+     "name": "Valid Accounts (privileged logon from untrusted IP)",
+     "severity": "medium",
+     "count": 1,
+     "first": "2026-09-20T11:00:01Z",
+     "last": "2026-09-20T11:00:01Z",
+     "sources": [
+      "windows"
+     ],
+     "hosts": [
+      "SRV-FILE-01"
+     ],
+     "first_epoch": 1789902001.0,
+     "posture": false
+    },
+    {
+     "flag": "account_created",
+     "technique": "T1136.001",
+     "name": "Create Account: Local Account",
+     "severity": "high",
+     "count": 1,
+     "first": "2026-09-20T11:02:00Z",
+     "last": "2026-09-20T11:02:00Z",
+     "sources": [
+      "windows"
+     ],
+     "hosts": [
+      "SRV-FILE-01"
+     ],
+     "first_epoch": 1789902120.0,
+     "posture": false
+    },
+    {
+     "flag": "privilege_group_add",
+     "technique": "T1098",
+     "name": "Account Manipulation (added to admin group)",
+     "severity": "high",
+     "count": 1,
+     "first": "2026-09-20T11:02:20Z",
+     "last": "2026-09-20T11:02:20Z",
+     "sources": [
+      "windows"
+     ],
+     "hosts": [
+      "SRV-FILE-01"
+     ],
+     "first_epoch": 1789902140.0,
+     "posture": false
+    }
+   ],
+   "techniques": [
+    "T1078",
+    "T1098",
+    "T1136.001"
+   ],
+   "id": "INC-2"
+  }
+ ],
+ "unlinked_alerts": [],
+ "alert_events": 13,
+ "rules_fired": {
+  "brute_force": 6,
+  "brute_force_success": 1,
+  "sudo_untrusted": 3,
+  "credential_access": 1,
+  "privileged_logon_unexpected_source": 1,
+  "privileged_session": 1,
+  "account_created": 1,
+  "privilege_group_add": 1
+ }
+}

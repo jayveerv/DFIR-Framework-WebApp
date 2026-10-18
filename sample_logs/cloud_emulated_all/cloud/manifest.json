@@ -1,0 +1,79 @@
+{
+ "collector": "cloudstate",
+ "account": "123456789012",
+ "region": "us-east-1",
+ "all_regions": true,
+ "started_utc": "2026-10-07T05:59:45Z",
+ "finished_utc": "2026-10-07T05:59:47Z",
+ "reference_time": "2027-04-25T05:59:44Z",
+ "artifacts": [
+  {
+   "name": "identity.json",
+   "sha256": "0f2b7addeb049182bab24906ae398a932e0a8f11deea8962d412568cbaf7741f",
+   "size": 158,
+   "note": "caller identity and collection time"
+  },
+  {
+   "name": "trails.json",
+   "sha256": "36b552a4fe34cb9a5ccfc9cd892fa68bb45ebb4b9fdc3be005c2ccdd89f7c65e",
+   "size": 1125,
+   "note": "CloudTrail trails and logging status"
+  },
+  {
+   "name": "iam_account.json",
+   "sha256": "0c70f297b3eed7a717a595eb6616a4f316e5b4a022bec94b2f817f8fde1d49f0",
+   "size": 75,
+   "note": "root MFA, account summary"
+  },
+  {
+   "name": "iam_users.json",
+   "sha256": "8ca3856b73e82f5ab1c4ec2215d4a3be08be09ac6729a8514f11965c00b54cbd",
+   "size": 2561,
+   "note": "IAM users, admin rights, MFA, access keys"
+  },
+  {
+   "name": "iam_roles.json",
+   "sha256": "32a6d8b88122c9d07b35e29ad446dfaff5b5cf724521fc087e32a5b6078e94cc",
+   "size": 1056,
+   "note": "IAM roles and their trust policies"
+  },
+  {
+   "name": "s3_buckets.json",
+   "sha256": "6ef62902e1de5ffe6dacf74798dfa37c819ae3b1d26129e0ffb5fbb3c27c2ba2",
+   "size": 2248,
+   "note": "S3 public access block and bucket policy status"
+  },
+  {
+   "name": "security_groups.json",
+   "sha256": "535a581f1efa09fa97b118ed2dcff93717f23b7c8f83e39f809a91dd741d9ca7",
+   "size": 8088,
+   "note": "security group inbound rules"
+  }
+ ],
+ "api_operations": [
+  "GetCallerIdentity",
+  "DescribeTrails",
+  "GetTrailStatus",
+  "GetAccountSummary",
+  "ListUsers",
+  "ListAttachedUserPolicies",
+  "GetPolicy",
+  "GetPolicyVersion",
+  "ListUserPolicies",
+  "ListGroupsForUser",
+  "ListMFADevices",
+  "ListAccessKeys",
+  "GetAccessKeyLastUsed",
+  "ListAttachedGroupPolicies",
+  "ListGroupPolicies",
+  "ListRoles",
+  "ListBuckets",
+  "GetPublicAccessBlock",
+  "GetBucketPolicyStatus",
+  "GetBucketPolicy",
+  "DescribeRegions",
+  "DescribeSecurityGroups"
+ ],
+ "errors": [],
+ "limited": {}
+}
