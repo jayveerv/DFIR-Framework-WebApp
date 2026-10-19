@@ -164,7 +164,7 @@ function navHtml(active) {
   }
   h += `<div class="grp">Framework</div>${a("#/system", "sys", "System &amp; self-test", "system")}
   ${u.role === "admin" ? a("#/users", "usr", "Users &amp; audit", "users") : ""}
-  <div class="foot">${esc(S.sess.app)} v${esc(S.sess.version)}<br>Developed by Jayveer Vasava${S.sess.public_mode ? '<br><span class="warn">Public demo mode</span>' : ""}</div>`;
+  <div class="foot">${esc(S.sess.app)} v${esc(S.sess.version)}<br>Developed by Jayveer Vasava</div>`;
   return h;
 }
 function shell(view, active, crumb) {
@@ -198,9 +198,9 @@ async function viewCases(v) {
   const cs = await api("GET", "/api/cases");
   if (!cs.length) {
     $("#cl").innerHTML = `<div class="card empty">${ic("fold", 40)}<div class="big">No cases yet</div><div class="note">Create a case and upload logs, collect live evidence from this computer or AWS, or start with a simulated attack scenario.</div>
-    <div class="acts" style="justify-content:center;margin-top:16px"><button class="btn pri" id="nc2">${ic("plus", 16)} New case</button><button class="btn" id="demo">${ic("lab", 16)} Demo case (scenario S1 + cloud)</button></div></div>`;
+    <div class="acts" style="justify-content:center;margin-top:16px"><button class="btn pri" id="nc2">${ic("plus", 16)} New case</button><button class="btn" id="demo">${ic("lab", 16)} Sample investigation (S1 attack)</button></div></div>`;
     $("#nc2").onclick = newCaseModal;
-    $("#demo").onclick = () => createCase({title:"Demo — cross-platform attack (S1)", description:"Simulated attack: Windows RDP brute force, Linux SSH compromise and AWS access-key abuse by one attacker.", sample:"S1_cloud"});
+    $("#demo").onclick = () => createCase({title:"Cross-platform attack investigation (S1)", description:"Windows RDP brute force, Linux SSH compromise and AWS access-key abuse by one attacker, reconstructed end to end.", sample:"S1_cloud"});
     return;
   }
   const tot = cs.reduce((a, c) => (a.inc += c.incidents || 0, a.high += c.high || 0, a.ev += c.events || 0, a.an += c.analyzed ? 1 : 0, a), {inc:0, high:0, ev:0, an:0});
@@ -329,10 +329,10 @@ function tEvidence(v) {
   : `<div class="empty" style="padding:20px"><div class="note">No evidence yet — upload files or use a collector.</div></div>`}</div>
   <div class="card" style="margin-top:16px"><h3><i>${ic("sys", 15)}</i>Case settings</h3><form id="cfgf">${cfgForm(c.config)}<button class="btn" type="submit">${ic("chk", 14)} Save settings</button></form></div></div>
   <div><div class="card" style="margin-bottom:16px"><h3><i>${ic("bolt", 15)}</i>Collect evidence</h3>
-  ${coll("triage", "cpu", "var(--host)", "Live triage — this computer", "Processes, network connections, accounts, persistence, recent files and security logs, read-only, in order of volatility.", pm ? "disabled in public demo" : "")}
+  ${coll("triage", "cpu", "var(--host)", "Live triage — this computer", "Processes, network connections, accounts, persistence, recent files and security logs, read-only, in order of volatility.", pm ? "disabled on the online server" : "")}
   ${coll("aws", "cld", "var(--aws)", "AWS — CloudTrail + account state", "Read-only API calls: CloudTrail events, IAM users/keys/MFA, roles, S3 public access, security groups, trails.")}
-  ${coll("ssh", "term", "var(--lin)", "Linux server — auth log over SSH", "Copies /var/log/auth.log (or /var/log/secure) with key-based SSH.", pm ? "disabled in public demo" : "")}
-  ${coll("winlog", "win", "var(--win)", "Windows — export Security log", "wevtutil export of this computer's Security log (run the console as Administrator).", pm ? "disabled in public demo" : (win ? "" : "only when the console runs on Windows"))}
+  ${coll("ssh", "term", "var(--lin)", "Linux server — auth log over SSH", "Copies /var/log/auth.log (or /var/log/secure) with key-based SSH.", pm ? "disabled on the online server" : "")}
+  ${coll("winlog", "win", "var(--win)", "Windows — export Security log", "wevtutil export of this computer's Security log (run the console as Administrator).", pm ? "disabled on the online server" : (win ? "" : "only when the console runs on Windows"))}
   ${coll("sample", "lab", "var(--vi)", "Simulated attack scenario", "Adds the framework's generated Windows + Linux + AWS logs for scenario S1–S5 (with ground truth).")}</div></div></div>`;
   wire(v);
   const fi = $("#fi"), dr = $("#drop");
@@ -640,7 +640,7 @@ async function viewSystem(v) {
   `<div class="g g2"><div class="card"><h3><i>${ic("sys", 15)}</i>Environment</h3><div class="kv"><div>Host</div><div class="mono">${esc(i.host)}</div><div>System</div><div class="mono">${esc(i.system)}</div><div>Python</div><div class="mono">${esc(i.python)}</div>
   ${Object.entries(i.modules).map(([k, x]) => `<div>${esc(k)}</div><div class="mono ${x ? "" : "warn"}">${x ? esc(x) : "not installed"}</div>`).join("")}
   <div>Data folder</div><div class="mono" style="word-break:break-all">${esc(i.data_dir)}</div><div>Custody HMAC key</div><div class="mono" style="word-break:break-all">${esc(i.custody_key)}</div><div>Cases</div><div>${i.cases}</div>
-  <div>Mode</div><div>${i.public_mode ? '<span class="warn">public demo (host collectors disabled)</span>' : "local"}</div></div>
+  <div>Mode</div><div>${i.public_mode ? '<span class="warn">online server (host collectors disabled)</span>' : "local"}</div></div>
   <div class="note" style="margin-top:12px">Back up <span class="mono">custody.key</span> and <span class="mono">anchors.json</span> with the cases: without the key the HMAC of old ledgers cannot be checked. CLI check of a case: <span class="mono">python main.py verify --case webapp_data/cases/&lt;ID&gt;/case --custody-key-file webapp_data/custody.key --anchor &lt;hash&gt;</span></div></div>
   <div class="card"><h3><i>${ic("mit", 15)}</i>Detection engine</h3><div class="g g2" style="margin-bottom:12px">${kpi(i.rules, "Detection rules", "", "var(--am)", "bolt")}${kpi(i.techniques, "ATT&CK techniques", "", "var(--cy)", "tgt")}</div>
   ${Object.entries(i.families).map(([f, n]) => `<div style="display:grid;grid-template-columns:1fr 40px;gap:8px;font-size:12.8px;margin:4px 0"><span>${esc(f)}</span><b class="mono" style="text-align:right">${n}</b></div>`).join("")}</div></div>

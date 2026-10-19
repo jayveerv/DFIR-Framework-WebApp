@@ -970,7 +970,7 @@ def api_job_start(cid, kind):
     if kind not in fns:
         abort(404)
     if PUBLIC_MODE and kind in ("triage", "ssh", "winlog"):
-        return jsonify(error="disabled in the public demo (it would collect the server, not your computer)"), 403
+        return jsonify(error="disabled on the online server (it would collect the server, not your computer)"), 403
     if kind == "winlog" and sys.platform != "win32":
         return jsonify(error="Windows Security log export only works when the console runs on Windows"), 400
     if kind == "ssh" and not (d.get("host") or "").strip():
@@ -1364,6 +1364,27 @@ def _bootstrap_admin():
 
 
 _bootstrap_admin()
+
+
+SAMPLE_TITLE = "Cross-platform attack investigation (S1)"
+SAMPLE_DESC = "Windows RDP brute force, Linux SSH compromise and AWS access-key abuse by one attacker, reconstructed end to end."
+
+
+def _bootstrap_sample():
+    """Online deploy: if DFIR_SAMPLE_CASE names a scenario and no case exists yet, create and analyse it at start-up
+    so the live link always opens on a finished investigation (free hosting wipes the disk on every restart)."""
+    sc = os.environ.get("DFIR_SAMPLE_CASE", "").strip()
+    if sc not in SAMPLES or os.listdir(CASES):
+        return
+    admin = next((k for k, v in users().items() if v.get("role") == "admin"), None)
+    if not admin:
+        return
+    with app.test_request_context("/api/cases", method="POST", json={"title": SAMPLE_TITLE, "description": SAMPLE_DESC, "sample": sc}):
+        session["user"] = admin
+        app.view_functions["api_case_new"]()
+
+
+_bootstrap_sample()
 
 
 def main():

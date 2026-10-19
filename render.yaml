@@ -13,8 +13,10 @@ services:
       - key: DFIR_MAX_UPLOAD_MB
         value: "50"
       - key: DFIR_ADMIN_USER
-        value: demo
+        value: jayveer
       - key: DFIR_ADMIN_NAME
-        value: Demo Analyst
+        value: Jayveer Vasava
+      - key: DFIR_SAMPLE_CASE
+        value: S1_cloud
       - key: DFIR_ADMIN_PASSWORD
         sync: false
