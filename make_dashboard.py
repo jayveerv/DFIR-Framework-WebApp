@@ -115,7 +115,8 @@ def _case(root, name):
     return out, evs
 
 
-def build(root=ROOT):
+def collect_data(root=ROOT):
+    """Every number shown by the dashboard (and by the web console's evaluation pages), read from the result files."""
     res = os.path.join(root, "results")
     ev_path = os.path.join(res, "evaluation.json")
     if not os.path.exists(ev_path):
@@ -252,6 +253,12 @@ def build(root=ROOT):
         "cloud": cloud, "s1cloud": ({"f1": s1c["score"]["f1"], "found": s1c["score"]["incidents_found"]} if s1c else None),
         "scale": data["scalability"], "real": real,
     }
+    return D
+
+
+def build(root=ROOT):
+    D = collect_data(root)
+    res = os.path.join(root, "results")
     js = json.dumps(D, separators=(",", ":")).replace("</", "<\\/")
     html = PAGE.replace("/*__DATA__*/null", js).replace("__TITLE__", TITLE)
     out = os.path.join(res, "dashboard.html")

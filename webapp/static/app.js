@@ -115,6 +115,7 @@ async function route() {
   if (h[0] === "c" && h[1]) return openCase(h[1], false, h[2] || "overview");
   S.cid = null; S.case = null; S.res = null;
   if (h[0] === "system") return shell(viewSystem, "system", "System & self-test");
+  if (h[0] === "eval") { const e = EVAL.find(x => x[0] === h[1]) || EVAL[0]; return shell(v => evalView(v, e[3]), "eval-" + e[0], e[2]); }
   if (h[0] === "users") return shell(viewUsers, "users", "Users & audit log");
   return shell(viewCases, "cases", "Cases");
 }
@@ -128,7 +129,11 @@ function viewLogin() {
   authPage(`<h2>Analyst sign in</h2><div class="sub">Every action you take is recorded in the case activity log and the chain-of-custody ledger.</div>
   <form id="lf"><div class="fr"><label class="f">Username</label><input class="in" name="username" autocomplete="username" autofocus></div>
   <div class="fr"><label class="f">Password</label><input class="in" type="password" name="password" autocomplete="current-password"></div>
-  <div class="err" id="lerr"></div><button class="btn pri" style="width:100%;justify-content:center">${ic("lock", 16)} Sign in</button></form>`);
+  <div class="err" id="lerr"></div><button class="btn pri" style="width:100%;justify-content:center">${ic("lock", 16)} Sign in</button></form>
+  ${S.sess.guest ? `<div style="display:flex;align-items:center;gap:10px;margin:16px 0 12px;color:var(--mu2);font-size:12px"><span style="flex:1;height:1px;background:var(--line)"></span>or<span style="flex:1;height:1px;background:var(--line)"></span></div>
+  <button class="btn" id="guest" style="width:100%;justify-content:center">${ic("play", 15)} Try demo (no password)</button>
+  <div class="hint" style="text-align:center;margin-top:8px">Guest access: create cases, run sample scenarios, analyse and verify. Demo data is cleared when the server restarts.</div>` : ""}`);
+  const g = $("#guest"); if (g) g.onclick = async () => { try { await api("POST", "/api/guest"); S.sess = null; location.hash = "#/cases"; route(); } catch (er) { $("#lerr").textContent = er.message; } };
   $("#lf").onsubmit = async e => { e.preventDefault(); const f = new FormData(e.target);
     try { await api("POST", "/api/login", {username:f.get("username"), password:f.get("password")}); S.sess = null; location.hash = "#/cases"; route(); }
     catch (er) { $("#lerr").textContent = er.message; } };
@@ -162,7 +167,8 @@ function navHtml(active) {
     ${a(b + "explorer", "exp", "Evidence explorer", "explorer", lr.events != null ? fmt(lr.events) : null)}
     ${a(b + "custody", "cus", "Chain of custody", "custody")}${a(b + "report", "rep", "Report &amp; export", "report")}${a(b + "activity", "act", "Activity log", "activity")}`;
   }
-  h += `<div class="grp">Framework</div>${a("#/system", "sys", "System &amp; self-test", "system")}
+  h += `<div class="grp">Framework evaluation</div>${EVAL.map(([k, ico, label]) => a("#/eval/" + k, ico, label, "eval-" + k)).join("")}
+  <div class="grp">System</div>${a("#/system", "sys", "System &amp; self-test", "system")}
   ${u.role === "admin" ? a("#/users", "usr", "Users &amp; audit", "users") : ""}
   <div class="foot">${esc(S.sess.app)} v${esc(S.sess.version)}<br>Developed by Jayveer Vasava${S.sess.public_mode ? '<br><span class="warn">Public demo mode</span>' : ""}</div>`;
   return h;
@@ -170,19 +176,22 @@ function navHtml(active) {
 function shell(view, active, crumb) {
   const u = S.sess.user;
   if (!$("#main") || !$("#nav")) {
-    $("#app").innerHTML = `<div class="top"><a class="brand" href="#/cases">${LOGO}<div><b>CP-DFIR</b><small>Investigation Console</small></div></a>
+    $("#app").innerHTML = `<div class="top"><button class="tbtn mnav" id="mnav" title="Menu">${ic("exp", 16)}</button><a class="brand" href="#/cases">${LOGO}<div><b>CP-DFIR</b><small>Investigation Console</small></div></a>
     <div class="crumb" id="crumb"></div><span id="tpill"></span>
     <button class="tbtn" id="theme" title="Light / dark theme">${ic("moon", 15)}</button>
     <div class="who"><div class="av">${esc((u.name || u.username).split(/\s+/).map(x => x[0]).join("").slice(0, 2).toUpperCase())}</div><div>${esc(u.name)}<br><span style="font-size:11px;color:var(--mu2)">${esc(u.role)}</span></div></div>
     <button class="tbtn" id="lo" title="Sign out">${ic("out", 15)}</button></div><div class="wrap"><nav id="nav"></nav><main id="main"></main></div>`;
     $("#theme").onclick = () => { const l = document.documentElement.classList.toggle("light"); try { localStorage.setItem("cpdfir-theme", l ? "light" : "dark"); } catch (e) {} };
     $("#lo").onclick = logout;
+    $("#mnav").onclick = () => $("#nav").classList.toggle("open");
+    $("#nav").addEventListener("click", e => { if (e.target.closest("a")) $("#nav").classList.remove("open"); });
   }
   $("#nav").innerHTML = navHtml(active);
   $("#crumb").innerHTML = S.case ? `<b>${esc(S.case.id)}</b> · ${esc(S.case.title)} <span style="color:var(--mu2)">/ ${esc(crumb)}</span>` : `<b>${esc(crumb)}</b>`;
   const c = S.case, lv = c && c.last_verify;
   $("#tpill").innerHTML = c && c.last_run ? (lv ? `<span class="pill ${lv.ok ? "ok" : "bad"}">${lv.ok ? '<span class="dot"></span>' : ic("x", 12)} custody ${lv.ok ? "verified" : "TAMPERED"} ${ago(lv.time)}</span>`
     : `<span class="pill ${c.last_run.custody_ok ? "ok" : "bad"}">${c.last_run.custody_ok ? '<span class="dot"></span>' : ""} custody ${c.last_run.custody_ok ? "verified at analysis" : "FAILED"}</span>`) : "";
+  tip.style.display = "none";
   const m = $("#main"); m.innerHTML = `<div class="view" id="v"></div>`;
   window.scrollTo(0, 0);
   try { const out = view($("#v")); if (out && out.catch) out.catch(fail); } catch (e) { fail(e); console.error(e); }
@@ -301,12 +310,12 @@ function tOverview(v) {
   wire(v);
   v.querySelectorAll("[data-inc]").forEach(r => r.onclick = () => { S.inc = +r.dataset.inc; location.hash = `#/c/${S.cid}/investigation`; });
 }
-function donut(m) {
+function donut(m, label) {
   const E = Object.entries(m).sort((a, b) => b[1] - a[1]), T = E.reduce((a, b) => a + b[1], 0); let a0 = -Math.PI / 2, s = "";
   E.forEach(([k, n]) => { const a1 = a0 + n / T * Math.PI * 2, L = a1 - a0 > Math.PI ? 1 : 0, R = 54, r = 34;
     const p = (a, rr) => `${70 + rr * Math.cos(a)} ${70 + rr * Math.sin(a)}`;
     s += E.length === 1 ? `<circle cx="70" cy="70" r="44" fill="none" stroke="${PC[k]}" stroke-width="20"/>` : `<path d="M${p(a0, R)} A${R} ${R} 0 ${L} 1 ${p(a1, R)} L${p(a1, r)} A${r} ${r} 0 ${L} 0 ${p(a0, r)}z" fill="${PC[k]}" stroke="var(--panel)" stroke-width="2" data-tip="${esc(PN[k] || k)}: ${n}"/>`; a0 = a1; });
-  return `<div class="donutw"><svg width="140" height="140" viewBox="0 0 140 140">${s}<text x="70" y="68" text-anchor="middle" font-size="22" font-weight="700" fill="var(--tx)">${T}</text><text x="70" y="86" text-anchor="middle" font-size="10" fill="var(--mu)">flagged</text></svg>
+  return `<div class="donutw"><svg width="140" height="140" viewBox="0 0 140 140">${s}<text x="70" y="68" text-anchor="middle" font-size="22" font-weight="700" fill="var(--tx)">${T}</text><text x="70" y="86" text-anchor="middle" font-size="10" fill="var(--mu)">${label || "flagged"}</text></svg>
   <div class="lgl">${E.map(([k, n]) => `<div><i style="background:${PC[k]}"></i>${esc(PN[k] || k)}<b>${n}</b></div>`).join("")}</div></div>`;
 }
 
@@ -606,7 +615,13 @@ function tReport(v) {
   <a class="btn" href="${b}timeline?download=1">${ic("dl", 14)} timeline.csv</a><a class="btn" href="${b}events?download=1">${ic("dl", 14)} normalized_events.json</a><a class="btn" href="${b}incidents?download=1">${ic("dl", 14)} incidents.json</a>
   <a class="btn" href="${b}ledger?download=1">${ic("dl", 14)} custody_ledger.jsonl</a><a class="btn" href="/api/cases/${S.cid}/bundle">${ic("fold", 14)} Full case bundle (.zip)</a></div>
   <div class="note" style="margin-top:10px">To print or save as PDF: open the report in a new tab and use the browser's Print → Save as PDF.</div></div>
-  <iframe class="rep" src="${b}report" title="report"></iframe>`;
+  <div class="g g3">${[["alert", "Incidents", "every incident with severity, time window, platforms, ATT&CK techniques and attack stages in order"],
+    ["res", "Timeline", "all flagged events of every platform in one UTC timeline, with the evidence file and line they came from"],
+    ["cus", "Chain of custody", "every ledger entry with its hash, the verification result and the anchor hash"],
+    ["col", "Evidence", "each acquired file with its SHA-256 before and after copying"], ["cld", "Cloud posture", "AWS account-state findings, when collected"],
+    ["sys", "Method & limits", "what was collected, what could not be collected, and the framework version"]].map(([i, t, d]) =>
+    `<div class="card"><h3><i>${ic(i, 15)}</i>${t}</h3><div class="note">${d}</div></div>`).join("")}</div>
+  <div class="note" style="margin-top:14px">The report is a single self-contained HTML file (no internet or JavaScript needed), suitable for handing over or archiving with the case bundle.</div>`;
   wire(v);
 }
 
@@ -624,16 +639,6 @@ function actDetail(x) {
 }
 
 /* ---------------------------------------------------------------- framework pages */
-async function viewResearch(v) {
-  const info = await api("GET", "/api/system/info");
-  const N = {"dashboard.html":"Evaluation dashboard", "evaluation_report.html":"Evaluation report (simulated)", "real_data_report.html":"Real-data validation"};
-  v.innerHTML = head("Framework evaluation", "Research results", "Results of the framework's evaluation (python main.py evaluate / real-eval): precision, recall and F1 on simulated scenarios, tampering tests, scalability, and validation on real public datasets.");
-  if (!info.research.length) { v.innerHTML += `<div class="card empty"><div class="big">No results yet</div><div class="note">Run <span class="mono">python main.py evaluate</span> and <span class="mono">python main.py real-eval</span>.</div></div>`; return; }
-  v.innerHTML += `<div class="card" style="margin-bottom:14px"><div class="chips" id="rch">${info.research.map((n, i) => `<span class="chip ${i ? "" : "on"}" data-n="${n}">${N[n]}</span>`).join("")}<a class="btn sm" id="rop" target="_blank" style="margin-left:auto">${ic("ext", 12)} Open in new tab</a></div></div>
-  <iframe class="rep" id="rif" style="height:80vh;background:var(--bg)"></iframe>`;
-  const show = n => { $("#rif").src = "/research/" + n; $("#rop").href = "/research/" + n; $$("#rch .chip").forEach(c => c.classList.toggle("on", c.dataset.n === n)); };
-  $$("#rch .chip").forEach(c => c.onclick = () => show(c.dataset.n)); show(info.research[0]);
-}
 async function viewSystem(v) {
   const i = await api("GET", "/api/system/info");
   v.innerHTML = head("System", "System & self-test", "Environment of this console and the framework's own unit tests.", `<button class="btn pri" id="st">${ic("play", 15)} Run self-test</button>`) +
@@ -662,6 +667,192 @@ async function viewUsers(v) {
   $("#uf").onsubmit = async e => { e.preventDefault(); try { await api("POST", "/api/users", Object.fromEntries(new FormData(e.target).entries())); toast("Analyst added", "var(--gr)"); shell(viewUsers, "users", "Users & audit log"); } catch (er) { fail(er); } };
   v.querySelectorAll("[data-du]").forEach(b => b.onclick = async () => { try { await api("DELETE", `/api/users/${b.dataset.du}`); toast("User removed"); shell(viewUsers, "users", "Users & audit log"); } catch (e) { fail(e); } });
   $("#dcf").onsubmit = async e => { e.preventDefault(); const id = new FormData(e.target).get("confirm").trim(); try { await api("DELETE", `/api/cases/${id}`, {confirm:id}); toast(`Case ${esc(id)} deleted`); shell(viewUsers, "users", "Users & audit log"); } catch (er) { fail(er); } };
+}
+
+/* ---------------------------------------------------------------- framework evaluation (native pages, data from /api/research) */
+const EVAL = [["overview", "ov", "Framework overview", eOverview], ["accuracy", "tgt", "Detection accuracy", eAccuracy],
+  ["integrity", "cus", "Evidence integrity", eIntegrity], ["cloud", "cld", "Cloud forensics", eCloud], ["scale", "res", "Scalability", eScale],
+  ["real", "chk", "Real-world validation", eReal], ["coverage", "mit", "ATT&amp;CK coverage", eCoverage]];
+const pct = x => (100 * x).toFixed(1) + "%", f3 = x => (+x).toFixed(3);
+const hbar = (x, c) => `<div class="bar"><i style="width:${Math.max(0, Math.min(1, x)) * 100}%;${c ? `background:${c}` : ""}"></i></div>`;
+const f1c = x => x >= .999 ? "var(--gr)" : x >= .9 ? "var(--cy)" : "var(--am)";
+async function evalView(v, fn) {
+  if (!S.rd) { v.innerHTML = `<div class="empty"><span class="spin"></span></div>`; S.rd = await api("GET", "/api/research"); }
+  if (!S.rd.ready) { v.innerHTML = head("Framework evaluation", "No evaluation results yet", "Run <span class=mono>python main.py evaluate</span> and <span class=mono>python main.py real-eval</span> on the machine that hosts the console."); return; }
+  v.innerHTML = fn(S.rd);
+  const nx = EVAL.findIndex(e => e[3] === fn), n = EVAL[nx + 1];
+  v.innerHTML += `<div class="foot2" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap"><span>Evaluation run ${esc(S.rd.meta.evaluated)} · Python ${esc(S.rd.meta.python)} · ${esc(S.rd.meta.system)} · from results/evaluation.json${S.rd.real ? " and results/real_data_results.json" : ""}</span>
+  ${n ? `<a class="btn sm" style="margin-left:auto" href="#/eval/${n[0]}">Next: ${n[2]} ›</a>` : ""}</div>`;
+}
+const row2 = (a, b, c) => `<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid var(--line)"><span class="note" style="font-size:12.8px">${a}</span><b class="mono" style="text-align:right;color:${c || "var(--tx)"}">${b}</b></div>`;
+function flowSvg() {
+  const st = [["ACQUISITION", "Windows · Linux · AWS · Live host", "var(--win)"], ["NORMALIZATION", "35 event types · UTC", "var(--lin)"], ["CORRELATION", "57 rules · entity graph", "var(--aws)"], ["REPORTING", "HTML report · timeline", "var(--vi)"]];
+  let s = `<svg class="flowsvg" viewBox="0 0 1100 128">`;
+  st.forEach((x, i) => { const X = 12 + i * 272;
+    s += `<rect x="${X}" y="18" width="232" height="66" rx="12" fill="color-mix(in srgb,${x[2]} 12%,transparent)" stroke="${x[2]}" stroke-width="1.4"/>
+    <text x="${X + 16}" y="44" fill="${x[2]}" font-size="13" font-weight="700" letter-spacing="1.5">${i + 1}. ${x[0]}</text><text x="${X + 16}" y="66" fill="var(--mu)" font-size="12">${x[1]}</text>`;
+    if (i < 3) s += `<path class="ln" d="M${X + 236} 51 H${X + 268}" stroke="var(--cy)" stroke-width="2.4"/><path d="M${X + 262} 46 l7 5 -7 5" fill="none" stroke="var(--cy)" stroke-width="2"/>`; });
+  return s + `<rect x="12" y="98" width="1076" height="24" rx="7" fill="color-mix(in srgb,var(--gr) 10%,transparent)" stroke="color-mix(in srgb,var(--gr) 55%,transparent)" stroke-dasharray="4 4"/>
+  <text x="550" y="114.5" text-anchor="middle" fill="var(--gr)" font-size="12" font-weight="600" letter-spacing=".6">CHAIN-OF-CUSTODY LEDGER · SHA-256 hash chain + HMAC · every stage recorded and re-verified</text></svg>`;
+}
+
+function eOverview(D) {
+  const K = D.kpi, s1 = D.cases.S1, ce = D.cloud.emu.all;
+  const t = esc(D.meta.title).replace("Scalable", "<em>Scalable</em>").replace("Cross-Platform", "<em>Cross-Platform</em>").replace("Cloud Forensic Investigation", "<em>Cloud Forensic Investigation</em>");
+  const COL = [["windows", "Windows event logs", "Security / System / PowerShell / Sysmon EVTX or exported XML: logons, account and group changes, services, tasks, log clearing, process creation."],
+    ["linux", "Linux logs", "auth.log / secure: SSH logins and failures, sudo, credential-file access, account creation."],
+    ["aws", "AWS CloudTrail", "Management events: API calls, key creation, logging changes, S3 bulk reads, use from outside networks."],
+    ["cloud", "AWS account state", "Read-only snapshot (List / Get / Describe only): trails, IAM users and keys, MFA, roles, S3 buckets, security groups."],
+    ["host", "Live host triage", "RFC 3227 order of volatility: processes, sockets, accounts, persistence entries, recent files, security logs."]];
+  return `<div class="card hero"><div class="kw">Windows · Linux · AWS · cross-platform digital forensics and incident response</div><h2>${t}</h2>
+  <div class="by">Automated evidence collection, cross-platform correlation, cloud forensics and a tamper-evident chain of custody — developed by ${esc(D.meta.author)}</div>${flowSvg()}</div>
+  <div class="g g4" style="margin-top:16px">${kpi(f3(K.f1), "Correlation F1 · core scenarios S1–S4", `precision ${pct(K.p)} · recall ${pct(K.r)}`, "var(--cy)", "tgt")}
+  ${kpi(`${K.tam_ok}/${K.tam_n}`, "Tampering attacks detected", `${K.ctl_ok}/${K.ctl_n} untouched cases verified clean`, "var(--gr)", "cus")}
+  ${kpi(fmt(K.thr) + "/s", "Records processed per second", `${fmt(K.rec)} records in ${K.sec.toFixed(1)} s`, "var(--vi)", "bolt")}
+  ${kpi(K.rules, "ATT&amp;CK-mapped detection rules", `${K.techs} techniques · 6 rule families`, "var(--am)", "mit")}</div>
+  <div class="g g3" style="margin-top:16px"><div class="card"><h3><i>${ic("col", 15)}</i>Evidence by platform · scenario S1</h3>${s1 ? donut(s1.sources, "events") : ""}<div class="note" style="margin-top:10px">One timeline, one schema, one incident.</div></div>
+  <div class="card"><h3><i>${ic("tgt", 15)}</i>F1 score per scenario</h3>${D.scen.map(s => `<div style="display:grid;grid-template-columns:92px 1fr 48px;gap:10px;align-items:center;margin:9px 0" data-tip="<b>${esc(s.name)}</b><br>${esc(s.desc)}<br>P ${pct(s.p)} · R ${pct(s.r)} · incidents ${s.found}/${s.exp}"><span class="mono" style="font-size:12px">${esc(s.name)}</span>${hbar(s.f1, f1c(s.f1))}<b class="mono" style="color:${f1c(s.f1)}">${f3(s.f1)}</b></div>`).join("")}</div>
+  <div class="card"><h3><i>${ic("ov", 15)}</i>Framework at a glance</h3>${row2("Evidence sources", "Windows · Linux · AWS · Host")}${row2("Common event schema", "35 types · UTC")}
+  ${row2("Cloud misconfigurations found", ce ? `${ce.ft}/${ce.et}` : "–", "var(--gr)")}${row2("Cloud API calls", ce ? `${ce.ops} · read-only` : "–")}${row2("Hard cases S5 · F1", f3(K.s5), "var(--am)")}
+  ${row2("Real EVTX samples parsed", D.real ? `${D.real.win.samples} · ${D.real.win.errors} errors` : "–")}</div></div>
+  <div class="card" style="margin-top:16px"><h3><i>${ic("col", 15)}</i>Five collectors, one forensically sound acquisition</h3>
+  <div class="g" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">${COL.map(c => `<div style="border:1px solid var(--line);border-top:3px solid ${PC[c[0]]};border-radius:11px;padding:12px 14px;background:var(--panel2)"><b style="font-size:13.5px">${c[1]}</b><div class="note" style="margin-top:5px">${c[2]}</div></div>`).join("")}</div></div>
+  <div class="g g2" style="margin-top:16px"><div class="card"><h3><i>${ic("lock", 15)}</i>Forensic soundness rules</h3>${[["Hash before &amp; after copy", "SHA-256 of source and copy must match, otherwise acquisition fails."],
+    ["Read-only cloud access", "Only List / Get / Describe API calls; enforced in code."], ["Order of volatility", "Live triage collects the most volatile data first (RFC 3227)."],
+    ["Limits are reported", "Anything that could not be collected is written in the manifest and the report."], ["UTC everywhere", "All timestamps converted to UTC in the common schema."]]
+    .map(x => `<div style="display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--line)"><span class="ok">${ic("chk", 16)}</span><div><b style="font-size:13px">${x[0]}</b><div class="note">${x[1]}</div></div></div>`).join("")}</div>
+  <div class="card"><h3><i>${ic("alert", 15)}</i>Limitations</h3>${["Scenario results use simulated logs in real formats with generated ground truth; they show the design works on these scenarios, not on production traffic.",
+    "Detection is rule-based (thresholds in config.py); attack patterns outside the rules are not flagged.", "Linux session attribution is a heuristic (latest login of the same user on the same host).",
+    "Linking a Linux credential file to an AWS key needs the analyst-supplied credential inventory.",
+    "The custody ledger detects changes after the fact; it does not stop them. A fully rewritten chain is detected only with the HMAC key or the external anchor hash.",
+    `Scalability is measured for a single process, up to ${fmt(K.rec)} records.`].map(x => `<div style="display:flex;gap:10px;padding:7px 0;border-bottom:1px solid var(--line)"><span class="warn">${ic("alert", 14)}</span><span class="note">${x}</span></div>`).join("")}</div></div>`;
+}
+
+function eAccuracy(D) {
+  const rows = D.scen_detail || [], main = rows.filter(r => !r.policy), pol = rows.filter(r => r.policy);
+  const tr = r => `<tr><td style="white-space:nowrap"><b class="mono">${esc(r.name)}</b></td><td style="min-width:200px">${esc(r.desc)}</td><td class="mono">${fmt(r.records)}</td><td class="mono">${pct(r.completeness)}</td>
+    <td class="mono">${r.found} / ${r.exp}</td><td class="mono ${r.false_inc ? "warn" : ""}">${r.false_inc}</td><td class="mono">${r.split} / ${r.merged}</td>
+    <td class="mono">${pct(r.p)}</td><td class="mono">${pct(r.r)}</td><td style="min-width:110px"><div style="display:flex;gap:8px;align-items:center"><b class="mono" style="width:42px;color:${f1c(r.f1)}">${f3(r.f1)}</b>${hbar(r.f1, f1c(r.f1))}</div></td><td class="mono ${r.fa ? "warn" : ""}">${r.fa}</td></tr>`;
+  const th = `<thead><tr><th>Scenario</th><th>What it tests</th><th>Records</th><th>Completeness</th><th>Incidents<br>found / exp.</th><th>False<br>incidents</th><th>Split /<br>merged</th><th>Precision</th><th>Recall</th><th>F1</th><th>False<br>alerts</th></tr></thead>`;
+  const C = D.coverage, W = 640, rh = 46, H = C.length * rh + 20;
+  let silo = `<svg viewBox="0 0 ${W} ${H}" width="100%">`;
+  C.forEach((c, i) => { const y = 10 + i * rh, X = 110, L = W - X - 60;
+    silo += `<text x="0" y="${y + 20}" font-size="12.5" fill="var(--tx)" font-weight="600">${esc(c.sc)} · ${esc(c.inc)}</text>
+    <rect x="${X}" y="${y + 4}" width="${L}" height="13" rx="4" fill="var(--line)"/><rect x="${X}" y="${y + 4}" width="${L * c.silo}" height="13" rx="4" fill="var(--mu2)"/><text x="${X + L + 8}" y="${y + 15}" font-size="11.5" fill="var(--mu)">${pct(c.silo)}</text>
+    <rect x="${X}" y="${y + 21}" width="${L}" height="13" rx="4" fill="var(--line)"/><rect x="${X}" y="${y + 21}" width="${L * c.uni}" height="13" rx="4" fill="var(--cy)"/><text x="${X + L + 8}" y="${y + 32}" font-size="11.5" fill="var(--cy)" font-weight="700">${pct(c.uni)}</text>`; });
+  silo += "</svg>";
+  return head("Framework evaluation", "Detection accuracy", "Five simulated multi-platform attacks with generator ground truth. Precision, recall and F1 are counted per event: did the framework put each attack event into the right incident, and nothing else.") +
+  `<div class="card"><h3><i>${ic("tgt", 15)}</i>Evidence completeness and correlation accuracy</h3><div class="tw"><table>${th}<tbody>${main.map(tr).join("")}</tbody></table></div>
+  <div class="info" style="margin-top:12px"><b>S5 is deliberately hard.</b> (1) A legitimate session of the same user is open when the attacker logs in, and Linux auth.log has no session id, so a legitimate command is attributed to the attacker (a false positive). (2) An insider moves laterally from an internal IP without brute force, so there is no untrusted entity and the rules miss the incident (a false negative). These are the known limits of rule-based detection.</div>
+  <div class="note" style="margin-top:10px">Completeness = supported records normalised ÷ supported records present in the source. False alerts = flagged events that are not part of any attack. Split / merged = one attack broken into several incidents / several attacks joined into one.</div></div>
+  ${pol.length ? `<div class="card" style="margin-top:16px"><h3><i>${ic("lock", 15)}</i>Admin-source policy — mitigation for the S5 insider case</h3><div class="tw"><table>${th}<tbody>${pol.map(tr).join("")}</tbody></table></div>
+  <div class="note" style="margin-top:10px">With <span class="mono">privileged_source_allowlist</span> set (admin logons expected only from 10.0.5.10) the insider is caught, and the benign scenario S4 still raises no false alert.</div></div>` : ""}
+  <div class="g g32" style="margin-top:16px"><div class="card"><h3><i>${ic("cor", 15)}</i>Unified vs siloed analysis</h3>${silo}
+  <div class="legend"><span><i style="background:var(--mu2)"></i>best single platform analysed alone</span><span><i style="background:var(--cy)"></i>unified (this framework)</span></div>
+  <div class="note" style="margin-top:8px">Share of each attack chain captured in one incident.</div></div>
+  <div class="card"><h3><i>${ic("key", 15)}</i>What links the platforms</h3>${[["var(--rd)", "Attacker IP", "same untrusted source address across Windows, Linux and AWS"],
+    ["var(--am)", "Credential file", "~/.aws/credentials or SSH key read inside an attacker session"], ["var(--cy)", "Cloud access key", "key used from outside, or created by another key"],
+    ["var(--vi)", "Credential inventory", "analyst-supplied map: which file holds which key"]].map(x => `<div style="display:flex;gap:12px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line)"><span style="width:12px;height:12px;border-radius:4px;flex:none;background:${x[0]};box-shadow:0 0 10px ${x[0]}"></span><div><b style="font-size:13px">${x[1]}</b><div class="note">${x[2]}</div></div></div>`).join("")}
+  ${D.ablation ? `<div class="info" style="margin-top:12px"><b>Ablation.</b> Without the credential inventory, the S2 credential pivot (Linux → AWS from a different IP) is split into ${D.ablation.incidents_found} incidents — the cross-platform link is lost.</div>` : ""}</div></div>`;
+}
+
+function eIntegrity(D) {
+  return head("Framework evaluation", "Evidence integrity", "Five kinds of tampering were applied to every scenario's finished case, and every untouched case was verified as a control. Every ledger entry's SHA-256 includes the previous entry's hash and is HMAC-signed; the newest hash (anchor) is kept outside the case.") +
+  `<div class="g g4" style="margin-bottom:16px">${kpi(`${D.kpi.tam_ok}/${D.kpi.tam_n}`, "Tampering attacks detected", "5 attack types × 5 scenarios", "var(--gr)", "cus")}${kpi(`${D.kpi.ctl_ok}/${D.kpi.ctl_n}`, "Untouched cases verified", "no false alarm", "var(--cy)", "chk")}
+  ${kpi(D.ledger_checks[0] || 0, "Ledger entries · scenario S2", "hash-chained and HMAC-signed", "var(--vi)", "lock")}${kpi(D.ledger_checks[1] || 0, "Files re-hashed · scenario S2", D.ledger_ok ? "verified while loading this page" : "verification failed", D.ledger_ok ? "var(--gr)" : "var(--rd)", "key")}</div>
+  <div class="card" style="margin-bottom:16px"><h3><i>${ic("cus", 15)}</i>Tampering tests</h3><div class="g g2">${D.tamper.map(t => { const good = t.ok === t.n, c = t.lim ? "var(--am)" : good ? "var(--gr)" : "var(--rd)", res = t.lim ? "not detected (documented limit)" : t.expect ? "detected" : "verifies clean";
+    return `<div class="tt"><div class="ic" style="background:color-mix(in srgb,${c} 15%,transparent);color:${c}">${ic(t.lim ? "alert" : good ? "chk" : "x", 18)}</div><div><div class="x">${esc(t.test)}</div><div class="y">expected: ${t.lim ? "known limitation — no key and no anchor" : t.expect ? "tampering detected" : "ledger verifies"} · result: ${res}</div></div><div class="z" style="color:${c}">${t.ok}/${t.n}</div></div>`; }).join("")}</div>
+  <div class="note" style="margin-top:12px">The last row is a known limit, not a failure: if an attacker rewrites the whole chain and neither the HMAC key nor the external anchor hash is available, nothing inside the case folder can prove it. The console therefore signs every ledger and keeps the anchor outside the case.</div></div>
+  <div class="card"><h3><i>${ic("lock", 15)}</i>Ledger of scenario S2<span class="r ${D.ledger_ok ? "ok" : "bad"}">${ic(D.ledger_ok ? "chk" : "x", 14)} ${D.ledger_ok ? "VERIFIED" : "FAILED"}</span></h3><div class="chain">
+  ${D.ledger.map((b, i) => `${i ? `<div class="arw"><svg width="22" height="14" viewBox="0 0 30 14"><path d="M0 7h26M20 2l6 5-6 5" fill="none" stroke="currentColor" stroke-width="2"/></svg></div>` : ""}
+  <div class="blk" data-tip="<b>#${b.seq} ${esc(b.stage)} · ${esc(b.action)}</b><br>${esc(b.target)}<br><span class=mono>${esc(b.time)}</span><br>prev: <span class=mono>${esc(b.prev.slice(0, 32))}…</span><br>hash: <span class=mono>${esc(b.hash.slice(0, 32))}…</span>">
+  <div class="sq">#${b.seq} · ${esc(b.stage)}</div><div class="a">${esc(b.action)}</div><div class="tg">${esc(b.target)}</div><div class="hs">prev&nbsp; ${esc(b.prev.slice(0, 10))}…<br>hash&nbsp; <em>${esc(b.hash.slice(0, 10))}…</em>${b.hmac ? "<br>hmac&nbsp; ✓ signed" : ""}</div></div>`).join("")}</div>
+  <div class="note" style="margin-top:8px">Try it live: open any case → Chain of custody → “Modify an evidence file” → Verify now.</div></div>`;
+}
+
+function eCloud(D) {
+  const E = D.cloud.emu, F = D.cloud.fixture, all = E.all || E.single;
+  const NM = {trail_logging_off:"CloudTrail logging switched off", trail_no_log_validation:"Log-file validation disabled", trail_single_region:"Trail covers one region only",
+    root_mfa_missing:"Root account without MFA", admin_without_mfa:"Administrator without MFA", stale_access_key:"Access key unused for 90+ days", role_trusts_anyone:"Role trusts any AWS principal",
+    role_trusts_external_account:"Role trusts an external account", public_bucket:"Publicly readable S3 bucket", bucket_public_access_not_blocked:"S3 Block Public Access incomplete", sg_world_open_admin_port:"Admin port open to the internet"};
+  const out = [], seen = new Set();
+  Object.values(D.cases).forEach(c => c.incidents.forEach(i => i.stages.filter(s => s.sources.includes("aws")).forEach(s => { const k = s.technique + s.name; if (!seen.has(k)) { seen.add(k); out.push([c.name, i.id, s]); } })));
+  return head("Framework evaluation", "Cloud forensics", "Two complementary views of AWS: CloudTrail activity is correlated with on-premise evidence, and a read-only account-state snapshot records the exposure at investigation time. Posture findings never start an incident on their own.") +
+  `<div class="g g4">${kpi(all ? `${all.ft}/${all.et}` : "–", "Misconfigurations found · AWS emulator", all ? `false positives: ${all.fp}` : "", "var(--gr)", "cld")}
+  ${kpi(all ? all.ops : "–", "Distinct AWS API operations used", all && all.ro ? "all List / Get / Describe (read-only)" : "", "var(--cy)", "lock")}
+  ${kpi(F.exposed ? `${F.exposed.ft}/${F.exposed.et}` : "–", "Labelled fixture · exposed account", F.clean ? `clean account: ${F.clean.ft} findings, ${F.clean.fp} FP` : "", "var(--vi)", "tgt")}
+  ${kpi(D.real ? `${D.real.aws.filter(a => a.hit).length}/${D.real.aws.length}` : "–", "Real CloudTrail attacks detected", "Stratus Red Team detonations", "var(--aws)", "alert")}</div>
+  <div class="g g32" style="margin-top:16px"><div class="card"><h3><i>${ic("cld", 15)}</i>Posture checks · real boto3 code path against the moto AWS emulator</h3><div class="tw"><table><thead><tr><th>Misconfiguration</th><th>Rule</th><th>Seeded</th><th>Found</th><th></th></tr></thead><tbody>
+  ${all ? Object.keys(all.exp).map(k => { const e = all.exp[k], f = all.found[k] || 0; return `<tr><td>${NM[k] || esc(k)}</td><td class="mono" style="color:var(--mu)">${esc(k)}</td><td class="mono">${e}</td><td class="mono">${f}</td><td class="${f === e ? "ok" : "bad"}">${ic(f === e ? "chk" : "x", 16)}</td></tr>`; }).join("") : ""}</tbody></table></div>
+  <div class="note" style="margin-top:10px">The emulator is not a real AWS account; it exercises the same boto3 calls the collector makes against a live account, including harmless look-alikes that must not be flagged.</div></div>
+  <div class="card"><h3><i>${ic("alert", 15)}</i>Cloud attack stages found in the scenarios</h3>${out.map(([c, i, s]) => `<div style="display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--line)"><span class="tag" style="color:var(--aws);border-color:color-mix(in srgb,var(--aws) 50%,transparent)">${esc(s.technique)}</span><div><b style="font-size:13px">${esc(s.name)}</b><div class="note">${sev(s.severity)} first seen in ${esc(c)} · ${esc(i)}</div></div></div>`).join("")}</div></div>`;
+}
+
+function eScale(D) {
+  const S = D.scale, last = S[S.length - 1];
+  const W = 560, H = 300, L = 58, B = 42, T = 16, R = 20, xm = Math.ceil(Math.max(...S.map(r => r.records)) * 1.05 / 40000) * 40000, ym = Math.ceil(Math.max(...S.map(r => r.total)) * 1.15 / 4) * 4,
+    X = v => L + v / xm * (W - L - R), Y = v => H - B - v / ym * (H - B - T);
+  let lc = `<svg viewBox="0 0 ${W} ${H}" width="100%"><defs><linearGradient id="ar1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--cy)" stop-opacity=".35"/><stop offset="1" stop-color="var(--cy)" stop-opacity="0"/></linearGradient></defs>`;
+  for (let k = 0; k <= 4; k++) { const v = ym * k / 4; lc += `<line x1="${L}" x2="${W - R}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--line)"/><text x="${L - 8}" y="${Y(v) + 4}" text-anchor="end" font-size="11" fill="var(--mu)">${v.toFixed(0)} s</text>`; }
+  for (let k = 0; k <= 4; k++) { const v = xm * k / 4; lc += `<text x="${X(v)}" y="${H - B + 18}" text-anchor="middle" font-size="11" fill="var(--mu)">${fmt(v)}</text>`; }
+  const pts = S.map(r => [X(r.records), Y(r.total)]);
+  lc += `<text x="${(W + L) / 2}" y="${H - 6}" text-anchor="middle" font-size="11.5" fill="var(--mu)">log records processed</text>
+  <path d="M${pts[0][0]} ${Y(0)}L${pts.map(p => p.join(" ")).join("L")}L${pts[pts.length - 1][0]} ${Y(0)}Z" fill="url(#ar1)"/><path d="M${pts.map(p => p.join(" ")).join("L")}" fill="none" stroke="var(--cy)" stroke-width="2.6"/>`;
+  S.forEach((r, i) => lc += `<circle cx="${pts[i][0]}" cy="${pts[i][1]}" r="5" fill="var(--bg2)" stroke="var(--cy)" stroke-width="2.4" data-tip="<b>${fmt(r.records)} records</b><br>${r.total.toFixed(2)} s · ${fmt(r.throughput)} records/s · F1 ${f3(r.f1)}"/>${i >= S.length - 2 ? `<text x="${pts[i][0]}" y="${pts[i][1] - 12}" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--tx)">${r.total.toFixed(2)} s</text>` : ""}`);
+  lc += "</svg>";
+  const st = [["acquisition", "Acquisition", "var(--win)"], ["normalization", "Normalization", "var(--lin)"], ["correlation", "Correlation", "var(--aws)"], ["custody", "Custody", "var(--vi)"]];
+  const sw = 560, srh = 44, sL = 86, sH = S.length * srh + 16, mx = Math.max(...S.map(r => st.reduce((a, k) => a + r[k[0]], 0)));
+  let sc = `<svg viewBox="0 0 ${sw} ${sH}" width="100%">`;
+  S.forEach((r, i) => { let x = sL; const y = 8 + i * srh; sc += `<text x="${sL - 10}" y="${y + 18}" text-anchor="end" font-size="11.5" fill="var(--mu)" font-family="Consolas,monospace">${fmt(r.records)}</text>`;
+    st.forEach(k => { const w = r[k[0]] / mx * (sw - sL - 60); sc += `<rect x="${x}" y="${y + 4}" width="${Math.max(w, .5)}" height="22" fill="${k[2]}" rx="2" data-tip="<b>${k[1]}</b> · ${fmt(r.records)} records<br>${r[k[0]].toFixed(3)} s (${pct(r[k[0]] / r.total)} of total)"/>`; x += w; });
+    sc += `<text x="${x + 8}" y="${y + 20}" font-size="11.5" fill="var(--tx)" font-weight="600">${r.total.toFixed(2)} s</text>`; });
+  sc += `</svg><div class="legend">${st.map(k => `<span><i style="background:${k[2]}"></i>${k[1]}</span>`).join("")}</div>`;
+  return head("Framework evaluation", "Scalability", `The same attack embedded in growing volumes of background activity. Largest run: ${fmt(last.records)} records in ${last.total.toFixed(2)} s with F1 ${f3(last.f1)} — time grows roughly linearly.`) +
+  `<div class="g g4" style="margin-bottom:16px">${kpi(fmt(last.records), "Largest run · records", "single process", "var(--cy)", "col")}${kpi(last.total.toFixed(1) + " s", "Total time", "acquire → report", "var(--vi)", "res")}
+  ${kpi(fmt(last.throughput) + "/s", "Throughput", "records per second", "var(--am)", "bolt")}${kpi(f3(last.f1), "F1 at the largest size", "attack still found", "var(--gr)", "tgt")}</div>
+  <div class="g g2"><div class="card"><h3><i>${ic("res", 15)}</i>Total processing time vs records</h3>${lc}</div><div class="card"><h3><i>${ic("ov", 15)}</i>Where the time goes (per stage)</h3>${sc}</div></div>
+  <div class="card" style="margin-top:16px"><div class="tw"><table><thead><tr><th>Records</th><th>Normalised events</th><th>Acquisition</th><th>Normalisation</th><th>Correlation</th><th>Custody</th><th>Total (s)</th><th>Records / s</th><th>F1</th></tr></thead><tbody>
+  ${S.map(r => `<tr class="mono"><td>${fmt(r.records)}</td><td>${fmt(r.events)}</td><td>${r.acquisition.toFixed(3)}</td><td>${r.normalization.toFixed(3)}</td><td>${r.correlation.toFixed(3)}</td><td>${r.custody.toFixed(3)}</td><td><b>${r.total.toFixed(2)}</b></td><td>${fmt(r.throughput)}</td><td class="ok">${f3(r.f1)}</td></tr>`).join("")}</tbody></table></div></div>`;
+}
+
+function eReal(D) {
+  const R = D.real; if (!R) return head("Framework evaluation", "Real-world validation", "Not run yet: <span class=mono>python main.py real-eval</span>.");
+  const w = R.win, tac = Object.entries(w.per_tactic).filter(([k]) => k !== "(root)").sort((a, b) => b[1].samples - a[1].samples);
+  const TW = 600, trh = 30, TL = 150, TH = tac.length * trh + 10, tmx = Math.max(...tac.map(t => t[1].samples));
+  let tc = `<svg viewBox="0 0 ${TW} ${TH}" width="100%">`;
+  tac.forEach(([k, v], i) => { const y = 4 + i * trh, s = (TW - TL - 56) / tmx;
+    tc += `<text x="${TL - 10}" y="${y + 15}" text-anchor="end" font-size="11.5" fill="var(--tx)">${esc(k)}</text>
+    <rect x="${TL}" y="${y + 3}" width="${v.samples * s}" height="17" rx="3" fill="var(--line2)" data-tip="<b>${esc(k)}</b><br>${v.samples} samples · ${v.with_supported} with supported events · ${v.alerted} alerted"/>
+    <rect x="${TL}" y="${y + 3}" width="${v.with_supported * s}" height="17" rx="3" fill="color-mix(in srgb,var(--cy) 45%,transparent)" pointer-events="none"/><rect x="${TL}" y="${y + 3}" width="${v.alerted * s}" height="17" rx="3" fill="var(--cy)" pointer-events="none"/>
+    <text x="${TL + v.samples * s + 6}" y="${y + 16}" font-size="11" fill="var(--mu)" font-family="Consolas,monospace">${v.alerted}/${v.samples}</text>`; });
+  tc += `</svg><div class="legend"><span><i style="background:var(--cy)"></i>raised an alert</span><span><i style="background:color-mix(in srgb,var(--cy) 45%,transparent)"></i>contains supported events</span><span><i style="background:var(--line2)"></i>samples</span></div>`;
+  return head("Framework evaluation", "Real-world validation", "Real attack logs from public datasets, not simulations: Windows EVTX-ATTACK-SAMPLES, LogHub OpenSSH / Linux logs and Stratus Red Team CloudTrail detonations.") +
+  `<div class="info" style="margin-bottom:16px"><b>Read this first.</b> The numbers are honest but limited: (1) rules were refined after looking at these samples, so labelled results are development-set results; (2) the false-positive rate on real benign traffic is not measured, because no labelled benign logs exist; (3) cross-platform correlation on one real incident is not measured, because no public dataset has Windows + Linux + AWS logs of the same incident.</div>
+  <div class="g g4">${kpi(w.samples, "Real Windows attack captures", `${fmt(w.records)} records · ${w.errors} parse errors`, "var(--win)", "col")}
+  ${kpi(pct(w.with_supported / w.samples), "Samples the framework understands", `${w.with_supported} of ${w.samples} contain supported events`, "var(--cy)", "chk")}
+  ${kpi(`${w.core[0]}/${w.core[1]}`, "Labelled samples detected", `deliberately hard cases: ${w.hard[0]}/${w.hard[1]}`, "var(--gr)", "tgt")}
+  ${kpi(`${R.aws.filter(a => a.hit).length}/${R.aws.length}`, "Real CloudTrail attacks detected", "Stratus Red Team", "var(--aws)", "cld")}</div>
+  <div class="g g32" style="margin-top:16px"><div class="card"><h3><i>${ic("mit", 15)}</i>Windows: ${w.samples} samples by ATT&amp;CK tactic</h3>${tc}</div>
+  <div class="card"><h3><i>${ic("tgt", 15)}</i>Labelled Windows samples</h3><div style="max-height:420px;overflow:auto">${w.labelled.map(x => `<div style="display:flex;gap:10px;padding:8px 2px;border-bottom:1px solid var(--line)"><span class="${x.hit ? "ok" : x.hard ? "warn" : "bad"}">${ic(x.hit ? "chk" : x.hard ? "alert" : "x", 16)}</span><div style="min-width:0"><div class="mono" style="font-size:11.5px;word-break:break-all">${esc(x.file.split("/").pop())}${x.hard ? ' <span class="tag sev-medium">HARD</span>' : ""}</div><div class="note">${esc(x.why)}</div></div></div>`).join("")}</div></div></div>
+  <div class="card" style="margin-top:16px"><h3><i>${ic("term", 15)}</i>Linux: real SSH server logs (LogHub)</h3><div class="tw"><table><thead><tr><th>Log</th><th>Lines</th><th>Normalised</th><th>Failed logins (framework / independent)</th><th>Brute-force IPs (framework / independent)</th><th>Accepted logins</th><th>Top attacking sources</th></tr></thead><tbody>
+  ${R.linux.map(l => `<tr><td class="mono">${esc(l.file)}</td><td class="mono">${fmt(l.lines)}</td><td class="mono">${fmt(l.norm)}</td><td class="mono">${fmt(l.fail)} / ${l.ind_fail ?? "–"}</td><td class="mono ${l.agree ? "ok" : "bad"}">${l.fw} / ${l.ind} ${l.agree ? "✓" : ""}</td><td class="mono">${l.accepted ?? "–"}</td><td class="mono" style="font-size:11px;min-width:180px;white-space:normal;word-break:break-all">${l.top.slice(0, 3).map(t => esc(t[0]) + " (" + t[1] + ")").join("<br>")}</td></tr>`).join("")}</tbody></table></div>
+  <div class="note" style="margin-top:8px">The framework's counts are checked against an independent naive regex count of the same files.</div></div>
+  <div class="g g2" style="margin-top:16px"><div class="card"><h3><i>${ic("cld", 15)}</i>AWS: real CloudTrail attack detonations</h3><div class="tw"><table><thead><tr><th>Sample</th><th>Attack</th><th>Rules fired</th><th></th></tr></thead><tbody>
+  ${R.aws.map(a => `<tr><td class="mono" style="font-size:11px;word-break:break-all">${esc(a.file.split("/").pop())}</td><td>${esc(a.why)}</td><td>${(a.flags || []).map(f => `<span class="tag">${esc(f)}</span>`).join("")}</td><td class="${a.hit ? "ok" : "bad"}">${ic(a.hit ? "chk" : "x", 16)}</td></tr>`).join("")}</tbody></table></div></div>
+  <div class="card"><h3><i>${ic("exp", 15)}</i>What the framework still does not read</h3><div class="note" style="margin-bottom:8px">Most common Windows event types in the samples that are outside the catalogue (counted as ignored, never silently dropped):</div>
+  ${(w.top_ignored || []).map(([k, n]) => `<div style="display:grid;grid-template-columns:1fr 80px;gap:10px;font-size:12.3px;padding:5px 0;border-bottom:1px solid var(--line)"><span class="mono" style="word-break:break-all">${esc(k)}</span><b class="mono" style="text-align:right">${fmt(n)}</b></div>`).join("")}
+  <div class="note" style="margin-top:12px">Datasets: EVTX-ATTACK-SAMPLES (sbousseaden), LogHub (logpai), Stratus Red Team (DataDog).</div></div></div>`;
+}
+
+function eCoverage(D) {
+  const T = D.techs, val = T.filter(t => t.validated).length;
+  return head("Framework evaluation", "ATT&amp;CK coverage", `${D.kpi.rules} detection rules mapped to ${T.length} MITRE ATT&amp;CK techniques in ${D.tactics.length} tactics. Highlighted techniques were triggered during the evaluation (simulated scenarios, AWS emulator or real public datasets); the others have rules that are implemented and unit-tested but were not seen in the evaluation data.`) +
+  `<div class="g g4" style="margin-bottom:16px">${kpi(D.kpi.rules, "Detection rules", "6 rule families", "var(--am)", "bolt")}${kpi(T.length, "ATT&amp;CK techniques", `${D.tactics.length} tactics`, "var(--cy)", "tgt")}
+  ${kpi(val, "Techniques triggered in evaluation", `${pct(val / T.length)} of covered techniques`, "var(--gr)", "chk")}
+  <div class="card"><h3><i>${ic("ov", 15)}</i>Rules per family</h3>${D.families.map(f => `<div style="display:grid;grid-template-columns:1fr 34px;gap:8px;font-size:12px;margin:3px 0"><span>${esc(f.family.replace(" (all platforms)", "").replace(" (posture)", " posture"))}</span><b class="mono" style="text-align:right">${f.rules}</b></div>`).join("")}</div></div>
+  <div class="card"><div class="mx">${D.tactics.map(tc => { const L = T.filter(t => t.tactic === tc);
+    return `<div class="col"><h4>${esc(tc)}<span>${L.length}</span></h4>${L.map(t => `<div class="tc ${t.validated ? "c" : ""}" data-tip="<b>${esc(t.id)} · ${esc(t.name)}</b><br>${t.rules.map(r => (r.val ? "✔ " : "○ ") + "<span class=mono>" + esc(r.rule) + "</span> — " + esc(r.desc)).join("<br>")}"><b>${esc(t.id)}</b>${esc(t.name)}<br><span class="n">${t.rules.length} rule${t.rules.length > 1 ? "s" : ""}</span></div>`).join("")}</div>`; }).join("")}</div>
+  <div class="legend"><span><i style="background:linear-gradient(160deg,var(--cy),var(--vi))"></i>triggered in evaluation</span><span><i style="background:var(--panel2);border:1px solid var(--line2)"></i>implemented, not triggered by the evaluation data</span><span>hover a technique for its rules</span></div></div>`;
 }
 
 /* ---------------------------------------------------------------- go */

@@ -439,7 +439,7 @@ def build_eval_report(data):
     o.append("<h2>5. Cross-platform support</h2>")
     o.append(_table(["Scenario", "Sources processed automatically", "Manual steps"], [[s["name"], f'{s["sources_processed"]} of 3 (Windows, Linux, AWS)', "none"] for s in sc]))
 
-    o.append("<h2>6. Limitations (state these honestly in the thesis)</h2><ul class='note'>"
+    o.append("<h2>6. Limitations</h2><ul class='note'>"
              "<li>All data is simulated (real log formats, generated events). Results show the framework works on these scenarios, not on production traffic.</li>"
              "<li>Ground truth comes from the generator, so scenario difficulty is limited by what the generator produces.</li>"
              "<li>Detection is rule-based (thresholds in config.py); novel attack patterns outside the rules are not flagged.</li>"

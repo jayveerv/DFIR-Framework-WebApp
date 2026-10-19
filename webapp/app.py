@@ -9,7 +9,7 @@ cloudstate.py) is used unchanged. This file only adds a web interface on top of 
     Linux auth log over SSH, Windows Security log export, simulated scenarios
   * analysis: runs pipeline.run_case() in a background job and shows the results live
   * chain of custody: HMAC-signed ledger, anchor hash kept OUTSIDE the case folder, one-click verification
-  * report / exports, per-case activity log, framework self-test, research results
+  * report / exports, per-case activity log, framework self-test, evaluation results
 
 Run:   python webapp/app.py            (opens http://127.0.0.1:5000)
        python webapp/app.py --host 0.0.0.0 --port 8080 --no-browser
@@ -56,6 +56,8 @@ DATA = os.path.abspath(os.environ.get("DFIR_DATA_DIR") or os.path.join(ROOT, "we
 CASES = os.path.join(DATA, "cases")
 TMP = os.path.join(DATA, "tmp")
 PUBLIC_MODE = os.environ.get("DFIR_PUBLIC_MODE", "") not in ("", "0", "false", "no")
+# "Try demo" guest login (no password, cannot manage users or delete cases). On by default in public mode.
+GUEST = os.environ.get("DFIR_GUEST", "1" if PUBLIC_MODE else "0") not in ("", "0", "false", "no")
 MAX_UPLOAD = int(os.environ.get("DFIR_MAX_UPLOAD_MB", "1024")) * 1024 * 1024
 for d in (DATA, CASES, TMP):
     os.makedirs(d, exist_ok=True)
@@ -141,6 +143,8 @@ def _in_request():
 
 def current_user():
     u = session.get("user")
+    if u == "guest" and GUEST:
+        return {"name": "Guest", "role": "guest"}
     return users().get(u) if u else None
 
 
@@ -173,7 +177,17 @@ def _pw_ok(p):
 def api_session():
     u = current_user()
     return jsonify(setup_needed=not users(), user=({"username": session["user"], "name": u["name"], "role": u["role"]} if u else None),
-                   app=APP_NAME, version=VERSION, public_mode=PUBLIC_MODE, platform=sys.platform)
+                   app=APP_NAME, version=VERSION, public_mode=PUBLIC_MODE, platform=sys.platform, guest=GUEST)
+
+
+@app.post("/api/guest")
+def api_guest():
+    if not GUEST:
+        return jsonify(error="guest access is off"), 403
+    session.clear()
+    session["user"] = "guest"
+    audit("guest_login")
+    return jsonify(ok=True)
 
 
 @app.post("/api/setup")
@@ -226,6 +240,8 @@ def api_logout():
 def api_password():
     d = request.get_json(force=True) or {}
     u = users()
+    if session["user"] not in u:
+        return jsonify(error="the guest account has no password"), 400
     me = u[session["user"]]
     if not check_password_hash(me["pw"], d.get("old") or ""):
         return jsonify(error="current password is wrong"), 400
@@ -1312,7 +1328,7 @@ def api_info():
     return jsonify(python=sys.version.split()[0], system=platform.platform(), host=platform.node(), modules=mods, data_dir=DATA,
                    custody_key=CUSTODY_KEY_PATH if not os.environ.get("DFIR_CUSTODY_KEY") else "DFIR_CUSTODY_KEY environment variable",
                    rules=len(FLAGS), techniques=len({v[0] for v in FLAGS.values()}), families={k: len(v) for k, v in RULE_FAMILIES.items()},
-                   public_mode=PUBLIC_MODE, cases=len(os.listdir(CASES)), research=[n for n in ("dashboard.html", "evaluation_report.html",
+                   public_mode=PUBLIC_MODE, cases=len(os.listdir(CASES)), research=[n for n in ("evaluation.json", "real_data_results.json",
                    "real_data_report.html") if os.path.exists(os.path.join(ROOT, "results", n))])
 
 
@@ -1326,13 +1342,56 @@ def api_audit():
     return jsonify(out[::-1][:500])
 
 
-@app.get("/research/<path:name>")
-def research(name):
-    if not current_user():
-        abort(401)
-    if name not in ("dashboard.html", "evaluation_report.html", "real_data_report.html"):
-        abort(404)
-    return send_from_directory(os.path.join(ROOT, "results"), name)
+_RESEARCH = {"key": None, "data": None}
+
+
+def _research_data():
+    """Evaluation results (results/evaluation.json, results/real_data_results.json) for the console's evaluation pages."""
+    import make_dashboard
+    paths = [os.path.join(ROOT, "results", n) for n in ("evaluation.json", "real_data_results.json")]
+    key = tuple(os.path.getmtime(p) if os.path.exists(p) else 0 for p in paths)
+    if _RESEARCH["key"] == key:
+        return _RESEARCH["data"]
+    if not os.path.exists(paths[0]):
+        return None
+    D = make_dashboard.collect_data(ROOT)
+    D.pop("explorer", None)
+    for c in D.get("cases", {}).values():
+        for i in c.get("incidents", []):
+            i.pop("events", None)
+    ev = _read_json(paths[0], {})
+    rows = []
+    for s_, pol in [(x, False) for x in ev.get("scenarios", [])] + [(x, True) for x in ev.get("policy", [])]:
+        x = s_["score"]
+        rows.append({"name": s_["name"], "desc": s_.get("description") or "Same logs with the admin-source policy (admin logons expected only from 10.0.5.10)",
+                     "policy": pol, "records": x["records_in_sources"], "completeness": x["completeness"], "found": x["incidents_found"],
+                     "exp": x["incidents_expected"], "false_inc": x["false_incidents"], "split": x["split_incidents"], "merged": x["merged_incidents"],
+                     "p": x["precision"], "r": x["recall"], "f1": x["f1"], "fa": x["false_alerts"], "tp": x["tp"], "fp": x["fp"], "fn": x["fn"],
+                     "cross": x["cross_platform_incidents"]})
+    D["scen_detail"] = rows
+    rd = _read_json(paths[1], None)
+    if rd and D.get("real"):
+        w = rd["windows"]
+        D["real"]["win"]["top_ignored"] = w.get("top_ignored", [])[:10]
+        D["real"]["win"]["supported_events"] = w.get("supported_events")
+        D["real"]["generated"] = (rd.get("generated") or "")[:16].replace("T", " ")
+        for l in D["real"]["linux"]:
+            src = rd["linux"].get(l["file"], {})
+            l.update(accepted=src.get("accepted"), bf_success=src.get("bf_success"), distinct=src.get("distinct_failing_ips"),
+                     ind_fail=src.get("independent_failed_password"), ignored=src.get("ignored"), top_ignored=(src.get("top_ignored") or [])[:5])
+        D["real"]["aws"] = [{"file": a["file"], "why": a["why"], "hit": a["hit"], "records": a.get("records"), "flags": sorted(a.get("flags") or []),
+                             "expected": a.get("expected", [])} for a in rd["aws"]]
+    _RESEARCH.update(key=key, data=D)
+    return D
+
+
+@app.get("/api/research")
+@login_required
+def api_research():
+    D = _research_data()
+    if not D:
+        return jsonify(ready=False)
+    return jsonify(ready=True, **D)
 
 
 @app.get("/")
@@ -1364,6 +1423,35 @@ def _bootstrap_admin():
 
 
 _bootstrap_admin()
+
+
+def _seed_demo():
+    """Public deploy: start with one analysed demo case so the console is never empty (the free host wipes data on restart)."""
+    if os.environ.get("DFIR_SEED_DEMO", "1" if PUBLIC_MODE else "0") in ("", "0", "false", "no"):
+        return
+    with LOCK:
+        if [x for x in os.listdir(CASES) if os.path.isdir(os.path.join(CASES, x))]:
+            return
+        cid = _new_case_id()
+        os.makedirs(os.path.join(CASES, cid, "uploads"))
+        save_meta({"id": cid, "title": "Demo — cross-platform attack (Windows + Linux + AWS)", "created": _now(), "created_by": "system",
+                   "description": "Simulated attack: RDP brute force on Windows, SSH compromise on Linux, stolen AWS key abused in the cloud, "
+                                  "plus an exposed AWS account state.", "status": "new",
+                   "config": {k: fw_config.DEFAULT_CASE[k] for k in CFG_KEYS}, "evidence": []})
+    j = Job(cid, "sample", "system")
+    JOBS[j.id] = j
+
+    def run():
+        try:
+            j.result = _job_sample(j, cid, {"name": "Demo Analyst"}, scenario="S1_cloud", analyze=True)
+            j.status = "done"
+        except Exception as e:
+            j.status, j.error = "failed", str(e)
+        j.ended = _now()
+    threading.Thread(target=run, daemon=True).start()
+
+
+_seed_demo()
 
 
 def main():

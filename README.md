@@ -10,12 +10,12 @@ timeline me jodta hai, aur har step ka hash-based chain of custody rakhta hai.
 > **Version note (7 Oct 2026):** `correlate.py`, `pipeline.py`, `main.py`, `cloudstate.py`, `make_dashboard.py` aur `tests/test_rules_and_pipeline.py` dobara likhe gaye (purani zip ki ye files kharab ho gayi thi). Is README ke saare numbers isi version ko dobara chala ke liye gaye hain (`main.py evaluate`, `main.py real-eval`, `main.py selftest`, `main.py triage`).
 
 
-**🖥️ Live web console (Render):** https://cp-dfir-console.onrender.com/ (login: `demo`; free plan, pehli baar khulne me ~50 sec lag sakte hain)
+## 🔗 Live: https://cp-dfir-console.onrender.com/
 
-**🌐 Live demo (GitHub Pages):** https://jayveerv.github.io/DFIR-Framework-WebApp/
-- Research dashboard: https://jayveerv.github.io/DFIR-Framework-WebApp/results/dashboard.html
-- Evaluation report: https://jayveerv.github.io/DFIR-Framework-WebApp/results/evaluation_report.html
-- Sample forensic report: https://jayveerv.github.io/DFIR-Framework-WebApp/cases/DEMO/report.html
+Ek hi link me sab kuch: **Try demo** (bina password) ya `demo` login → pehle se analysed demo case, apne cases (upload / sample scenario → Analyse),
+investigation graph, MITRE, cloud posture, chain of custody (verify + tamper demo), report download, aur **Framework evaluation** ke 7 pages
+(overview, detection accuracy, evidence integrity, cloud forensics, scalability, real-world validation, ATT&CK coverage).
+Free plan: pehli baar khulne me ~50 sec lag sakte hain; server restart par demo data reset hota hai.
 
 **Web console ko online deploy karna (Render.com, free):** repo me `render.yaml` hai. Render pe *New → Blueprint* → is repo ko chuno →
 `DFIR_ADMIN_PASSWORD` set karo (login: `demo` / wahi password). Public mode me live triage / SSH / Windows export band rehte hain.
@@ -44,7 +44,7 @@ Linux/macOS: `./run_webapp.sh` (ya `python webapp/app.py`).
 | **Chain of custody** | **Verify now** button, HMAC-signed ledger blocks, anchor hash (case folder ke **bahar** rakha jata hai), **tampering demo** (file badlo → TAMPERING DETECTED → restore) |
 | **Report & export** | Framework ki HTML report, timeline.csv, events/incidents JSON, ledger, poora case bundle (.zip) |
 | **Activity log** | Kisne kya kiya: upload (hash ke saath), collectors, analysis, verify, export |
-| Research results | `results/` ka evaluation dashboard aur reports |
+| Framework evaluation | 7 native pages: overview, accuracy, integrity, cloud, scalability, real-world validation, ATT&CK coverage (`results/*.json` se) |
 | System & self-test | Environment, 46 unit tests ek click me, password change |
 | Users & audit | (admin) analysts add/remove, global audit log (logins, failed logins), case delete |
 
@@ -216,7 +216,7 @@ Poori detail `results/real_data_report.html`. Data GitHub se download hota hai (
 
 ---
 
-## 5. Kya measure NAHI hua (thesis aur viva me sach bolna)
+## 5. Kya measure NAHI hua (limitations)
 
 1. **Asli benign traffic par false-positive rate** measure nahi hua: koi labelled asli benign log available nahi tha.
 2. **Asli multi-platform incident par correlation** measure nahi hua: koi public dataset me ek incident ke asli Windows + Linux + AWS logs nahi hain. Cross-platform correlation sirf **simulated** scenarios par evaluate hua.

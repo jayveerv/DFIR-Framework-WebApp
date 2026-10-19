@@ -56,14 +56,6 @@
    "severity": "High",
    "entities": [
     {
-     "id": "cred:web01:/home/ubuntu/.aws/credentials",
-     "kind": "cred",
-     "platforms": [
-      "linux"
-     ],
-     "events": 1
-    },
-    {
      "id": "key:AKIAQ3EXAMPLEAPP0001",
      "kind": "key",
      "platforms": [
@@ -83,6 +75,14 @@
      "events": 38
     },
     {
+     "id": "cred:web01:/home/ubuntu/.aws/credentials",
+     "kind": "cred",
+     "platforms": [
+      "linux"
+     ],
+     "events": 1
+    },
+    {
      "id": "key:AKIAQ3EXAMPLENEW0002",
      "kind": "key",
      "platforms": [
@@ -93,14 +93,8 @@
    ],
    "links": [
     {
-     "a": "cred:web01:/home/ubuntu/.aws/credentials",
-     "b": "ip:203.0.113.45",
-     "reason": "credential file read in session",
-     "events": 1
-    },
-    {
-     "a": "cred:web01:/home/ubuntu/.aws/credentials",
-     "b": "key:AKIAQ3EXAMPLEAPP0001",
+     "a": "key:AKIAQ3EXAMPLEAPP0001",
+     "b": "cred:web01:/home/ubuntu/.aws/credentials",
      "reason": "credential inventory (file holds key)",
      "events": 1
     },
@@ -114,6 +108,12 @@
      "a": "key:AKIAQ3EXAMPLEAPP0001",
      "b": "key:AKIAQ3EXAMPLENEW0002",
      "reason": "key created by key",
+     "events": 1
+    },
+    {
+     "a": "ip:203.0.113.45",
+     "b": "cred:web01:/home/ubuntu/.aws/credentials",
+     "reason": "credential file read in session",
      "events": 1
     },
     {
