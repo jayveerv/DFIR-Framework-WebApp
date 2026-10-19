@@ -114,7 +114,6 @@ async function route() {
   if (h[0] === "login" || h[0] === "setup" || !h[0]) { location.hash = "#/cases"; return; }
   if (h[0] === "c" && h[1]) return openCase(h[1], false, h[2] || "overview");
   S.cid = null; S.case = null; S.res = null;
-  if (h[0] === "research") return shell(viewResearch, "research", "Research results");
   if (h[0] === "system") return shell(viewSystem, "system", "System & self-test");
   if (h[0] === "users") return shell(viewUsers, "users", "Users & audit log");
   return shell(viewCases, "cases", "Cases");
@@ -163,7 +162,7 @@ function navHtml(active) {
     ${a(b + "explorer", "exp", "Evidence explorer", "explorer", lr.events != null ? fmt(lr.events) : null)}
     ${a(b + "custody", "cus", "Chain of custody", "custody")}${a(b + "report", "rep", "Report &amp; export", "report")}${a(b + "activity", "act", "Activity log", "activity")}`;
   }
-  h += `<div class="grp">Framework</div>${a("#/research", "res", "Research results", "research")}${a("#/system", "sys", "System &amp; self-test", "system")}
+  h += `<div class="grp">Framework</div>${a("#/system", "sys", "System &amp; self-test", "system")}
   ${u.role === "admin" ? a("#/users", "usr", "Users &amp; audit", "users") : ""}
   <div class="foot">${esc(S.sess.app)} v${esc(S.sess.version)}<br>Developed by Jayveer Vasava${S.sess.public_mode ? '<br><span class="warn">Public demo mode</span>' : ""}</div>`;
   return h;
