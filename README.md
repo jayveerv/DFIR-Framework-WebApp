@@ -10,6 +10,8 @@ timeline me jodta hai, aur har step ka hash-based chain of custody rakhta hai.
 > **Version note (7 Oct 2026):** `correlate.py`, `pipeline.py`, `main.py`, `cloudstate.py`, `make_dashboard.py` aur `tests/test_rules_and_pipeline.py` dobara likhe gaye (purani zip ki ye files kharab ho gayi thi). Is README ke saare numbers isi version ko dobara chala ke liye gaye hain (`main.py evaluate`, `main.py real-eval`, `main.py selftest`, `main.py triage`).
 
 
+**🖥️ Live web console (Render):** https://cp-dfir-console.onrender.com/ (login: `demo`; free plan, pehli baar khulne me ~50 sec lag sakte hain)
+
 **🌐 Live demo (GitHub Pages):** https://jayveerv.github.io/DFIR-Framework-WebApp/
 - Research dashboard: https://jayveerv.github.io/DFIR-Framework-WebApp/results/dashboard.html
 - Evaluation report: https://jayveerv.github.io/DFIR-Framework-WebApp/results/evaluation_report.html
