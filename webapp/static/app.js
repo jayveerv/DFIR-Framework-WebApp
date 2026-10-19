@@ -123,7 +123,7 @@ async function route() {
 /* ---------------------------------------------------------------- auth */
 function authPage(inner) {
   $("#app").innerHTML = `<div class="auth"><div class="authbox"><div class="authlogo">${LOGO.replace('width="34" height="34"', 'width="46" height="46"')}<div><b>CP-DFIR</b><small>Investigation Console</small></div></div>
-  <div class="card">${inner}</div><div class="ttlbig">${esc(TITLE)}<br>M.Tech Cyber Security · Parul University</div></div></div>`;
+  <div class="card">${inner}</div><div class="ttlbig">${esc(TITLE)}</div></div></div>`;
 }
 function viewLogin() {
   authPage(`<h2>Analyst sign in</h2><div class="sub">Every action you take is recorded in the case activity log and the chain-of-custody ledger.</div>
@@ -165,7 +165,7 @@ function navHtml(active) {
   }
   h += `<div class="grp">Framework</div>${a("#/research", "res", "Research results", "research")}${a("#/system", "sys", "System &amp; self-test", "system")}
   ${u.role === "admin" ? a("#/users", "usr", "Users &amp; audit", "users") : ""}
-  <div class="foot">${esc(S.sess.app)} v${esc(S.sess.version)}<br>Jayveer Vasava · M.Tech CSE (Cyber Security)<br>Parul University${S.sess.public_mode ? '<br><span class="warn">Public demo mode</span>' : ""}</div>`;
+  <div class="foot">${esc(S.sess.app)} v${esc(S.sess.version)}<br>Developed by Jayveer Vasava${S.sess.public_mode ? '<br><span class="warn">Public demo mode</span>' : ""}</div>`;
   return h;
 }
 function shell(view, active, crumb) {
@@ -628,7 +628,7 @@ function actDetail(x) {
 async function viewResearch(v) {
   const info = await api("GET", "/api/system/info");
   const N = {"dashboard.html":"Evaluation dashboard", "evaluation_report.html":"Evaluation report (simulated)", "real_data_report.html":"Real-data validation"};
-  v.innerHTML = head("Phase-II evaluation", "Research results", "Results of the framework's evaluation (python main.py evaluate / real-eval): precision, recall and F1 on simulated scenarios, tampering tests, scalability, and validation on real public datasets.");
+  v.innerHTML = head("Framework evaluation", "Research results", "Results of the framework's evaluation (python main.py evaluate / real-eval): precision, recall and F1 on simulated scenarios, tampering tests, scalability, and validation on real public datasets.");
   if (!info.research.length) { v.innerHTML += `<div class="card empty"><div class="big">No results yet</div><div class="note">Run <span class="mono">python main.py evaluate</span> and <span class="mono">python main.py real-eval</span>.</div></div>`; return; }
   v.innerHTML += `<div class="card" style="margin-bottom:14px"><div class="chips" id="rch">${info.research.map((n, i) => `<span class="chip ${i ? "" : "on"}" data-n="${n}">${N[n]}</span>`).join("")}<a class="btn sm" id="rop" target="_blank" style="margin-left:auto">${ic("ext", 12)} Open in new tab</a></div></div>
   <iframe class="rep" id="rif" style="height:80vh;background:var(--bg)"></iframe>`;

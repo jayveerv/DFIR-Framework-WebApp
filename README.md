@@ -1,7 +1,7 @@
-# Cross-Platform DFIR Framework (Phase-II Implementation)
+# Cross-Platform DFIR Framework
 
 **Title:** A Scalable Cross-Platform DFIR Framework for Automated Evidence Collection, Correlation, and Cloud Forensic Investigation
-**Student:** Jayveer Vasava (2503032330032) | **Guides:** Dr. Ankita Gandhi, Dr. Kruti Kamal Sutaria
+**Author:** Jayveer Vasava
 
 Windows, Linux aur AWS ke logs se evidence collect karta hai, ek common format me laata hai, alag-alag platforms ke events ko ek attack
 timeline me jodta hai, aur har step ka hash-based chain of custody rakhta hai.
@@ -65,7 +65,7 @@ Files: `webapp/app.py` (Flask backend, framework ko bina badle use karta hai), `
 ## 0. Sundar Dashboard (sabse pehle ye dekho)
 
 **`view_dashboard.bat`** par double-click karo — **CP-DFIR Investigation Console** browser me
-khulega (dark SOC-style, internet ki zarurat nahi). Left menu dissertation title ke hisaab se hai:
+khulega (dark SOC-style, internet ki zarurat nahi). Left menu framework ke hisaab se hai:
 
 | Menu | Kya dikhata hai |
 |---|---|

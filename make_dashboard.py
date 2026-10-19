@@ -2,7 +2,7 @@
 
 Reads results/evaluation.json (python main.py evaluate), the simulated cases in cases/ and, if present,
 results/real_data_results.json (python main.py real-eval), and writes results/dashboard.html.
-The page is organised around the dissertation title: automated evidence collection, cross-platform correlation,
+The page is organised around the framework: automated evidence collection, cross-platform correlation,
 cloud forensic investigation and scalability, plus chain of custody, MITRE ATT&CK coverage and real-data validation.
 Every number on the page is read from those result files; nothing is typed in by hand.
 
@@ -26,9 +26,9 @@ from custody import CustodyLedger  # noqa: E402
 TITLE = ("A Scalable Cross-Platform DFIR Framework for Automated Evidence Collection, "
          "Correlation, and Cloud Forensic Investigation")
 AUTHOR = "Jayveer Vasava"
-ENROL = "2503032330032"
-PROGRAM = "M.Tech CSE (Cyber Security), PIET, Parul University"
-GUIDES = "Guide: Dr. Ankita Gandhi · Co-guide: Dr. Kruti Kamal Sutaria"
+ENROL = ""
+PROGRAM = ""
+GUIDES = ""
 
 # MITRE ATT&CK technique -> (tactic shown in the matrix, technique name). Techniques with several tactics are
 # placed under the tactic in which the framework's rules use them.
@@ -465,8 +465,8 @@ function kpi(v,l,s,c,icon){return `<div class="card kpi" style="--c:${c}"><div c
 function sOverview(){
  const K=D.kpi, s1=D.cases.S1;
  const t=D.meta.title.replace("Scalable","<em>Scalable</em>").replace("Cross-Platform","<em>Cross-Platform</em>").replace("Cloud Forensic Investigation","<em>Cloud Forensic Investigation</em>");
- let h=`<div class="card hero"><div class="kw">M.Tech Dissertation · Phase II · Implementation & Evaluation</div><h2>${t}</h2>
- <div class="by">${esc(D.meta.author)} (${esc(D.meta.enrol)}) · ${esc(D.meta.program)} · ${esc(D.meta.guides)}</div>${flowSvg()}</div>`;
+ let h=`<div class="card hero"><div class="kw">Cross-platform DFIR · Windows · Linux · AWS · Evaluation results</div><h2>${t}</h2>
+ <div class="by">Automated evidence collection, cross-platform correlation, cloud forensics and a tamper-evident chain of custody</div>${flowSvg()}</div>`;
  h+=`<div class="g g4" style="margin-top:16px">`+
   kpi(f3(K.f1),"Correlation F1 · core scenarios S1–S4",`precision ${pct(K.p)} · recall ${pct(K.r)}`,"var(--cy)","tgt")+
   kpi(`${K.tam_ok}/${K.tam_n}`,"Tampering attacks detected",`${K.ctl_ok}/${K.ctl_n} untouched cases verified clean`,"var(--gr)","cus")+
@@ -775,7 +775,7 @@ $("#ttl").innerHTML=`<b>${esc(D.meta.title)}</b>`;
 $("#pillPl").innerHTML=`${ic("cor",13)} Windows · Linux · AWS`;
 $("#pillCu").lastElementChild.textContent=`Custody ${D.ledger_ok===false?"FAILED":"verified"} · ${D.kpi.tam_ok}/${D.kpi.tam_n} tamper tests`;
 let nav="",g="";SECTIONS.forEach(s=>{if(s.grp!=g){g=s.grp;nav+=`<div class="grp">${g}</div>`}nav+=`<a href="#${s.id}" data-s="${s.id}">${ic(s.ico)}${s.nav}</a>`});
-nav+=`<div class="who"><b>${esc(D.meta.author)}</b><br>${esc(D.meta.enrol)}<br>${esc(D.meta.program)}<br><br>Evaluation run<br><span class="mono">${esc(D.meta.evaluated)}</span><br>Python ${esc(D.meta.python)} · ${esc(D.meta.system)}</div>`;
+nav+=`<div class="who">Evaluation run<br><span class="mono">${esc(D.meta.evaluated)}</span><br>Python ${esc(D.meta.python)} · ${esc(D.meta.system)}</div>`;
 $("#nav").innerHTML=nav;
 $("#main").innerHTML=SECTIONS.map(s=>`<section id="sec-${s.id}">${R[s.id]()}<div class="foot">Generated ${esc(D.meta.built)} by make_dashboard.py from results/evaluation.json, results/real_data_results.json and cases/. Works offline.</div></section>`).join("");
 function animate(sec){sec.querySelectorAll(".bar i").forEach(b=>{b.style.width="0";requestAnimationFrame(()=>requestAnimationFrame(()=>b.style.width=b.dataset.w+"%"))});
