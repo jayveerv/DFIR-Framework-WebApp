@@ -68,11 +68,16 @@ for d in (DATA, CASES, TMP):
 
 # Durable storage for hosts with a temporary disk: mirror the data folder into PostgreSQL (see persist.py).
 MIRROR = None
-if os.environ.get("DATABASE_URL"):
-    from persist import Mirror
-    MIRROR = Mirror(os.environ["DATABASE_URL"], DATA)
-    MIRROR.restore()
-    MIRROR.start()
+STORAGE_ERROR = None
+if (os.environ.get("DATABASE_URL") or "").strip():
+    try:
+        from persist import Mirror
+        MIRROR = Mirror("".join(os.environ["DATABASE_URL"].split()), DATA)   # tolerate line breaks pasted into the variable
+        MIRROR.restore()
+        MIRROR.start()
+    except Exception as e:                       # never refuse to start: fall back to the local disk and say so
+        MIRROR, STORAGE_ERROR = None, f"database storage unavailable ({type(e).__name__}): cases are kept on the local disk only"
+        print("  Storage  " + STORAGE_ERROR)
 
 
 def _now():
@@ -1464,7 +1469,7 @@ def api_info():
             mods[mname] = getattr(mod, "__version__", "installed")
         except ImportError:
             mods[mname] = None
-    st = {"backend": "local disk (data folder)"}
+    st = {"backend": "local disk (data folder)", "last_error": STORAGE_ERROR}
     if MIRROR:
         try:
             st = MIRROR.status()
