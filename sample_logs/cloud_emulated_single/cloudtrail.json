@@ -5,7 +5,7 @@
    "userIdentity": {
     "type": "IAMUser",
     "userName": "app-uploader",
-    "accessKeyId": "AKIARZPUZDIKKBDGDLWY"
+    "accessKeyId": "AKIARZPUZDIKHZCHO2HK"
    },
    "eventTime": "2026-09-20T09:40:00Z",
    "eventSource": "sts.amazonaws.com",
@@ -23,7 +23,7 @@
    "userIdentity": {
     "type": "IAMUser",
     "userName": "app-uploader",
-    "accessKeyId": "AKIARZPUZDIKKBDGDLWY"
+    "accessKeyId": "AKIARZPUZDIKHZCHO2HK"
    },
    "eventTime": "2026-09-20T09:40:40Z",
    "eventSource": "s3.amazonaws.com",
@@ -41,7 +41,7 @@
    "userIdentity": {
     "type": "IAMUser",
     "userName": "app-uploader",
-    "accessKeyId": "AKIARZPUZDIKKBDGDLWY"
+    "accessKeyId": "AKIARZPUZDIKHZCHO2HK"
    },
    "eventTime": "2026-09-20T09:42:00Z",
    "eventSource": "iam.amazonaws.com",

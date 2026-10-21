@@ -24,26 +24,26 @@
    "severity": "High",
    "entities": [
     {
-     "id": "cred:web01:/home/ubuntu/.aws/credentials",
-     "kind": "cred",
-     "platforms": [
-      "linux"
-     ],
-     "events": 1
-    },
-    {
      "id": "ip:203.0.113.45",
      "kind": "ip",
      "platforms": [
       "linux"
      ],
      "events": 9
+    },
+    {
+     "id": "cred:web01:/home/ubuntu/.aws/credentials",
+     "kind": "cred",
+     "platforms": [
+      "linux"
+     ],
+     "events": 1
     }
    ],
    "links": [
     {
-     "a": "cred:web01:/home/ubuntu/.aws/credentials",
-     "b": "ip:203.0.113.45",
+     "a": "ip:203.0.113.45",
+     "b": "cred:web01:/home/ubuntu/.aws/credentials",
      "reason": "credential file read in session",
      "events": 1
     }

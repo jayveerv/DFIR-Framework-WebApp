@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-07T06:00:03.044133+00:00",
+ "generated": "2026-10-21T10:08:51.652191+00:00",
  "python": "3.13.16",
  "system": "Linux",
  "scenarios": [
@@ -81,13 +81,13 @@
     }
    ],
    "timings": {
-    "acquisition": 0.0012418109999998705,
-    "normalization": 0.010553253000125551,
-    "correlation": 0.004701588999978412,
-    "output_and_custody": 0.0063227000000551925,
-    "custody_verification": 0.0005911569999170752,
-    "reporting": 0.0015534889998889412,
-    "total": 0.025483628999836583
+    "acquisition": 0.0019415110000409186,
+    "normalization": 0.01381395699991117,
+    "correlation": 0.006682668000394187,
+    "output_and_custody": 0.009999200000493147,
+    "custody_verification": 0.0006473489993368275,
+    "reporting": 0.00267976000031922,
+    "total": 0.036864265999611234
    },
    "sources_processed": 3,
    "report": "../cases/S1/report.html"
@@ -170,13 +170,13 @@
     }
    ],
    "timings": {
-    "acquisition": 0.0009377210001275671,
-    "normalization": 0.006916021999813893,
-    "correlation": 0.003595446999952401,
-    "output_and_custody": 0.00565540399998099,
-    "custody_verification": 0.0005072169999493781,
-    "reporting": 0.0015910330000679096,
-    "total": 0.019428145000119912
+    "acquisition": 0.001275769000130822,
+    "normalization": 0.008999079999739479,
+    "correlation": 0.004320717999689805,
+    "output_and_custody": 0.008082471000307123,
+    "custody_verification": 0.0006061479998606956,
+    "reporting": 0.002174632000787824,
+    "total": 0.025762842999938584
    },
    "sources_processed": 3,
    "report": "../cases/S2/report.html"
@@ -264,13 +264,13 @@
     }
    ],
    "timings": {
-    "acquisition": 0.0009396689999903174,
-    "normalization": 0.0076016900000013266,
-    "correlation": 0.0038653269998576434,
-    "output_and_custody": 0.006073151000009602,
-    "custody_verification": 0.0004966789999798493,
-    "reporting": 0.001690933000190853,
-    "total": 0.020866850999937014
+    "acquisition": 0.001097655999728886,
+    "normalization": 0.009747748000336287,
+    "correlation": 0.0053058740004416904,
+    "output_and_custody": 0.00905757700002141,
+    "custody_verification": 0.0006349470004352042,
+    "reporting": 0.0024923860000853892,
+    "total": 0.028704437999294896
    },
    "sources_processed": 3,
    "report": "../cases/S3/report.html"
@@ -347,13 +347,13 @@
     }
    ],
    "timings": {
-    "acquisition": 0.0008791850000307022,
-    "normalization": 0.006554639999876599,
-    "correlation": 0.002723555000102351,
-    "output_and_custody": 0.004347879000079047,
-    "custody_verification": 0.00042002800000773277,
-    "reporting": 0.0008100800000647723,
-    "total": 0.015904378999948676
+    "acquisition": 0.0012657990000661812,
+    "normalization": 0.00860661499973503,
+    "correlation": 0.003821495999545732,
+    "output_and_custody": 0.006578902000001108,
+    "custody_verification": 0.0005323289997249958,
+    "reporting": 0.0013406569996732287,
+    "total": 0.02239842699964356
    },
    "sources_processed": 3,
    "report": "../cases/S4/report.html"
@@ -441,13 +441,13 @@
     }
    ],
    "timings": {
-    "acquisition": 0.0008626310000181547,
-    "normalization": 0.0066566469999997935,
-    "correlation": 0.0030380649998278386,
-    "output_and_custody": 0.0052163240000027145,
-    "custody_verification": 0.0004565869999169081,
-    "reporting": 0.0012289839999084506,
-    "total": 0.017637302000139243
+    "acquisition": 0.0012763479999193805,
+    "normalization": 0.008927185000175086,
+    "correlation": 0.0035786749995168066,
+    "output_and_custody": 0.007764119999592367,
+    "custody_verification": 0.0006367199994201655,
+    "reporting": 0.001984563999940292,
+    "total": 0.02444705900052213
    },
    "sources_processed": 3,
    "report": "../cases/S5/report.html"
@@ -575,11 +575,11 @@
     "root_mfa_missing": 1,
     "admin_without_mfa": 1,
     "stale_access_key": 3,
+    "role_trusts_external_account": 1,
     "trail_logging_off": 1,
     "sg_world_open_admin_port": 3,
     "trail_no_log_validation": 1,
     "role_trusts_anyone": 1,
-    "role_trusts_external_account": 1,
     "public_bucket": 1,
     "bucket_public_access_not_blocked": 1
    },
@@ -591,7 +591,7 @@
    "incidents": 0,
    "custody": true,
    "errors": 0,
-   "api_operations": 21,
+   "api_operations": 20,
    "read_only": true,
    "limited": [
     "security_groups"
@@ -614,10 +614,10 @@
     "root_mfa_missing": 1,
     "admin_without_mfa": 1,
     "stale_access_key": 3,
+    "role_trusts_external_account": 1,
     "trail_logging_off": 1,
     "trail_no_log_validation": 1,
     "role_trusts_anyone": 1,
-    "role_trusts_external_account": 1,
     "public_bucket": 1,
     "bucket_public_access_not_blocked": 1,
     "sg_world_open_admin_port": 4
@@ -630,7 +630,7 @@
    "incidents": 0,
    "custody": true,
    "errors": 0,
-   "api_operations": 22,
+   "api_operations": 21,
    "read_only": true,
    "limited": []
   },
@@ -661,12 +661,12 @@
   {
    "records": 1067,
    "events": 913,
-   "acquisition": 0.001624284999934389,
-   "normalization": 0.024381659000027867,
-   "correlation": 0.013303778000135935,
-   "custody": 0.02078266200010148,
-   "total": 0.06009238400019967,
-   "throughput": 17755.99383769588,
+   "acquisition": 0.0019783010002356605,
+   "normalization": 0.02517698500014376,
+   "correlation": 0.014564905000042927,
+   "custody": 0.024527634998776193,
+   "total": 0.06624782599919854,
+   "throughput": 16106.188903661661,
    "f1": 1.0,
    "incidents": 1,
    "completeness": 1.0
@@ -674,12 +674,12 @@
   {
    "records": 5241,
    "events": 4428,
-   "acquisition": 0.006797431999984838,
-   "normalization": 0.1182635500001652,
-   "correlation": 0.06373681800005215,
-   "custody": 0.09265871299999162,
-   "total": 0.2814565130001938,
-   "throughput": 18620.993858459373,
+   "acquisition": 0.0064004739997471916,
+   "normalization": 0.12190615300005447,
+   "correlation": 0.07093500200062408,
+   "custody": 0.1076297079998767,
+   "total": 0.30687133700030245,
+   "throughput": 17078.818931840593,
    "f1": 1.0,
    "incidents": 1,
    "completeness": 1.0
@@ -687,12 +687,12 @@
   {
    "records": 10375,
    "events": 8692,
-   "acquisition": 0.012849173999939012,
-   "normalization": 0.23342864699998245,
-   "correlation": 0.13874663199999304,
-   "custody": 0.19170890800000961,
-   "total": 0.5767333609999241,
-   "throughput": 17989.248934745367,
+   "acquisition": 0.011643275999631442,
+   "normalization": 0.2585176849997879,
+   "correlation": 0.18606060900037846,
+   "custody": 0.19974080399970262,
+   "total": 0.6559623739995004,
+   "throughput": 15816.45596033516,
    "f1": 1.0,
    "incidents": 1,
    "completeness": 1.0
@@ -700,12 +700,12 @@
   {
    "records": 52218,
    "events": 44121,
-   "acquisition": 0.05699221600002602,
-   "normalization": 1.2003181780000887,
-   "correlation": 1.0876449489999231,
-   "custody": 0.9766562380000323,
-   "total": 3.32161158100007,
-   "throughput": 15720.68218291743,
+   "acquisition": 0.05551801399997203,
+   "normalization": 1.2338319540003795,
+   "correlation": 1.1917108490006285,
+   "custody": 0.9565267420002783,
+   "total": 3.4375875590012583,
+   "throughput": 15190.303986081213,
    "f1": 1.0,
    "incidents": 1,
    "completeness": 1.0
@@ -713,12 +713,12 @@
   {
    "records": 104634,
    "events": 88584,
-   "acquisition": 0.11024888600013583,
-   "normalization": 2.4058885809999992,
-   "correlation": 1.8186795710000752,
-   "custody": 1.914562554999975,
-   "total": 6.249379593000185,
-   "throughput": 16743.102006029305,
+   "acquisition": 0.112100934999944,
+   "normalization": 2.6205346890001238,
+   "correlation": 1.8281707360001747,
+   "custody": 1.6402126729999509,
+   "total": 6.201019033000193,
+   "throughput": 16873.67825242357,
    "f1": 1.0,
    "incidents": 1,
    "completeness": 1.0

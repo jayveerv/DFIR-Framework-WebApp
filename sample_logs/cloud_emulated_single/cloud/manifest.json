@@ -3,19 +3,19 @@
  "account": "123456789012",
  "region": "us-east-1",
  "all_regions": false,
- "started_utc": "2026-10-07T05:59:44Z",
- "finished_utc": "2026-10-07T05:59:45Z",
- "reference_time": "2027-04-25T05:59:44Z",
+ "started_utc": "2026-10-21T10:08:33Z",
+ "finished_utc": "2026-10-21T10:08:34Z",
+ "reference_time": "2027-05-09T10:08:33Z",
  "artifacts": [
   {
    "name": "identity.json",
-   "sha256": "0f2b7addeb049182bab24906ae398a932e0a8f11deea8962d412568cbaf7741f",
+   "sha256": "0a9734df19298f267c1760d94801203e18a3e9b2abcdcbaef92c248b4f207f27",
    "size": 158,
    "note": "caller identity and collection time"
   },
   {
    "name": "trails.json",
-   "sha256": "36b552a4fe34cb9a5ccfc9cd892fa68bb45ebb4b9fdc3be005c2ccdd89f7c65e",
+   "sha256": "2a265338a15ed260fc3ad20cec84ab764089d1740731105de921e1b0ab72803f",
    "size": 1125,
    "note": "CloudTrail trails and logging status"
   },
@@ -27,25 +27,25 @@
   },
   {
    "name": "iam_users.json",
-   "sha256": "8ca3856b73e82f5ab1c4ec2215d4a3be08be09ac6729a8514f11965c00b54cbd",
+   "sha256": "70bae7cffdaec43b71ac3cf8e7bb0182ee10e40ccb15f527e84071973df9792a",
    "size": 2561,
    "note": "IAM users, admin rights, MFA, access keys"
   },
   {
    "name": "iam_roles.json",
-   "sha256": "32a6d8b88122c9d07b35e29ad446dfaff5b5cf724521fc087e32a5b6078e94cc",
+   "sha256": "e251695c69f64e63e6dda3e3e6343036c8deb2d5e7d253d93ab42f14b659da61",
    "size": 1056,
    "note": "IAM roles and their trust policies"
   },
   {
    "name": "s3_buckets.json",
-   "sha256": "6ef62902e1de5ffe6dacf74798dfa37c819ae3b1d26129e0ffb5fbb3c27c2ba2",
-   "size": 2248,
+   "sha256": "791609321a0b8357a17bc0266bd2b0d0fcfec724f753a63e0038a68ab901cd75",
+   "size": 2236,
    "note": "S3 public access block and bucket policy status"
   },
   {
    "name": "security_groups.json",
-   "sha256": "18376babfdfb4f1c465271a9897b96f9cae304a8c864de46be4a97f1eebaa7f8",
+   "sha256": "9d3daa78c833e4a34199420b3586d5a8156ebdab4a46109782109d8b79e9e782",
    "size": 1658,
    "note": "security group inbound rules"
   }
@@ -70,7 +70,6 @@
   "ListBuckets",
   "GetPublicAccessBlock",
   "GetBucketPolicyStatus",
-  "GetBucketPolicy",
   "DescribeSecurityGroups"
  ],
  "errors": [],
