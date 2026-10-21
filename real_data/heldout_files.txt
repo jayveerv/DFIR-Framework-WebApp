@@ -1,0 +1,321 @@
+DeepBlueCLI/Powershell-Invoke-Obfuscation-encoding-menu.evtx
+DeepBlueCLI/Powershell-Invoke-Obfuscation-many.evtx
+DeepBlueCLI/Powershell-Invoke-Obfuscation-string-menu.evtx
+DeepBlueCLI/disablestop-eventlog.evtx
+DeepBlueCLI/eventlog-dac.evtx
+DeepBlueCLI/many-events-application.evtx
+DeepBlueCLI/many-events-security.evtx
+DeepBlueCLI/many-events-system.evtx
+DeepBlueCLI/metasploit-psexec-native-target-security.evtx
+DeepBlueCLI/metasploit-psexec-native-target-system.evtx
+DeepBlueCLI/metasploit-psexec-powershell-target-security.evtx
+DeepBlueCLI/metasploit-psexec-powershell-target-system.evtx
+DeepBlueCLI/metasploit-psexec-pwshpayload.evtx
+DeepBlueCLI/mimikatz-privesc-hashdump.evtx
+DeepBlueCLI/mimikatz-privilegedebug-tokenelevate-hashdump.evtx
+DeepBlueCLI/new-user-security.evtx
+DeepBlueCLI/password-spray.evtx
+DeepBlueCLI/powersploit-security.evtx
+DeepBlueCLI/powersploit-system.evtx
+DeepBlueCLI/psattack-security.evtx
+DeepBlueCLI/smb-password-guessing-security.evtx
+EVTX-to-MITRE-Attack/Antivirus/ID1116-1117-Defender threat detected.evtx
+EVTX-to-MITRE-Attack/Antivirus/ID1151-Defender health status.evtx
+EVTX-to-MITRE-Attack/EVTX_full_APT_attack_steps/ID11,13,17,18-PSexec as system execution.evtx
+EVTX-to-MITRE-Attack/EVTX_full_APT_attack_steps/ID4624,4688,5140,5145-Eternal Romance - MS17_010_psexec (GLOBAL).evtx
+EVTX-to-MITRE-Attack/EVTX_full_APT_attack_steps/ID4674,5142-Mimikatz print spool privileges requested.evtx
+EVTX-to-MITRE-Attack/EVTX_full_APT_attack_steps/ID4674,6416 New external device connected (PrintNightmare).evtx
+EVTX-to-MITRE-Attack/EVTX_full_APT_attack_steps/ID4688,4698,4699,5145,4624-ATexec remote trask creation (GLOBAL).evtx
+EVTX-to-MITRE-Attack/EVTX_full_APT_attack_steps/ID4688,5140,5145-WMIexec execution via SMB (GLOBAL).evtx
+EVTX-to-MITRE-Attack/EVTX_full_APT_attack_steps/ID4720,4698-Fortinet APT group abuse on Windows.evtx
+EVTX-to-MITRE-Attack/EVTX_full_APT_attack_steps/ID4742,4935,4662,4661,5137-DCshadow attack (GLOBAL) failed.evtx
+EVTX-to-MITRE-Attack/EVTX_full_APT_attack_steps/ID47x,4661-4662,5136,4688,4697-SAM the admin (CVE-2021-42287).evtx
+EVTX-to-MITRE-Attack/EVTX_full_APT_attack_steps/ID5140-5145,4688,4697-Encrypted payload deployed with service over SMB (GLOBAL).evtx
+EVTX-to-MITRE-Attack/EVTX_full_APT_attack_steps/ID5145-4624-DonPAPI full extraction.evtx
+EVTX-to-MITRE-Attack/TA0001-Initial access/T1078-Valid accounts/ID1149-RDP success logins to multiple hosts.evtx
+EVTX-to-MITRE-Attack/TA0001-Initial access/T1078-Valid accounts/ID33205-SQL Server failed login with disabled SA account.evtx
+EVTX-to-MITRE-Attack/TA0001-Initial access/T1078-Valid accounts/ID4625-failed login with denied access due to account restriction.evtx
+EVTX-to-MITRE-Attack/TA0002-Execution/T1047-Windows Management Instrumentation/ID1-WMI spwaning PowerShell process - WMImplant.evtx
+EVTX-to-MITRE-Attack/TA0002-Execution/T1047-Windows Management Instrumentation/ID1-WMIexec process execution.evtx
+EVTX-to-MITRE-Attack/TA0002-Execution/T1047-Windows Management Instrumentation/ID3-7-10-Suspicious DLL loaded (CME+Mimikatz).evtx
+EVTX-to-MITRE-Attack/TA0002-Execution/T1047-Windows Management Instrumentation/ID4688-5145-WMIexec execution via SMB.evtx
+EVTX-to-MITRE-Attack/TA0002-Execution/T1053.005-Scheduled Task/ID4688-4698 Persistent scheduled task with SYSTEM privileges creation.evtx
+EVTX-to-MITRE-Attack/TA0002-Execution/T1053.005-Scheduled Task/ID4688-Interactive shell using AT schedule task.evtx
+EVTX-to-MITRE-Attack/TA0002-Execution/T1053.005-Scheduled Task/ID4688-Scheduled task creation.evtx
+EVTX-to-MITRE-Attack/TA0002-Execution/T1053.005-Scheduled Task/ID4698-4699-Fast created & deleted task by ATexec (susp. arg.).evtx
+EVTX-to-MITRE-Attack/TA0002-Execution/T1053.005-Scheduled Task/ID4698-4699-Fast created & deleted task by SMBexec (sups. arg.).evtx
+EVTX-to-MITRE-Attack/TA0002-Execution/T1053.005-Scheduled Task/ID5145-Remote schedule task creation (ATexec).evtx
+EVTX-to-MITRE-Attack/TA0002-Execution/T1059.001-PowerShell/ID4103-4104-Payload download via PowerShell.evtx
+EVTX-to-MITRE-Attack/TA0002-Execution/T1059.001-PowerShell/ID4688-Encoded PowerShell MSF payload via process execution.evtx
+EVTX-to-MITRE-Attack/TA0002-Execution/T1059.001-PowerShell/ID800-4103-Interactive PipeShell over named pipe (server and client).evtx
+EVTX-to-MITRE-Attack/TA0002-Execution/T1059.003-Windows Command Shell/ID4688-SQL Server payload injectection for reverse shell (MSF).evtx
+EVTX-to-MITRE-Attack/TA0002-Execution/T1204-User execution/ID4688-Edge payload download via command.evtx
+EVTX-to-MITRE-Attack/TA0002-Execution/T1569.002-Service execution/ID5145-remote service creation over SMB.evtx
+EVTX-to-MITRE-Attack/TA0002-Execution/T1569.002-Service execution/ID5145-service massive remote creation via named pipe - Tchopper.evtx
+EVTX-to-MITRE-Attack/TA0002-Execution/T1569.002-Service execution/ID7000,7009,7045-Payload deployed via service - Tchopper.evtx
+EVTX-to-MITRE-Attack/TA0002-Execution/T1569.002-Service execution/ID7009-Service deployment time out (meterpreter).evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID33205-SQL Server member added to database role.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID33205-SQL Server member added to server role.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID33205-SQL Server user linked to a database.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4688-SPN added to an account.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4723-5145-password reset with changeNTLM (Mimikatz).evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4724-5145-password reset with setNTLM (Mimikatz).evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4728-4756-Member added to sensitive domain groups.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4728-Massive account group membership change.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4728-Member adding to a group by the same account.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4732-4733-Quick added-removed user from local group.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4732-DNSadmin new member added.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4732-User added to local admin groups.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4738,5136-SPN set on user account.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4738-Account is sensitive and cannot be delegated.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4738-Account with password not required.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4738-Do not require Kerberos preauthentication.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4738-Password cannot be changed.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4738-Password never expires.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4738-Use only Kerberos DES encryption types.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4738-User set with reversible psw encryption.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4742,5136-Enable Trust this computer for delegation (to any service, Kerberos only).evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4742,5136-Enable Trust this computer for delegation (to specified service, Kerberos only).evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4742,5136-Enable Trust this computer for delegation (to specified service, any protocol).evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4742,5136-SPN set on computer account.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4742-SPN set on computer account (DCshadow).evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4756-Exchange admin group change.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4781-4738-User renamed to admin or likely.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4781-Computer account renamed without a trailing $ (CVE-2021-42278).evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID5136-4662 AD object owner changed.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID5136-Computer account set for RBCD delegation.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1136-Create account/ID33205-SQL Server Disabled SA user activated.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1136-Create account/ID33205-SQL Server local user created.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1136-Create account/ID4688-User creation via commandline.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1136-Create account/ID472, 4728 Hidden user creation.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1136-Create account/ID4720-4726 Fast created-deleted user.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1136-Create account/ID4720-Admin like user created.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1136-Create account/ID4720-Fake computer account created.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1136-Create account/ID4720-Local user created.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1136-Create account/ID4722-Guest account activated.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1136-Create account/ID4741-Computer account created with privileges.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1136-Create account/ID4742-4743-Fast created & deleted computer account.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1197-BITS jobs/ID3-59-60-BITS job created.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1197-BITS jobs/ID4688-BITS transfer initiated.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1197-BITS jobs/ID60-High volume file downloaded with BITS.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1197-BITS jobs/ID800-4103-4104-PowerShell BITS job started.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1505-Server Software Component/ID11-Exchange transport config modified.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1505-Server Software Component/ID6-Failed to install an Exchange transport agent.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1505.001-SQL Stored Procedures/ID11715-SQL Server started in single mode for psw recovery.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1505.001-SQL Stored Procedures/ID15457-SQL Server CMDshell enabled.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1505.001-SQL Stored Procedures/ID15457-SQL server CLR lateral movement.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1505.001-SQL Stored Procedures/ID4688-SQL Server started in single mode for psw recovery.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1505.001-SQL Stored Procedures/ID4688-sqlcmd tool abuse in SQL Server.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1543.003-Create or Modify System Process-Windows Service/ID13-New service for Mimikatz.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1543.003-Create or Modify System Process-Windows Service/ID4688-4697 RDP hijack via service creation.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1543.003-Create or Modify System Process-Windows Service/ID4688-Command SC to create service on remote host.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1543.003-Create or Modify System Process-Windows Service/ID4688-Service abuse with Failure Command.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1543.003-Create or Modify System Process-Windows Service/ID4688-Service abuse with malicious path.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1543.003-Create or Modify System Process-Windows Service/ID4688-Service created (command).evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1543.003-Create or Modify System Process-Windows Service/ID4688-Service permissions modified (registry).evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1543.003-Create or Modify System Process-Windows Service/ID4688-Service permissions modified (sc).evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1543.003-Create or Modify System Process-Windows Service/ID4697-MSF payload deployed via service.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1543.003-Create or Modify System Process-Windows Service/ID4697-New service for Mimikatz.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1543.003-Create or Modify System Process-Windows Service/ID7045-4697-SMBexec service registration.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1543.003-Create or Modify System Process-Windows Service/ID7045-7036 PSexec service installation.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1543.003-Create or Modify System Process-Windows Service/ID7045-New service for Mimikatz +npcap.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1543.003-Create or Modify System Process-Windows Service/ID7045-Random service installation.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1543.003-Create or Modify System Process-Windows Service/ID800-4103-4104-Service abuse with Failure Command.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1543.003-Create or Modify System Process-Windows Service/ID800-4103-4104-Service abuse with malicious path.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1543.003-Create or Modify System Process-Windows Service/ID800-4103-4104-Service creation (PowerShell).evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1546-Event Triggered Execution/ID13-WMIimplant registry crash control.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1546-Event Triggered Execution/ID19-20-WMI registration via PowerLurk.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1546-Event Triggered Execution/ID4688-netsh helper DLL.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1546-Event Triggered Execution/ID5136-AdminSDholder backdoor obfuscation (via localizationDisplayId).evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1546-Event Triggered Execution/ID5136-AdminSDholder permissions changed.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1546-Event Triggered Execution/ID800-4103-4104-WMI registration via PowerLurk.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1547-Boot or Logon Autostart Execution/ID12-LSA Protect mode enabled RunAsPPL.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1547-Boot or Logon Autostart Execution/ID4622-New SSP loaded in LSA (only legitim).evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1547-Boot or Logon Autostart Execution/ID4664-symbolic link created.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1574-Hijack Execution Flow/ID150-Failed DLL loaded by DNS server.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1574-Hijack Execution Flow/ID4688-DNS DLL serverlevelplugindll command.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1574-Hijack Execution Flow/ID770-Success DLL loaded by DNS server.evtx
+EVTX-to-MITRE-Attack/TA0003-Persistence/T1574-Hijack Execution Flow/ID800-4103-4104-Print spooler privilege escalation (CVE-2020-1048).evtx
+EVTX-to-MITRE-Attack/TA0004-Privilege Escalation/T1068-Exploitation for Privilege Escalation/ID4673-Privilege SeMachineAccountPrivilege called.evtx
+EVTX-to-MITRE-Attack/TA0004-Privilege Escalation/T1134-Access Token Manipulation/ID4648-4624-RunAsCS login.evtx
+EVTX-to-MITRE-Attack/TA0004-Privilege Escalation/T1134-Access Token Manipulation/ID4688,4624-RottenPotatoNG.evtx
+EVTX-to-MITRE-Attack/TA0004-Privilege Escalation/T1134-Access Token Manipulation/ID4688,4648,4624-Runas execution with different user.evtx
+EVTX-to-MITRE-Attack/TA0004-Privilege Escalation/T1134-Access Token Manipulation/ID4704-4705-User righ assigned to account.evtx
+EVTX-to-MITRE-Attack/TA0004-Privilege Escalation/T1134-Access Token Manipulation/ID4717-4718-System security granded to account.evtx
+EVTX-to-MITRE-Attack/TA0004-Privilege Escalation/T1134.005-Access Token Manipulation SID-History Injection/ID 4765 - SID history added.evtx
+EVTX-to-MITRE-Attack/TA0004-Privilege Escalation/T1484-Domain or Tenant Policy Modification/ID 4865 4706 - trust added.evtx
+EVTX-to-MITRE-Attack/TA0004-Privilege Escalation/T1484.001-Domain Policy Modification-Group Policy Modification/ID5136-4662 sensitive GPO edited.evtx
+EVTX-to-MITRE-Attack/TA0004-Privilege Escalation/T1546-Image File Execution Options Injection/ID1-CMD executed via sticky key call.evtx
+EVTX-to-MITRE-Attack/TA0004-Privilege Escalation/T1546-Image File Execution Options Injection/ID11-New sethc file created from CMD copy.evtx
+EVTX-to-MITRE-Attack/TA0004-Privilege Escalation/T1546-Image File Execution Options Injection/ID12,13-Stickey key registry update.evtx
+EVTX-to-MITRE-Attack/TA0004-Privilege Escalation/T1546-Image File Execution Options Injection/ID4656-Failed sethc replacement by CMD.evtx
+EVTX-to-MITRE-Attack/TA0004-Privilege Escalation/T1546-Image File Execution Options Injection/ID4688-Stickey command reg update + execution.evtx
+EVTX-to-MITRE-Attack/TA0004-Privilege Escalation/T1574-DLL side-loading/1-Print spool spawned a CMD shell (PrintNightMare).evtx
+EVTX-to-MITRE-Attack/TA0004-Privilege Escalation/T1574-DLL side-loading/ID316,300,301,316,823,848-Mimispool printer server instal.evtx
+EVTX-to-MITRE-Attack/TA0004-Privilege Escalation/T1574-DLL side-loading/ID354-808-Mimispool printer installation (PrintNightmare).evtx
+EVTX-to-MITRE-Attack/TA0004-Privilege Escalation/T1574-DLL side-loading/ID4688,6416,4648-SystemNightMare.evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1027-Obfuscated Files or Information/4624,4674,4688- CrackMap Exec SMB mimikatz.evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1027-Obfuscated Files or Information/ID1-CrackMapExec payload execution.evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1027-Obfuscated Files or Information/ID400-800-CrackMapExec payload execution.evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1027-Obfuscated Files or Information/ID4103-4104-CrackMapExec payload execution.evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1027-Obfuscated Files or Information/ID4688-Obfuscated payload transfer via service name - Tchopper.evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1070.001-Clear Windows event logs/ID104-1102-Event log cleared.evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1070.001-Clear Windows event logs/ID4688-Clear event log attempt (native).evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1070.001-Clear Windows event logs/ID4688-Clear event log attempt (wmi).evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1070.001-Clear Windows event logs/ID800-4103-4104-Clear event log attempt.evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1070.006-Timestomp/ID4616-system time changed.evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1078.002-Valid accounts-Domain accounts/ID4964-Login of a member of a special group.evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1112-Modify registry/ID11,13-SMBexec service registration.evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1112-Modify registry/ID4624,4670,4688,4674-Registry permission change via WMI (DAMP).evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1112-Modify registry/ID800-4103-4104-Registry permission change via WMI (DAMP) PowerShell on source.evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1140-Deobfuscate-Decode Files or Information/ID4688-Certutil download.evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1207-Rogue domain controller/ID4662-Sensitive attributes accessed (DCshadow).evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1207-Rogue domain controller/ID5137-Fake domain controller registration (DCshadow).evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1222.001-File and Directory Permissions Modification/ID5124-OCSP security settings changed.evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1222.001-File and Directory Permissions Modification/ID5136-Permission change on OU by computer.evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1222.001-File and Directory Permissions Modification/ID5136-Permission change on OU by user.evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1222.001-File and Directory Permissions Modification/ID5136-Permission change on top root AD (DCsync).evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1222.001-File and Directory Permissions Modification/ID5136-Permissions changed on a GPO.evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1222.001-File and Directory Permissions Modification/ID5143-File share permissions changed.evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1553- Subvert Trust Controls/ID12-13 SIP provider registration.evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1555.004-Windows Credential Manager/ID 5376, 5379, 5382, 5381, 5382 credential manager and vault.evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.001-Impair Defenses-Disable or Modify tool/ID1-SYSMON driver unload (FilterManager).evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.001-Impair Defenses-Disable or Modify tool/ID13-Defender service configuration disabled.evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.001-Impair Defenses-Disable or Modify tool/ID4688-Defender critical features disabled (command).evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.001-Impair Defenses-Disable or Modify tool/ID4688-Defender service deactivation attempt.evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.001-Impair Defenses-Disable or Modify tool/ID5007-Defender threat exclusion (native).evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.001-Impair Defenses-Disable or Modify tool/ID8-Module Virtualization disabled (Credential Guard).evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.001-Impair Defenses-Disable or Modify tool/ID800-4103-4104 Defender critical features disabled (PowerShell).evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.001-Impair Defenses-Disable or Modify tool/ID800-4103-4104 Defender default action allow any (PowerShell).evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.001-Impair Defenses-Disable or Modify tool/ID800-4103-4104 Defender exclusion added (PowerShell).evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.002-Disable Windows Event Logging/ID33205-SQL Server  audit object disabled.evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.002-Disable Windows Event Logging/ID33205-SQL Server Database audit specification deleted.evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.002-Disable Windows Event Logging/ID33205-SQL Server Database audit specification disabled.evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.002-Disable Windows Event Logging/ID33205-SQL Server audit object deleted.evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.002-Disable Windows Event Logging/ID33205-SQL Server audit specification deleted.evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.002-Disable Windows Event Logging/ID33205-SQL Server audit specification disabled.evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.002-Disable Windows Event Logging/ID4688-Audit policy clear attempt.evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.002-Disable Windows Event Logging/ID4688-Audit policy deactivation attempt.evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.002-Disable Windows Event Logging/ID4719-Audit policy deactivation.evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.002-Disable Windows Event Logging/ID4739-Domain policy changed by non system account.evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.002-Disable Windows Event Logging/ID4885,4876,4877,5123,5124-ADCS PKI OCSP.evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.002-Disable Windows Event Logging/ID4908-Special group table changed.evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.002-Disable Windows Event Logging/ID541-DNS server auditing changed.evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.004-Impair Defenses-Disable or Modify System Firewall/ID2003-4950-Firewall disabled.evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.004-Impair Defenses-Disable or Modify System Firewall/ID2004-Any any firewall rule created.evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.004-Impair Defenses-Disable or Modify System Firewall/ID2004-New firewall rule created by PowerShell.evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.004-Impair Defenses-Disable or Modify System Firewall/ID4103-4104-2004-OpenSSH firewall rule activation.evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.004-Impair Defenses-Disable or Modify System Firewall/ID4688-5447-4950-Firewall disabled (command).evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.004-Impair Defenses-Disable or Modify System Firewall/ID800-4103-Firewall disabled.evtx
+EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1564-Hide artifacts/ID4688-Linux Subsystem installation (WSL).evtx
+EVTX-to-MITRE-Attack/TA0006-Credential Access/T1003-Credential dumping/ID1-12-13-Wdigest authentication activation.evtx
+EVTX-to-MITRE-Attack/TA0006-Credential Access/T1003-Credential dumping/ID1-LSASS dump with LSASSY (SYSMON).evtx
+EVTX-to-MITRE-Attack/TA0006-Credential Access/T1003-Credential dumping/ID10-Mimikatz LSASS process dump.evtx
+EVTX-to-MITRE-Attack/TA0006-Credential Access/T1003-Credential dumping/ID11-LSASS credentials dump via Task Manager.evtx
+EVTX-to-MITRE-Attack/TA0006-Credential Access/T1003-Credential dumping/ID11-Mimikatz LSA SSP clear text password exfiltration.evtx
+EVTX-to-MITRE-Attack/TA0006-Credential Access/T1003-Credential dumping/ID325-327-IFM created - ESENT.evtx
+EVTX-to-MITRE-Attack/TA0006-Credential Access/T1003-Credential dumping/ID4656, 5145, 4674-Impacket secret dump via SMB.evtx
+EVTX-to-MITRE-Attack/TA0006-Credential Access/T1003-Credential dumping/ID4656-4663-4658 Mimikatz sekurlsa password dump.evtx
+EVTX-to-MITRE-Attack/TA0006-Credential Access/T1003-Credential dumping/ID4661-4658 Mimikatz sekurlsa password dump SAM.evtx
+EVTX-to-MITRE-Attack/TA0006-Credential Access/T1003-Credential dumping/ID4661-Suspicious SAM access to password attributes by LSASS (Dcshadow).evtx
+EVTX-to-MITRE-Attack/TA0006-Credential Access/T1003-Credential dumping/ID4662-DCsync attack using Mimikatz.evtx
+EVTX-to-MITRE-Attack/TA0006-Credential Access/T1003-Credential dumping/ID4663-Task Manager used to dump LSASS process.evtx
+EVTX-to-MITRE-Attack/TA0006-Credential Access/T1003-Credential dumping/ID4688-4663-4656-LSASS dump with LSASSY (process).evtx
+EVTX-to-MITRE-Attack/TA0006-Credential Access/T1003-Credential dumping/ID4688-Diskshadow abuse.evtx
+EVTX-to-MITRE-Attack/TA0006-Credential Access/T1003-Credential dumping/ID4688-IFM created.evtx
+EVTX-to-MITRE-Attack/TA0006-Credential Access/T1003-Credential dumping/ID4688-Task Manager access indicator for potential LSASS dump.evtx
+EVTX-to-MITRE-Attack/TA0006-Credential Access/T1003-Credential dumping/ID4756-Exchange critical group change (DCsync).evtx
+EVTX-to-MITRE-Attack/TA0006-Credential Access/T1003-Credential dumping/ID4794-4688-DSRM password set with NTDSutil.evtx
+EVTX-to-MITRE-Attack/TA0006-Credential Access/T1003-Credential dumping/ID800-4103-4104-LSASS dump with LSASSY (PowerShell).evtx
+EVTX-to-MITRE-Attack/TA0006-Credential Access/T1040-Traffic sniffing/ID-4688 Native Windows sniffer Pktmon usage.evtx
+EVTX-to-MITRE-Attack/TA0006-Credential Access/T1110.xxx-Brut force/ID 4776,4625-AccountRestore local bruteforce.evtx
+EVTX-to-MITRE-Attack/TA0006-Credential Access/T1110.xxx-Brut force/ID18456-SQL Server failed login because only Windows auth.evtx
+EVTX-to-MITRE-Attack/TA0006-Credential Access/T1110.xxx-Brut force/ID33205-SQL Server failed login because only Windows auth.evtx
+EVTX-to-MITRE-Attack/TA0006-Credential Access/T1110.xxx-Brut force/ID33205-SQL Server failed login with SA wrong password.evtx
+EVTX-to-MITRE-Attack/TA0006-Credential Access/T1110.xxx-Brut force/ID33205-SQL Server failed login with non existing accounts.evtx
+EVTX-to-MITRE-Attack/TA0006-Credential Access/T1110.xxx-Brut force/ID4-OpenSSH brutforce with non existing users (sshd logs).evtx
+EVTX-to-MITRE-Attack/TA0006-Credential Access/T1110.xxx-Brut force/ID4-OpenSSH brutforce with valid users.evtx
+EVTX-to-MITRE-Attack/TA0006-Credential Access/T1110.xxx-Brut force/ID4625-OpenSSH brutforce with non existing users.evtx
+EVTX-to-MITRE-Attack/TA0006-Credential Access/T1110.xxx-Brut force/ID4625-OpenSSH brutforce with valid users.evtx
+EVTX-to-MITRE-Attack/TA0006-Credential Access/T1110.xxx-Brut force/ID4768-4771-Kerberos brutforce with non existing users.evtx
+EVTX-to-MITRE-Attack/TA0006-Credential Access/T1110.xxx-Brut force/ID4768-4771-Kerberos user enumeration (Kerbrute).evtx
+EVTX-to-MITRE-Attack/TA0006-Credential Access/T1110.xxx-Brut force/ID4771-Kerberos brutforce with valid user.evtx
+EVTX-to-MITRE-Attack/TA0006-Credential Access/T1552.004-Unsecured Credentials-Private Keys/ID70-CAPI-Private key accessed Mimikatz.evtx
+EVTX-to-MITRE-Attack/TA0006-Credential Access/T1555-Credentials from Password Stores/ID4662-Sensitve DPAPI attributes accessed.evtx
+EVTX-to-MITRE-Attack/TA0006-Credential Access/T1555-Credentials from Password Stores/ID5145-user file-credentials-browser dump via network share.evtx
+EVTX-to-MITRE-Attack/TA0006-Credential Access/T1557-Man in the middle/ID5145-Print spooler bug abuse.evtx
+EVTX-to-MITRE-Attack/TA0006-Credential Access/T1558-Steal or Forge Kerberos Tickets/ID4624-Success login with Golden ticket.evtx
+EVTX-to-MITRE-Attack/TA0006-Credential Access/T1558-Steal or Forge Kerberos Tickets/ID4768-4769-Kerberos host ticket without a trailing $.evtx
+EVTX-to-MITRE-Attack/TA0006-Credential Access/T1558-Steal or Forge Kerberos Tickets/ID4768-Kerberos AS-REP Roasting.evtx
+EVTX-to-MITRE-Attack/TA0006-Credential Access/T1558-Steal or Forge Kerberos Tickets/ID4769-Golden ticket issued.evtx
+EVTX-to-MITRE-Attack/TA0006-Credential Access/T1558-Steal or Forge Kerberos Tickets/ID4769-Kerberoast ticket with low encryption.evtx
+EVTX-to-MITRE-Attack/TA0007-Discovery/T1016-System Network Configuration Discovery/ID4688-Audit policy enumerated.evtx
+EVTX-to-MITRE-Attack/TA0007-Discovery/T1016-System Network Configuration Discovery/ID4688-Firewall configuration enumerated (command).evtx
+EVTX-to-MITRE-Attack/TA0007-Discovery/T1016-System Network Configuration Discovery/ID4688-Scheduled task configuration enumeration.evtx
+EVTX-to-MITRE-Attack/TA0007-Discovery/T1016-System Network Configuration Discovery/ID6004-DNS-server-failed zone transfer.evtx
+EVTX-to-MITRE-Attack/TA0007-Discovery/T1016-System Network Configuration Discovery/ID800-4103-4104-Firewall configuration enumerated (PowerShell).evtx
+EVTX-to-MITRE-Attack/TA0007-Discovery/T1018-Remote System Discovery/ID5145-DNS hosts files access via network share.evtx
+EVTX-to-MITRE-Attack/TA0007-Discovery/T1046-Network Service Scanning/ID131-RDP brutforce (no user info).evtx
+EVTX-to-MITRE-Attack/TA0007-Discovery/T1046-Network Service Scanning/ID4624-Anonymous login with domain specified (DonPapi).evtx
+EVTX-to-MITRE-Attack/TA0007-Discovery/T1069-Permission Groups Discovery/ID4661-Local group enumeration with RID brutforce with CME.evtx
+EVTX-to-MITRE-Attack/TA0007-Discovery/T1069-Permission Groups Discovery/ID4661-SAM sensitive domain users & groups discovery.evtx
+EVTX-to-MITRE-Attack/TA0007-Discovery/T1069-Permission Groups Discovery/ID4662-Domain group enumeration CME.evtx
+EVTX-to-MITRE-Attack/TA0007-Discovery/T1069-Permission Groups Discovery/ID4688-Group discovery via commandline.evtx
+EVTX-to-MITRE-Attack/TA0007-Discovery/T1069-Permission Groups Discovery/ID4799-4624-Local admin group enumerated by SharpHound.evtx
+EVTX-to-MITRE-Attack/TA0007-Discovery/T1069-Permission Groups Discovery/ID800-4103-4104-Domain group discovery via PowerShell.evtx
+EVTX-to-MITRE-Attack/TA0007-Discovery/T1069-Permission Groups Discovery/ID800-4103-4104-Local group discovery via PowerShell.evtx.evtx
+EVTX-to-MITRE-Attack/TA0007-Discovery/T1087-Account discovery/ID1-SPN discovery (SYSMON process).evtx
+EVTX-to-MITRE-Attack/TA0007-Discovery/T1087-Account discovery/ID4103-4104 - SPN discovery (moder nPowerShell).evtx
+EVTX-to-MITRE-Attack/TA0007-Discovery/T1087-Account discovery/ID4662-4624-Honeypot account property read.evtx
+EVTX-to-MITRE-Attack/TA0007-Discovery/T1087-Account discovery/ID4688-List all Service Principal Names (SPN).evtx
+EVTX-to-MITRE-Attack/TA0007-Discovery/T1087-Account discovery/ID4688-User enumeration via command.evtx
+EVTX-to-MITRE-Attack/TA0007-Discovery/T1087-Account discovery/ID4769-Kerberos TGS host enumeration (Bloodhound).evtx
+EVTX-to-MITRE-Attack/TA0007-Discovery/T1087-Account discovery/ID600-Active Directory module called by PowerShell.evtx
+EVTX-to-MITRE-Attack/TA0007-Discovery/T1087-Account discovery/ID800 - SPN discovery (PowerShell).evtx
+EVTX-to-MITRE-Attack/TA0007-Discovery/T1135.xxx-Network Share Discovery/ID4688-Network share discovery or connection via commandline.evtx
+EVTX-to-MITRE-Attack/TA0007-Discovery/T1135.xxx-Network Share Discovery/ID5140-5145-Bloodhound-SharpHound enumeration via SMB.evtx
+EVTX-to-MITRE-Attack/TA0007-Discovery/T1135.xxx-Network Share Discovery/ID5140-Failed ADMIN$ share access.evtx
+EVTX-to-MITRE-Attack/TA0007-Discovery/T1201-Password Policy Discovery/ID4661-Password policy enumeration.evtx
+EVTX-to-MITRE-Attack/TA0007-Discovery/T1201-Password Policy Discovery/ID4688-Password policy discovery via commandline.evtx
+EVTX-to-MITRE-Attack/TA0007-Discovery/T1482-Domain Trust Discovery/ID800,4103,4104-Active Directory Forest PowerShell class.evtx
+EVTX-to-MITRE-Attack/TA0008-Lateral Movement/T1021.001-Remote Desktop Protocol/ID4688,4778,4779 RDP hijack direct.evtx
+EVTX-to-MITRE-Attack/TA0008-Lateral Movement/T1021.001-Remote Desktop Protocol/ID4688-4778 RDP hijack command execution.evtx
+EVTX-to-MITRE-Attack/TA0008-Lateral Movement/T1021.001-Remote Desktop Protocol/ID4825-Denied RDP connection with valid credentials.evtx
+EVTX-to-MITRE-Attack/TA0008-Lateral Movement/T1021.002-SMB Windows Admin Shares/ID4688,4697,5140-5145 PSexec remote execution + admin share.evtx
+EVTX-to-MITRE-Attack/TA0008-Lateral Movement/T1021.002-SMB Windows Admin Shares/ID4688-4648 Lateral movement with net use.evtx
+EVTX-to-MITRE-Attack/TA0008-Lateral Movement/T1021.002-SMB Windows Admin Shares/ID4688-Network share manipulation via commandline.evtx
+EVTX-to-MITRE-Attack/TA0008-Lateral Movement/T1021.002-SMB Windows Admin Shares/ID5140-ADMIN$ share connection with Golden ticket.evtx
+EVTX-to-MITRE-Attack/TA0008-Lateral Movement/T1021.002-SMB Windows Admin Shares/ID5142- New file share created.evtx
+EVTX-to-MITRE-Attack/TA0008-Lateral Movement/T1021.002-SMB Windows Admin Shares/ID5142-5143-Mimispool print share created and modified.evtx
+EVTX-to-MITRE-Attack/TA0008-Lateral Movement/T1021.002-SMB Windows Admin Shares/ID5145-remote shell execution via SMB admin share.evtx
+EVTX-to-MITRE-Attack/TA0008-Lateral Movement/T1021.003-Distributed Component Object Model (DCOM)/ID4103,4104-DCOMexec native via PowerShell.evtx
+EVTX-to-MITRE-Attack/TA0008-Lateral Movement/T1021.003-Distributed Component Object Model (DCOM)/ID4688,4674-DCOMexec process spawned.evtx
+EVTX-to-MITRE-Attack/TA0008-Lateral Movement/T1021.004-Remote Service SSH/ID4-OpenSSH server listening.evtx
+EVTX-to-MITRE-Attack/TA0008-Lateral Movement/T1021.004-Remote Service SSH/ID4103-4104-OpenSSH server activation and config.evtx
+EVTX-to-MITRE-Attack/TA0008-Lateral Movement/T1021.004-Remote Service SSH/ID4103-4104-OpenSSH server install.evtx
+EVTX-to-MITRE-Attack/TA0008-Lateral Movement/T1021.006-Windows Remote Management/ID4656-WS Management listener enumeration.evtx
+EVTX-to-MITRE-Attack/TA0008-Lateral Movement/T1550-Use Alternate Authentication Material/ID4624-Mimikatz Pass the hash.evtx
+EVTX-to-MITRE-Attack/TA0009-Collection/T1125-Video capture/ID13-RDP shadow session configuration enabled (registry).evtx
+EVTX-to-MITRE-Attack/TA0011-Command and Control/T1090-Proxy/ID5600-proxy configuration changed.evtx
+EVTX-to-MITRE-Attack/TA0011-Command and Control/T1572-Protocol tunneling/ID4688-netsh RDP port forwarding abuse.evtx
+EVTX-to-MITRE-Attack/TA0040-Impact/T1486-Data Encrypted for Impact/ID 768,775,793,796,817,840-BitLocker encryption activated.evtx
+EVTX-to-MITRE-Attack/TA0040-Impact/T1490-Inhibit System Recovery/ID4688-Delete VSS backup (WMI).evtx
+EVTX-to-MITRE-Attack/TA0040-Impact/T1490-Inhibit System Recovery/ID4688-Delete Window backup (webadmin).evtx
+EVTX-to-MITRE-Attack/TA0040-Impact/T1490-Inhibit System Recovery/ID800-4103-4104-Delete VSS backup (PowerShell).evtx
+EVTX-to-MITRE-Attack/TA0040-Impact/T1565-Data manipulation/ID11-DNS hosts files modified.evtx
+YamatoSecurity/CredentialAccess/T1558.003_StealOrForgeKerberosTicketsKerberoasting_Security.evtx
+YamatoSecurity/CredentialAccess/T1558.004_StealOrForgeKerberosTicketsAS-REP-Roasting_Security.evtx
+YamatoSecurity/DefenseEvasion/T1027.004_ObfuscatedFilesOrInformationCompileAfterDelivery_Sysmon.evtx
+YamatoSecurity/DefenseEvasion/T1218.004_SignedBinaryProxyExecutionInstallUtil_Sysmon.evtx
+YamatoSecurity/ImpairDefenses/T1562.010_DowngradeAttack_PowerShell.evtx
+YamatoSecurity/IntialAccess/ValidAccounts/ID21-25 RDP Logon Logoff Reconnect.evtx
+YamatoSecurity/IntialAccess/ValidAccounts/ID302 RDS Gateway Logon Logoff.evtx
+YamatoSecurity/LateralMovement/T1210_Zerologon_Sysmon.evtx
+YamatoSecurity/LateralMovement/T1210_Zerologon_WindowsDefaultLogging.evtx
+YamatoSecurity/LateralMovement/T1210_Zerologon_WindowsExtraLogging.evtx
+YamatoSecurity/LateralMovement/T1563.002_RDP-Hijacking_Security.evtx
+YamatoSecurity/Persistence/SharpEventPersistHiddenShellcode.evtx
+YamatoSecurity/Persistence/T1197_BitsClient.evtx
+YamatoSecurity/Sysmon/Sysmon-27-BlockExeWrite_AbusingCertutil.evtx
+YamatoSecurity/Sysmon/Sysmon-27-BlockExeWrite_AbusingSvchost.evtx
+YamatoSecurity/Vulnerabilities/App_1_CVE-Detected.evtx

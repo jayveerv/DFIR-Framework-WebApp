@@ -1,24 +1,36 @@
-# Cross-Platform DFIR Framework
+# CP-DFIR — Cross-Platform DFIR Framework
 
-**Title:** A Scalable Cross-Platform DFIR Framework for Automated Evidence Collection, Correlation, and Cloud Forensic Investigation
-**Author:** Jayveer Vasava
+**A Scalable Cross-Platform DFIR Framework for Automated Evidence Collection, Correlation, and Cloud Forensic Investigation**
+Author: Jayveer Vasava
 
 Windows, Linux aur AWS ke logs se evidence collect karta hai, ek common format me laata hai, alag-alag platforms ke events ko ek attack
-timeline me jodta hai, aur har step ka hash-based chain of custody rakhta hai.
-
-
-> **Version note (7 Oct 2026):** `correlate.py`, `pipeline.py`, `main.py`, `cloudstate.py`, `make_dashboard.py` aur `tests/test_rules_and_pipeline.py` dobara likhe gaye (purani zip ki ye files kharab ho gayi thi). Is README ke saare numbers isi version ko dobara chala ke liye gaye hain (`main.py evaluate`, `main.py real-eval`, `main.py selftest`, `main.py triage`).
-
+timeline me jodta hai, aur har step ka hash-based chain of custody rakhta hai. Framework ek **analyst console** ke through chalta hai
+(browser me khulta hai, jaise Velociraptor / Timesketch), aur CLI (`main.py`) se bhi.
 
 ## 🔗 Live: https://cp-dfir-console.onrender.com/
 
-Ek hi link me sab kuch: **Try demo** (bina password) ya `demo` login → pehle se analysed demo case, apne cases (upload / sample scenario → Analyse),
-investigation graph, MITRE, cloud posture, chain of custody (verify + tamper demo), report download, aur **Framework evaluation** ke 7 pages
-(overview, detection accuracy, evidence integrity, cloud forensics, scalability, real-world validation, ATT&CK coverage).
-Free plan: pehli baar khulne me ~50 sec lag sakte hain; server restart par demo data reset hota hai.
+Ek hi link me poora framework chalta hai: **Try demo** (bina password) → read-only demo case dekho, ya **apna case banao** →
+evidence upload karo (ya collector ka zip) → Analyse → investigation graph, timeline, MITRE, cloud posture, chain of custody
+(verify + tamper check), professional report (dark/light, Print/PDF), pseudonymised export, aur **Framework evaluation** ke 7 pages.
 
-**Web console ko online deploy karna (Render.com, free):** repo me `render.yaml` hai. Render pe *New → Blueprint* → is repo ko chuno →
-`DFIR_ADMIN_PASSWORD` set karo (login: `demo` / wahi password). Public mode me live triage / SSH / Windows export band rehte hain.
+Hosted instance ke rules (privacy): har visitor ko sirf apne cases dikhte hain; visitor cases 24 h baad apne aap delete;
+asli evidence ke liye CP-DFIR apne computer par chalao (data bahar nahi jaata). Laptop ka evidence = **collector download karo**
+(Evidence page) → zip upload karo → console har file ka SHA-256 dobara check karta hai.
+
+## v1.1 me naya
+
+| Feature | Kya karta hai | File |
+|---|---|---|
+| Evidence collectors | Windows (PowerShell, kuch install nahi) aur Linux (Python 3 stdlib) collector: host state, processes, sockets, accounts, persistence, recent executables, security logs → ek zip + `cpdfir_manifest.json` (har file ka SHA-256) | `collectors/` |
+| Integrity since collection | Zip upload par har file ka hash manifest se milaya jaata hai; badli / gayab / extra file turant report | `webapp/app.py` |
+| Case privacy | Per-visitor cases, shared demo case read-only, guest cases ka auto-delete (retention), SSH sirf public hosts par | `webapp/app.py` |
+| Pseudonymised export | Usernames, IPs, hosts, emails, AWS account / key ids → keyed tokens (per-case secret); ledger kabhi nahi badalta | `anonymize.py` |
+| Professional report | Executive summary + suggested next steps, case details & scope, findings, integrity, method & limits, appendix; dark/light; A4 print with page numbers | `report.py` |
+| Durable storage | `DATABASE_URL` (PostgreSQL) set ho to data folder DB me mirror hota hai, restart par restore (SHA-256 check ke saath); keys sirf env vars me | `webapp/persist.py` |
+| Held-out validation | Frozen rules ko 320 naye real samples par ek baar chalaya (development set se alag) | `heldout.py` |
+
+**Deploy (Render.com, free):** *New → Blueprint* → is repo ko chuno → `DFIR_ADMIN_PASSWORD` aur `DATABASE_URL` (free Neon/Supabase
+Postgres) set karo. `DFIR_CUSTODY_KEY` / `DFIR_SESSION_KEY` Render khud generate karta hai.
 
 ---
 

@@ -3,7 +3,7 @@
   python main.py demo                      simulated attack (Windows + Linux + AWS), report opens in the browser
   python main.py evaluate [--quick]        all simulated scenarios, tampering tests, cloud checks, scalability -> results/
   python main.py real-eval                 validation on REAL public data (downloads ~44 MB the first time) -> results/
-  python main.py tamper-demo               show tampering being detected (for the viva)
+  python main.py tamper-demo               show tampering being detected
   python main.py analyze --input DIR       analyse your own evidence (windows_security.xml or *.evtx, auth.log, cloudtrail.json,
                                            host/ and cloud/ folders, optional case_config.json)
   python main.py triage                    collect live evidence from THIS computer, analyse it and open the report
@@ -110,6 +110,10 @@ def cmd_real(a):
     for f, r in d["linux"].items():
         print(f"Linux {f}: {r['normalized']} events, brute-force IPs framework {r['framework_bf_ips']} vs independent {r['independent_bf_ips']}")
     print(f"AWS: {sum(r['hit'] for r in d['aws'])}/{len(d['aws'])} real attack samples detected")
+    ho = d.get("heldout")
+    if ho:
+        print(f"Held-out (frozen rules, {ho['samples']} unseen samples): right technique in {ho['in_parent']}/{ho['in_scope']} in-scope samples "
+              f"({ho['in_parent_pct']}%), any alert {ho['in_alerted']}/{ho['in_scope']}")
     _open(os.path.join("results", "real_data_report.html"), a.no_open)
 
 

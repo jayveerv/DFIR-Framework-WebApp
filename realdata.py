@@ -86,7 +86,7 @@ def _get(url, dest, tries=3):
     os.makedirs(os.path.dirname(dest), exist_ok=True)
     for k in range(tries):
         try:
-            req = urllib.request.Request(url, headers={"User-Agent": "dfir-framework-thesis"})
+            req = urllib.request.Request(url, headers={"User-Agent": "cp-dfir-framework"})
             with urllib.request.urlopen(req, timeout=60) as r, open(dest, "wb") as f:
                 f.write(r.read())
             return True
@@ -286,12 +286,13 @@ def _pct(a, b):
 
 
 def build_report(data):
-    from report import CSS, _table
+    from report import _table, page_close, page_open
     w, lx, aw = data["windows"], data["linux"], data["aws"]
     now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     v1 = data.get("windows_v1") or {}
-    o = [f"<!doctype html><html><head><meta charset='utf-8'><title>Real data validation</title><style>{CSS}</style></head><body>"
-         f"<header><h1>Validation on REAL public data</h1><p>Generated {now} · no simulated logs in this report</p></header><main>"]
+    o = [page_open("CP-DFIR real-data validation", "CP-DFIR · Real-world validation", "Validation on real public data",
+                   f"Generated {now} · no simulated logs in this report",
+                   marking="CP-DFIR · validation report · real public datasets")]
     lab = [x for x in w["labelled"]]
     core = [x for x in lab if not x["hard"]]
     hard = [x for x in lab if x["hard"]]
@@ -302,9 +303,13 @@ def build_report(data):
     o.append(f'<div class="card"><b>{sum(x["hit"] for x in core)}/{len(core)}</b><span>labelled samples detected (development set)</span></div>')
     o.append(f'<div class="card"><b>{sum(x["hit"] for x in hard)}/{len(hard)}</b><span>deliberately hard / unsupported cases detected</span></div>')
     o.append(f'<div class="card"><b>{sum(r["hit"] for r in aw)}/{len(aw)}</b><span>real CloudTrail attack samples detected</span></div>')
+    ho = data.get("heldout")
+    if ho:
+        o.append(f'<div class="card"><b>{ho["in_parent"]}/{ho["in_scope"]}</b><span>HELD-OUT in-scope samples with the right technique ({ho["in_parent_pct"]}%)</span></div>')
     o.append("</div>")
     o.append("<p class='note'><b>Read this first.</b> These are real logs, so the numbers are honest but limited: (1) the detection rules were written "
-             "after looking at these samples, so the labelled results are <i>development-set</i> results and optimistic; "
+             "after looking at these samples, so the labelled results are <i>development-set</i> results and optimistic &mdash; section 4 therefore "
+             "measures the frozen rules on 320 <b>held-out</b> real samples that were never used to write them; "
              "(2) the false-positive rate on real benign traffic is <b>not</b> measured, because no labelled real benign logs were available; "
              "(3) correlation across platforms on a real incident is <b>not</b> measured, because no public dataset has real Windows + Linux + AWS logs of one incident "
              "(cross-platform correlation is evaluated only on the simulated scenarios).</p>")
@@ -349,11 +354,49 @@ def build_report(data):
                       h(x["v1"]), '<span class="ok">HIT</span>' if x["hit"] else '<span class="bad">MISS</span>'] for x in aw]))
     o.append("<p class='note'>Only 4 files (15 events). They are in Datadog's enriched format: the first version crashed on one file (records glued together without commas) and read no source IP from any of them. Both are fixed. These samples are far too few to say anything about accuracy; they show the parser works on real CloudTrail exports.</p>")
 
-    o.append("<h2>4. Sources</h2><ul class='note'>"
+    if ho:
+        o.append(heldout_section(ho, _table))
+    o.append("<h2>5. Sources</h2><ul class='note'>"
              "<li>Windows: sbousseaden/EVTX-ATTACK-SAMPLES (GitHub). Sample labels here come from folder and file names.</li>"
              "<li>Linux: LogHub, He, Zhu, He and Lyu, <i>Loghub: A Large Collection of System Log Datasets towards Automated Log Analytics</i>, arXiv:2008.06448, 2020 (OpenSSH_2k, Linux_2k).</li>"
-             "<li>AWS: zmallen/cloudtrail2sightings cloudtrail.zip, containing CloudTrail events produced by DataDog/stratus-red-team detonations.</li></ul>")
-    o.append("</main></body></html>")
+             "<li>AWS: zmallen/cloudtrail2sightings cloudtrail.zip, containing CloudTrail events produced by DataDog/stratus-red-team detonations.</li>"
+             "<li>Held-out Windows: Yamato-Security/hayabusa-sample-evtx (fixed commit), which collects mdecrevoisier/EVTX-to-MITRE-Attack, "
+             "sans-blue-team/DeepBlueCLI sample logs and Yamato Security's own samples.</li></ul>")
+    o.append(page_close())
+    return "".join(o)
+
+
+def heldout_section(ho, _table):
+    pc = lambda a, b: f"{100 * a / b:.1f}%" if b else "n/a"
+    o = ["<h2>4. Held-out validation (rules frozen, samples never used to write them)</h2>"]
+    o.append(f"<p>The rule set (fingerprint <span class='mono'>{h(ho['rules_fingerprint'])}</span>) was run <b>once</b> on {ho['samples']} real "
+             f"Windows captures ({ho['records']:,} records) from {h(ho['dataset'])} and was not changed afterwards. "
+             f"{len(ho['excluded'])} file byte-identical to a development sample was excluded. A sample is <i>in scope</i> when CP-DFIR has a rule "
+             "for its labelled ATT&amp;CK technique, its parent technique or an equivalent one (PsExec: service execution); a rule for a sibling "
+             "sub-technique does not count.</p>")
+    o.append(_table(["", "Samples", "Raised an alert", "Right technique (exact)", "Right technique (incl. parent)"], [
+        ["<b>In scope</b>", ho["in_scope"], f"{ho['in_alerted']} ({ho['in_alerted_pct']}%)", f"{ho['in_exact']} ({ho['in_exact_pct']}%)",
+         f"<b>{ho['in_parent']} ({ho['in_parent_pct']}%)</b>"],
+        ["Out of scope (no rule for the technique)", ho["out_scope"], f"{ho['out_alerted']} ({pc(ho['out_alerted'], ho['out_scope'])})", "-", "-"],
+        ["Unlabelled attack captures", ho["unlabelled"], f"{ho['unlabelled_alerted']} ({pc(ho['unlabelled_alerted'], ho['unlabelled'])})", "-", "-"]]))
+    o.append("<h3>By corpus (in-scope samples)</h3>")
+    o.append(_table(["Corpus", "Samples", "Records", "Parse errors", "In scope", "Alerted", "Right technique"],
+                    [[h(k), v["samples"], f"{v['records']:,}", v["errors"], v["in_scope"], v["in_alerted"], v["in_parent"]] for k, v in ho["per_corpus"].items()]))
+    o.append("<h3>By technique (in scope)</h3>")
+    o.append(_table(["Technique", "Samples", "Alerted", "Right technique"],
+                    [[h(k), v["samples"], v["alerted"], v["exact"]] for k, v in ho["per_technique"].items()]))
+    if ho.get("background"):
+        o.append("<h3>Background logs (large logs of everyday activity)</h3>")
+        o.append(_table(["Log", "Records", "Supported events", "Alerts", "Alerts per 1,000 supported events", "Rules that fired"],
+                        [[h(b["file"]), f"{b['records']:,}", f"{b['supported']:,}", b["alerts"], b["per_1000"] if b["per_1000"] is not None else "-",
+                          h(", ".join(f"{k}×{v}" for k, v in b["flags"].items()) or "none")] for b in ho["background"]]))
+        o.append("<p class='note'>These logs are not labelled benign (they may contain test activity), so the alerts are an upper bound on false alarms, not a false-positive rate.</p>")
+    o.append("<h3>What the held-out set shows</h3><ul class='note'>"
+             f"<li>The development-set result (section 1) does not carry over: on unseen data the right technique was found in {ho['in_parent_pct']}% of in-scope samples. "
+             "Classic attack captures (DeepBlueCLI: PsExec, Mimikatz, PowerShell, log clearing) are detected well; EVTX-to-MITRE samples mostly rely on "
+             "Security events the framework does not parse yet (for example 4738/4724/5136 account changes, 4656/4663 object access, 5140/5145 detail fields).</li>"
+             f"<li>{ho['errors']:,} records in a few files could not be decoded by the python-evtx library (a known NullTypeNode error); they are counted, not hidden.</li>"
+             "<li>The gaps are listed by technique above; closing them needs new parsers and rules, which must then be measured on yet another unseen set.</li></ul>")
     return "".join(o)
 
 
@@ -373,7 +416,17 @@ def run(root, log=print):
     lx = linux_eval(root)
     log("AWS (real CloudTrail samples) ...")
     aw = aws_eval(root)
-    data = dict(generated=datetime.now(timezone.utc).isoformat(), windows=ws, windows_v1=v1, linux=lx, aws=aw, windows_seconds=secs, windows_rows=rows)
+    log("Held-out Windows validation (frozen rules, unseen samples) ...")
+    import heldout
+    miss = heldout.fetch(root, log)
+    if miss:
+        log(f"Warning: {len(miss)} held-out file(s) could not be downloaded.")
+    ho = heldout.run(root, log)
+    with open(os.path.join(root, "results", "heldout_results.json"), "w", encoding="utf-8") as f:
+        json.dump(ho, f, indent=1)
+    ho = {k: v for k, v in ho.items() if k != "rows"}
+    data = dict(generated=datetime.now(timezone.utc).isoformat(), windows=ws, windows_v1=v1, linux=lx, aws=aw, windows_seconds=secs, windows_rows=rows,
+                heldout=ho)
     os.makedirs(os.path.join(root, "results"), exist_ok=True)
     with open(os.path.join(root, "results", "real_data_results.json"), "w", encoding="utf-8") as f:
         json.dump(data, f, indent=1)

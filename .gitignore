@@ -5,3 +5,9 @@ __pycache__/
 venv/
 .env
 *.key
+
+# downloaded datasets (fetched on first run)
+real_data/evtx/
+real_data/heldout/
+real_data/linux/
+real_data/aws/

@@ -98,7 +98,7 @@ def chain_coverage(events, cfg, truth):
     return rows
 
 
-EVAL_KEY = b"thesis-evaluation-key"
+EVAL_KEY = b"cp-dfir-evaluation-key"
 
 
 def _forge_chain(lp):
@@ -354,9 +354,10 @@ def _pct(x):
 def build_eval_report(data):
     sc, scale, abl = data["scenarios"], data["scalability"], data["ablation"]
     now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
-    from report import CSS, _table
-    o = [f"<!doctype html><html><head><meta charset='utf-8'><title>Evaluation</title><style>{CSS}</style></head><body>"
-         f"<header><h1>Framework Evaluation — Design Parameters</h1><p>Generated {now} · Python {platform.python_version()} · {platform.system()} · simulated logs with generator ground truth</p></header><main>"]
+    from report import _table, page_close, page_open
+    o = [page_open("CP-DFIR evaluation", "CP-DFIR · Framework evaluation", "Evaluation against the design parameters",
+                   f"Generated {now} · Python {platform.python_version()} · {platform.system()} · simulated logs with generator ground truth",
+                   marking="CP-DFIR · evaluation report · simulated evidence with ground truth")]
 
     hard = [s for s in sc if s["name"] not in CORE]
     tam_all = [t for s in sc for t in s["tamper"] if t["expect_detect"]]
@@ -447,7 +448,7 @@ def build_eval_report(data):
              "<li>Linking a Linux credential file to an AWS key requires the analyst-supplied credential inventory.</li>"
              "<li>The custody ledger detects changes after the fact; it does not stop them. Removal of the last entries needs the anchor hash noted outside the case folder, and a fully rewritten chain is detected only when the ledger was HMAC-signed with a key the attacker does not have (row 'checked WITHOUT key or anchor' shows the plain hash chain alone misses it).</li>"
              f"<li>Scalability is measured for a single process; the largest test had {scale[-1]['records']:,} records.</li></ul>")
-    o.append("</main></body></html>")
+    o.append(page_close())
     return "".join(o)
 
 

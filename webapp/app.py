@@ -43,6 +43,7 @@ from flask import Flask, abort, jsonify, request, send_file, send_from_directory
 from werkzeug.security import check_password_hash, generate_password_hash  # noqa: E402
 from werkzeug.utils import secure_filename  # noqa: E402
 
+import anonymize  # noqa: E402
 import config as fw_config  # noqa: E402
 import pipeline  # noqa: E402
 from correlate import FLAGS, POSTURE, RULE_FAMILIES  # noqa: E402
@@ -59,8 +60,19 @@ PUBLIC_MODE = os.environ.get("DFIR_PUBLIC_MODE", "") not in ("", "0", "false", "
 # "Try demo" guest login (no password, cannot manage users or delete cases). On by default in public mode.
 GUEST = os.environ.get("DFIR_GUEST", "1" if PUBLIC_MODE else "0") not in ("", "0", "false", "no")
 MAX_UPLOAD = int(os.environ.get("DFIR_MAX_UPLOAD_MB", "1024")) * 1024 * 1024
+# Privacy: in public mode each visitor sees only their own cases (plus the shared, read-only demo case), and
+# visitor cases are deleted automatically after DFIR_RETENTION_HOURS. 0 disables automatic deletion.
+RETENTION_H = float(os.environ.get("DFIR_RETENTION_HOURS", "24" if PUBLIC_MODE else "0") or 0)
 for d in (DATA, CASES, TMP):
     os.makedirs(d, exist_ok=True)
+
+# Durable storage for hosts with a temporary disk: mirror the data folder into PostgreSQL (see persist.py).
+MIRROR = None
+if os.environ.get("DATABASE_URL"):
+    from persist import Mirror
+    MIRROR = Mirror(os.environ["DATABASE_URL"], DATA)
+    MIRROR.restore()
+    MIRROR.start()
 
 
 def _now():
@@ -101,7 +113,7 @@ CUSTODY_KEY = (os.environ.get("DFIR_CUSTODY_KEY") or _secret_file("custody.key")
 CUSTODY_KEY_PATH = os.path.join(DATA, "custody.key")
 
 app = Flask(__name__, static_folder=os.path.join(HERE, "static"), static_url_path="/static")
-app.config.update(SECRET_KEY=_secret_file("session.key"), MAX_CONTENT_LENGTH=MAX_UPLOAD,
+app.config.update(SECRET_KEY=os.environ.get("DFIR_SESSION_KEY") or _secret_file("session.key"), MAX_CONTENT_LENGTH=MAX_UPLOAD,
                   SESSION_COOKIE_HTTPONLY=True, SESSION_COOKIE_SAMESITE="Lax", JSON_SORT_KEYS=False)
 
 LOCK = threading.RLock()
@@ -141,6 +153,33 @@ def _in_request():
         return False
 
 
+def owner_id():
+    """Who owns a case created in this session: the username, or guest:<id> for an anonymous visitor."""
+    u = session.get("user")
+    return f"guest:{session.get('gid', 'anon')}" if u == "guest" else u
+
+
+def can_read(m):
+    u = current_user() or {}
+    if u.get("role") == "admin" or m.get("shared"):
+        return True
+    own = m.get("owner")
+    if own is None:                                 # cases from before ownership existed: visible to signed-in analysts
+        return u.get("role") != "guest"
+    if not PUBLIC_MODE and u.get("role") == "analyst":
+        return True                                 # one team on a private install: analysts see each other's cases
+    return own == owner_id()
+
+
+def can_write(m):
+    u = current_user() or {}
+    if u.get("role") == "admin":
+        return True
+    if m.get("shared"):
+        return False                                # the demo case is read-only for everybody but administrators
+    return can_read(m)
+
+
 def current_user():
     u = session.get("user")
     if u == "guest" and GUEST:
@@ -177,7 +216,8 @@ def _pw_ok(p):
 def api_session():
     u = current_user()
     return jsonify(setup_needed=not users(), user=({"username": session["user"], "name": u["name"], "role": u["role"]} if u else None),
-                   app=APP_NAME, version=VERSION, public_mode=PUBLIC_MODE, platform=sys.platform, guest=GUEST)
+                   app=APP_NAME, version=VERSION, public_mode=PUBLIC_MODE, platform=sys.platform, guest=GUEST,
+                   retention_hours=RETENTION_H)
 
 
 @app.post("/api/guest")
@@ -186,6 +226,7 @@ def api_guest():
         return jsonify(error="guest access is off"), 403
     session.clear()
     session["user"] = "guest"
+    session["gid"] = secrets.token_hex(6)      # every visitor is a separate guest: cases are not shared between visitors
     audit("guest_login")
     return jsonify(ok=True)
 
@@ -310,6 +351,10 @@ def case_dir(cid):
     d = os.path.join(CASES, cid)
     if not os.path.isdir(d):
         abort(404)
+    if _in_request() and session.get("user"):
+        m = _read_json(os.path.join(d, "case.json")) or {}
+        if not can_read(m):
+            abort(404)                              # do not even reveal that the case exists
     return d
 
 
@@ -365,7 +410,15 @@ def _public_case(m):
             "sources": sorted({KIND_SOURCE.get(e["kind"], e["kind"]) for e in m.get("evidence", [])}),
             "analyzed": lr.get("time"), "incidents": lr.get("incidents"), "alerts": lr.get("alerts"), "events": lr.get("events"),
             "high": lr.get("high"), "custody_ok": (m.get("last_verify") or {}).get("ok", lr.get("custody_ok")),
-            "job": _job_for(m["id"])}
+            "job": _job_for(m["id"]), "shared": bool(m.get("shared")), "writable": can_write(m) if _in_request() else True,
+            "expires": _expires(m)}
+
+
+def _expires(m):
+    if not RETENTION_H or m.get("shared") or not str(m.get("owner") or "").startswith("guest:"):
+        return None
+    t = datetime.fromisoformat(m["created"].replace("Z", "+00:00")).timestamp() + RETENTION_H * 3600
+    return datetime.fromtimestamp(t, timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
 @app.get("/api/cases")
@@ -374,7 +427,7 @@ def api_cases():
     out = []
     for cid in sorted(os.listdir(CASES), reverse=True):
         m = _read_json(os.path.join(CASES, cid, "case.json"))
-        if m:
+        if m and can_read(m):
             out.append(_public_case(m))
     return jsonify(out)
 
@@ -432,7 +485,7 @@ def api_case_new():
         d0 = os.path.join(CASES, cid)
         os.makedirs(os.path.join(d0, "uploads"))
         m = {"id": cid, "title": title, "description": (d.get("description") or "").strip()[:2000], "created": _now(),
-             "created_by": session["user"], "status": "new", "config": cfg, "evidence": []}
+             "created_by": session["user"], "owner": owner_id(), "status": "new", "config": cfg, "evidence": []}
         save_meta(m)
     audit("case_created", cid, title=title)
     job = None
@@ -448,6 +501,7 @@ def api_case(cid):
     m = load_meta(cid)
     pc = _public_case(m)
     pc.update(config=m["config"], evidence_items=m.get("evidence", []), last_run=m.get("last_run"), last_verify=m.get("last_verify"),
+              collections=m.get("collections", []),
               anchor=_anchor(cid), anchors=_anchors().get(cid, []), kinds=KINDS)
     return jsonify(pc)
 
@@ -561,6 +615,11 @@ def _ingest_file(m, path, name, origin, by, hint=None, override=None, report=Non
     if kind not in KINDS:
         report.append({"name": name, "ok": False, "note": "not a supported evidence type (skipped)"})
         return None
+    h = sha256_file(path)
+    dup = next((e for e in m["evidence"] if e["sha256"] == h and e["name"] == name), None)
+    if dup:
+        report.append({"name": name, "ok": True, "kind": "duplicate", "sha256": h, "note": "identical file already in this case (not added twice)"})
+        return dup
     it = _add_item(m, path, name, kind, origin, by)
     report.append({"name": name, "ok": True, "kind": kind, "sha256": it["sha256"], "size": it["size"]})
     return it
@@ -569,6 +628,15 @@ def _ingest_file(m, path, name, origin, by, hint=None, override=None, report=Non
 def _ingest_zip(m, zpath, zname, by, report):
     total = 0
     with zipfile.ZipFile(zpath) as z, tempfile.TemporaryDirectory(dir=TMP) as td:
+        # A CP-DFIR collector package carries cpdfir_manifest.json with the SHA-256 taken at collection time:
+        # every file is re-hashed here and compared, so a change between collection and upload is visible.
+        manifest, expect, checked = None, {}, {"verified": 0, "mismatch": [], "missing": [], "extra": []}
+        if "cpdfir_manifest.json" in z.namelist():
+            try:
+                manifest = json.loads(z.read("cpdfir_manifest.json").decode("utf-8-sig"))
+                expect = {f["path"]: f.get("sha256") for f in manifest.get("files", []) if f.get("path") != "cpdfir_manifest.json"}
+            except (ValueError, KeyError, TypeError):
+                report.append({"name": "cpdfir_manifest.json", "ok": False, "note": "collector manifest unreadable - integrity since collection NOT verified"})
         for zi in z.infolist():
             if zi.is_dir():
                 continue
@@ -582,8 +650,32 @@ def _ingest_zip(m, zpath, zname, by, report):
             out = os.path.join(td, uuid.uuid4().hex)
             with z.open(zi) as src, open(out, "wb") as dst:
                 shutil.copyfileobj(src, dst)
+            rel = "/".join(parts)
+            if rel == "cpdfir_manifest.json":
+                continue
+            if manifest is not None:
+                h = sha256_file(out)
+                if rel not in expect:
+                    checked["extra"].append(rel)
+                elif expect[rel] != h:
+                    checked["mismatch"].append(rel)
+                else:
+                    checked["verified"] += 1
             hint = parts[-2].lower() if len(parts) > 1 else None
             _ingest_file(m, out, parts[-1], f"zip:{zname}", by, hint=hint, report=report)
+        if manifest is not None:
+            seen = {"/".join(p for p in re.split(r"[\\/]+", zi.filename) if p) for zi in z.infolist()}
+            checked["missing"] = sorted(k for k in expect if k not in seen)
+            ok = not (checked["mismatch"] or checked["missing"] or checked["extra"])
+            col = {"package": zname, "package_sha256": sha256_file(zpath), "collector": manifest.get("collector_version"),
+                   "host": manifest.get("hostname"), "platform": manifest.get("platform"), "run_as": manifest.get("run_as"),
+                   "admin": manifest.get("is_admin"), "collected_utc": manifest.get("finished_utc"), "limited": manifest.get("limited") or {},
+                   "verified": checked["verified"], "mismatch": checked["mismatch"], "missing": checked["missing"], "extra": checked["extra"],
+                   "integrity_ok": ok, "checked_at": _now()}
+            m.setdefault("collections", []).append(col)
+            note = (f"collector package from {col['host']}: {checked['verified']} file(s) match the SHA-256 taken at collection"
+                    if ok else f"INTEGRITY PROBLEM since collection - changed: {checked['mismatch']}, missing: {checked['missing']}, added: {checked['extra']}")
+            report.append({"name": "cpdfir_manifest.json", "ok": ok, "kind": "collector_manifest", "note": note})
 
 
 @app.post("/api/cases/<cid>/evidence")
@@ -761,6 +853,8 @@ def _start_job(cid, kind, fn, **kw):
             j.status = "failed"
         j.ended = _now()
         _audit_job(j, user)
+        if MIRROR:
+            MIRROR.request_sync()
 
     threading.Thread(target=run, daemon=True).start()
     return j
@@ -798,7 +892,8 @@ def _job_analyze(j, cid, user, **_):
     for n in assemble(m, inp):
         j.log("      " + n)
     cfg = dict(fw_config.DEFAULT_CASE, **m["config"])
-    cfg["case_id"], cfg["investigator"] = cid, user.get("name") or j.user
+    cfg["case_id"], cfg["investigator"] = cid, user.get("name") or ("Guest analyst" if j.user == "guest" else j.user)
+    cfg["title"] = m.get("title", "")
     j.log("[1/5] Acquisition    copy into evidence/, SHA-256 before and after, ledger entry per file")
     j.log("[2/5] Normalization  Windows / Linux / AWS / host / cloud state -> one schema, UTC")
     j.log("[3/5] Correlation    57 ATT&CK-mapped rules + NetworkX entity graph")
@@ -977,6 +1072,24 @@ def api_samples():
     return jsonify(SAMPLES)
 
 
+def _public_host_check(host):
+    """Hosted console: SSH only to public Internet addresses (no internal, loopback or cloud-metadata targets)."""
+    import ipaddress
+    import socket
+    host = (host or "").strip()
+    if not host:
+        return "give the SSH host"
+    try:
+        addrs = {ai[4][0] for ai in socket.getaddrinfo(host, 22)}
+    except OSError:
+        return "the SSH host name could not be resolved"
+    for a in addrs:
+        ip = ipaddress.ip_address(a.split("%")[0])
+        if not ip.is_global:
+            return f"{host} resolves to a private/internal address ({a}); the hosted console only connects to public hosts"
+    return None
+
+
 @app.post("/api/cases/<cid>/jobs/<kind>")
 @login_required
 def api_job_start(cid, kind):
@@ -985,8 +1098,13 @@ def api_job_start(cid, kind):
     fns = {"analyze": _job_analyze, "sample": _job_sample, "triage": _job_triage, "aws": _job_aws, "ssh": _job_ssh, "winlog": _job_winlog}
     if kind not in fns:
         abort(404)
-    if PUBLIC_MODE and kind in ("triage", "ssh", "winlog"):
-        return jsonify(error="disabled in the public demo (it would collect the server, not your computer)"), 403
+    if PUBLIC_MODE and kind in ("triage", "winlog"):
+        return jsonify(error="not available on the hosted console: it would collect the server, not your computer - "
+                             "use the downloadable collector (Evidence page) and upload its zip"), 403
+    if PUBLIC_MODE and kind == "ssh":
+        err = _public_host_check(d.get("host"))
+        if err:
+            return jsonify(error=err), 400
     if kind == "winlog" and sys.platform != "win32":
         return jsonify(error="Windows Security log export only works when the console runs on Windows"), 400
     if kind == "ssh" and not (d.get("host") or "").strip():
@@ -1210,7 +1328,7 @@ def api_verify(cid):
 @app.post("/api/cases/<cid>/tamper")
 @login_required
 def api_tamper(cid):
-    """Viva demonstration: really change a file inside the analysed case (and restore it) to show verification
+    """Tamper-detection check: really change a file inside the analysed case (and restore it) to show verification
     catching it. The change is made to the working copy in case/evidence or the ledger, never to the originals."""
     d = case_dir(cid)
     act = (request.get_json(force=True) or {}).get("action")
@@ -1221,7 +1339,7 @@ def api_tamper(cid):
         return jsonify(error="analyse the case first"), 400
     if act in ("evidence", "ledger"):
         if os.path.isdir(bk):
-            return jsonify(error="a tampering demo is already active: restore first"), 400
+            return jsonify(error="a tamper check is already active: restore first"), 400
         os.makedirs(bk)
         if act == "evidence":
             files = [os.path.join(dp, f) for dp, _, fs in os.walk(ev) for f in fs]
@@ -1232,7 +1350,7 @@ def api_tamper(cid):
             rel = os.path.relpath(target, os.path.join(d, "case"))
             shutil.copy2(target, os.path.join(bk, "file"))
             with open(target, "ab") as f:
-                f.write(b"\n# one line appended by the tampering demo\n")
+                f.write(b"\n# one line appended by the CP-DFIR tamper check\n")
             what = f"appended one line to {rel}"
         else:
             rel = "custody_ledger.jsonl"
@@ -1271,9 +1389,30 @@ def api_case_file(cid, what):
     if what not in files or not os.path.exists(os.path.join(d, files[what])):
         abort(404)
     dl = request.args.get("download") == "1"
+    if request.args.get("anon") == "1":
+        if what == "ledger":
+            return jsonify(error="the custody ledger is not pseudonymised: it is the integrity record of the original evidence"), 400
+        mp = _anon_map(cid)
+        with open(os.path.join(d, files[what]), encoding="utf-8") as f:
+            txt = f.read()
+        out = anonymize.report_html(txt, mp) if what == "report" else anonymize.apply(txt, mp)
+        audit("export", cid, file=files[what], pseudonymised=True, identifiers=len(mp))
+        name = f"{cid}_PSEUDONYMISED_{files[what]}"
+        mt = {"report": "text/html", "timeline": "text/csv"}.get(what, "application/json")
+        return send_file(io.BytesIO(out.encode("utf-8")), as_attachment=dl, download_name=name, mimetype=mt)
     if what != "report" or dl:
         audit("export", cid, file=files[what])
     return send_file(os.path.join(d, files[what]), as_attachment=dl, download_name=f"{cid}_{files[what]}")
+
+
+def _anon_map(cid):
+    """Per-case secret (kept in case.json) so tokens are stable inside the case and unlinkable across cases."""
+    with LOCK:
+        m = load_meta(cid)
+        if not m.get("anon_secret"):
+            m["anon_secret"] = secrets.token_hex(16)
+            save_meta(m)
+    return anonymize.build_map(_events(cid)[1] if _events(cid) else [], bytes.fromhex(m["anon_secret"]))
 
 
 @app.get("/api/cases/<cid>/bundle")
@@ -1325,8 +1464,16 @@ def api_info():
             mods[mname] = getattr(mod, "__version__", "installed")
         except ImportError:
             mods[mname] = None
-    return jsonify(python=sys.version.split()[0], system=platform.platform(), host=platform.node(), modules=mods, data_dir=DATA,
-                   custody_key=CUSTODY_KEY_PATH if not os.environ.get("DFIR_CUSTODY_KEY") else "DFIR_CUSTODY_KEY environment variable",
+    st = {"backend": "local disk (data folder)"}
+    if MIRROR:
+        try:
+            st = MIRROR.status()
+        except Exception as e:
+            st = {"backend": "PostgreSQL", "last_error": str(e)}
+    hide = PUBLIC_MODE and (current_user() or {}).get("role") != "admin"      # do not show server paths to visitors
+    return jsonify(python=sys.version.split()[0], system=platform.platform(), host="hosted" if hide else platform.node(), modules=mods,
+                   data_dir="(hosted)" if hide else DATA, storage=st, retention_hours=RETENTION_H,
+                   custody_key=("environment variable" if hide else CUSTODY_KEY_PATH) if not os.environ.get("DFIR_CUSTODY_KEY") else "DFIR_CUSTODY_KEY environment variable",
                    rules=len(FLAGS), techniques=len({v[0] for v in FLAGS.values()}), families={k: len(v) for k, v in RULE_FAMILIES.items()},
                    public_mode=PUBLIC_MODE, cases=len(os.listdir(CASES)), research=[n for n in ("evaluation.json", "real_data_results.json",
                    "real_data_report.html") if os.path.exists(os.path.join(ROOT, "results", n))])
@@ -1381,6 +1528,11 @@ def _research_data():
                      ind_fail=src.get("independent_failed_password"), ignored=src.get("ignored"), top_ignored=(src.get("top_ignored") or [])[:5])
         D["real"]["aws"] = [{"file": a["file"], "why": a["why"], "hit": a["hit"], "records": a.get("records"), "flags": sorted(a.get("flags") or []),
                              "expected": a.get("expected", [])} for a in rd["aws"]]
+        ho = rd.get("heldout")
+        if ho:
+            D["real"]["heldout"] = {k: ho.get(k) for k in ("dataset", "rules_fingerprint", "samples", "records", "errors", "in_scope", "in_alerted",
+                                                            "in_exact", "in_parent", "in_alerted_pct", "in_exact_pct", "in_parent_pct", "out_scope",
+                                                            "out_alerted", "unlabelled", "unlabelled_alerted", "per_corpus", "per_technique", "background")}
     _RESEARCH.update(key=key, data=D)
     return D
 
@@ -1394,13 +1546,67 @@ def api_research():
     return jsonify(ready=True, **D)
 
 
+COLLECTORS = os.path.join(ROOT, "collectors")
+
+
+@app.get("/api/collectors/<name>")
+def api_collector(name):
+    """The read-only evidence collectors (public: they contain no case data)."""
+    if name not in ("cpdfir-collect-windows.ps1", "cpdfir-collect-linux.py"):
+        abort(404)
+    return send_from_directory(COLLECTORS, name, as_attachment=True, mimetype="text/plain")
+
+
 @app.get("/")
 def index():
     return send_from_directory(app.static_folder, "index.html")
 
 
+@app.before_request
+def _write_guard():
+    """Every state-changing call on a case needs write access (the shared demo case is read-only)."""
+    va = request.view_args or {}
+    if request.method in ("POST", "PATCH", "DELETE", "PUT") and va.get("cid") and session.get("user"):
+        p = os.path.join(CASES, va["cid"], "case.json")
+        m = _read_json(p) if re.fullmatch(r"[A-Za-z0-9_-]{1,64}", va["cid"]) and os.path.exists(p) else None
+        if m is not None and not can_write(m):
+            if not can_read(m):
+                abort(404)
+            read_only_call = request.endpoint == "api_verify" or (
+                request.endpoint == "api_tamper" and (request.get_json(silent=True) or {}).get("action") == "status")
+            if not read_only_call:                               # anybody who can see a case may verify its custody
+                return jsonify(error="this case is read-only for your account (shared demo case) - create your own case to work on it"), 403
+
+
+def _retention_sweep():
+    """Delete visitor (guest) cases older than the retention period. Runs every 10 minutes in the background."""
+    while RETENTION_H:
+        try:
+            now = time.time()
+            for cid in os.listdir(CASES):
+                m = _read_json(os.path.join(CASES, cid, "case.json"))
+                if not m or m.get("shared") or not str(m.get("owner") or "").startswith("guest:") or _job_for(cid):
+                    continue
+                t = datetime.fromisoformat(m["created"].replace("Z", "+00:00")).timestamp()
+                if now - t > RETENTION_H * 3600:
+                    with LOCK:
+                        _rmtree(os.path.join(CASES, cid))
+                    audit("case_expired", None, case_id=cid, retention_hours=RETENTION_H)
+                    if MIRROR:
+                        MIRROR.request_sync()
+        except Exception:
+            pass
+        time.sleep(600)
+
+
+if RETENTION_H:
+    threading.Thread(target=_retention_sweep, daemon=True).start()
+
+
 @app.after_request
 def headers(r):
+    if MIRROR and request.method in ("POST", "PATCH", "DELETE", "PUT") and r.status_code < 400:
+        MIRROR.request_sync()
     r.headers["X-Content-Type-Options"] = "nosniff"
     r.headers["Referrer-Policy"] = "same-origin"
     if r.mimetype == "text/html" and request.path == "/":
@@ -1435,9 +1641,11 @@ def _seed_demo():
         cid = _new_case_id()
         os.makedirs(os.path.join(CASES, cid, "uploads"))
         save_meta({"id": cid, "title": "Demo — cross-platform attack (Windows + Linux + AWS)", "created": _now(), "created_by": "system",
+                   "owner": "system", "shared": True,
                    "description": "Simulated attack: RDP brute force on Windows, SSH compromise on Linux, stolen AWS key abused in the cloud, "
                                   "plus an exposed AWS account state.", "status": "new",
                    "config": {k: fw_config.DEFAULT_CASE[k] for k in CFG_KEYS}, "evidence": []})
+    audit("case_created", cid, title="Demo — cross-platform attack (Windows + Linux + AWS)", by="system")
     j = Job(cid, "sample", "system")
     JOBS[j.id] = j
 
@@ -1448,6 +1656,9 @@ def _seed_demo():
         except Exception as e:
             j.status, j.error = "failed", str(e)
         j.ended = _now()
+        _audit_job(j, {"name": "Demo Analyst"})
+        if MIRROR:
+            MIRROR.request_sync()
     threading.Thread(target=run, daemon=True).start()
 
 

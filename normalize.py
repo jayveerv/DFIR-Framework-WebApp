@@ -352,7 +352,7 @@ def parse_host(host_dir):
         if not os.path.exists(p):
             return None
         try:
-            with open(p, encoding="utf-8") as f:
+            with open(p, encoding="utf-8-sig") as f:
                 return json.load(f)
         except ValueError:
             st["errors"] += 1
@@ -428,7 +428,7 @@ def parse_cloud(cloud_dir):
         if not os.path.exists(p):
             return None
         try:
-            with open(p, encoding="utf-8") as f:
+            with open(p, encoding="utf-8-sig") as f:
                 return json.load(f)
         except ValueError:
             st["errors"] += 1

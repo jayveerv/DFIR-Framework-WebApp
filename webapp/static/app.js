@@ -132,7 +132,7 @@ function viewLogin() {
   <div class="err" id="lerr"></div><button class="btn pri" style="width:100%;justify-content:center">${ic("lock", 16)} Sign in</button></form>
   ${S.sess.guest ? `<div style="display:flex;align-items:center;gap:10px;margin:16px 0 12px;color:var(--mu2);font-size:12px"><span style="flex:1;height:1px;background:var(--line)"></span>or<span style="flex:1;height:1px;background:var(--line)"></span></div>
   <button class="btn" id="guest" style="width:100%;justify-content:center">${ic("play", 15)} Try demo (no password)</button>
-  <div class="hint" style="text-align:center;margin-top:8px">Guest access: create cases, run sample scenarios, analyse and verify. Demo data is cleared when the server restarts.</div>` : ""}`);
+  <div class="hint" style="text-align:center;margin-top:8px">Guest access: explore the analysed demo case, or create your own cases (upload evidence, collectors, simulated scenarios), analyse and verify. Your cases are private to your session${S.sess.retention_hours ? ` and deleted after ${S.sess.retention_hours} h` : ""}.</div>` : ""}`);
   const g = $("#guest"); if (g) g.onclick = async () => { try { await api("POST", "/api/guest"); S.sess = null; location.hash = "#/cases"; route(); } catch (er) { $("#lerr").textContent = er.message; } };
   $("#lf").onsubmit = async e => { e.preventDefault(); const f = new FormData(e.target);
     try { await api("POST", "/api/login", {username:f.get("username"), password:f.get("password")}); S.sess = null; location.hash = "#/cases"; route(); }
@@ -159,7 +159,7 @@ function navHtml(active) {
   let h = `<div class="grp">Workspace</div>${a("#/cases", "fold", "All cases", "cases")}`;
   if (c) {
     const b = `#/c/${c.id}/`, lr = c.last_run || {};
-    h += `<div class="grp">Open case</div><div class="casebox"><div class="id">${esc(c.id)}</div><div class="t">${esc(c.title)}</div><div style="margin-top:6px"><span class="status ${c.job ? "running" : c.status}">${c.job ? "job running" : esc(c.status)}</span></div></div>
+    h += `<div class="grp">Open case</div><div class="casebox"><div class="id">${esc(c.id)}</div><div class="t">${esc(c.title)}</div><div style="margin-top:6px"><span class="status ${c.job ? "running" : c.status}">${c.job ? "job running" : esc(c.status)}</span>${c.shared && !c.writable ? ' <span class="status">read-only demo</span>' : ""}${c.expires ? `<div class="note" style="margin-top:4px;font-size:10.5px">auto-deleted ${esc(utc(c.expires))}</div>` : ""}</div></div>
     ${a(b + "overview", "ov", "Overview", "overview")}${a(b + "evidence", "col", "Evidence", "evidence", c.evidence_items.length)}
     ${a(b + "investigation", "inv", "Investigation", "investigation", r && r.ready ? r.incidents.length : null, r && r.ready && r.incidents.some(i => i.severity === "High"))}
     ${a(b + "mitre", "mit", "MITRE ATT&amp;CK", "mitre", r && r.ready ? r.techs.filter(t => t.hits).length : null)}
@@ -170,7 +170,7 @@ function navHtml(active) {
   h += `<div class="grp">Framework evaluation</div>${EVAL.map(([k, ico, label]) => a("#/eval/" + k, ico, label, "eval-" + k)).join("")}
   <div class="grp">System</div>${a("#/system", "sys", "System &amp; self-test", "system")}
   ${u.role === "admin" ? a("#/users", "usr", "Users &amp; audit", "users") : ""}
-  <div class="foot">${esc(S.sess.app)} v${esc(S.sess.version)}<br>Developed by Jayveer Vasava${S.sess.public_mode ? '<br><span class="warn">Public demo mode</span>' : ""}</div>`;
+  <div class="foot">${esc(S.sess.app)} v${esc(S.sess.version)}<br>Developed by Jayveer Vasava${S.sess.public_mode ? '<br><span class="warn">Hosted instance</span>' : ""}</div>`;
   return h;
 }
 function shell(view, active, crumb) {
@@ -180,13 +180,14 @@ function shell(view, active, crumb) {
     <div class="crumb" id="crumb"></div><span id="tpill"></span>
     <button class="tbtn" id="theme" title="Light / dark theme">${ic("moon", 15)}</button>
     <div class="who"><div class="av">${esc((u.name || u.username).split(/\s+/).map(x => x[0]).join("").slice(0, 2).toUpperCase())}</div><div>${esc(u.name)}<br><span style="font-size:11px;color:var(--mu2)">${esc(u.role)}</span></div></div>
-    <button class="tbtn" id="lo" title="Sign out">${ic("out", 15)}</button></div><div class="wrap"><nav id="nav"></nav><main id="main"></main></div>`;
+    <button class="tbtn" id="lo" title="Sign out">${ic("out", 15)}</button></div>${S.sess.public_mode ? `<div class="pbanner">${ic("alert", 14)}<span><b>Hosted instance.</b> Do not upload real or personal evidence here. Your cases are visible only to you${S.sess.retention_hours ? ` and are deleted automatically after ${S.sess.retention_hours} h` : ""}. For real investigations run CP-DFIR on your own machine (data never leaves it).</span></div>` : ""}<div class="wrap"><nav id="nav"></nav><main id="main"></main></div>`;
     $("#theme").onclick = () => { const l = document.documentElement.classList.toggle("light"); try { localStorage.setItem("cpdfir-theme", l ? "light" : "dark"); } catch (e) {} };
     $("#lo").onclick = logout;
     $("#mnav").onclick = () => $("#nav").classList.toggle("open");
     $("#nav").addEventListener("click", e => { if (e.target.closest("a")) $("#nav").classList.remove("open"); });
   }
   $("#nav").innerHTML = navHtml(active);
+  crumb = String(crumb == null ? "" : crumb).replace(/&amp;/g, "&");
   $("#crumb").innerHTML = S.case ? `<b>${esc(S.case.id)}</b> · ${esc(S.case.title)} <span style="color:var(--mu2)">/ ${esc(crumb)}</span>` : `<b>${esc(crumb)}</b>`;
   const c = S.case, lv = c && c.last_verify;
   $("#tpill").innerHTML = c && c.last_run ? (lv ? `<span class="pill ${lv.ok ? "ok" : "bad"}">${lv.ok ? '<span class="dot"></span>' : ic("x", 12)} custody ${lv.ok ? "verified" : "TAMPERED"} ${ago(lv.time)}</span>`
@@ -323,7 +324,8 @@ function donut(m, label) {
 function tEvidence(v) {
   const c = S.case, items = c.evidence_items, pm = S.sess.public_mode, win = S.sess.platform === "win32";
   v.innerHTML = head("Evidence intake", "Evidence", "Originals are stored read-only with their SHA-256 at intake. At analysis time the framework copies them into the case, hashes them again and records every step in the custody ledger.",
-    `<button class="btn pri" data-run ${items.length ? "" : "disabled"}>${ic("play", 15)} ${c.last_run ? "Re-analyse" : "Analyse"} ${items.length} file(s)</button>`) + staleBox() +
+    c.writable === false ? "" : `<button class="btn pri" data-run ${items.length ? "" : "disabled"}>${ic("play", 15)} ${c.last_run ? "Re-analyse" : "Analyse"} ${items.length} file(s)</button>`) + staleBox() +
+  (c.writable === false ? `<div class="info" style="margin-bottom:16px"><b>Read-only demo case.</b> You can explore every page, verify custody and download the report. To upload evidence or run collectors, go to <a href="#/cases">All cases</a> and create your own case.</div>` : "") +
   `<div class="g g32"><div><div class="card" style="margin-bottom:16px"><h3><i>${ic("up", 15)}</i>Upload evidence</h3>
   <div class="drop" id="drop">${ic("up", 34)}<div class="big">Drop files here or click to choose</div><div class="note">Windows <span class="mono">.evtx</span> / wevtutil <span class="mono">.xml</span> · Linux <span class="mono">auth.log</span> / <span class="mono">secure</span> · AWS <span class="mono">cloudtrail.json</span> · host/ and cloud/ artifacts · <span class="mono">case_config.json</span> · or a <span class="mono">.zip</span> of any of these</div></div>
   <input type="file" id="fi" multiple class="hide">
@@ -331,17 +333,17 @@ function tEvidence(v) {
   <div id="upres"></div></div>
   <div class="card"><h3><i>${ic("fold", 15)}</i>Evidence in this case<span class="r note">${items.length} file(s) · ${bytes(items.reduce((a, b) => a + b.size, 0))}</span></h3>
   ${items.length ? `<div class="tw max"><table><thead><tr><th>File</th><th>Type</th><th>SHA-256 at intake</th><th>Size</th><th>Added</th><th></th></tr></thead><tbody>
-  ${items.map(it => `<tr><td style="word-break:break-all"><b>${esc(it.name)}</b></td><td><span class="kind" style="--pc:${KC[it.kind]}">${esc(c.kinds[it.kind] || it.kind)}</span></td>
+  ${items.map(it => `<tr><td style="min-width:150px;overflow-wrap:anywhere"><b>${esc(it.name)}</b></td><td><span class="kind" style="--pc:${KC[it.kind]}">${esc(c.kinds[it.kind] || it.kind)}</span></td>
   <td class="mono" style="white-space:nowrap"><span data-tip="${esc(it.sha256)}">${esc(it.sha256.slice(0, 12))}…</span> <button class="btn sm ghost" data-copy="${esc(it.sha256)}" title="copy">${ic("copy", 12)}</button></td><td class="mono" style="white-space:nowrap">${bytes(it.size)}</td>
   <td style="font-size:11.5px;white-space:nowrap">${esc(it.added_by)} · <span style="color:var(--mu2)">${ago(it.added)}</span><div class="mono" style="font-size:10.5px;color:var(--mu2)">${esc(it.origin)}</div></td>
   <td style="white-space:nowrap"><a class="btn sm ghost" href="/api/cases/${c.id}/evidence/${it.id}/download" title="download original">${ic("dl", 13)}</a><button class="btn sm ghost danger" data-del="${it.id}" title="remove">${ic("trash", 13)}</button></td></tr>`).join("")}</tbody></table></div>`
   : `<div class="empty" style="padding:20px"><div class="note">No evidence yet — upload files or use a collector.</div></div>`}</div>
   <div class="card" style="margin-top:16px"><h3><i>${ic("sys", 15)}</i>Case settings</h3><form id="cfgf">${cfgForm(c.config)}<button class="btn" type="submit">${ic("chk", 14)} Save settings</button></form></div></div>
-  <div><div class="card" style="margin-bottom:16px"><h3><i>${ic("bolt", 15)}</i>Collect evidence</h3>
-  ${coll("triage", "cpu", "var(--host)", "Live triage — this computer", "Processes, network connections, accounts, persistence, recent files and security logs, read-only, in order of volatility.", pm ? "disabled in public demo" : "")}
+  <div>${collectorCard(c)}${collectionsCard(c)}<div class="card" style="margin-bottom:16px"><h3><i>${ic("bolt", 15)}</i>Collect evidence</h3>
+  ${coll("triage", "cpu", "var(--host)", "Live triage — this computer", "Processes, network connections, accounts, persistence, recent files and security logs, read-only, in order of volatility.", pm ? "runs on the console's own machine - use the collector above for your computer" : "")}
   ${coll("aws", "cld", "var(--aws)", "AWS — CloudTrail + account state", "Read-only API calls: CloudTrail events, IAM users/keys/MFA, roles, S3 public access, security groups, trails.")}
-  ${coll("ssh", "term", "var(--lin)", "Linux server — auth log over SSH", "Copies /var/log/auth.log (or /var/log/secure) with key-based SSH.", pm ? "disabled in public demo" : "")}
-  ${coll("winlog", "win", "var(--win)", "Windows — export Security log", "wevtutil export of this computer's Security log (run the console as Administrator).", pm ? "disabled in public demo" : (win ? "" : "only when the console runs on Windows"))}
+  ${coll("ssh", "term", "var(--lin)", "Linux server — auth log over SSH", "Copies /var/log/auth.log (or /var/log/secure) with key-based SSH." + (pm ? " Hosted console: public Internet hosts only." : ""))}
+  ${coll("winlog", "win", "var(--win)", "Windows — export Security log", "wevtutil export of this computer's Security log (run the console as Administrator).", pm ? "runs on the console's own machine - use the collector above for your computer" : (win ? "" : "only when the console runs on Windows"))}
   ${coll("sample", "lab", "var(--vi)", "Simulated attack scenario", "Adds the framework's generated Windows + Linux + AWS logs for scenario S1–S5 (with ground truth).")}</div></div></div>`;
   wire(v);
   const fi = $("#fi"), dr = $("#drop");
@@ -353,6 +355,21 @@ function tEvidence(v) {
   v.querySelectorAll("[data-coll]").forEach(b => b.onclick = () => COLL[b.dataset.coll]());
   $("#cfgf").onsubmit = async e => { e.preventDefault(); try { await api("PATCH", `/api/cases/${c.id}`, Object.fromEntries(new FormData(e.target).entries())); toast("Settings saved", "var(--gr)"); openCase(c.id, true); } catch (er) { fail(er); } };
 }
+function collectorCard(c) {
+  return `<div class="card" style="margin-bottom:16px"><h3><i>${ic("dl", 15)}</i>Collect from a computer</h3>
+  <div class="note" style="margin-bottom:12px">Run the read-only collector on the computer under investigation. It gathers host state, processes, connections, accounts, persistence, recent executables and the security logs, hashes every file (SHA-256) into a manifest and packs one zip. Upload that zip here: every hash is checked again, so any change after collection is reported.</div>
+  <div class="coll" style="--c:var(--win)"><div class="ic">${ic("win", 20)}</div><div><div class="x">Windows collector</div><div class="y">PowerShell, nothing to install. Run as Administrator:<br><span class="mono" style="font-size:11px">Set-ExecutionPolicy -Scope Process Bypass; .\\cpdfir-collect-windows.ps1</span></div></div><a class="btn sm b" href="/api/collectors/cpdfir-collect-windows.ps1" download>${ic("dl", 12)} Download</a></div>
+  <div class="coll" style="--c:var(--lin)"><div class="ic">${ic("term", 20)}</div><div><div class="x">Linux collector</div><div class="y">Python 3 standard library, nothing to install:<br><span class="mono" style="font-size:11px">sudo python3 cpdfir-collect-linux.py</span></div></div><a class="btn sm b" href="/api/collectors/cpdfir-collect-linux.py" download>${ic("dl", 12)} Download</a></div></div>`;
+}
+function collectionsCard(c) {
+  const cs = c.collections || [];
+  if (!cs.length) return "";
+  return `<div class="card" style="margin-bottom:16px"><h3><i>${ic("cus", 15)}</i>Collector packages<span class="r note">integrity since collection</span></h3>
+  <div class="tw"><table><thead><tr><th>Host</th><th>Collected (UTC)</th><th>Files</th><th>Integrity</th></tr></thead><tbody>
+  ${cs.map(x => `<tr><td><b>${esc(x.host || "?")}</b><div class="note">${esc(x.platform || "")} · ${esc(x.run_as || "")}${x.admin ? " (admin)" : " (not admin)"}</div></td><td class="mono">${esc(utc(x.collected_utc))}</td><td class="mono">${x.verified}</td>
+  <td>${x.integrity_ok ? `<span class="pill ok">${ic("chk", 12)} hashes match</span>` : `<span class="pill bad">${ic("x", 12)} changed after collection</span><div class="note">${esc([...x.mismatch, ...x.missing, ...x.extra].join(", "))}</div>`}
+  ${Object.keys(x.limited || {}).length ? `<div class="note warn" style="margin-top:4px">${esc(Object.values(x.limited).join(" "))}</div>` : ""}</td></tr>`).join("")}</tbody></table></div></div>`;
+}
 const coll = (k, icon, c, x, y, dis) => `<div class="coll" style="--c:${c}"><div class="ic">${ic(icon, 20)}</div><div><div class="x">${x}</div><div class="y">${y}${dis ? `<br><span class="warn">${dis}</span>` : ""}</div></div><button class="btn sm b" data-coll="${k}" ${dis ? "disabled" : ""}>${ic("play", 12)} Start</button></div>`;
 async function upload(files) {
   if (!files || !files.length) return;
@@ -362,7 +379,7 @@ async function upload(files) {
     const r = await api("POST", `/api/cases/${S.cid}/evidence`, fd);
     await openCase(S.cid, true, "evidence");
     $("#upres").innerHTML = `<div class="tw" style="margin-top:12px"><table><thead><tr><th>File</th><th>Result</th><th>SHA-256</th></tr></thead><tbody>${r.report.map(x => `<tr><td>${esc(x.name)}</td><td>${x.ok ? `<span class="ok">${ic("chk", 13)}</span> ${esc(S.case.kinds[x.kind] || x.kind)}${x.note ? " — " + esc(x.note) : ""}` : `<span class="bad">${ic("x", 13)}</span> ${esc(x.note)}`}</td><td class="mono">${x.sha256 ? esc(x.sha256.slice(0, 20)) + "…" : ""}</td></tr>`).join("")}</tbody></table></div>`;
-    const n = r.report.filter(x => x.ok && x.kind !== "zip" && x.kind !== "case_config").length;
+    const n = r.report.filter(x => x.ok && !["zip", "case_config", "duplicate", "collector_manifest"].includes(x.kind)).length;
     toast(`${n} evidence file(s) added`, n ? "var(--gr)" : "var(--am)");
   } catch (e) { $("#upres").innerHTML = ""; fail(e); }
 }
@@ -577,8 +594,8 @@ function tCustody(v) {
   <div class="g g2" style="margin-bottom:16px"><div class="card"><h3><i>${ic("key", 15)}</i>Anchor hash (kept outside the case folder)</h3><div class="mono" style="word-break:break-all;font-size:12.5px;color:var(--gr)">${esc(R.anchor || "–")}</div>
   <div class="note" style="margin-top:8px">Stored in the console's <span class="mono">webapp_data/anchors.json</span>, not inside the case. Deleting the last ledger entries or rewriting the chain is detected by comparing against it. Note it in your case notes too.</div>
   <div class="tw" style="margin-top:10px;max-height:150px"><table><thead><tr><th>Analysis run</th><th>By</th><th>Anchor</th></tr></thead><tbody>${(S.case.anchors || []).slice().reverse().map(a => `<tr><td class="mono">${utc(a.time)}</td><td>${esc(a.by)}</td><td class="mono">${esc(a.head.slice(0, 20))}…</td></tr>`).join("")}</tbody></table></div></div>
-  <div class="card"><h3><i>${ic("lab", 15)}</i>Tampering demonstration (for the viva)</h3><div class="note" style="margin-bottom:12px">Really changes a file of this analysed case so you can show that verification catches it, then puts the original back. Evidence originals in uploads/ are never touched.</div>
-  <div id="tdst" class="note" style="margin-bottom:10px"></div><div class="acts"><button class="btn danger" data-t="evidence">${ic("alert", 14)} Modify an evidence file</button><button class="btn danger" data-t="ledger">${ic("alert", 14)} Edit a ledger entry</button><button class="btn" data-t="restore">${ic("ref", 14)} Restore</button></div></div></div>
+  <div class="card"><h3><i>${ic("lab", 15)}</i>Tamper-detection check</h3><div class="note" style="margin-bottom:12px">Really changes a file of this analysed case so you can show that verification catches it, then puts the original back. Evidence originals in uploads/ are never touched.</div>
+  <div id="tdst" class="note" style="margin-bottom:10px"></div>${S.case.writable === false ? `<div class="note warn">This shared demo case is read-only. Create your own case (e.g. with a simulated scenario) to run the tamper check.</div>` : `<div class="acts"><button class="btn danger" data-t="evidence">${ic("alert", 14)} Modify an evidence file</button><button class="btn danger" data-t="ledger">${ic("alert", 14)} Edit a ledger entry</button><button class="btn" data-t="restore">${ic("ref", 14)} Restore</button></div>`}</div></div>
   <div class="card"><h3><i>${ic("lock", 15)}</i>Ledger — ${R.ledger.length} hash-chained entries<span class="r note">HMAC-SHA256 signed · actor = analyst who ran the step</span></h3><div class="chain">
   ${R.ledger.map((b, i) => `${i ? `<div class="arw"><svg width="22" height="14" viewBox="0 0 30 14"><path d="M0 7h26M20 2l6 5-6 5" fill="none" stroke="currentColor" stroke-width="2"/></svg></div>` : ""}
   <div class="blk ${bad.has(b.seq) ? "bad" : ""}" data-tip="<b>#${b.seq} ${esc(b.stage)} · ${esc(b.action)}</b><br>${esc(b.target)}<br><span class=mono>${esc(b.time)}</span><br>actor: ${esc(b.actor)}<br>prev: <span class=mono>${esc((b.prev || "").slice(0, 32))}…</span><br>hash: <span class=mono>${esc((b.hash || "").slice(0, 32))}…</span>${b.sha ? "<br>file SHA-256: <span class=mono>" + esc(b.sha.slice(0, 32)) + "…</span>" : ""}">
@@ -603,7 +620,7 @@ async function verify() {
     await openCase(S.cid, true, "custody");
   } catch (e) { fail(e); }
 }
-async function tamperStatus() { try { const s = await api("POST", `/api/cases/${S.cid}/tamper`, {action:"status"}); const el = $("#tdst"); if (el) el.innerHTML = s.active ? `<span class="bad">${ic("alert", 13)} Active: ${esc(s.what)} — verify, then restore.</span>` : `<span class="ok">${ic("chk", 13)} No tampering demo active.</span>`; } catch (e) {} }
+async function tamperStatus() { try { const s = await api("POST", `/api/cases/${S.cid}/tamper`, {action:"status"}); const el = $("#tdst"); if (el) el.innerHTML = s.active ? `<span class="bad">${ic("alert", 13)} Active: ${esc(s.what)} — verify, then restore.</span>` : `<span class="ok">${ic("chk", 13)} No tamper check active.</span>`; } catch (e) {} }
 async function tamper(a) { try { const r = await api("POST", `/api/cases/${S.cid}/tamper`, {action:a}); toast(esc(r.what), a === "restore" ? "var(--gr)" : "var(--am)"); S.verify = null; await openCase(S.cid, true, "custody"); } catch (e) { fail(e); } }
 
 /* ---- report */
@@ -614,7 +631,11 @@ function tReport(v) {
   v.innerHTML += staleBox() + `<div class="card" style="margin-bottom:16px"><div class="acts"><a class="btn pri" href="${b}report" target="_blank">${ic("ext", 14)} Open report in new tab</a><a class="btn" href="${b}report?download=1">${ic("dl", 14)} report.html</a>
   <a class="btn" href="${b}timeline?download=1">${ic("dl", 14)} timeline.csv</a><a class="btn" href="${b}events?download=1">${ic("dl", 14)} normalized_events.json</a><a class="btn" href="${b}incidents?download=1">${ic("dl", 14)} incidents.json</a>
   <a class="btn" href="${b}ledger?download=1">${ic("dl", 14)} custody_ledger.jsonl</a><a class="btn" href="/api/cases/${S.cid}/bundle">${ic("fold", 14)} Full case bundle (.zip)</a></div>
-  <div class="note" style="margin-top:10px">To print or save as PDF: open the report in a new tab and use the browser's Print → Save as PDF.</div></div>
+  <div class="note" style="margin-top:10px">PDF: open the report and use its <b>Print / Save as PDF</b> button (the printed report is always in the light layout, with page numbers).</div></div>
+  <div class="card" style="margin-bottom:16px"><h3><i>${ic("usr", 15)}</i>Share without personal data (pseudonymised)</h3>
+  <div class="note" style="margin-bottom:10px">User names, IP addresses, host names, e-mail addresses, AWS account and access-key ids are replaced by keyed tokens (e.g. <span class="mono">user-3f9a1c</span>). The same value always gets the same token in this case, so the attack story still reads correctly, but tokens cannot be reversed or linked to other cases. For reading only: the original, hash-verified bundle remains the evidence, and the custody ledger is never altered.</div>
+  <div class="acts"><a class="btn" href="${b}report?anon=1" target="_blank">${ic("ext", 14)} Open pseudonymised report</a><a class="btn" href="${b}report?anon=1&download=1">${ic("dl", 14)} report (pseudonymised)</a>
+  <a class="btn" href="${b}timeline?anon=1&download=1">${ic("dl", 14)} timeline.csv (pseudonymised)</a><a class="btn" href="${b}incidents?anon=1&download=1">${ic("dl", 14)} incidents.json (pseudonymised)</a></div></div>
   <div class="g g3">${[["alert", "Incidents", "every incident with severity, time window, platforms, ATT&CK techniques and attack stages in order"],
     ["res", "Timeline", "all flagged events of every platform in one UTC timeline, with the evidence file and line they came from"],
     ["cus", "Chain of custody", "every ledger entry with its hash, the verification result and the anchor hash"],
@@ -627,7 +648,7 @@ function tReport(v) {
 
 /* ---- activity */
 async function tActivity(v) {
-  v.innerHTML = head("Audit trail", "Case activity log", "Who did what and when: case creation, every evidence upload with its SHA-256, collectors, analyses, verifications, tampering demos and exports.");
+  v.innerHTML = head("Audit trail", "Case activity log", "Who did what and when: case creation, every evidence upload with its SHA-256, collectors, analyses, verifications, tamper-detection checks and exports.");
   const a = await api("GET", `/api/cases/${S.cid}/activity`);
   v.innerHTML += `<div class="card"><div class="tw max" style="max-height:70vh"><table><thead><tr><th>Time (UTC)</th><th>User</th><th>Action</th><th>Details</th></tr></thead><tbody>
   ${a.map(x => `<tr><td class="mono">${utc(x.time)}</td><td>${esc(x.user || "–")}</td><td><span class="tag ${/fail|tamper/.test(x.action) ? "rd" : /done|verified|created/.test(x.action) ? "gr" : "cy"}">${esc(x.action)}</span></td><td class="mono" style="font-size:11px;max-width:620px;white-space:pre-wrap;word-break:break-word">${esc(actDetail(x))}</td></tr>`).join("")}</tbody></table></div></div>`;
@@ -645,7 +666,9 @@ async function viewSystem(v) {
   `<div class="g g2"><div class="card"><h3><i>${ic("sys", 15)}</i>Environment</h3><div class="kv"><div>Host</div><div class="mono">${esc(i.host)}</div><div>System</div><div class="mono">${esc(i.system)}</div><div>Python</div><div class="mono">${esc(i.python)}</div>
   ${Object.entries(i.modules).map(([k, x]) => `<div>${esc(k)}</div><div class="mono ${x ? "" : "warn"}">${x ? esc(x) : "not installed"}</div>`).join("")}
   <div>Data folder</div><div class="mono" style="word-break:break-all">${esc(i.data_dir)}</div><div>Custody HMAC key</div><div class="mono" style="word-break:break-all">${esc(i.custody_key)}</div><div>Cases</div><div>${i.cases}</div>
-  <div>Mode</div><div>${i.public_mode ? '<span class="warn">public demo (host collectors disabled)</span>' : "local"}</div></div>
+  <div>Mode</div><div>${i.public_mode ? '<span class="warn">hosted instance (collectors that read this server are off; per-visitor cases)</span>' : "local"}</div>
+  <div>Storage</div><div>${esc(i.storage.backend)}${i.storage.files != null ? ` · ${fmt(i.storage.files)} files, ${bytes(i.storage.bytes)}` : ""}${i.storage.last_error ? ` <span class="bad">${esc(i.storage.last_error)}</span>` : ""}</div>
+  <div>Retention</div><div>${i.retention_hours ? `visitor cases deleted after ${i.retention_hours} h` : "cases kept until deleted"}</div></div>
   <div class="note" style="margin-top:12px">Back up <span class="mono">custody.key</span> and <span class="mono">anchors.json</span> with the cases: without the key the HMAC of old ledgers cannot be checked. CLI check of a case: <span class="mono">python main.py verify --case webapp_data/cases/&lt;ID&gt;/case --custody-key-file webapp_data/custody.key --anchor &lt;hash&gt;</span></div></div>
   <div class="card"><h3><i>${ic("mit", 15)}</i>Detection engine</h3><div class="g g2" style="margin-bottom:12px">${kpi(i.rules, "Detection rules", "", "var(--am)", "bolt")}${kpi(i.techniques, "ATT&CK techniques", "", "var(--cy)", "tgt")}</div>
   ${Object.entries(i.families).map(([f, n]) => `<div style="display:grid;grid-template-columns:1fr 40px;gap:8px;font-size:12.8px;margin:4px 0"><span>${esc(f)}</span><b class="mono" style="text-align:right">${n}</b></div>`).join("")}</div></div>
@@ -827,7 +850,7 @@ function eReal(D) {
     <text x="${TL + v.samples * s + 6}" y="${y + 16}" font-size="11" fill="var(--mu)" font-family="Consolas,monospace">${v.alerted}/${v.samples}</text>`; });
   tc += `</svg><div class="legend"><span><i style="background:var(--cy)"></i>raised an alert</span><span><i style="background:color-mix(in srgb,var(--cy) 45%,transparent)"></i>contains supported events</span><span><i style="background:var(--line2)"></i>samples</span></div>`;
   return head("Framework evaluation", "Real-world validation", "Real attack logs from public datasets, not simulations: Windows EVTX-ATTACK-SAMPLES, LogHub OpenSSH / Linux logs and Stratus Red Team CloudTrail detonations.") +
-  `<div class="info" style="margin-bottom:16px"><b>Read this first.</b> The numbers are honest but limited: (1) rules were refined after looking at these samples, so labelled results are development-set results; (2) the false-positive rate on real benign traffic is not measured, because no labelled benign logs exist; (3) cross-platform correlation on one real incident is not measured, because no public dataset has Windows + Linux + AWS logs of the same incident.</div>
+  `<div class="info" style="margin-bottom:16px"><b>Read this first.</b> The numbers are honest but limited: (1) rules were refined after looking at these samples, so labelled results are development-set results &mdash; the <b>held-out</b> section below measures the frozen rules on unseen samples; (2) the false-positive rate on real benign traffic is not measured, because no labelled benign logs exist; (3) cross-platform correlation on one real incident is not measured, because no public dataset has Windows + Linux + AWS logs of the same incident.</div>
   <div class="g g4">${kpi(w.samples, "Real Windows attack captures", `${fmt(w.records)} records · ${w.errors} parse errors`, "var(--win)", "col")}
   ${kpi(pct(w.with_supported / w.samples), "Samples the framework understands", `${w.with_supported} of ${w.samples} contain supported events`, "var(--cy)", "chk")}
   ${kpi(`${w.core[0]}/${w.core[1]}`, "Labelled samples detected", `deliberately hard cases: ${w.hard[0]}/${w.hard[1]}`, "var(--gr)", "tgt")}
@@ -841,7 +864,22 @@ function eReal(D) {
   ${R.aws.map(a => `<tr><td class="mono" style="font-size:11px;word-break:break-all">${esc(a.file.split("/").pop())}</td><td>${esc(a.why)}</td><td>${(a.flags || []).map(f => `<span class="tag">${esc(f)}</span>`).join("")}</td><td class="${a.hit ? "ok" : "bad"}">${ic(a.hit ? "chk" : "x", 16)}</td></tr>`).join("")}</tbody></table></div></div>
   <div class="card"><h3><i>${ic("exp", 15)}</i>What the framework still does not read</h3><div class="note" style="margin-bottom:8px">Most common Windows event types in the samples that are outside the catalogue (counted as ignored, never silently dropped):</div>
   ${(w.top_ignored || []).map(([k, n]) => `<div style="display:grid;grid-template-columns:1fr 80px;gap:10px;font-size:12.3px;padding:5px 0;border-bottom:1px solid var(--line)"><span class="mono" style="word-break:break-all">${esc(k)}</span><b class="mono" style="text-align:right">${fmt(n)}</b></div>`).join("")}
-  <div class="note" style="margin-top:12px">Datasets: EVTX-ATTACK-SAMPLES (sbousseaden), LogHub (logpai), Stratus Red Team (DataDog).</div></div></div>`;
+  <div class="note" style="margin-top:12px">Datasets: EVTX-ATTACK-SAMPLES (sbousseaden), LogHub (logpai), Stratus Red Team (DataDog), held-out: Hayabusa sample collection (EVTX-to-MITRE-Attack, DeepBlueCLI, Yamato Security).</div></div></div>` + heldoutHtml(R.heldout);
+}
+function heldoutHtml(H) {
+  if (!H) return "";
+  const pc = (a, b) => b ? (100 * a / b).toFixed(1) + "%" : "–";
+  return `<div class="card" style="margin-top:16px"><h3><i>${ic("lab", 15)}</i>Held-out validation &mdash; frozen rules, ${H.samples} unseen real samples<span class="r note mono">rules ${esc(H.rules_fingerprint)} · ${esc(H.dataset)}</span></h3>
+  <div class="note" style="margin-bottom:12px">Run once on real Windows captures that were never used to write the rules (a file identical to a development sample was excluded). In scope = CP-DFIR has a rule for the labelled ATT&amp;CK technique, its parent or an equivalent technique.</div>
+  <div class="g g4">${kpi(`${H.in_parent}/${H.in_scope}`, "Right technique (in scope)", `${H.in_parent_pct}% · exact sub-technique ${H.in_exact_pct}%`, "var(--am)", "tgt")}
+  ${kpi(`${H.in_alerted}/${H.in_scope}`, "Raised any alert (in scope)", `${H.in_alerted_pct}%`, "var(--cy)", "bolt")}
+  ${kpi(`${H.out_alerted}/${H.out_scope}`, "Out of scope but alerted", "no rule for the labelled technique", "var(--vi)", "mit")}
+  ${kpi(fmt(H.records), "Records parsed", `${fmt(H.errors)} undecodable (python-evtx bug)`, "var(--win)", "col")}</div>
+  <div class="g g2" style="margin-top:14px"><div class="tw"><table><thead><tr><th>Corpus</th><th>Samples</th><th>In scope</th><th>Alerted</th><th>Right technique</th></tr></thead><tbody>
+  ${Object.entries(H.per_corpus).map(([k, v]) => `<tr><td>${esc(k)}</td><td class="mono">${v.samples}</td><td class="mono">${v.in_scope}</td><td class="mono">${v.in_alerted}</td><td class="mono">${v.in_parent} (${pc(v.in_parent, v.in_scope)})</td></tr>`).join("")}</tbody></table></div>
+  <div class="tw" style="max-height:300px"><table><thead><tr><th>Technique</th><th>Samples</th><th>Alerted</th><th>Right technique</th></tr></thead><tbody>
+  ${Object.entries(H.per_technique).map(([k, v]) => `<tr><td class="mono">${esc(k)}</td><td class="mono">${v.samples}</td><td class="mono">${v.alerted}</td><td class="mono ${v.exact ? "ok" : "bad"}">${v.exact}</td></tr>`).join("")}</tbody></table></div></div>
+  <div class="info" style="margin-top:14px"><b>What it shows.</b> The development-set score does not carry over to unseen data: classic attack captures (DeepBlueCLI: PsExec, Mimikatz, PowerShell, log clearing) are detected well, while most EVTX-to-MITRE samples rely on Security events the framework does not parse yet (account changes 4738/4724/5136, object access 4656/4663). These gaps are reported, not tuned away: closing them needs new parsers and rules that must be measured on another unseen set.</div></div>`;
 }
 
 function eCoverage(D) {

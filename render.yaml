@@ -5,6 +5,7 @@ services:
     plan: free
     buildCommand: pip install -r requirements.txt
     startCommand: python webapp/app.py --host 0.0.0.0 --no-browser
+    healthCheckPath: /api/session
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.9
@@ -12,9 +13,19 @@ services:
         value: "1"
       - key: DFIR_MAX_UPLOAD_MB
         value: "50"
+      - key: DFIR_RETENTION_HOURS
+        value: "24"
       - key: DFIR_ADMIN_USER
-        value: demo
+        value: jayveer
       - key: DFIR_ADMIN_NAME
-        value: Demo Analyst
+        value: Jayveer Vasava
       - key: DFIR_ADMIN_PASSWORD
         sync: false
+      # durable storage: PostgreSQL connection string (e.g. a free Neon or Supabase database)
+      - key: DATABASE_URL
+        sync: false
+      # secrets live in the environment, never in the database or the case folders
+      - key: DFIR_CUSTODY_KEY
+        generateValue: true
+      - key: DFIR_SESSION_KEY
+        generateValue: true

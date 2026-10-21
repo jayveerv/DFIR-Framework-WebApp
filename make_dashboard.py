@@ -175,7 +175,7 @@ def collect_data(root=ROOT):
                     ledger.append({"seq": x["seq"], "stage": x["stage"], "action": x["action"], "target": x["target"],
                                    "time": x["time_utc"], "sha": x.get("sha256") or "", "prev": x["prev_hash"],
                                    "hash": x["entry_hash"], "hmac": bool(x.get("hmac"))})
-        ledger_ok, chk = CustodyLedger(lp).verify(None, b"thesis-evaluation-key")
+        ledger_ok, chk = CustodyLedger(lp).verify(None, b"cp-dfir-evaluation-key")
         ledger_checks = [sum(c["type"] == "ledger" for c in chk), sum(c["type"] == "file" for c in chk)]
 
     # ---------------- MITRE
