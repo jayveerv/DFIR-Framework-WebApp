@@ -25,10 +25,12 @@ param(
 )
 
 $ErrorActionPreference = "Continue"
-$Version = "1.1"
+$Version = "1.2"
 $Start = Get-Date
 function Iso($d) { if ($null -eq $d) { return $null }; return ([datetime]$d).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ") }
-function Hash($p) { try { return (Get-FileHash -Algorithm SHA256 -LiteralPath $p -ErrorAction Stop).Hash.ToLower() } catch { return $null } }
+function Hash($p, [int64]$cap = 104857600) {
+    try { if ((Get-Item -LiteralPath $p -ErrorAction Stop).Length -gt $cap) { return $null }
+          return (Get-FileHash -Algorithm SHA256 -LiteralPath $p -ErrorAction Stop).Hash.ToLower() } catch { return $null } }
 
 $isAdmin = ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 $hostName = $env:COMPUTERNAME
@@ -81,19 +83,21 @@ try {
 Save "connections.json" ([ordered]@{ collected_at = Iso (Get-Date); items = $conns })
 
 # 3. processes ---------------------------------------------------------------------------------------
+Write-Host "  processes (owners and executable hashes) ..."
 $hashCache = @{}
-$procs = @()
+$procs = New-Object System.Collections.ArrayList
+# owners in one call (needs Administrator); per-process WMI GetOwner is far too slow on a real machine
 $owners = @{}
+try { Get-Process -IncludeUserName -ErrorAction Stop | ForEach-Object { if ($_.UserName) { $owners[[int]$_.Id] = $_.UserName } } } catch { [void]$errors.Add("process owners: $_") }
 foreach ($p in (Get-CimInstance Win32_Process)) {
-    $u = $null
-    try { $o = Invoke-CimMethod -InputObject $p -MethodName GetOwner -ErrorAction Stop; if ($o.User) { $u = "$($o.Domain)\$($o.User)" } } catch {}
+    $u = $owners[[int]$p.ProcessId]
     $exe = $p.ExecutablePath
     $h = $null
     if ($exe) { if (-not $hashCache.ContainsKey($exe) -and $hashCache.Count -lt 400) { $hashCache[$exe] = Hash $exe }; $h = $hashCache[$exe] }
     $cmd = @()
     if ($p.CommandLine) { $cmd = @($p.CommandLine) }
-    $procs += [ordered]@{ pid = [int]$p.ProcessId; ppid = [int]$p.ParentProcessId; name = $p.Name; exe = $exe; cmdline = $cmd; username = $u
-                          create_time_utc = Iso $p.CreationDate; status = "running"; cwd = $null; exe_deleted = $false; exe_sha256 = $h }
+    [void]$procs.Add([ordered]@{ pid = [int]$p.ProcessId; ppid = [int]$p.ParentProcessId; name = $p.Name; exe = $exe; cmdline = $cmd; username = $u
+                          create_time_utc = Iso $p.CreationDate; status = "running"; cwd = $null; exe_deleted = $false; exe_sha256 = $h })
 }
 Save "processes.json" ([ordered]@{ collected_at = Iso (Get-Date); items = $procs })
 
@@ -105,6 +109,7 @@ try { $admins = @(Get-LocalGroupMember -SID "S-1-5-32-544" -ErrorAction Stop | F
 Save "accounts.json" ([ordered]@{ collected_at = Iso (Get-Date); items = $acc; administrators = $admins })
 
 # 5. persistence -------------------------------------------------------------------------------------
+Write-Host "  persistence (Run keys, startup, scheduled tasks, services) ..."
 $pers = @()
 foreach ($k in @("HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run", "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce",
                  "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run", "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run",
@@ -135,6 +140,7 @@ Save "persistence.json" ([ordered]@{ collected_at = Iso (Get-Date); items = $per
 # 6. recently written executables / scripts in temp and download folders --------------------------------
 $cut = (Get-Date).AddDays(-$Days)
 $dirs = @($env:TEMP, "$env:SystemRoot\Temp", "C:\Users\Public") + (Get-ChildItem "C:\Users" -Directory -ErrorAction SilentlyContinue | ForEach-Object { Join-Path $_.FullName "Downloads" })
+Write-Host "  recent executables and scripts in temp / Downloads ..."
 $files = @(); $scanned = 0
 foreach ($d in ($dirs | Where-Object { $_ -and (Test-Path -LiteralPath $_) } | Select-Object -Unique)) {
     Get-ChildItem -LiteralPath $d -File -Recurse -Depth 3 -Force -ErrorAction SilentlyContinue | ForEach-Object {
