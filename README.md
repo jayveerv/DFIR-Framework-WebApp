@@ -57,7 +57,7 @@ Linux/macOS: `./run_webapp.sh` (ya `python webapp/app.py`).
 | **Report & export** | Framework ki HTML report, timeline.csv, events/incidents JSON, ledger, poora case bundle (.zip) |
 | **Activity log** | Kisne kya kiya: upload (hash ke saath), collectors, analysis, verify, export |
 | Framework evaluation | 7 native pages: overview, accuracy, integrity, cloud, scalability, real-world validation, ATT&CK coverage (`results/*.json` se) |
-| System & self-test | Environment, 46 unit tests ek click me, password change |
+| System & self-test | Environment, 59 unit tests ek click me, password change |
 | Users & audit | (admin) analysts add/remove, global audit log (logins, failed logins), case delete |
 
 **Forensic design**
@@ -115,7 +115,7 @@ Upar ◐ button se light theme. Kisi section ko seedha kholna ho to `dashboard.h
 | 5 | **Apni logs analyze karo** |
 | 6 | Is laptop ka Windows Security log export karo (**Run as Administrator**) |
 | 7 | AWS CloudTrail events **aur account state** (IAM, access keys, S3, security groups) kheecho (AWS credentials chahiye) |
-| 8 | Unit tests (46 tests) |
+| 8 | Unit tests (59 tests) |
 | 9 | **TRIAGE**: is laptop ka live evidence (processes, sockets, accounts, persistence, files, logs) collect karo, analyze karo, report banao |
 
 Command line: `python main.py triage | collect-host | demo | evaluate | real-eval | tamper-demo | analyze --input DIR | collect-live | collect-aws | collect-linux | verify --case DIR | selftest`
@@ -133,7 +133,7 @@ Command line: `python main.py triage | collect-host | demo | evaluate | real-eva
 | Reporting | `report.py` | Self-contained HTML report (internet ya JavaScript nahi chahiye) |
 | Evaluation | `evaluate.py`, `generate_data.py` | Simulated scenarios + ground truth, tampering tests, scalability |
 | **Real-data validation** | `realdata.py` | **Asli** public logs par test (section 4) |
-| Tests | `tests/` | 46 tests: asli processes/sockets (Linux), AWS collectors (botocore Stubber, AWS service model se validated), SSH collector (fake runner), parsers, rules, custody |
+| Tests | `tests/` | 59 tests (hosted-console privacy, collector package integrity, pseudonymisation aur held-out labels ke 11 naye): asli processes/sockets (Linux), AWS collectors (botocore Stubber, AWS service model se validated), SSH collector (fake runner), parsers, rules, custody |
 
 **Supported inputs**
 - **Windows:** `wevtutil` XML export ya binary **`.evtx`**. Security (4624, 4625, 4634, 4672, 4688, 4698, 4720, 4732, 5145, 1102), System (7045, 104), **Sysmon (1, 3, 10, 13)**, PowerShell 4104
@@ -224,6 +224,25 @@ Poori detail `results/real_data_report.html`. Data GitHub se download hota hai (
 
 **Asli data se jo bugs mile aur theek hue:** `.evtx` binary padha nahi jaata tha; real time format (`2019-03-19 23:35:07+00:00`) fail; CloudTrail me source IP alag jagah (enriched export); ek real CloudTrail file invalid JSON (records ke beech comma nahi) par crash; syslog "message repeated 5 times" ek failure ginta tha (brute-force IPs 9 -> 11 hue); purane RedHat `sshd(pam_unix)` format 0% parse.
 
+### 4b. Held-out validation (rules frozen, naye samples)
+
+Upar wale labelled results development set hain (rules unhi samples ko dekh kar likhe gaye). Isliye rules ko **freeze** karke
+(fingerprint `804638ca9a700716`) **320 naye real samples** par **ek baar** chalaya, jo rules likhte waqt kabhi nahi dekhe gaye:
+Hayabusa sample collection (fixed commit) = EVTX-to-MITRE-Attack + DeepBlueCLI (SANS) + Yamato Security. Ek file jo
+development set se byte-identical thi, hata di.
+
+| | Samples | Alert aaya | Sahi technique |
+|---|---|---|---|
+| In scope (technique ka rule hai) | 117 | 36 (30.8%) | **26 (22.2%)** |
+| DeepBlueCLI (classic attacks) | 14 in scope | 13 | 8 |
+| EVTX-to-MITRE-Attack | 102 in scope | 22 | 17 |
+
+**Matlab:** development-set ka 25/26 naye data par nahi tikta. Classic captures (PsExec, Mimikatz, PowerShell, log clearing) theek
+pakde jaate hain; EVTX-to-MITRE ke zyada-tar samples aise Security events use karte hain jo framework abhi parse nahi karta
+(4738/4724/5136 account changes, 4656/4663 object access). Ye gaps tune nahi kiye gaye (warna ye set bhi development set ban jaata);
+inhe band karne ke liye naye parsers + rules aur phir ek aur unseen set chahiye. 15 files (1,681 records) python-evtx 0.8 ke
+NullTypeNode bug ki wajah se decode nahi hoti - gini gayi hain, chhupayi nahi. Chalana: `python main.py real-eval` (held-out bhi isi me).
+
 **Jo abhi bhi nahi pakda gaya (report me MISS likha hai):** rdrleakdiag LSASS dump (sample me LSASS-access event nahi hai; command line se *credential_dump_tool* alert aata hai, par label *lsass_access* maangta hai, isliye MISS gina), renamed regsvr32, msxsl, Security 4656/4663 object-access LSASS, TeamViewer memory dump, Kerberos password spray (4771).
 
 ---
@@ -232,9 +251,9 @@ Poori detail `results/real_data_report.html`. Data GitHub se download hota hai (
 
 1. **Asli benign traffic par false-positive rate** measure nahi hua: koi labelled asli benign log available nahi tha.
 2. **Asli multi-platform incident par correlation** measure nahi hua: koi public dataset me ek incident ke asli Windows + Linux + AWS logs nahi hain. Cross-platform correlation sirf **simulated** scenarios par evaluate hua.
-3. Detection rules **asli samples dekhne ke baad** likhe gaye. Isliye asli-data ke labelled results "development set" hain, optimistic. Unbiased test ke liye naya data chahiye.
+3. Detection rules **asli samples dekhne ke baad** likhe gaye, isliye EVTX-ATTACK-SAMPLES ke labelled results "development set" hain. Isliye section 4b me frozen rules ko **320 unseen samples** par test kiya: wahan in-scope samples me sahi technique **22.2%** hai. Ye number honest baseline hai.
 4. Sample labels file names se liye gaye hain (meri reading), dataset ke official per-rule labels nahi.
-5. **Live collectors ka asli test kahan hua:** host collector Linux par **asli system par** test hua. **Windows aur macOS paths (registry Run keys, schtasks, services, wevtutil, LaunchAgents) is project ke dauran Windows/macOS machine par chale nahi**: parsers documented output formats par fixture se test hue, par asli output par nahi. AWS collector botocore stub se, SSH collector fake runner se test hua (asli sshd/AWS account nahi). **Apne Windows laptop par menu 9 chalao: wahi sabse zaroori check hai.**
+5. **Live collectors ka asli test kahan hua:** host collector Linux par **asli system par** test hua. **Windows aur macOS paths (registry Run keys, schtasks, services, wevtutil, LaunchAgents) is project ke dauran Windows/macOS machine par chale nahi**: parsers documented output formats par fixture se test hue, par asli output par nahi. AWS collector botocore stub se, SSH collector fake runner se test hua (asli sshd/AWS account nahi). **Apne Windows laptop par menu 9 chalao: wahi sabse zaroori check hai.** Naya PowerShell collector (`collectors/cpdfir-collect-windows.ps1`) PowerShell 7.4 parser se syntax-check hua (0 errors); asli Windows par chalana bhi zaroori hai.
 6. Rule-based detection: rules se bahar ke attacks nahi pakde jaate.
 7. Linux session attribution heuristic hai (same user ka latest login). S5 me isse ek false positive aata hai.
 8. Credential file -> AWS key link ke liye analyst ka `credential_inventory` chahiye.
