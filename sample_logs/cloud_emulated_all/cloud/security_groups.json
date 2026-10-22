@@ -41,240 +41,240 @@
  ],
  "items": [
   {
-   "group_id": "sg-344663aa481f71b9a",
+   "group_id": "sg-dd7b2019916f52ad7",
    "name": "default",
-   "vpc": "vpc-25022551af2ec9c26",
+   "vpc": "vpc-7e733ebb192d99d2f",
    "region": "af-south-1",
    "rules": []
   },
   {
-   "group_id": "sg-12ef0ad306ff5a2b6",
+   "group_id": "sg-197fe7388254327e3",
    "name": "default",
-   "vpc": "vpc-4d8a3ec4344faade6",
+   "vpc": "vpc-72fa2b3a2eb6aed63",
    "region": "ap-east-1",
    "rules": []
   },
   {
-   "group_id": "sg-5ad95db96b32e956b",
+   "group_id": "sg-0c4c496ae3df3ca83",
    "name": "default",
-   "vpc": "vpc-0f5ff5ac96d11c160",
+   "vpc": "vpc-b77fe6a3f5c8375aa",
    "region": "ap-east-2",
    "rules": []
   },
   {
-   "group_id": "sg-fc68301e193fafed6",
+   "group_id": "sg-a21b2ba9a57e74782",
    "name": "default",
-   "vpc": "vpc-2887d8175d3dbda2e",
+   "vpc": "vpc-5e081d077f963af31",
    "region": "ap-northeast-1",
    "rules": []
   },
   {
-   "group_id": "sg-2d8e81006175d706f",
+   "group_id": "sg-66a9c288d4464ecb2",
    "name": "default",
-   "vpc": "vpc-5f0c5bf2612838c21",
+   "vpc": "vpc-2cfb18dfb9d7ed053",
    "region": "ap-northeast-2",
    "rules": []
   },
   {
-   "group_id": "sg-1d2f79a0b3b07bbc9",
+   "group_id": "sg-4223dcb914e044b38",
    "name": "default",
-   "vpc": "vpc-2a54b6717f21c7db4",
+   "vpc": "vpc-a9eda03eddd1bdce8",
    "region": "ap-northeast-3",
    "rules": []
   },
   {
-   "group_id": "sg-8ca51bbc7e9135786",
+   "group_id": "sg-b4333ca3414e275a5",
    "name": "default",
-   "vpc": "vpc-812f8861e17d454f7",
+   "vpc": "vpc-c4e47057af0ab27ef",
    "region": "ap-south-1",
    "rules": []
   },
   {
-   "group_id": "sg-00f4449b402ba828f",
+   "group_id": "sg-fd1f8ff8a36057dce",
    "name": "default",
-   "vpc": "vpc-dfb30a2e433c0cc0b",
+   "vpc": "vpc-fa4b1224a6f44cc80",
    "region": "ap-south-2",
    "rules": []
   },
   {
-   "group_id": "sg-c7208aa6eaf9c0018",
+   "group_id": "sg-4e80ebd20b444e0a2",
    "name": "default",
-   "vpc": "vpc-af9595d7dd852fcc1",
+   "vpc": "vpc-192ac5af73edd7183",
    "region": "ap-southeast-1",
    "rules": []
   },
   {
-   "group_id": "sg-4c99d6856673f57b6",
+   "group_id": "sg-9fd37f127d2f1e5dd",
    "name": "default",
-   "vpc": "vpc-0f1b40cb14b759e07",
+   "vpc": "vpc-038027ad38494fda4",
    "region": "ap-southeast-2",
    "rules": []
   },
   {
-   "group_id": "sg-499ad7f8f0b01feb1",
+   "group_id": "sg-99364b4b21e08a4e8",
    "name": "default",
-   "vpc": "vpc-4f0ae585032c5520c",
+   "vpc": "vpc-819e62f45279c8df5",
    "region": "ap-southeast-3",
    "rules": []
   },
   {
-   "group_id": "sg-30e458eab7cdc8e6a",
+   "group_id": "sg-00bd797636ba787b2",
    "name": "default",
-   "vpc": "vpc-540e56a5bd5cabb46",
+   "vpc": "vpc-3f698d32bf68789c1",
    "region": "ap-southeast-4",
    "rules": []
   },
   {
-   "group_id": "sg-6b53e9fe25741831c",
+   "group_id": "sg-3dc619047d0e6a91d",
    "name": "default",
-   "vpc": "vpc-e93da43c88c4e117f",
+   "vpc": "vpc-702121271d7bb141b",
    "region": "ap-southeast-5",
    "rules": []
   },
   {
-   "group_id": "sg-e4a9bb7a7425aff4b",
+   "group_id": "sg-22a7747dd4e891d5f",
    "name": "default",
-   "vpc": "vpc-0d70bf0df28774bbc",
+   "vpc": "vpc-2d0ef10d1b251b30b",
    "region": "ap-southeast-6",
    "rules": []
   },
   {
-   "group_id": "sg-23c281aaa2fb3a7d8",
+   "group_id": "sg-3070111609b2b08cb",
    "name": "default",
-   "vpc": "vpc-b57759570066ad8f4",
+   "vpc": "vpc-f51b3e5f1505a7a2a",
    "region": "ap-southeast-7",
    "rules": []
   },
   {
-   "group_id": "sg-f0baf00924b7b0bd6",
+   "group_id": "sg-fb4a857c694de91df",
    "name": "default",
-   "vpc": "vpc-4ed1bcf8025c71887",
+   "vpc": "vpc-0e9d35a1e892e3f4e",
    "region": "ca-central-1",
    "rules": []
   },
   {
-   "group_id": "sg-b865f40a167809475",
+   "group_id": "sg-c846e1046d13e95da",
    "name": "default",
-   "vpc": "vpc-b211dbf82d203c0e3",
+   "vpc": "vpc-192439c25dfa51bed",
    "region": "ca-west-1",
    "rules": []
   },
   {
-   "group_id": "sg-d7d1ed1a5f063d087",
+   "group_id": "sg-55f10eebe2bee8012",
    "name": "default",
-   "vpc": "vpc-951b90be4a7deb45d",
+   "vpc": "vpc-c686b0eddf037f192",
    "region": "cn-north-1",
    "rules": []
   },
   {
-   "group_id": "sg-c81ee4e490d92872a",
+   "group_id": "sg-378a64fef2d239801",
    "name": "default",
-   "vpc": "vpc-a0d185981ebf2a294",
+   "vpc": "vpc-650798e1965f93c2f",
    "region": "cn-northwest-1",
    "rules": []
   },
   {
-   "group_id": "sg-6461805fdab63c010",
+   "group_id": "sg-3e11e29c9755c2daf",
    "name": "default",
-   "vpc": "vpc-e53425e991a30cf00",
+   "vpc": "vpc-3a2b51f1841d196c3",
    "region": "eu-central-1",
    "rules": []
   },
   {
-   "group_id": "sg-7e2b1947a8257c71d",
+   "group_id": "sg-5693c1c27621b2114",
    "name": "default",
-   "vpc": "vpc-e679f17bb0fd02dc9",
+   "vpc": "vpc-e56c6238c72aa8dfc",
    "region": "eu-central-2",
    "rules": []
   },
   {
-   "group_id": "sg-88f0fc0dadee44dd1",
+   "group_id": "sg-dacc71e5f148942fa",
    "name": "default",
-   "vpc": "vpc-5801109d94c56903c",
+   "vpc": "vpc-cf9277f9966f32786",
    "region": "eu-north-1",
    "rules": []
   },
   {
-   "group_id": "sg-4ed37e1118500f0b1",
+   "group_id": "sg-ff290949ba623fd8d",
    "name": "default",
-   "vpc": "vpc-78e43bb1f200aede9",
+   "vpc": "vpc-06412c2a93f2c9702",
    "region": "eu-south-1",
    "rules": []
   },
   {
-   "group_id": "sg-4549c466e58482587",
+   "group_id": "sg-f3194e0c4ad524305",
    "name": "default",
-   "vpc": "vpc-7f9c2dd2fd8c63736",
+   "vpc": "vpc-762600a01e44aa4e7",
    "region": "eu-south-2",
    "rules": []
   },
   {
-   "group_id": "sg-0ae65e81adba75f76",
+   "group_id": "sg-63ac328597391eb14",
    "name": "default",
-   "vpc": "vpc-042671523a34c2780",
+   "vpc": "vpc-2b8f9c1c48a0195be",
    "region": "eu-west-1",
    "rules": []
   },
   {
-   "group_id": "sg-d5be1aa08b4d0e165",
+   "group_id": "sg-f5100cc7f989f0e95",
    "name": "default",
-   "vpc": "vpc-f32935865bbc94012",
+   "vpc": "vpc-d8cce97656fc5e350",
    "region": "eu-west-2",
    "rules": []
   },
   {
-   "group_id": "sg-d521f3717368fb723",
+   "group_id": "sg-79bf82a9047d0129a",
    "name": "default",
-   "vpc": "vpc-41031af93922645b4",
+   "vpc": "vpc-f5c78bed6fe94f2d8",
    "region": "eu-west-3",
    "rules": []
   },
   {
-   "group_id": "sg-c093bcf940d6b4e26",
+   "group_id": "sg-9f64b8afe5c0cc7b8",
    "name": "default",
-   "vpc": "vpc-708ddabff67d638dc",
+   "vpc": "vpc-c1e9b517e4180e057",
    "region": "il-central-1",
    "rules": []
   },
   {
-   "group_id": "sg-e3f8f5d94deb1b9ab",
+   "group_id": "sg-27040aff27d172d63",
    "name": "default",
-   "vpc": "vpc-e3f2882a4f6db9da9",
+   "vpc": "vpc-98ffe6963a6385795",
    "region": "me-central-1",
    "rules": []
   },
   {
-   "group_id": "sg-1c9e405cf04ff8abf",
+   "group_id": "sg-c2e77606f629504fb",
    "name": "default",
-   "vpc": "vpc-aed7e278f5e59dd59",
+   "vpc": "vpc-fe9a4062b8b264913",
    "region": "me-south-1",
    "rules": []
   },
   {
-   "group_id": "sg-a8c0fd581ee5da610",
+   "group_id": "sg-98f26aca44fb6438d",
    "name": "default",
-   "vpc": "vpc-e455c46a94143fcc1",
+   "vpc": "vpc-c3a232e642176f528",
    "region": "mx-central-1",
    "rules": []
   },
   {
-   "group_id": "sg-ada15370c9a1f570a",
+   "group_id": "sg-31effb21f32b9c481",
    "name": "default",
-   "vpc": "vpc-71a352e1ce9df45b8",
+   "vpc": "vpc-0eec5696e416ff7df",
    "region": "sa-east-1",
    "rules": []
   },
   {
-   "group_id": "sg-7c70fdd8c9f5dc705",
+   "group_id": "sg-a2aa1fb3ca373d496",
    "name": "default",
-   "vpc": "vpc-42d8994716954c750",
+   "vpc": "vpc-df2805ebd573e2097",
    "region": "us-east-1",
    "rules": []
   },
   {
-   "group_id": "sg-c4bc39cda50ef2eaf",
+   "group_id": "sg-cbf1946bfedc5c43b",
    "name": "ssh-world",
-   "vpc": "vpc-42d8994716954c750",
+   "vpc": "vpc-df2805ebd573e2097",
    "region": "us-east-1",
    "rules": [
     {
@@ -289,9 +289,9 @@
    ]
   },
   {
-   "group_id": "sg-60b4d11a6d4341946",
+   "group_id": "sg-aba1dccad7ecb0642",
    "name": "rdp-world",
-   "vpc": "vpc-42d8994716954c750",
+   "vpc": "vpc-df2805ebd573e2097",
    "region": "us-east-1",
    "rules": [
     {
@@ -306,9 +306,9 @@
    ]
   },
   {
-   "group_id": "sg-46c4676f1e2108725",
+   "group_id": "sg-957c35f42c86038ca",
    "name": "all-open",
-   "vpc": "vpc-42d8994716954c750",
+   "vpc": "vpc-df2805ebd573e2097",
    "region": "us-east-1",
    "rules": [
     {
@@ -323,9 +323,9 @@
    ]
   },
   {
-   "group_id": "sg-181f17dfb15d56b8f",
+   "group_id": "sg-39a114312c049e135",
    "name": "web-443",
-   "vpc": "vpc-42d8994716954c750",
+   "vpc": "vpc-df2805ebd573e2097",
    "region": "us-east-1",
    "rules": [
     {
@@ -340,9 +340,9 @@
    ]
   },
   {
-   "group_id": "sg-05f04ecd5905993d8",
+   "group_id": "sg-b820e3c2bbab04c0f",
    "name": "db-internal",
-   "vpc": "vpc-42d8994716954c750",
+   "vpc": "vpc-df2805ebd573e2097",
    "region": "us-east-1",
    "rules": [
     {
@@ -357,44 +357,44 @@
    ]
   },
   {
-   "group_id": "sg-6089bcebbc4aa0a3d",
+   "group_id": "sg-fc9873e241b923a41",
    "name": "default",
-   "vpc": "vpc-bb98f492386826b37",
+   "vpc": "vpc-7fc8709c9ee0787fd",
    "region": "us-east-2",
    "rules": []
   },
   {
-   "group_id": "sg-645cb41880e9ddca0",
+   "group_id": "sg-4be6c19615e6bd238",
    "name": "default",
-   "vpc": "vpc-827ff66996bd37a13",
+   "vpc": "vpc-70a37aa17e6272967",
    "region": "us-gov-east-1",
    "rules": []
   },
   {
-   "group_id": "sg-1bcd0019b7cf602e7",
+   "group_id": "sg-82c5cef5e8bae0be0",
    "name": "default",
-   "vpc": "vpc-309816fb4204f755e",
+   "vpc": "vpc-4b3dadf76560fa52b",
    "region": "us-gov-west-1",
    "rules": []
   },
   {
-   "group_id": "sg-f0876530fdb75776c",
+   "group_id": "sg-d806940c6af9f3880",
    "name": "default",
-   "vpc": "vpc-bd9267f9a7678c28e",
+   "vpc": "vpc-857f03b207cac8874",
    "region": "us-west-1",
    "rules": []
   },
   {
-   "group_id": "sg-f20b1f604901c2d0c",
+   "group_id": "sg-7ed61489b1d829e94",
    "name": "default",
-   "vpc": "vpc-2c101eb9cf8b8dd45",
+   "vpc": "vpc-7a879582debbbb60e",
    "region": "us-west-2",
    "rules": []
   },
   {
-   "group_id": "sg-febb83b6b015d193b",
+   "group_id": "sg-fade44ac0b3203a3e",
    "name": "ssh-world-west",
-   "vpc": "vpc-2c101eb9cf8b8dd45",
+   "vpc": "vpc-7a879582debbbb60e",
    "region": "us-west-2",
    "rules": [
     {

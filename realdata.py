@@ -355,7 +355,7 @@ def build_report(data):
     o.append("<p class='note'>Only 4 files (15 events). They are in Datadog's enriched format: the first version crashed on one file (records glued together without commas) and read no source IP from any of them. Both are fixed. These samples are far too few to say anything about accuracy; they show the parser works on real CloudTrail exports.</p>")
 
     if ho:
-        o.append(heldout_section(ho, _table))
+        o.append(heldout_section(ho, _table, data.get("heldout_posthoc")))
     o.append("<h2>5. Sources</h2><ul class='note'>"
              "<li>Windows: sbousseaden/EVTX-ATTACK-SAMPLES (GitHub). Sample labels here come from folder and file names.</li>"
              "<li>Linux: LogHub, He, Zhu, He and Lyu, <i>Loghub: A Large Collection of System Log Datasets towards Automated Log Analytics</i>, arXiv:2008.06448, 2020 (OpenSSH_2k, Linux_2k).</li>"
@@ -366,7 +366,7 @@ def build_report(data):
     return "".join(o)
 
 
-def heldout_section(ho, _table):
+def heldout_section(ho, _table, post=None):
     pc = lambda a, b: f"{100 * a / b:.1f}%" if b else "n/a"
     o = ["<h2>4. Held-out validation (rules frozen, samples never used to write them)</h2>"]
     o.append(f"<p>The rule set (fingerprint <span class='mono'>{h(ho['rules_fingerprint'])}</span>) was run <b>once</b> on {ho['samples']} real "
@@ -397,6 +397,16 @@ def heldout_section(ho, _table):
              "Security events the framework does not parse yet (for example 4738/4724/5136 account changes, 4656/4663 object access, 5140/5145 detail fields).</li>"
              f"<li>{ho['errors']:,} records in a few files could not be decoded by the python-evtx library (a known NullTypeNode error); they are counted, not hidden.</li>"
              "<li>The gaps are listed by technique above; closing them needs new parsers and rules, which must then be measured on yet another unseen set.</li></ul>")
+    if post:
+        o.append("<h3>After the v1.3 rules (post-hoc, not a held-out result)</h3>")
+        o.append(f"<p>The gaps above led to new parsers (4728/4756, 4738/4742, 4781, 5136, 4723/4724, 4768/4771, Defender 5001/5007, PowerShell 4103/800) "
+                 f"and five rules for account manipulation and defence tampering, written from Microsoft's event documentation. Re-running this collection "
+                 f"with the new rules (fingerprint <span class='mono'>{h(post['rules_fingerprint'])}</span>) gives the figures below. Because the "
+                 f"collection had already shown the gaps, these numbers are <b>optimistic</b> and are reported only to show that the gaps were closed; "
+                 f"the frozen result above remains the held-out estimate.</p>")
+        o.append(_table(["Rules", "In scope", "Alerted", "Right technique (exact)", "Right technique (incl. parent)"], [
+            ["v1.1 (frozen, held-out)", ho["in_scope"], f"{ho['in_alerted']} ({ho['in_alerted_pct']}%)", f"{ho['in_exact']} ({ho['in_exact_pct']}%)", f"{ho['in_parent']} ({ho['in_parent_pct']}%)"],
+            ["v1.3 (post-hoc)", post["in_scope"], f"{post['in_alerted']} ({post['in_alerted_pct']}%)", f"{post['in_exact']} ({post['in_exact_pct']}%)", f"{post['in_parent']} ({post['in_parent_pct']}%)"]]))
     return "".join(o)
 
 
@@ -421,12 +431,20 @@ def run(root, log=print):
     miss = heldout.fetch(root, log)
     if miss:
         log(f"Warning: {len(miss)} held-out file(s) could not be downloaded.")
-    ho = heldout.run(root, log)
+    cur = heldout.run(root, log)
+    # The held-out result that counts is the FIRST run with frozen rules (v1.1). Later rule sets were written after that run had shown
+    # the gaps, so on this collection they are post-hoc (optimistic) and are reported separately, never in place of the frozen result.
+    frozen_p = os.path.join(root, "results", "heldout_frozen_v1.1.json")
+    frozen = json.load(open(frozen_p, encoding="utf-8")) if os.path.exists(frozen_p) else cur
     with open(os.path.join(root, "results", "heldout_results.json"), "w", encoding="utf-8") as f:
-        json.dump(ho, f, indent=1)
-    ho = {k: v for k, v in ho.items() if k != "rows"}
+        json.dump(cur, f, indent=1)
+    ho = {k: v for k, v in frozen.items() if k != "rows"}
+    post = None
+    if cur["rules_fingerprint"] != frozen["rules_fingerprint"]:
+        post = {k: v for k, v in cur.items() if k not in ("rows", "background", "missed", "out_scope_techniques")}
+        post["background"] = cur.get("background")
     data = dict(generated=datetime.now(timezone.utc).isoformat(), windows=ws, windows_v1=v1, linux=lx, aws=aw, windows_seconds=secs, windows_rows=rows,
-                heldout=ho)
+                heldout=ho, heldout_posthoc=post)
     os.makedirs(os.path.join(root, "results"), exist_ok=True)
     with open(os.path.join(root, "results", "real_data_results.json"), "w", encoding="utf-8") as f:
         json.dump(data, f, indent=1)

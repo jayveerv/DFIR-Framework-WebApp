@@ -27,14 +27,16 @@ def _jsonable(events):
     return events
 
 
-def run_case(input_dir, case_dir, cfg=None, make_report=True, clean=True, key=None):
+def run_case(input_dir, case_dir, cfg=None, make_report=True, clean=True, key=None, progress=None):
     """Run the whole framework on one folder of evidence.
 
     input_dir  folder with windows_security.xml / *.evtx, auth.log, cloudtrail.json, host/ and cloud/ (any subset)
     case_dir   output folder (evidence copy, ledger, timeline, incidents, report)
     cfg        case configuration (default: input_dir/case_config.json, else config.DEFAULT_CASE)
     key        HMAC key for the custody ledger (default: DFIR_CUSTODY_KEY environment variable, else plain hash chain)
+    progress   optional callback progress(stage_no, stage_name, state, info) for user interfaces
     """
+    say = progress or (lambda *a: None)
     if cfg is None:
         cfg = config.load_case_config(os.path.join(input_dir, "case_config.json"))
     else:
@@ -46,9 +48,17 @@ def run_case(input_dir, case_dir, cfg=None, make_report=True, clean=True, key=No
     timings = {}
     t_all = time.perf_counter()
 
+    say(1, "Acquisition", "start", "")
     acquired, msgs = _timed(timings, "acquisition", collect.acquire, input_dir, case_dir, ledger)
-    events, stats = _timed(timings, "normalization", normalize.normalize_case, os.path.join(case_dir, "evidence"), cfg)
+    say(1, "Acquisition", "done", f"{timings['acquisition']:.1f} s")
+    say(2, "Normalisation", "start", "")
+    events, stats = _timed(timings, "normalization", normalize.normalize_case, os.path.join(case_dir, "evidence"), cfg,
+                           on_file=lambda f, n, i, tot: say(2, "Normalisation", "file", f"{i}/{tot} {f} ({n:,} records)"))
+    say(2, "Normalisation", "done", f"{len(events):,} events, {timings['normalization']:.1f} s")
+    say(3, "Correlation", "start", "")
     corr = _timed(timings, "correlation", correlate.correlate, events, cfg)
+    say(3, "Correlation", "done", f"{corr['alert_events']} flagged, {len(corr['incidents'])} incident(s), {timings['correlation']:.1f} s")
+    say(4, "Custody", "start", "")
 
     def _write_outputs():
         p_json = os.path.join(case_dir, "normalized_events.json")
@@ -71,6 +81,7 @@ def run_case(input_dir, case_dir, cfg=None, make_report=True, clean=True, key=No
 
     _timed(timings, "output_and_custody", _write_outputs)
     ok, checks = _timed(timings, "custody_verification", ledger.verify)
+    say(4, "Custody", "done", "VERIFIED" if ok else "FAILED")
     head = ledger.entries[-1]["entry_hash"] if ledger.entries else None
     ctx = dict(cfg=cfg, acquired=acquired, acquire_msgs=msgs, stats=stats, events=events, corr=corr, custody_ok=ok,
                custody_checks=checks, head_hash=head, timings=timings, case_dir=case_dir, ledger=ledger, hmac_used=bool(ledger.key))

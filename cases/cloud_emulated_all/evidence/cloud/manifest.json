@@ -3,19 +3,19 @@
  "account": "123456789012",
  "region": "us-east-1",
  "all_regions": true,
- "started_utc": "2026-10-21T10:08:34Z",
- "finished_utc": "2026-10-21T10:08:36Z",
- "reference_time": "2027-05-09T10:08:33Z",
+ "started_utc": "2026-10-21T21:57:20Z",
+ "finished_utc": "2026-10-21T21:57:24Z",
+ "reference_time": "2027-05-09T21:57:19Z",
  "artifacts": [
   {
    "name": "identity.json",
-   "sha256": "0a9734df19298f267c1760d94801203e18a3e9b2abcdcbaef92c248b4f207f27",
+   "sha256": "b7fba84b031ef007d1912213f21fd531d71e6961386ccf3794e2f898bb6cf77f",
    "size": 158,
    "note": "caller identity and collection time"
   },
   {
    "name": "trails.json",
-   "sha256": "23b3b642a5a234dafd6416a5820450621ae85561a811f8dd257d50a9d19d3a4c",
+   "sha256": "102eaae9ed750bf9badd401ed48266d7be3890be9bc1c46e707ebea57e12cc51",
    "size": 1125,
    "note": "CloudTrail trails and logging status"
   },
@@ -27,25 +27,25 @@
   },
   {
    "name": "iam_users.json",
-   "sha256": "70bae7cffdaec43b71ac3cf8e7bb0182ee10e40ccb15f527e84071973df9792a",
+   "sha256": "042cc8c65652c3cf43939be87ad7d954e7213641e74be8fe9c54e9855af8da53",
    "size": 2561,
    "note": "IAM users, admin rights, MFA, access keys"
   },
   {
    "name": "iam_roles.json",
-   "sha256": "e251695c69f64e63e6dda3e3e6343036c8deb2d5e7d253d93ab42f14b659da61",
+   "sha256": "1ff68d9451e8ee26595ddc69bb273c3d45b98bae6569ad420552b843f0abd9d8",
    "size": 1056,
    "note": "IAM roles and their trust policies"
   },
   {
    "name": "s3_buckets.json",
-   "sha256": "791609321a0b8357a17bc0266bd2b0d0fcfec724f753a63e0038a68ab901cd75",
+   "sha256": "52386b27ded9c301348ab4d4f506271bdde2a75caeace1f9d2066a08decee5e3",
    "size": 2236,
    "note": "S3 public access block and bucket policy status"
   },
   {
    "name": "security_groups.json",
-   "sha256": "3fcedb10e1f05097bde10742db731edae2aa4986e45e1def68ff7f2e7873f7de",
+   "sha256": "35e562a2b9fca90edc57662bc47807bcdb806d0ea7b345bfeba872837e1d7f6c",
    "size": 8088,
    "note": "security group inbound rules"
   }

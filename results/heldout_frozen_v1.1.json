@@ -1,0 +1,5715 @@
+{
+ "dataset": "Yamato-Security/hayabusa-sample-evtx@0845333ecb4a",
+ "rules_fingerprint": "804638ca9a700716",
+ "seconds": 177.1,
+ "excluded": {
+  "EVTX-to-MITRE-Attack/TA0004-Privilege Escalation/T1134.005-Access Token Manipulation SID-History Injection/ID 4765 - SID history added.evtx": "byte-identical to a development sample"
+ },
+ "samples": 320,
+ "records": 39836,
+ "errors": 1681,
+ "with_supported": 176,
+ "in_scope": 117,
+ "in_alerted": 36,
+ "in_exact": 24,
+ "in_parent": 26,
+ "in_alerted_pct": 30.8,
+ "in_exact_pct": 20.5,
+ "in_parent_pct": 22.2,
+ "out_scope": 181,
+ "out_alerted": 43,
+ "unlabelled": 19,
+ "unlabelled_alerted": 9,
+ "per_corpus": {
+  "DeepBlueCLI": {
+   "samples": 21,
+   "records": 28220,
+   "errors": 0,
+   "in_scope": 14,
+   "in_alerted": 13,
+   "in_exact": 7,
+   "in_parent": 8
+  },
+  "EVTX-to-MITRE-Attack": {
+   "samples": 283,
+   "records": 11337,
+   "errors": 1681,
+   "in_scope": 102,
+   "in_alerted": 22,
+   "in_exact": 17,
+   "in_parent": 17
+  },
+  "YamatoSecurity": {
+   "samples": 16,
+   "records": 279,
+   "errors": 0,
+   "in_scope": 1,
+   "in_alerted": 1,
+   "in_exact": 0,
+   "in_parent": 1
+  }
+ },
+ "per_technique": {
+  "T1021.002": {
+   "samples": 7,
+   "alerted": 4,
+   "exact": 3
+  },
+  "T1027": {
+   "samples": 8,
+   "alerted": 3,
+   "exact": 3
+  },
+  "T1053.005": {
+   "samples": 6,
+   "alerted": 4,
+   "exact": 3
+  },
+  "T1059.001": {
+   "samples": 6,
+   "alerted": 5,
+   "exact": 4
+  },
+  "T1070.001": {
+   "samples": 4,
+   "alerted": 2,
+   "exact": 2
+  },
+  "T1070.006": {
+   "samples": 1,
+   "alerted": 0,
+   "exact": 0
+  },
+  "T1078": {
+   "samples": 3,
+   "alerted": 0,
+   "exact": 0
+  },
+  "T1078.002": {
+   "samples": 1,
+   "alerted": 0,
+   "exact": 0
+  },
+  "T1098": {
+   "samples": 30,
+   "alerted": 0,
+   "exact": 0
+  },
+  "T1110": {
+   "samples": 12,
+   "alerted": 1,
+   "exact": 0
+  },
+  "T1110.001": {
+   "samples": 1,
+   "alerted": 1,
+   "exact": 0
+  },
+  "T1110.003": {
+   "samples": 1,
+   "alerted": 1,
+   "exact": 0
+  },
+  "T1136.001": {
+   "samples": 1,
+   "alerted": 0,
+   "exact": 0
+  },
+  "T1218.004": {
+   "samples": 1,
+   "alerted": 1,
+   "exact": 0
+  },
+  "T1543.003": {
+   "samples": 17,
+   "alerted": 6,
+   "exact": 4
+  },
+  "T1562.001": {
+   "samples": 9,
+   "alerted": 0,
+   "exact": 0
+  },
+  "T1569.002": {
+   "samples": 9,
+   "alerted": 8,
+   "exact": 5
+  }
+ },
+ "background": [
+  {
+   "file": "DeepBlueCLI/many-events-application.evtx",
+   "records": 2216,
+   "supported": 0,
+   "alerts": 0,
+   "flags": {},
+   "per_1000": null
+  },
+  {
+   "file": "DeepBlueCLI/many-events-security.evtx",
+   "records": 13223,
+   "supported": 9352,
+   "alerts": 53,
+   "flags": {
+    "suspicious_powershell": 34,
+    "credential_dump_tool": 18,
+    "encoded_powershell": 1
+   },
+   "per_1000": 5.67
+  },
+  {
+   "file": "DeepBlueCLI/many-events-system.evtx",
+   "records": 8414,
+   "supported": 61,
+   "alerts": 51,
+   "flags": {
+    "service_installed": 51
+   },
+   "per_1000": 836.07
+  }
+ ],
+ "missed": [
+  {
+   "file": "DeepBlueCLI/metasploit-psexec-native-target-security.evtx",
+   "label": "T1569.002",
+   "supported": 4,
+   "techniques": [
+    "T1070.001"
+   ]
+  },
+  {
+   "file": "DeepBlueCLI/metasploit-psexec-powershell-target-security.evtx",
+   "label": "T1569.002",
+   "supported": 8,
+   "techniques": [
+    "T1059.001",
+    "T1070.001"
+   ]
+  },
+  {
+   "file": "DeepBlueCLI/metasploit-psexec-pwshpayload.evtx",
+   "label": "T1569.002",
+   "supported": 4,
+   "techniques": [
+    "T1070.001"
+   ]
+  },
+  {
+   "file": "DeepBlueCLI/new-user-security.evtx",
+   "label": "T1136.001",
+   "supported": 3,
+   "techniques": []
+  },
+  {
+   "file": "DeepBlueCLI/password-spray.evtx",
+   "label": "T1110.003",
+   "supported": 1,
+   "techniques": [
+    "T1070.001"
+   ]
+  },
+  {
+   "file": "DeepBlueCLI/psattack-security.evtx",
+   "label": "T1059.001",
+   "supported": 24,
+   "techniques": [
+    "T1070.001"
+   ]
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0001-Initial access/T1078-Valid accounts/ID1149-RDP success logins to multiple hosts.evtx",
+   "label": "T1078",
+   "supported": 0,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0001-Initial access/T1078-Valid accounts/ID33205-SQL Server failed login with disabled SA account.evtx",
+   "label": "T1078",
+   "supported": 0,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0001-Initial access/T1078-Valid accounts/ID4625-failed login with denied access due to account restriction.evtx",
+   "label": "T1078",
+   "supported": 2,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0002-Execution/T1053.005-Scheduled Task/ID4688-Interactive shell using AT schedule task.evtx",
+   "label": "T1053.005",
+   "supported": 1,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0002-Execution/T1053.005-Scheduled Task/ID4688-Scheduled task creation.evtx",
+   "label": "T1053.005",
+   "supported": 1,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0002-Execution/T1053.005-Scheduled Task/ID5145-Remote schedule task creation (ATexec).evtx",
+   "label": "T1053.005",
+   "supported": 4,
+   "techniques": [
+    "T1021.002",
+    "T1569.002"
+   ]
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0002-Execution/T1059.001-PowerShell/ID800-4103-Interactive PipeShell over named pipe (server and client).evtx",
+   "label": "T1059.001",
+   "supported": 0,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0002-Execution/T1569.002-Service execution/ID7009-Service deployment time out (meterpreter).evtx",
+   "label": "T1569.002",
+   "supported": 0,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID33205-SQL Server member added to database role.evtx",
+   "label": "T1098",
+   "supported": 0,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID33205-SQL Server member added to server role.evtx",
+   "label": "T1098",
+   "supported": 0,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID33205-SQL Server user linked to a database.evtx",
+   "label": "T1098",
+   "supported": 0,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4688-SPN added to an account.evtx",
+   "label": "T1098",
+   "supported": 2,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4723-5145-password reset with changeNTLM (Mimikatz).evtx",
+   "label": "T1098",
+   "supported": 0,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4724-5145-password reset with setNTLM (Mimikatz).evtx",
+   "label": "T1098",
+   "supported": 6,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4728-4756-Member added to sensitive domain groups.evtx",
+   "label": "T1098",
+   "supported": 0,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4728-Massive account group membership change.evtx",
+   "label": "T1098",
+   "supported": 0,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4728-Member adding to a group by the same account.evtx",
+   "label": "T1098",
+   "supported": 0,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4732-4733-Quick added-removed user from local group.evtx",
+   "label": "T1098",
+   "supported": 3,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4732-DNSadmin new member added.evtx",
+   "label": "T1098",
+   "supported": 1,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4732-User added to local admin groups.evtx",
+   "label": "T1098",
+   "supported": 3,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4738,5136-SPN set on user account.evtx",
+   "label": "T1098",
+   "supported": 0,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4738-Account is sensitive and cannot be delegated.evtx",
+   "label": "T1098",
+   "supported": 0,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4738-Account with password not required.evtx",
+   "label": "T1098",
+   "supported": 0,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4738-Do not require Kerberos preauthentication.evtx",
+   "label": "T1098",
+   "supported": 0,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4738-Password cannot be changed.evtx",
+   "label": "T1098",
+   "supported": 0,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4738-Password never expires.evtx",
+   "label": "T1098",
+   "supported": 0,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4738-Use only Kerberos DES encryption types.evtx",
+   "label": "T1098",
+   "supported": 0,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4738-User set with reversible psw encryption.evtx",
+   "label": "T1098",
+   "supported": 0,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4742,5136-Enable Trust this computer for delegation (to any service, Kerberos only).evtx",
+   "label": "T1098",
+   "supported": 0,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4742,5136-Enable Trust this computer for delegation (to specified service, Kerberos only).evtx",
+   "label": "T1098",
+   "supported": 0,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4742,5136-Enable Trust this computer for delegation (to specified service, any protocol).evtx",
+   "label": "T1098",
+   "supported": 0,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4742,5136-SPN set on computer account.evtx",
+   "label": "T1098",
+   "supported": 0,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4742-SPN set on computer account (DCshadow).evtx",
+   "label": "T1098",
+   "supported": 0,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4756-Exchange admin group change.evtx",
+   "label": "T1098",
+   "supported": 0,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4781-4738-User renamed to admin or likely.evtx",
+   "label": "T1098",
+   "supported": 0,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4781-Computer account renamed without a trailing $ (CVE-2021-42278).evtx",
+   "label": "T1098",
+   "supported": 0,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID5136-4662 AD object owner changed.evtx",
+   "label": "T1098",
+   "supported": 0,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID5136-Computer account set for RBCD delegation.evtx",
+   "label": "T1098",
+   "supported": 0,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1543.003-Create or Modify System Process-Windows Service/ID13-New service for Mimikatz.evtx",
+   "label": "T1543.003",
+   "supported": 2,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1543.003-Create or Modify System Process-Windows Service/ID4688-4697 RDP hijack via service creation.evtx",
+   "label": "T1543.003",
+   "supported": 2,
+   "techniques": [
+    "T1070.001"
+   ]
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1543.003-Create or Modify System Process-Windows Service/ID4688-Command SC to create service on remote host.evtx",
+   "label": "T1543.003",
+   "supported": 1,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1543.003-Create or Modify System Process-Windows Service/ID4688-Service abuse with Failure Command.evtx",
+   "label": "T1543.003",
+   "supported": 2,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1543.003-Create or Modify System Process-Windows Service/ID4688-Service abuse with malicious path.evtx",
+   "label": "T1543.003",
+   "supported": 3,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1543.003-Create or Modify System Process-Windows Service/ID4688-Service created (command).evtx",
+   "label": "T1543.003",
+   "supported": 2,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1543.003-Create or Modify System Process-Windows Service/ID4688-Service permissions modified (registry).evtx",
+   "label": "T1543.003",
+   "supported": 2,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1543.003-Create or Modify System Process-Windows Service/ID4688-Service permissions modified (sc).evtx",
+   "label": "T1543.003",
+   "supported": 1,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1543.003-Create or Modify System Process-Windows Service/ID4697-MSF payload deployed via service.evtx",
+   "label": "T1543.003",
+   "supported": 0,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1543.003-Create or Modify System Process-Windows Service/ID4697-New service for Mimikatz.evtx",
+   "label": "T1543.003",
+   "supported": 1,
+   "techniques": [
+    "T1070.001"
+   ]
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1543.003-Create or Modify System Process-Windows Service/ID800-4103-4104-Service abuse with Failure Command.evtx",
+   "label": "T1543.003",
+   "supported": 2,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1543.003-Create or Modify System Process-Windows Service/ID800-4103-4104-Service abuse with malicious path.evtx",
+   "label": "T1543.003",
+   "supported": 2,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1543.003-Create or Modify System Process-Windows Service/ID800-4103-4104-Service creation (PowerShell).evtx",
+   "label": "T1543.003",
+   "supported": 4,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1027-Obfuscated Files or Information/4624,4674,4688- CrackMap Exec SMB mimikatz.evtx",
+   "label": "T1027",
+   "supported": 12,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1027-Obfuscated Files or Information/ID1-CrackMapExec payload execution.evtx",
+   "label": "T1027",
+   "supported": 2,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1027-Obfuscated Files or Information/ID400-800-CrackMapExec payload execution.evtx",
+   "label": "T1027",
+   "supported": 0,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1027-Obfuscated Files or Information/ID4103-4104-CrackMapExec payload execution.evtx",
+   "label": "T1027",
+   "supported": 11,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1027-Obfuscated Files or Information/ID4688-Obfuscated payload transfer via service name - Tchopper.evtx",
+   "label": "T1027",
+   "supported": 735,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1070.001-Clear Windows event logs/ID4688-Clear event log attempt (native).evtx",
+   "label": "T1070.001",
+   "supported": 28,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1070.001-Clear Windows event logs/ID800-4103-4104-Clear event log attempt.evtx",
+   "label": "T1070.001",
+   "supported": 2,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1070.006-Timestomp/ID4616-system time changed.evtx",
+   "label": "T1070.006",
+   "supported": 0,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1078.002-Valid accounts-Domain accounts/ID4964-Login of a member of a special group.evtx",
+   "label": "T1078.002",
+   "supported": 0,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.001-Impair Defenses-Disable or Modify tool/ID1-SYSMON driver unload (FilterManager).evtx",
+   "label": "T1562.001",
+   "supported": 0,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.001-Impair Defenses-Disable or Modify tool/ID13-Defender service configuration disabled.evtx",
+   "label": "T1562.001",
+   "supported": 2,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.001-Impair Defenses-Disable or Modify tool/ID4688-Defender critical features disabled (command).evtx",
+   "label": "T1562.001",
+   "supported": 9,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.001-Impair Defenses-Disable or Modify tool/ID4688-Defender service deactivation attempt.evtx",
+   "label": "T1562.001",
+   "supported": 5,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.001-Impair Defenses-Disable or Modify tool/ID5007-Defender threat exclusion (native).evtx",
+   "label": "T1562.001",
+   "supported": 0,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.001-Impair Defenses-Disable or Modify tool/ID8-Module Virtualization disabled (Credential Guard).evtx",
+   "label": "T1562.001",
+   "supported": 0,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.001-Impair Defenses-Disable or Modify tool/ID800-4103-4104 Defender critical features disabled (PowerShell).evtx",
+   "label": "T1562.001",
+   "supported": 10,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.001-Impair Defenses-Disable or Modify tool/ID800-4103-4104 Defender default action allow any (PowerShell).evtx",
+   "label": "T1562.001",
+   "supported": 2,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.001-Impair Defenses-Disable or Modify tool/ID800-4103-4104 Defender exclusion added (PowerShell).evtx",
+   "label": "T1562.001",
+   "supported": 4,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1110.xxx-Brut force/ID 4776,4625-AccountRestore local bruteforce.evtx",
+   "label": "T1110",
+   "supported": 16,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1110.xxx-Brut force/ID18456-SQL Server failed login because only Windows auth.evtx",
+   "label": "T1110",
+   "supported": 0,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1110.xxx-Brut force/ID33205-SQL Server failed login because only Windows auth.evtx",
+   "label": "T1110",
+   "supported": 0,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1110.xxx-Brut force/ID33205-SQL Server failed login with SA wrong password.evtx",
+   "label": "T1110",
+   "supported": 0,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1110.xxx-Brut force/ID33205-SQL Server failed login with non existing accounts.evtx",
+   "label": "T1110",
+   "supported": 0,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1110.xxx-Brut force/ID4-OpenSSH brutforce with non existing users (sshd logs).evtx",
+   "label": "T1110",
+   "supported": 0,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1110.xxx-Brut force/ID4-OpenSSH brutforce with valid users.evtx",
+   "label": "T1110",
+   "supported": 0,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1110.xxx-Brut force/ID4625-OpenSSH brutforce with non existing users.evtx",
+   "label": "T1110",
+   "supported": 10,
+   "techniques": [
+    "T1070.001"
+   ]
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1110.xxx-Brut force/ID4625-OpenSSH brutforce with valid users.evtx",
+   "label": "T1110",
+   "supported": 9,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1110.xxx-Brut force/ID4768-4771-Kerberos brutforce with non existing users.evtx",
+   "label": "T1110",
+   "supported": 0,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1110.xxx-Brut force/ID4768-4771-Kerberos user enumeration (Kerbrute).evtx",
+   "label": "T1110",
+   "supported": 0,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1110.xxx-Brut force/ID4771-Kerberos brutforce with valid user.evtx",
+   "label": "T1110",
+   "supported": 0,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0008-Lateral Movement/T1021.002-SMB Windows Admin Shares/ID4688-4648 Lateral movement with net use.evtx",
+   "label": "T1021.002",
+   "supported": 1,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0008-Lateral Movement/T1021.002-SMB Windows Admin Shares/ID4688-Network share manipulation via commandline.evtx",
+   "label": "T1021.002",
+   "supported": 3,
+   "techniques": [
+    "T1070.001"
+   ]
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0008-Lateral Movement/T1021.002-SMB Windows Admin Shares/ID5140-ADMIN$ share connection with Golden ticket.evtx",
+   "label": "T1021.002",
+   "supported": 0,
+   "techniques": []
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0008-Lateral Movement/T1021.002-SMB Windows Admin Shares/ID5142-5143-Mimispool print share created and modified.evtx",
+   "label": "T1021.002",
+   "supported": 0,
+   "techniques": []
+  }
+ ],
+ "out_scope_techniques": {
+  "T1003": 21,
+  "T1562.002": 15,
+  "T1136": 11,
+  "T1546": 11,
+  "T1574": 8,
+  "T1087": 8,
+  "T1069": 7,
+  "T1222.001": 6,
+  "T1562.004": 6,
+  "T1197": 5,
+  "T1505.001": 5,
+  "T1134": 5,
+  "T1558": 5,
+  "T1016": 5,
+  "T1047": 4,
+  "T1547": 3,
+  "T1112": 3,
+  "T1135": 3,
+  "T1021.001": 3,
+  "T1021.004": 3,
+  "T1490": 3,
+  "T1210": 3,
+  "T1505": 2,
+  "T1207": 2,
+  "T1555": 2,
+  "T1046": 2,
+  "T1201": 2,
+  "T1021.003": 2,
+  "T1059.003": 1,
+  "T1204": 1,
+  "T1068": 1,
+  "T1484": 1,
+  "T1484.001": 1,
+  "T1140": 1,
+  "T1553": 1,
+  "T1555.004": 1,
+  "T1564": 1,
+  "T1040": 1,
+  "T1552.004": 1,
+  "T1557": 1,
+  "T1018": 1,
+  "T1482": 1,
+  "T1021.006": 1,
+  "T1550": 1,
+  "T1125": 1,
+  "T1090": 1,
+  "T1572": 1,
+  "T1486": 1,
+  "T1565": 1,
+  "T1558.003": 1,
+  "T1558.004": 1,
+  "T1027.004": 1,
+  "T1562.010": 1,
+  "T1563.002": 1
+ },
+ "rows": [
+  {
+   "file": "DeepBlueCLI/Powershell-Invoke-Obfuscation-encoding-menu.evtx",
+   "corpus": "DeepBlueCLI",
+   "label": "T1027",
+   "scope": "in",
+   "records": 66,
+   "supported": 66,
+   "errors": 0,
+   "flags": {
+    "suspicious_powershell": 1
+   },
+   "techniques": [
+    "T1059.001"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
+  },
+  {
+   "file": "DeepBlueCLI/Powershell-Invoke-Obfuscation-many.evtx",
+   "corpus": "DeepBlueCLI",
+   "label": "T1027",
+   "scope": "in",
+   "records": 302,
+   "supported": 302,
+   "errors": 0,
+   "flags": {
+    "suspicious_powershell": 22,
+    "credential_dump_tool": 3
+   },
+   "techniques": [
+    "T1003.001",
+    "T1059.001"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
+  },
+  {
+   "file": "DeepBlueCLI/Powershell-Invoke-Obfuscation-string-menu.evtx",
+   "corpus": "DeepBlueCLI",
+   "label": "T1027",
+   "scope": "in",
+   "records": 4,
+   "supported": 4,
+   "errors": 0,
+   "flags": {
+    "suspicious_powershell": 1
+   },
+   "techniques": [
+    "T1059.001"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
+  },
+  {
+   "file": "DeepBlueCLI/disablestop-eventlog.evtx",
+   "corpus": "DeepBlueCLI",
+   "label": "T1562.002",
+   "scope": "out",
+   "records": 13,
+   "supported": 1,
+   "errors": 0,
+   "flags": {
+    "log_cleared": 1
+   },
+   "techniques": [
+    "T1070.001"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "DeepBlueCLI/eventlog-dac.evtx",
+   "corpus": "DeepBlueCLI",
+   "label": "T1562.002",
+   "scope": "out",
+   "records": 19,
+   "supported": 1,
+   "errors": 0,
+   "flags": {
+    "log_cleared": 1
+   },
+   "techniques": [
+    "T1070.001"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "DeepBlueCLI/many-events-application.evtx",
+   "corpus": "DeepBlueCLI",
+   "label": "background",
+   "scope": "background",
+   "records": 2216,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "DeepBlueCLI/many-events-security.evtx",
+   "corpus": "DeepBlueCLI",
+   "label": "background",
+   "scope": "background",
+   "records": 13223,
+   "supported": 9352,
+   "errors": 0,
+   "flags": {
+    "suspicious_powershell": 34,
+    "credential_dump_tool": 18,
+    "encoded_powershell": 1
+   },
+   "techniques": [
+    "T1003.001",
+    "T1059.001"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "DeepBlueCLI/many-events-system.evtx",
+   "corpus": "DeepBlueCLI",
+   "label": "background",
+   "scope": "background",
+   "records": 8414,
+   "supported": 61,
+   "errors": 0,
+   "flags": {
+    "service_installed": 51
+   },
+   "techniques": [
+    "T1543.003"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "DeepBlueCLI/metasploit-psexec-native-target-security.evtx",
+   "corpus": "DeepBlueCLI",
+   "label": "T1569.002",
+   "scope": "in",
+   "records": 4,
+   "supported": 4,
+   "errors": 0,
+   "flags": {
+    "log_cleared": 1
+   },
+   "techniques": [
+    "T1070.001"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "DeepBlueCLI/metasploit-psexec-native-target-system.evtx",
+   "corpus": "DeepBlueCLI",
+   "label": "T1569.002",
+   "scope": "in",
+   "records": 7,
+   "supported": 3,
+   "errors": 0,
+   "flags": {
+    "log_cleared": 1,
+    "service_installed": 2
+   },
+   "techniques": [
+    "T1070.001",
+    "T1543.003"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
+  },
+  {
+   "file": "DeepBlueCLI/metasploit-psexec-powershell-target-security.evtx",
+   "corpus": "DeepBlueCLI",
+   "label": "T1569.002",
+   "scope": "in",
+   "records": 8,
+   "supported": 8,
+   "errors": 0,
+   "flags": {
+    "log_cleared": 1,
+    "suspicious_powershell": 3
+   },
+   "techniques": [
+    "T1059.001",
+    "T1070.001"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "DeepBlueCLI/metasploit-psexec-powershell-target-system.evtx",
+   "corpus": "DeepBlueCLI",
+   "label": "T1569.002",
+   "scope": "in",
+   "records": 5,
+   "supported": 3,
+   "errors": 0,
+   "flags": {
+    "log_cleared": 1,
+    "service_installed": 2
+   },
+   "techniques": [
+    "T1070.001",
+    "T1543.003"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
+  },
+  {
+   "file": "DeepBlueCLI/metasploit-psexec-pwshpayload.evtx",
+   "corpus": "DeepBlueCLI",
+   "label": "T1569.002",
+   "scope": "in",
+   "records": 5,
+   "supported": 4,
+   "errors": 0,
+   "flags": {
+    "log_cleared": 1
+   },
+   "techniques": [
+    "T1070.001"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "DeepBlueCLI/mimikatz-privesc-hashdump.evtx",
+   "corpus": "DeepBlueCLI",
+   "label": "T1003",
+   "scope": "out",
+   "records": 13,
+   "supported": 1,
+   "errors": 0,
+   "flags": {
+    "log_cleared": 1
+   },
+   "techniques": [
+    "T1070.001"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "DeepBlueCLI/mimikatz-privilegedebug-tokenelevate-hashdump.evtx",
+   "corpus": "DeepBlueCLI",
+   "label": "T1003",
+   "scope": "out",
+   "records": 6,
+   "supported": 5,
+   "errors": 0,
+   "flags": {
+    "log_cleared": 1
+   },
+   "techniques": [
+    "T1070.001"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "DeepBlueCLI/new-user-security.evtx",
+   "corpus": "DeepBlueCLI",
+   "label": "T1136.001",
+   "scope": "in",
+   "records": 4,
+   "supported": 3,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "DeepBlueCLI/password-spray.evtx",
+   "corpus": "DeepBlueCLI",
+   "label": "T1110.003",
+   "scope": "in",
+   "records": 295,
+   "supported": 1,
+   "errors": 0,
+   "flags": {
+    "log_cleared": 1
+   },
+   "techniques": [
+    "T1070.001"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "DeepBlueCLI/powersploit-security.evtx",
+   "corpus": "DeepBlueCLI",
+   "label": "T1059.001",
+   "scope": "in",
+   "records": 27,
+   "supported": 27,
+   "errors": 0,
+   "flags": {
+    "log_cleared": 1,
+    "encoded_powershell": 2,
+    "suspicious_powershell": 2
+   },
+   "techniques": [
+    "T1059.001",
+    "T1070.001"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
+  },
+  {
+   "file": "DeepBlueCLI/powersploit-system.evtx",
+   "corpus": "DeepBlueCLI",
+   "label": "T1059.001",
+   "scope": "in",
+   "records": 4,
+   "supported": 4,
+   "errors": 0,
+   "flags": {
+    "log_cleared": 1,
+    "suspicious_powershell": 2,
+    "credential_dump_tool": 2
+   },
+   "techniques": [
+    "T1003.001",
+    "T1059.001",
+    "T1070.001"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
+  },
+  {
+   "file": "DeepBlueCLI/psattack-security.evtx",
+   "corpus": "DeepBlueCLI",
+   "label": "T1059.001",
+   "scope": "in",
+   "records": 24,
+   "supported": 24,
+   "errors": 0,
+   "flags": {
+    "log_cleared": 1
+   },
+   "techniques": [
+    "T1070.001"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "DeepBlueCLI/smb-password-guessing-security.evtx",
+   "corpus": "DeepBlueCLI",
+   "label": "T1110.001",
+   "scope": "in",
+   "records": 3561,
+   "supported": 3561,
+   "errors": 0,
+   "flags": {
+    "brute_force": 3561
+   },
+   "techniques": [
+    "T1110"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": true
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/Antivirus/ID1116-1117-Defender threat detected.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": null,
+   "scope": "unlabelled",
+   "records": 6,
+   "supported": 0,
+   "errors": 6,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/Antivirus/ID1151-Defender health status.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": null,
+   "scope": "unlabelled",
+   "records": 455,
+   "supported": 0,
+   "errors": 455,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/EVTX_full_APT_attack_steps/ID11,13,17,18-PSexec as system execution.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": null,
+   "scope": "unlabelled",
+   "records": 15,
+   "supported": 5,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/EVTX_full_APT_attack_steps/ID4624,4688,5140,5145-Eternal Romance - MS17_010_psexec (GLOBAL).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": null,
+   "scope": "unlabelled",
+   "records": 46,
+   "supported": 36,
+   "errors": 0,
+   "flags": {
+    "log_cleared": 1,
+    "admin_share_access": 19,
+    "remote_service_control": 1,
+    "suspicious_powershell": 3
+   },
+   "techniques": [
+    "T1021.002",
+    "T1059.001",
+    "T1070.001",
+    "T1569.002"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/EVTX_full_APT_attack_steps/ID4674,5142-Mimikatz print spool privileges requested.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": null,
+   "scope": "unlabelled",
+   "records": 4,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/EVTX_full_APT_attack_steps/ID4674,6416 New external device connected (PrintNightmare).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": null,
+   "scope": "unlabelled",
+   "records": 6,
+   "supported": 3,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/EVTX_full_APT_attack_steps/ID4688,4698,4699,5145,4624-ATexec remote trask creation (GLOBAL).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": null,
+   "scope": "unlabelled",
+   "records": 12,
+   "supported": 11,
+   "errors": 0,
+   "flags": {
+    "remote_service_control": 1,
+    "scheduled_task_created": 1,
+    "admin_share_access": 3
+   },
+   "techniques": [
+    "T1021.002",
+    "T1053.005",
+    "T1569.002"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/EVTX_full_APT_attack_steps/ID4688,5140,5145-WMIexec execution via SMB (GLOBAL).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": null,
+   "scope": "unlabelled",
+   "records": 97,
+   "supported": 46,
+   "errors": 0,
+   "flags": {
+    "log_cleared": 1,
+    "admin_share_access": 29
+   },
+   "techniques": [
+    "T1021.002",
+    "T1070.001"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/EVTX_full_APT_attack_steps/ID4720,4698-Fortinet APT group abuse on Windows.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": null,
+   "scope": "unlabelled",
+   "records": 3,
+   "supported": 3,
+   "errors": 0,
+   "flags": {
+    "scheduled_task_created": 1
+   },
+   "techniques": [
+    "T1053.005"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/EVTX_full_APT_attack_steps/ID4742,4935,4662,4661,5137-DCshadow attack (GLOBAL) failed.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": null,
+   "scope": "unlabelled",
+   "records": 17,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/EVTX_full_APT_attack_steps/ID47x,4661-4662,5136,4688,4697-SAM the admin (CVE-2021-42287).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": null,
+   "scope": "unlabelled",
+   "records": 40,
+   "supported": 13,
+   "errors": 0,
+   "flags": {
+    "remote_service_control": 1,
+    "admin_share_access": 4
+   },
+   "techniques": [
+    "T1021.002",
+    "T1569.002"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/EVTX_full_APT_attack_steps/ID5140-5145,4688,4697-Encrypted payload deployed with service over SMB (GLOBAL).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": null,
+   "scope": "unlabelled",
+   "records": 64,
+   "supported": 60,
+   "errors": 0,
+   "flags": {
+    "admin_share_access": 1,
+    "remote_service_control": 1,
+    "suspicious_powershell": 3
+   },
+   "techniques": [
+    "T1021.002",
+    "T1059.001",
+    "T1569.002"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/EVTX_full_APT_attack_steps/ID5145-4624-DonPAPI full extraction.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": null,
+   "scope": "unlabelled",
+   "records": 750,
+   "supported": 380,
+   "errors": 0,
+   "flags": {
+    "log_cleared": 1,
+    "admin_share_access": 318,
+    "remote_service_control": 14
+   },
+   "techniques": [
+    "T1021.002",
+    "T1070.001",
+    "T1569.002"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0001-Initial access/T1078-Valid accounts/ID1149-RDP success logins to multiple hosts.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1078",
+   "scope": "in",
+   "records": 11,
+   "supported": 0,
+   "errors": 11,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0001-Initial access/T1078-Valid accounts/ID33205-SQL Server failed login with disabled SA account.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1078",
+   "scope": "in",
+   "records": 2,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0001-Initial access/T1078-Valid accounts/ID4625-failed login with denied access due to account restriction.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1078",
+   "scope": "in",
+   "records": 2,
+   "supported": 2,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0002-Execution/T1047-Windows Management Instrumentation/ID1-WMI spwaning PowerShell process - WMImplant.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1047",
+   "scope": "out",
+   "records": 1,
+   "supported": 1,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0002-Execution/T1047-Windows Management Instrumentation/ID1-WMIexec process execution.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1047",
+   "scope": "out",
+   "records": 1,
+   "supported": 1,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0002-Execution/T1047-Windows Management Instrumentation/ID3-7-10-Suspicious DLL loaded (CME+Mimikatz).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1047",
+   "scope": "out",
+   "records": 5,
+   "supported": 3,
+   "errors": 0,
+   "flags": {
+    "lsass_access": 1
+   },
+   "techniques": [
+    "T1003.001"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0002-Execution/T1047-Windows Management Instrumentation/ID4688-5145-WMIexec execution via SMB.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1047",
+   "scope": "out",
+   "records": 1023,
+   "supported": 995,
+   "errors": 0,
+   "flags": {
+    "log_cleared": 1,
+    "admin_share_access": 955
+   },
+   "techniques": [
+    "T1021.002",
+    "T1070.001"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0002-Execution/T1053.005-Scheduled Task/ID4688-4698 Persistent scheduled task with SYSTEM privileges creation.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1053.005",
+   "scope": "in",
+   "records": 4,
+   "supported": 4,
+   "errors": 0,
+   "flags": {
+    "scheduled_task_created": 1
+   },
+   "techniques": [
+    "T1053.005"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0002-Execution/T1053.005-Scheduled Task/ID4688-Interactive shell using AT schedule task.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1053.005",
+   "scope": "in",
+   "records": 1,
+   "supported": 1,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0002-Execution/T1053.005-Scheduled Task/ID4688-Scheduled task creation.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1053.005",
+   "scope": "in",
+   "records": 1,
+   "supported": 1,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0002-Execution/T1053.005-Scheduled Task/ID4698-4699-Fast created & deleted task by ATexec (susp. arg.).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1053.005",
+   "scope": "in",
+   "records": 2,
+   "supported": 1,
+   "errors": 0,
+   "flags": {
+    "scheduled_task_created": 1
+   },
+   "techniques": [
+    "T1053.005"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0002-Execution/T1053.005-Scheduled Task/ID4698-4699-Fast created & deleted task by SMBexec (sups. arg.).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1053.005",
+   "scope": "in",
+   "records": 2,
+   "supported": 1,
+   "errors": 0,
+   "flags": {
+    "scheduled_task_created": 1
+   },
+   "techniques": [
+    "T1053.005"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0002-Execution/T1053.005-Scheduled Task/ID5145-Remote schedule task creation (ATexec).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1053.005",
+   "scope": "in",
+   "records": 4,
+   "supported": 4,
+   "errors": 0,
+   "flags": {
+    "remote_service_control": 1,
+    "admin_share_access": 3
+   },
+   "techniques": [
+    "T1021.002",
+    "T1569.002"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0002-Execution/T1059.001-PowerShell/ID4103-4104-Payload download via PowerShell.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1059.001",
+   "scope": "in",
+   "records": 3,
+   "supported": 2,
+   "errors": 0,
+   "flags": {
+    "suspicious_powershell": 1
+   },
+   "techniques": [
+    "T1059.001"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0002-Execution/T1059.001-PowerShell/ID4688-Encoded PowerShell MSF payload via process execution.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1059.001",
+   "scope": "in",
+   "records": 59,
+   "supported": 58,
+   "errors": 0,
+   "flags": {
+    "suspicious_powershell": 3
+   },
+   "techniques": [
+    "T1059.001"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0002-Execution/T1059.001-PowerShell/ID800-4103-Interactive PipeShell over named pipe (server and client).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1059.001",
+   "scope": "in",
+   "records": 30,
+   "supported": 0,
+   "errors": 30,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0002-Execution/T1059.003-Windows Command Shell/ID4688-SQL Server payload injectection for reverse shell (MSF).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1059.003",
+   "scope": "out",
+   "records": 140,
+   "supported": 140,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0002-Execution/T1204-User execution/ID4688-Edge payload download via command.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1204",
+   "scope": "out",
+   "records": 7,
+   "supported": 7,
+   "errors": 0,
+   "flags": {
+    "credential_dump_tool": 1
+   },
+   "techniques": [
+    "T1003.001"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0002-Execution/T1569.002-Service execution/ID5145-remote service creation over SMB.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1569.002",
+   "scope": "in",
+   "records": 2,
+   "supported": 2,
+   "errors": 0,
+   "flags": {
+    "admin_share_access": 1,
+    "remote_service_control": 1
+   },
+   "techniques": [
+    "T1021.002",
+    "T1569.002"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0002-Execution/T1569.002-Service execution/ID5145-service massive remote creation via named pipe - Tchopper.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1569.002",
+   "scope": "in",
+   "records": 246,
+   "supported": 246,
+   "errors": 0,
+   "flags": {
+    "remote_service_control": 246
+   },
+   "techniques": [
+    "T1569.002"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0002-Execution/T1569.002-Service execution/ID7000,7009,7045-Payload deployed via service - Tchopper.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1569.002",
+   "scope": "in",
+   "records": 733,
+   "supported": 244,
+   "errors": 0,
+   "flags": {
+    "service_installed": 244
+   },
+   "techniques": [
+    "T1543.003"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0002-Execution/T1569.002-Service execution/ID7009-Service deployment time out (meterpreter).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1569.002",
+   "scope": "in",
+   "records": 3,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID33205-SQL Server member added to database role.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1098",
+   "scope": "in",
+   "records": 1,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID33205-SQL Server member added to server role.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1098",
+   "scope": "in",
+   "records": 1,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID33205-SQL Server user linked to a database.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1098",
+   "scope": "in",
+   "records": 1,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4688-SPN added to an account.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1098",
+   "scope": "in",
+   "records": 2,
+   "supported": 2,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4723-5145-password reset with changeNTLM (Mimikatz).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1098",
+   "scope": "in",
+   "records": 1,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4724-5145-password reset with setNTLM (Mimikatz).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1098",
+   "scope": "in",
+   "records": 8,
+   "supported": 6,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4728-4756-Member added to sensitive domain groups.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1098",
+   "scope": "in",
+   "records": 4,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4728-Massive account group membership change.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1098",
+   "scope": "in",
+   "records": 11,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4728-Member adding to a group by the same account.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1098",
+   "scope": "in",
+   "records": 1,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4732-4733-Quick added-removed user from local group.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1098",
+   "scope": "in",
+   "records": 5,
+   "supported": 3,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4732-DNSadmin new member added.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1098",
+   "scope": "in",
+   "records": 1,
+   "supported": 1,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4732-User added to local admin groups.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1098",
+   "scope": "in",
+   "records": 3,
+   "supported": 3,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4738,5136-SPN set on user account.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1098",
+   "scope": "in",
+   "records": 4,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4738-Account is sensitive and cannot be delegated.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1098",
+   "scope": "in",
+   "records": 2,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4738-Account with password not required.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1098",
+   "scope": "in",
+   "records": 2,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4738-Do not require Kerberos preauthentication.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1098",
+   "scope": "in",
+   "records": 2,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4738-Password cannot be changed.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1098",
+   "scope": "in",
+   "records": 2,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4738-Password never expires.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1098",
+   "scope": "in",
+   "records": 2,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4738-Use only Kerberos DES encryption types.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1098",
+   "scope": "in",
+   "records": 2,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4738-User set with reversible psw encryption.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1098",
+   "scope": "in",
+   "records": 2,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4742,5136-Enable Trust this computer for delegation (to any service, Kerberos only).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1098",
+   "scope": "in",
+   "records": 3,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4742,5136-Enable Trust this computer for delegation (to specified service, Kerberos only).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1098",
+   "scope": "in",
+   "records": 9,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4742,5136-Enable Trust this computer for delegation (to specified service, any protocol).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1098",
+   "scope": "in",
+   "records": 9,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4742,5136-SPN set on computer account.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1098",
+   "scope": "in",
+   "records": 2,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4742-SPN set on computer account (DCshadow).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1098",
+   "scope": "in",
+   "records": 3,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4756-Exchange admin group change.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1098",
+   "scope": "in",
+   "records": 15,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4781-4738-User renamed to admin or likely.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1098",
+   "scope": "in",
+   "records": 2,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4781-Computer account renamed without a trailing $ (CVE-2021-42278).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1098",
+   "scope": "in",
+   "records": 2,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID5136-4662 AD object owner changed.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1098",
+   "scope": "in",
+   "records": 9,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID5136-Computer account set for RBCD delegation.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1098",
+   "scope": "in",
+   "records": 5,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1136-Create account/ID33205-SQL Server Disabled SA user activated.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1136",
+   "scope": "out",
+   "records": 1,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1136-Create account/ID33205-SQL Server local user created.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1136",
+   "scope": "out",
+   "records": 1,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1136-Create account/ID4688-User creation via commandline.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1136",
+   "scope": "out",
+   "records": 9,
+   "supported": 4,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1136-Create account/ID472, 4728 Hidden user creation.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1136",
+   "scope": "out",
+   "records": 21,
+   "supported": 7,
+   "errors": 0,
+   "flags": {
+    "log_cleared": 1
+   },
+   "techniques": [
+    "T1070.001"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1136-Create account/ID4720-4726 Fast created-deleted user.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1136",
+   "scope": "out",
+   "records": 2,
+   "supported": 1,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1136-Create account/ID4720-Admin like user created.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1136",
+   "scope": "out",
+   "records": 1,
+   "supported": 1,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1136-Create account/ID4720-Fake computer account created.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1136",
+   "scope": "out",
+   "records": 1,
+   "supported": 1,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1136-Create account/ID4720-Local user created.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1136",
+   "scope": "out",
+   "records": 2,
+   "supported": 2,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1136-Create account/ID4722-Guest account activated.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1136",
+   "scope": "out",
+   "records": 1,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1136-Create account/ID4741-Computer account created with privileges.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1136",
+   "scope": "out",
+   "records": 1,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1136-Create account/ID4742-4743-Fast created & deleted computer account.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1136",
+   "scope": "out",
+   "records": 3,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1197-BITS jobs/ID3-59-60-BITS job created.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1197",
+   "scope": "out",
+   "records": 5,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1197-BITS jobs/ID4688-BITS transfer initiated.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1197",
+   "scope": "out",
+   "records": 2,
+   "supported": 2,
+   "errors": 0,
+   "flags": {
+    "lolbin_abuse": 1
+   },
+   "techniques": [
+    "T1218"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1197-BITS jobs/ID60-High volume file downloaded with BITS.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1197",
+   "scope": "out",
+   "records": 6,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1197-BITS jobs/ID800-4103-4104-PowerShell BITS job started.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1197",
+   "scope": "out",
+   "records": 11,
+   "supported": 5,
+   "errors": 0,
+   "flags": {
+    "suspicious_powershell": 2
+   },
+   "techniques": [
+    "T1059.001"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1505-Server Software Component/ID11-Exchange transport config modified.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1505",
+   "scope": "out",
+   "records": 1,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1505-Server Software Component/ID6-Failed to install an Exchange transport agent.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1505",
+   "scope": "out",
+   "records": 4,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1505.001-SQL Stored Procedures/ID11715-SQL Server started in single mode for psw recovery.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1505.001",
+   "scope": "out",
+   "records": 1,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1505.001-SQL Stored Procedures/ID15457-SQL Server CMDshell enabled.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1505.001",
+   "scope": "out",
+   "records": 2,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1505.001-SQL Stored Procedures/ID15457-SQL server CLR lateral movement.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1505.001",
+   "scope": "out",
+   "records": 2,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1505.001-SQL Stored Procedures/ID4688-SQL Server started in single mode for psw recovery.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1505.001",
+   "scope": "out",
+   "records": 4,
+   "supported": 4,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1505.001-SQL Stored Procedures/ID4688-sqlcmd tool abuse in SQL Server.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1505.001",
+   "scope": "out",
+   "records": 1,
+   "supported": 1,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1543.003-Create or Modify System Process-Windows Service/ID13-New service for Mimikatz.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1543.003",
+   "scope": "in",
+   "records": 2,
+   "supported": 2,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1543.003-Create or Modify System Process-Windows Service/ID4688-4697 RDP hijack via service creation.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1543.003",
+   "scope": "in",
+   "records": 3,
+   "supported": 2,
+   "errors": 0,
+   "flags": {
+    "log_cleared": 1
+   },
+   "techniques": [
+    "T1070.001"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1543.003-Create or Modify System Process-Windows Service/ID4688-Command SC to create service on remote host.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1543.003",
+   "scope": "in",
+   "records": 1,
+   "supported": 1,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1543.003-Create or Modify System Process-Windows Service/ID4688-Service abuse with Failure Command.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1543.003",
+   "scope": "in",
+   "records": 2,
+   "supported": 2,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1543.003-Create or Modify System Process-Windows Service/ID4688-Service abuse with malicious path.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1543.003",
+   "scope": "in",
+   "records": 3,
+   "supported": 3,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1543.003-Create or Modify System Process-Windows Service/ID4688-Service created (command).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1543.003",
+   "scope": "in",
+   "records": 2,
+   "supported": 2,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1543.003-Create or Modify System Process-Windows Service/ID4688-Service permissions modified (registry).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1543.003",
+   "scope": "in",
+   "records": 2,
+   "supported": 2,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1543.003-Create or Modify System Process-Windows Service/ID4688-Service permissions modified (sc).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1543.003",
+   "scope": "in",
+   "records": 1,
+   "supported": 1,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1543.003-Create or Modify System Process-Windows Service/ID4697-MSF payload deployed via service.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1543.003",
+   "scope": "in",
+   "records": 1,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1543.003-Create or Modify System Process-Windows Service/ID4697-New service for Mimikatz.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1543.003",
+   "scope": "in",
+   "records": 2,
+   "supported": 1,
+   "errors": 0,
+   "flags": {
+    "log_cleared": 1
+   },
+   "techniques": [
+    "T1070.001"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1543.003-Create or Modify System Process-Windows Service/ID7045-4697-SMBexec service registration.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1543.003",
+   "scope": "in",
+   "records": 2,
+   "supported": 1,
+   "errors": 0,
+   "flags": {
+    "service_installed": 1
+   },
+   "techniques": [
+    "T1543.003"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1543.003-Create or Modify System Process-Windows Service/ID7045-7036 PSexec service installation.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1543.003",
+   "scope": "in",
+   "records": 4,
+   "supported": 2,
+   "errors": 0,
+   "flags": {
+    "log_cleared": 1,
+    "service_installed": 1
+   },
+   "techniques": [
+    "T1070.001",
+    "T1543.003"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1543.003-Create or Modify System Process-Windows Service/ID7045-New service for Mimikatz +npcap.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1543.003",
+   "scope": "in",
+   "records": 6,
+   "supported": 6,
+   "errors": 0,
+   "flags": {
+    "service_installed": 3
+   },
+   "techniques": [
+    "T1543.003"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1543.003-Create or Modify System Process-Windows Service/ID7045-Random service installation.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1543.003",
+   "scope": "in",
+   "records": 2,
+   "supported": 2,
+   "errors": 0,
+   "flags": {
+    "log_cleared": 1,
+    "service_installed": 1
+   },
+   "techniques": [
+    "T1070.001",
+    "T1543.003"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1543.003-Create or Modify System Process-Windows Service/ID800-4103-4104-Service abuse with Failure Command.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1543.003",
+   "scope": "in",
+   "records": 10,
+   "supported": 2,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1543.003-Create or Modify System Process-Windows Service/ID800-4103-4104-Service abuse with malicious path.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1543.003",
+   "scope": "in",
+   "records": 10,
+   "supported": 2,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1543.003-Create or Modify System Process-Windows Service/ID800-4103-4104-Service creation (PowerShell).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1543.003",
+   "scope": "in",
+   "records": 8,
+   "supported": 4,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1546-Event Triggered Execution/ID13-WMIimplant registry crash control.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1546",
+   "scope": "out",
+   "records": 18,
+   "supported": 18,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1546-Event Triggered Execution/ID19-20-WMI registration via PowerLurk.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1546",
+   "scope": "out",
+   "records": 3,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1546-Event Triggered Execution/ID4688-netsh helper DLL.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1546",
+   "scope": "out",
+   "records": 2,
+   "supported": 2,
+   "errors": 0,
+   "flags": {
+    "log_cleared": 1,
+    "credential_dump_tool": 1
+   },
+   "techniques": [
+    "T1003.001",
+    "T1070.001"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1546-Event Triggered Execution/ID5136-AdminSDholder backdoor obfuscation (via localizationDisplayId).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1546",
+   "scope": "out",
+   "records": 4,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1546-Event Triggered Execution/ID5136-AdminSDholder permissions changed.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1546",
+   "scope": "out",
+   "records": 2,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1546-Event Triggered Execution/ID800-4103-4104-WMI registration via PowerLurk.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1546",
+   "scope": "out",
+   "records": 10,
+   "supported": 0,
+   "errors": 10,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1547-Boot or Logon Autostart Execution/ID12-LSA Protect mode enabled RunAsPPL.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1547",
+   "scope": "out",
+   "records": 3,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1547-Boot or Logon Autostart Execution/ID4622-New SSP loaded in LSA (only legitim).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1547",
+   "scope": "out",
+   "records": 420,
+   "supported": 0,
+   "errors": 420,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1547-Boot or Logon Autostart Execution/ID4664-symbolic link created.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1547",
+   "scope": "out",
+   "records": 1,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1574-Hijack Execution Flow/ID150-Failed DLL loaded by DNS server.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1574",
+   "scope": "out",
+   "records": 2,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1574-Hijack Execution Flow/ID4688-DNS DLL serverlevelplugindll command.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1574",
+   "scope": "out",
+   "records": 1,
+   "supported": 1,
+   "errors": 0,
+   "flags": {
+    "credential_dump_tool": 1
+   },
+   "techniques": [
+    "T1003.001"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1574-Hijack Execution Flow/ID770-Success DLL loaded by DNS server.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1574",
+   "scope": "out",
+   "records": 2,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1574-Hijack Execution Flow/ID800-4103-4104-Print spooler privilege escalation (CVE-2020-1048).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1574",
+   "scope": "out",
+   "records": 10,
+   "supported": 0,
+   "errors": 10,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0004-Privilege Escalation/T1068-Exploitation for Privilege Escalation/ID4673-Privilege SeMachineAccountPrivilege called.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1068",
+   "scope": "out",
+   "records": 1,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0004-Privilege Escalation/T1134-Access Token Manipulation/ID4648-4624-RunAsCS login.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1134",
+   "scope": "out",
+   "records": 6,
+   "supported": 5,
+   "errors": 0,
+   "flags": {
+    "log_cleared": 1
+   },
+   "techniques": [
+    "T1070.001"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0004-Privilege Escalation/T1134-Access Token Manipulation/ID4688,4624-RottenPotatoNG.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1134",
+   "scope": "out",
+   "records": 5,
+   "supported": 5,
+   "errors": 0,
+   "flags": {
+    "log_cleared": 1
+   },
+   "techniques": [
+    "T1070.001"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0004-Privilege Escalation/T1134-Access Token Manipulation/ID4688,4648,4624-Runas execution with different user.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1134",
+   "scope": "out",
+   "records": 9,
+   "supported": 8,
+   "errors": 0,
+   "flags": {
+    "log_cleared": 1
+   },
+   "techniques": [
+    "T1070.001"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0004-Privilege Escalation/T1134-Access Token Manipulation/ID4704-4705-User righ assigned to account.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1134",
+   "scope": "out",
+   "records": 11,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0004-Privilege Escalation/T1134-Access Token Manipulation/ID4717-4718-System security granded to account.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1134",
+   "scope": "out",
+   "records": 2,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0004-Privilege Escalation/T1484-Domain or Tenant Policy Modification/ID 4865 4706 - trust added.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1484",
+   "scope": "out",
+   "records": 6,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0004-Privilege Escalation/T1484.001-Domain Policy Modification-Group Policy Modification/ID5136-4662 sensitive GPO edited.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1484.001",
+   "scope": "out",
+   "records": 11,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0004-Privilege Escalation/T1546-Image File Execution Options Injection/ID1-CMD executed via sticky key call.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1546",
+   "scope": "out",
+   "records": 2,
+   "supported": 1,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0004-Privilege Escalation/T1546-Image File Execution Options Injection/ID11-New sethc file created from CMD copy.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1546",
+   "scope": "out",
+   "records": 2,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0004-Privilege Escalation/T1546-Image File Execution Options Injection/ID12,13-Stickey key registry update.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1546",
+   "scope": "out",
+   "records": 2,
+   "supported": 1,
+   "errors": 0,
+   "flags": {
+    "registry_persistence": 1
+   },
+   "techniques": [
+    "T1547.001"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0004-Privilege Escalation/T1546-Image File Execution Options Injection/ID4656-Failed sethc replacement by CMD.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1546",
+   "scope": "out",
+   "records": 20,
+   "supported": 1,
+   "errors": 0,
+   "flags": {
+    "log_cleared": 1
+   },
+   "techniques": [
+    "T1070.001"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0004-Privilege Escalation/T1546-Image File Execution Options Injection/ID4688-Stickey command reg update + execution.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1546",
+   "scope": "out",
+   "records": 5,
+   "supported": 5,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0004-Privilege Escalation/T1574-DLL side-loading/1-Print spool spawned a CMD shell (PrintNightMare).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1574",
+   "scope": "out",
+   "records": 1,
+   "supported": 1,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0004-Privilege Escalation/T1574-DLL side-loading/ID316,300,301,316,823,848-Mimispool printer server instal.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1574",
+   "scope": "out",
+   "records": 11,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0004-Privilege Escalation/T1574-DLL side-loading/ID354-808-Mimispool printer installation (PrintNightmare).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1574",
+   "scope": "out",
+   "records": 14,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0004-Privilege Escalation/T1574-DLL side-loading/ID4688,6416,4648-SystemNightMare.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1574",
+   "scope": "out",
+   "records": 53,
+   "supported": 8,
+   "errors": 0,
+   "flags": {
+    "log_cleared": 1,
+    "lolbin_abuse": 1
+   },
+   "techniques": [
+    "T1070.001",
+    "T1218"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1027-Obfuscated Files or Information/4624,4674,4688- CrackMap Exec SMB mimikatz.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1027",
+   "scope": "in",
+   "records": 63,
+   "supported": 12,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1027-Obfuscated Files or Information/ID1-CrackMapExec payload execution.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1027",
+   "scope": "in",
+   "records": 2,
+   "supported": 2,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1027-Obfuscated Files or Information/ID400-800-CrackMapExec payload execution.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1027",
+   "scope": "in",
+   "records": 13,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1027-Obfuscated Files or Information/ID4103-4104-CrackMapExec payload execution.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1027",
+   "scope": "in",
+   "records": 24,
+   "supported": 11,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1027-Obfuscated Files or Information/ID4688-Obfuscated payload transfer via service name - Tchopper.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1027",
+   "scope": "in",
+   "records": 735,
+   "supported": 735,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1070.001-Clear Windows event logs/ID104-1102-Event log cleared.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1070.001",
+   "scope": "in",
+   "records": 91,
+   "supported": 91,
+   "errors": 0,
+   "flags": {
+    "log_cleared": 91
+   },
+   "techniques": [
+    "T1070.001"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1070.001-Clear Windows event logs/ID4688-Clear event log attempt (native).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1070.001",
+   "scope": "in",
+   "records": 28,
+   "supported": 28,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1070.001-Clear Windows event logs/ID4688-Clear event log attempt (wmi).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1070.001",
+   "scope": "in",
+   "records": 2,
+   "supported": 2,
+   "errors": 0,
+   "flags": {
+    "log_cleared": 1
+   },
+   "techniques": [
+    "T1070.001"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1070.001-Clear Windows event logs/ID800-4103-4104-Clear event log attempt.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1070.001",
+   "scope": "in",
+   "records": 6,
+   "supported": 2,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1070.006-Timestomp/ID4616-system time changed.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1070.006",
+   "scope": "in",
+   "records": 8,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1078.002-Valid accounts-Domain accounts/ID4964-Login of a member of a special group.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1078.002",
+   "scope": "in",
+   "records": 8,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1112-Modify registry/ID11,13-SMBexec service registration.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1112",
+   "scope": "out",
+   "records": 4,
+   "supported": 3,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1112-Modify registry/ID4624,4670,4688,4674-Registry permission change via WMI (DAMP).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1112",
+   "scope": "out",
+   "records": 824,
+   "supported": 15,
+   "errors": 0,
+   "flags": {
+    "log_cleared": 1
+   },
+   "techniques": [
+    "T1070.001"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1112-Modify registry/ID800-4103-4104-Registry permission change via WMI (DAMP) PowerShell on source.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1112",
+   "scope": "out",
+   "records": 132,
+   "supported": 2,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1140-Deobfuscate-Decode Files or Information/ID4688-Certutil download.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1140",
+   "scope": "out",
+   "records": 2,
+   "supported": 2,
+   "errors": 0,
+   "flags": {
+    "log_cleared": 1,
+    "lolbin_abuse": 1
+   },
+   "techniques": [
+    "T1070.001",
+    "T1218"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1207-Rogue domain controller/ID4662-Sensitive attributes accessed (DCshadow).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1207",
+   "scope": "out",
+   "records": 14,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1207-Rogue domain controller/ID5137-Fake domain controller registration (DCshadow).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1207",
+   "scope": "out",
+   "records": 1,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1222.001-File and Directory Permissions Modification/ID5124-OCSP security settings changed.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1222.001",
+   "scope": "out",
+   "records": 7,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1222.001-File and Directory Permissions Modification/ID5136-Permission change on OU by computer.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1222.001",
+   "scope": "out",
+   "records": 3,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1222.001-File and Directory Permissions Modification/ID5136-Permission change on OU by user.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1222.001",
+   "scope": "out",
+   "records": 2,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1222.001-File and Directory Permissions Modification/ID5136-Permission change on top root AD (DCsync).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1222.001",
+   "scope": "out",
+   "records": 7,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1222.001-File and Directory Permissions Modification/ID5136-Permissions changed on a GPO.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1222.001",
+   "scope": "out",
+   "records": 3,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1222.001-File and Directory Permissions Modification/ID5143-File share permissions changed.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1222.001",
+   "scope": "out",
+   "records": 4,
+   "supported": 3,
+   "errors": 0,
+   "flags": {
+    "admin_share_access": 3
+   },
+   "techniques": [
+    "T1021.002"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1553- Subvert Trust Controls/ID12-13 SIP provider registration.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1553",
+   "scope": "out",
+   "records": 27,
+   "supported": 14,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1555.004-Windows Credential Manager/ID 5376, 5379, 5382, 5381, 5382 credential manager and vault.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1555.004",
+   "scope": "out",
+   "records": 15,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.001-Impair Defenses-Disable or Modify tool/ID1-SYSMON driver unload (FilterManager).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1562.001",
+   "scope": "in",
+   "records": 1,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.001-Impair Defenses-Disable or Modify tool/ID13-Defender service configuration disabled.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1562.001",
+   "scope": "in",
+   "records": 2,
+   "supported": 2,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.001-Impair Defenses-Disable or Modify tool/ID4688-Defender critical features disabled (command).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1562.001",
+   "scope": "in",
+   "records": 9,
+   "supported": 9,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.001-Impair Defenses-Disable or Modify tool/ID4688-Defender service deactivation attempt.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1562.001",
+   "scope": "in",
+   "records": 5,
+   "supported": 5,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.001-Impair Defenses-Disable or Modify tool/ID5007-Defender threat exclusion (native).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1562.001",
+   "scope": "in",
+   "records": 4,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.001-Impair Defenses-Disable or Modify tool/ID8-Module Virtualization disabled (Credential Guard).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1562.001",
+   "scope": "in",
+   "records": 32,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.001-Impair Defenses-Disable or Modify tool/ID800-4103-4104 Defender critical features disabled (PowerShell).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1562.001",
+   "scope": "in",
+   "records": 50,
+   "supported": 10,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.001-Impair Defenses-Disable or Modify tool/ID800-4103-4104 Defender default action allow any (PowerShell).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1562.001",
+   "scope": "in",
+   "records": 10,
+   "supported": 2,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.001-Impair Defenses-Disable or Modify tool/ID800-4103-4104 Defender exclusion added (PowerShell).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1562.001",
+   "scope": "in",
+   "records": 20,
+   "supported": 4,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.002-Disable Windows Event Logging/ID33205-SQL Server  audit object disabled.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1562.002",
+   "scope": "out",
+   "records": 4,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.002-Disable Windows Event Logging/ID33205-SQL Server Database audit specification deleted.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1562.002",
+   "scope": "out",
+   "records": 4,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.002-Disable Windows Event Logging/ID33205-SQL Server Database audit specification disabled.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1562.002",
+   "scope": "out",
+   "records": 2,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.002-Disable Windows Event Logging/ID33205-SQL Server audit object deleted.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1562.002",
+   "scope": "out",
+   "records": 4,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.002-Disable Windows Event Logging/ID33205-SQL Server audit specification deleted.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1562.002",
+   "scope": "out",
+   "records": 2,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.002-Disable Windows Event Logging/ID33205-SQL Server audit specification disabled.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1562.002",
+   "scope": "out",
+   "records": 2,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.002-Disable Windows Event Logging/ID4688-Audit policy clear attempt.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1562.002",
+   "scope": "out",
+   "records": 2,
+   "supported": 2,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.002-Disable Windows Event Logging/ID4688-Audit policy deactivation attempt.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1562.002",
+   "scope": "out",
+   "records": 3,
+   "supported": 3,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.002-Disable Windows Event Logging/ID4719-Audit policy deactivation.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1562.002",
+   "scope": "out",
+   "records": 30,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.002-Disable Windows Event Logging/ID4739-Domain policy changed by non system account.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1562.002",
+   "scope": "out",
+   "records": 1,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.002-Disable Windows Event Logging/ID4885,4876,4877,5123,5124-ADCS PKI OCSP.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1562.002",
+   "scope": "out",
+   "records": 13,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.002-Disable Windows Event Logging/ID4908-Special group table changed.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1562.002",
+   "scope": "out",
+   "records": 4,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.002-Disable Windows Event Logging/ID541-DNS server auditing changed.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1562.002",
+   "scope": "out",
+   "records": 1,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.004-Impair Defenses-Disable or Modify System Firewall/ID2003-4950-Firewall disabled.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1562.004",
+   "scope": "out",
+   "records": 6,
+   "supported": 0,
+   "errors": 6,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.004-Impair Defenses-Disable or Modify System Firewall/ID2004-Any any firewall rule created.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1562.004",
+   "scope": "out",
+   "records": 1,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.004-Impair Defenses-Disable or Modify System Firewall/ID2004-New firewall rule created by PowerShell.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1562.004",
+   "scope": "out",
+   "records": 1,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.004-Impair Defenses-Disable or Modify System Firewall/ID4103-4104-2004-OpenSSH firewall rule activation.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1562.004",
+   "scope": "out",
+   "records": 391,
+   "supported": 0,
+   "errors": 391,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.004-Impair Defenses-Disable or Modify System Firewall/ID4688-5447-4950-Firewall disabled (command).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1562.004",
+   "scope": "out",
+   "records": 998,
+   "supported": 6,
+   "errors": 0,
+   "flags": {
+    "log_cleared": 1
+   },
+   "techniques": [
+    "T1070.001"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.004-Impair Defenses-Disable or Modify System Firewall/ID800-4103-Firewall disabled.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1562.004",
+   "scope": "out",
+   "records": 10,
+   "supported": 0,
+   "errors": 10,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1564-Hide artifacts/ID4688-Linux Subsystem installation (WSL).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1564",
+   "scope": "out",
+   "records": 9,
+   "supported": 9,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1003-Credential dumping/ID1-12-13-Wdigest authentication activation.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1003",
+   "scope": "out",
+   "records": 3,
+   "supported": 2,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1003-Credential dumping/ID1-LSASS dump with LSASSY (SYSMON).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1003",
+   "scope": "out",
+   "records": 14,
+   "supported": 3,
+   "errors": 0,
+   "flags": {
+    "credential_dump_tool": 2,
+    "lolbin_abuse": 1,
+    "lsass_access": 1
+   },
+   "techniques": [
+    "T1003.001",
+    "T1218"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": true
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1003-Credential dumping/ID10-Mimikatz LSASS process dump.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1003",
+   "scope": "out",
+   "records": 3,
+   "supported": 3,
+   "errors": 0,
+   "flags": {
+    "credential_dump_tool": 2,
+    "lsass_access": 1
+   },
+   "techniques": [
+    "T1003.001"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": true
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1003-Credential dumping/ID11-LSASS credentials dump via Task Manager.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1003",
+   "scope": "out",
+   "records": 1,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1003-Credential dumping/ID11-Mimikatz LSA SSP clear text password exfiltration.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1003",
+   "scope": "out",
+   "records": 1,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1003-Credential dumping/ID325-327-IFM created - ESENT.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1003",
+   "scope": "out",
+   "records": 4,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1003-Credential dumping/ID4656, 5145, 4674-Impacket secret dump via SMB.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1003",
+   "scope": "out",
+   "records": 41,
+   "supported": 32,
+   "errors": 0,
+   "flags": {
+    "log_cleared": 1,
+    "remote_service_control": 1,
+    "admin_share_access": 20
+   },
+   "techniques": [
+    "T1021.002",
+    "T1070.001",
+    "T1569.002"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1003-Credential dumping/ID4656-4663-4658 Mimikatz sekurlsa password dump.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1003",
+   "scope": "out",
+   "records": 7,
+   "supported": 2,
+   "errors": 0,
+   "flags": {
+    "log_cleared": 1
+   },
+   "techniques": [
+    "T1070.001"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1003-Credential dumping/ID4661-4658 Mimikatz sekurlsa password dump SAM.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1003",
+   "scope": "out",
+   "records": 186,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1003-Credential dumping/ID4661-Suspicious SAM access to password attributes by LSASS (Dcshadow).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1003",
+   "scope": "out",
+   "records": 20,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1003-Credential dumping/ID4662-DCsync attack using Mimikatz.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1003",
+   "scope": "out",
+   "records": 20,
+   "supported": 14,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1003-Credential dumping/ID4663-Task Manager used to dump LSASS process.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1003",
+   "scope": "out",
+   "records": 2,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1003-Credential dumping/ID4688-4663-4656-LSASS dump with LSASSY (process).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1003",
+   "scope": "out",
+   "records": 28,
+   "supported": 24,
+   "errors": 0,
+   "flags": {
+    "credential_dump_tool": 2,
+    "admin_share_access": 11,
+    "lolbin_abuse": 1
+   },
+   "techniques": [
+    "T1003.001",
+    "T1021.002",
+    "T1218"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": true
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1003-Credential dumping/ID4688-Diskshadow abuse.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1003",
+   "scope": "out",
+   "records": 4,
+   "supported": 4,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1003-Credential dumping/ID4688-IFM created.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1003",
+   "scope": "out",
+   "records": 5,
+   "supported": 5,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1003-Credential dumping/ID4688-Task Manager access indicator for potential LSASS dump.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1003",
+   "scope": "out",
+   "records": 9,
+   "supported": 9,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1003-Credential dumping/ID4756-Exchange critical group change (DCsync).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1003",
+   "scope": "out",
+   "records": 3,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1003-Credential dumping/ID4794-4688-DSRM password set with NTDSutil.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1003",
+   "scope": "out",
+   "records": 2,
+   "supported": 1,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1003-Credential dumping/ID800-4103-4104-LSASS dump with LSASSY (PowerShell).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1003",
+   "scope": "out",
+   "records": 56,
+   "supported": 43,
+   "errors": 0,
+   "flags": {
+    "credential_dump_tool": 1
+   },
+   "techniques": [
+    "T1003.001"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": true
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1040-Traffic sniffing/ID-4688 Native Windows sniffer Pktmon usage.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1040",
+   "scope": "out",
+   "records": 6,
+   "supported": 6,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1110.xxx-Brut force/ID 4776,4625-AccountRestore local bruteforce.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1110",
+   "scope": "in",
+   "records": 16,
+   "supported": 16,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1110.xxx-Brut force/ID18456-SQL Server failed login because only Windows auth.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1110",
+   "scope": "in",
+   "records": 6,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1110.xxx-Brut force/ID33205-SQL Server failed login because only Windows auth.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1110",
+   "scope": "in",
+   "records": 6,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1110.xxx-Brut force/ID33205-SQL Server failed login with SA wrong password.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1110",
+   "scope": "in",
+   "records": 27,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1110.xxx-Brut force/ID33205-SQL Server failed login with non existing accounts.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1110",
+   "scope": "in",
+   "records": 72,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1110.xxx-Brut force/ID4-OpenSSH brutforce with non existing users (sshd logs).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1110",
+   "scope": "in",
+   "records": 7,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1110.xxx-Brut force/ID4-OpenSSH brutforce with valid users.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1110",
+   "scope": "in",
+   "records": 7,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1110.xxx-Brut force/ID4625-OpenSSH brutforce with non existing users.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1110",
+   "scope": "in",
+   "records": 20,
+   "supported": 10,
+   "errors": 0,
+   "flags": {
+    "log_cleared": 1
+   },
+   "techniques": [
+    "T1070.001"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1110.xxx-Brut force/ID4625-OpenSSH brutforce with valid users.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1110",
+   "scope": "in",
+   "records": 11,
+   "supported": 9,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1110.xxx-Brut force/ID4768-4771-Kerberos brutforce with non existing users.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1110",
+   "scope": "in",
+   "records": 52,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1110.xxx-Brut force/ID4768-4771-Kerberos user enumeration (Kerbrute).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1110",
+   "scope": "in",
+   "records": 42,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1110.xxx-Brut force/ID4771-Kerberos brutforce with valid user.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1110",
+   "scope": "in",
+   "records": 54,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1552.004-Unsecured Credentials-Private Keys/ID70-CAPI-Private key accessed Mimikatz.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1552.004",
+   "scope": "out",
+   "records": 3,
+   "supported": 0,
+   "errors": 3,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1555-Credentials from Password Stores/ID4662-Sensitve DPAPI attributes accessed.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1555",
+   "scope": "out",
+   "records": 57,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1555-Credentials from Password Stores/ID5145-user file-credentials-browser dump via network share.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1555",
+   "scope": "out",
+   "records": 349,
+   "supported": 349,
+   "errors": 0,
+   "flags": {
+    "admin_share_access": 318,
+    "remote_service_control": 14
+   },
+   "techniques": [
+    "T1021.002",
+    "T1569.002"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1557-Man in the middle/ID5145-Print spooler bug abuse.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1557",
+   "scope": "out",
+   "records": 9,
+   "supported": 9,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1558-Steal or Forge Kerberos Tickets/ID4624-Success login with Golden ticket.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1558",
+   "scope": "out",
+   "records": 10,
+   "supported": 10,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1558-Steal or Forge Kerberos Tickets/ID4768-4769-Kerberos host ticket without a trailing $.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1558",
+   "scope": "out",
+   "records": 2,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1558-Steal or Forge Kerberos Tickets/ID4768-Kerberos AS-REP Roasting.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1558",
+   "scope": "out",
+   "records": 1,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1558-Steal or Forge Kerberos Tickets/ID4769-Golden ticket issued.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1558",
+   "scope": "out",
+   "records": 10,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1558-Steal or Forge Kerberos Tickets/ID4769-Kerberoast ticket with low encryption.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1558",
+   "scope": "out",
+   "records": 10,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0007-Discovery/T1016-System Network Configuration Discovery/ID4688-Audit policy enumerated.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1016",
+   "scope": "out",
+   "records": 3,
+   "supported": 2,
+   "errors": 0,
+   "flags": {
+    "log_cleared": 1
+   },
+   "techniques": [
+    "T1070.001"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0007-Discovery/T1016-System Network Configuration Discovery/ID4688-Firewall configuration enumerated (command).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1016",
+   "scope": "out",
+   "records": 3,
+   "supported": 3,
+   "errors": 0,
+   "flags": {
+    "log_cleared": 1
+   },
+   "techniques": [
+    "T1070.001"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0007-Discovery/T1016-System Network Configuration Discovery/ID4688-Scheduled task configuration enumeration.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1016",
+   "scope": "out",
+   "records": 4,
+   "supported": 4,
+   "errors": 0,
+   "flags": {
+    "log_cleared": 1,
+    "admin_share_access": 2
+   },
+   "techniques": [
+    "T1021.002",
+    "T1070.001"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0007-Discovery/T1016-System Network Configuration Discovery/ID6004-DNS-server-failed zone transfer.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1016",
+   "scope": "out",
+   "records": 3,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0007-Discovery/T1016-System Network Configuration Discovery/ID800-4103-4104-Firewall configuration enumerated (PowerShell).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1016",
+   "scope": "out",
+   "records": 694,
+   "supported": 338,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0007-Discovery/T1018-Remote System Discovery/ID5145-DNS hosts files access via network share.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1018",
+   "scope": "out",
+   "records": 6,
+   "supported": 6,
+   "errors": 0,
+   "flags": {
+    "admin_share_access": 6
+   },
+   "techniques": [
+    "T1021.002"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0007-Discovery/T1046-Network Service Scanning/ID131-RDP brutforce (no user info).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1046",
+   "scope": "out",
+   "records": 154,
+   "supported": 0,
+   "errors": 154,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0007-Discovery/T1046-Network Service Scanning/ID4624-Anonymous login with domain specified (DonPapi).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1046",
+   "scope": "out",
+   "records": 15,
+   "supported": 15,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0007-Discovery/T1069-Permission Groups Discovery/ID4661-Local group enumeration with RID brutforce with CME.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1069",
+   "scope": "out",
+   "records": 54,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0007-Discovery/T1069-Permission Groups Discovery/ID4661-SAM sensitive domain users & groups discovery.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1069",
+   "scope": "out",
+   "records": 24,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0007-Discovery/T1069-Permission Groups Discovery/ID4662-Domain group enumeration CME.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1069",
+   "scope": "out",
+   "records": 80,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0007-Discovery/T1069-Permission Groups Discovery/ID4688-Group discovery via commandline.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1069",
+   "scope": "out",
+   "records": 3,
+   "supported": 3,
+   "errors": 0,
+   "flags": {
+    "log_cleared": 1
+   },
+   "techniques": [
+    "T1070.001"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0007-Discovery/T1069-Permission Groups Discovery/ID4799-4624-Local admin group enumerated by SharpHound.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1069",
+   "scope": "out",
+   "records": 55,
+   "supported": 0,
+   "errors": 55,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0007-Discovery/T1069-Permission Groups Discovery/ID800-4103-4104-Domain group discovery via PowerShell.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1069",
+   "scope": "out",
+   "records": 10,
+   "supported": 2,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0007-Discovery/T1069-Permission Groups Discovery/ID800-4103-4104-Local group discovery via PowerShell.evtx.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1069",
+   "scope": "out",
+   "records": 10,
+   "supported": 2,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0007-Discovery/T1087-Account discovery/ID1-SPN discovery (SYSMON process).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1087",
+   "scope": "out",
+   "records": 1,
+   "supported": 1,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0007-Discovery/T1087-Account discovery/ID4103-4104 - SPN discovery (moder nPowerShell).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1087",
+   "scope": "out",
+   "records": 21,
+   "supported": 6,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0007-Discovery/T1087-Account discovery/ID4662-4624-Honeypot account property read.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1087",
+   "scope": "out",
+   "records": 17,
+   "supported": 14,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0007-Discovery/T1087-Account discovery/ID4688-List all Service Principal Names (SPN).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1087",
+   "scope": "out",
+   "records": 2,
+   "supported": 2,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0007-Discovery/T1087-Account discovery/ID4688-User enumeration via command.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1087",
+   "scope": "out",
+   "records": 4,
+   "supported": 4,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0007-Discovery/T1087-Account discovery/ID4769-Kerberos TGS host enumeration (Bloodhound).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1087",
+   "scope": "out",
+   "records": 24,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0007-Discovery/T1087-Account discovery/ID600-Active Directory module called by PowerShell.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1087",
+   "scope": "out",
+   "records": 1,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0007-Discovery/T1087-Account discovery/ID800 - SPN discovery (PowerShell).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1087",
+   "scope": "out",
+   "records": 21,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0007-Discovery/T1135.xxx-Network Share Discovery/ID4688-Network share discovery or connection via commandline.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1135",
+   "scope": "out",
+   "records": 4,
+   "supported": 3,
+   "errors": 0,
+   "flags": {
+    "log_cleared": 1
+   },
+   "techniques": [
+    "T1070.001"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0007-Discovery/T1135.xxx-Network Share Discovery/ID5140-5145-Bloodhound-SharpHound enumeration via SMB.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1135",
+   "scope": "out",
+   "records": 91,
+   "supported": 0,
+   "errors": 91,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0007-Discovery/T1135.xxx-Network Share Discovery/ID5140-Failed ADMIN$ share access.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1135",
+   "scope": "out",
+   "records": 8,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0007-Discovery/T1201-Password Policy Discovery/ID4661-Password policy enumeration.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1201",
+   "scope": "out",
+   "records": 8,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0007-Discovery/T1201-Password Policy Discovery/ID4688-Password policy discovery via commandline.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1201",
+   "scope": "out",
+   "records": 3,
+   "supported": 3,
+   "errors": 0,
+   "flags": {
+    "log_cleared": 1
+   },
+   "techniques": [
+    "T1070.001"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0007-Discovery/T1482-Domain Trust Discovery/ID800,4103,4104-Active Directory Forest PowerShell class.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1482",
+   "scope": "out",
+   "records": 8,
+   "supported": 2,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0008-Lateral Movement/T1021.001-Remote Desktop Protocol/ID4688,4778,4779 RDP hijack direct.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1021.001",
+   "scope": "out",
+   "records": 14,
+   "supported": 12,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0008-Lateral Movement/T1021.001-Remote Desktop Protocol/ID4688-4778 RDP hijack command execution.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1021.001",
+   "scope": "out",
+   "records": 22,
+   "supported": 21,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0008-Lateral Movement/T1021.001-Remote Desktop Protocol/ID4825-Denied RDP connection with valid credentials.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1021.001",
+   "scope": "out",
+   "records": 2,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0008-Lateral Movement/T1021.002-SMB Windows Admin Shares/ID4688,4697,5140-5145 PSexec remote execution + admin share.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1021.002",
+   "scope": "in",
+   "records": 30,
+   "supported": 25,
+   "errors": 0,
+   "flags": {
+    "admin_share_access": 5
+   },
+   "techniques": [
+    "T1021.002"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0008-Lateral Movement/T1021.002-SMB Windows Admin Shares/ID4688-4648 Lateral movement with net use.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1021.002",
+   "scope": "in",
+   "records": 2,
+   "supported": 1,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0008-Lateral Movement/T1021.002-SMB Windows Admin Shares/ID4688-Network share manipulation via commandline.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1021.002",
+   "scope": "in",
+   "records": 3,
+   "supported": 3,
+   "errors": 0,
+   "flags": {
+    "log_cleared": 1
+   },
+   "techniques": [
+    "T1070.001"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0008-Lateral Movement/T1021.002-SMB Windows Admin Shares/ID5140-ADMIN$ share connection with Golden ticket.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1021.002",
+   "scope": "in",
+   "records": 2,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0008-Lateral Movement/T1021.002-SMB Windows Admin Shares/ID5142- New file share created.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1021.002",
+   "scope": "in",
+   "records": 4,
+   "supported": 3,
+   "errors": 0,
+   "flags": {
+    "admin_share_access": 3
+   },
+   "techniques": [
+    "T1021.002"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0008-Lateral Movement/T1021.002-SMB Windows Admin Shares/ID5142-5143-Mimispool print share created and modified.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1021.002",
+   "scope": "in",
+   "records": 2,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0008-Lateral Movement/T1021.002-SMB Windows Admin Shares/ID5145-remote shell execution via SMB admin share.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1021.002",
+   "scope": "in",
+   "records": 2,
+   "supported": 2,
+   "errors": 0,
+   "flags": {
+    "admin_share_access": 1,
+    "remote_service_control": 1
+   },
+   "techniques": [
+    "T1021.002",
+    "T1569.002"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0008-Lateral Movement/T1021.003-Distributed Component Object Model (DCOM)/ID4103,4104-DCOMexec native via PowerShell.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1021.003",
+   "scope": "out",
+   "records": 5,
+   "supported": 2,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0008-Lateral Movement/T1021.003-Distributed Component Object Model (DCOM)/ID4688,4674-DCOMexec process spawned.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1021.003",
+   "scope": "out",
+   "records": 12,
+   "supported": 6,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0008-Lateral Movement/T1021.004-Remote Service SSH/ID4-OpenSSH server listening.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1021.004",
+   "scope": "out",
+   "records": 6,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0008-Lateral Movement/T1021.004-Remote Service SSH/ID4103-4104-OpenSSH server activation and config.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1021.004",
+   "scope": "out",
+   "records": 240,
+   "supported": 103,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0008-Lateral Movement/T1021.004-Remote Service SSH/ID4103-4104-OpenSSH server install.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1021.004",
+   "scope": "out",
+   "records": 30,
+   "supported": 4,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0008-Lateral Movement/T1021.006-Windows Remote Management/ID4656-WS Management listener enumeration.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1021.006",
+   "scope": "out",
+   "records": 29,
+   "supported": 0,
+   "errors": 29,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0008-Lateral Movement/T1550-Use Alternate Authentication Material/ID4624-Mimikatz Pass the hash.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1550",
+   "scope": "out",
+   "records": 8,
+   "supported": 7,
+   "errors": 0,
+   "flags": {
+    "log_cleared": 1,
+    "admin_share_access": 2
+   },
+   "techniques": [
+    "T1021.002",
+    "T1070.001"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0009-Collection/T1125-Video capture/ID13-RDP shadow session configuration enabled (registry).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1125",
+   "scope": "out",
+   "records": 1,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0011-Command and Control/T1090-Proxy/ID5600-proxy configuration changed.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1090",
+   "scope": "out",
+   "records": 10,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0011-Command and Control/T1572-Protocol tunneling/ID4688-netsh RDP port forwarding abuse.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1572",
+   "scope": "out",
+   "records": 8,
+   "supported": 6,
+   "errors": 0,
+   "flags": {
+    "log_cleared": 1
+   },
+   "techniques": [
+    "T1070.001"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0040-Impact/T1486-Data Encrypted for Impact/ID 768,775,793,796,817,840-BitLocker encryption activated.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1486",
+   "scope": "out",
+   "records": 32,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0040-Impact/T1490-Inhibit System Recovery/ID4688-Delete VSS backup (WMI).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1490",
+   "scope": "out",
+   "records": 3,
+   "supported": 3,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0040-Impact/T1490-Inhibit System Recovery/ID4688-Delete Window backup (webadmin).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1490",
+   "scope": "out",
+   "records": 4,
+   "supported": 4,
+   "errors": 0,
+   "flags": {
+    "log_cleared": 1
+   },
+   "techniques": [
+    "T1070.001"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0040-Impact/T1490-Inhibit System Recovery/ID800-4103-4104-Delete VSS backup (PowerShell).evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1490",
+   "scope": "out",
+   "records": 7,
+   "supported": 3,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "EVTX-to-MITRE-Attack/TA0040-Impact/T1565-Data manipulation/ID11-DNS hosts files modified.evtx",
+   "corpus": "EVTX-to-MITRE-Attack",
+   "label": "T1565",
+   "scope": "out",
+   "records": 1,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "YamatoSecurity/CredentialAccess/T1558.003_StealOrForgeKerberosTicketsKerberoasting_Security.evtx",
+   "corpus": "YamatoSecurity",
+   "label": "T1558.003",
+   "scope": "out",
+   "records": 6,
+   "supported": 3,
+   "errors": 0,
+   "flags": {
+    "log_cleared": 1
+   },
+   "techniques": [
+    "T1070.001"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "YamatoSecurity/CredentialAccess/T1558.004_StealOrForgeKerberosTicketsAS-REP-Roasting_Security.evtx",
+   "corpus": "YamatoSecurity",
+   "label": "T1558.004",
+   "scope": "out",
+   "records": 43,
+   "supported": 39,
+   "errors": 0,
+   "flags": {
+    "log_cleared": 1
+   },
+   "techniques": [
+    "T1070.001"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "YamatoSecurity/DefenseEvasion/T1027.004_ObfuscatedFilesOrInformationCompileAfterDelivery_Sysmon.evtx",
+   "corpus": "YamatoSecurity",
+   "label": "T1027.004",
+   "scope": "out",
+   "records": 9,
+   "supported": 3,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "YamatoSecurity/DefenseEvasion/T1218.004_SignedBinaryProxyExecutionInstallUtil_Sysmon.evtx",
+   "corpus": "YamatoSecurity",
+   "label": "T1218.004",
+   "scope": "in",
+   "records": 7,
+   "supported": 1,
+   "errors": 0,
+   "flags": {
+    "lolbin_abuse": 1
+   },
+   "techniques": [
+    "T1218"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": true
+  },
+  {
+   "file": "YamatoSecurity/ImpairDefenses/T1562.010_DowngradeAttack_PowerShell.evtx",
+   "corpus": "YamatoSecurity",
+   "label": "T1562.010",
+   "scope": "out",
+   "records": 26,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "YamatoSecurity/IntialAccess/ValidAccounts/ID21-25 RDP Logon Logoff Reconnect.evtx",
+   "corpus": "YamatoSecurity",
+   "label": null,
+   "scope": "unlabelled",
+   "records": 76,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "YamatoSecurity/IntialAccess/ValidAccounts/ID302 RDS Gateway Logon Logoff.evtx",
+   "corpus": "YamatoSecurity",
+   "label": null,
+   "scope": "unlabelled",
+   "records": 16,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "YamatoSecurity/LateralMovement/T1210_Zerologon_Sysmon.evtx",
+   "corpus": "YamatoSecurity",
+   "label": "T1210",
+   "scope": "out",
+   "records": 22,
+   "supported": 10,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "YamatoSecurity/LateralMovement/T1210_Zerologon_WindowsDefaultLogging.evtx",
+   "corpus": "YamatoSecurity",
+   "label": "T1210",
+   "scope": "out",
+   "records": 35,
+   "supported": 30,
+   "errors": 0,
+   "flags": {
+    "log_cleared": 1
+   },
+   "techniques": [
+    "T1070.001"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "YamatoSecurity/LateralMovement/T1210_Zerologon_WindowsExtraLogging.evtx",
+   "corpus": "YamatoSecurity",
+   "label": "T1210",
+   "scope": "out",
+   "records": 14,
+   "supported": 10,
+   "errors": 0,
+   "flags": {
+    "log_cleared": 1
+   },
+   "techniques": [
+    "T1070.001"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "YamatoSecurity/LateralMovement/T1563.002_RDP-Hijacking_Security.evtx",
+   "corpus": "YamatoSecurity",
+   "label": "T1563.002",
+   "scope": "out",
+   "records": 4,
+   "supported": 2,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "YamatoSecurity/Persistence/SharpEventPersistHiddenShellcode.evtx",
+   "corpus": "YamatoSecurity",
+   "label": null,
+   "scope": "unlabelled",
+   "records": 1,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "YamatoSecurity/Persistence/T1197_BitsClient.evtx",
+   "corpus": "YamatoSecurity",
+   "label": "T1197",
+   "scope": "out",
+   "records": 7,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "YamatoSecurity/Sysmon/Sysmon-27-BlockExeWrite_AbusingCertutil.evtx",
+   "corpus": "YamatoSecurity",
+   "label": null,
+   "scope": "unlabelled",
+   "records": 7,
+   "supported": 2,
+   "errors": 0,
+   "flags": {
+    "lolbin_abuse": 1
+   },
+   "techniques": [
+    "T1218"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "YamatoSecurity/Sysmon/Sysmon-27-BlockExeWrite_AbusingSvchost.evtx",
+   "corpus": "YamatoSecurity",
+   "label": null,
+   "scope": "unlabelled",
+   "records": 5,
+   "supported": 2,
+   "errors": 0,
+   "flags": {
+    "lolbin_abuse": 1
+   },
+   "techniques": [
+    "T1218"
+   ],
+   "alerted": true,
+   "exact": false,
+   "parent_match": false
+  },
+  {
+   "file": "YamatoSecurity/Vulnerabilities/App_1_CVE-Detected.evtx",
+   "corpus": "YamatoSecurity",
+   "label": null,
+   "scope": "unlabelled",
+   "records": 1,
+   "supported": 0,
+   "errors": 0,
+   "flags": {},
+   "techniques": [],
+   "alerted": false,
+   "exact": false,
+   "parent_match": false
+  }
+ ]
+}

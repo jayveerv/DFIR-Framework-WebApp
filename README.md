@@ -17,6 +17,19 @@ Hosted instance ke rules (privacy): har visitor ko sirf apne cases dikhte hain; 
 asli evidence ke liye CP-DFIR apne computer par chalao (data bahar nahi jaata). Laptop ka evidence = **collector download karo**
 (Evidence page) → zip upload karo → console har file ka SHA-256 dobara check karta hai.
 
+## v1.3 me naya
+
+| Feature | Kya karta hai | File |
+|---|---|---|
+| Windows account manipulation | 4728/4756 (privileged group), 4738/4742 (UAC: no pre-auth, no password, reversible, DES, delegation; SPN), 4781 (rename), 5136 (SPN / delegation / UAC), 4723/4724 (password reset) → 4 naye T1098 rules | `normalize.py`, `correlate.py` |
+| Defence tampering | Defender 5001/5007/5010/5012, `Set-MpPreference` / `Add-MpPreference` exclusions, `sc config WinDefend`, Sysmon driver unload, PowerShell 4103/800 → `defender_tampering` (T1562.001) | `normalize.py`, `correlate.py` |
+| Kerberos brute force | 4768/4771 failures ab authentication failures hain (brute-force rule unhe bhi ginta hai) | `normalize.py` |
+| Service baseline | System32 / Program Files ke drivers aur services alert nahi karte; cmd / PowerShell / `%COMSPEC%` wali ya baahar ki services karte hain | `correlate.py` |
+| Live progress | Analysis job me stage, progress bar aur elapsed time; 20 MB se bade case par warning | `pipeline.py`, `webapp/` |
+
+Held-out note: v1.1 ka frozen result (30.8% alerted) hi asli held-out number hai; v1.3 ke rules us collection ke gaps dekh kar likhe gaye, isliye
+unka re-run sirf post-hoc dikhaya jaata hai (`results/heldout_frozen_v1.1.json` vs `results/heldout_results.json`).
+
 ## v1.1 me naya
 
 | Feature | Kya karta hai | File |
@@ -57,7 +70,7 @@ Linux/macOS: `./run_webapp.sh` (ya `python webapp/app.py`).
 | **Report & export** | Framework ki HTML report, timeline.csv, events/incidents JSON, ledger, poora case bundle (.zip) |
 | **Activity log** | Kisne kya kiya: upload (hash ke saath), collectors, analysis, verify, export |
 | Framework evaluation | 7 native pages: overview, accuracy, integrity, cloud, scalability, real-world validation, ATT&CK coverage (`results/*.json` se) |
-| System & self-test | Environment, 59 unit tests ek click me, password change |
+| System & self-test | Environment, 62 unit tests ek click me, password change |
 | Users & audit | (admin) analysts add/remove, global audit log (logins, failed logins), case delete |
 
 **Forensic design**
@@ -87,7 +100,7 @@ khulega (dark SOC-style, internet ki zarurat nahi). Left menu framework ke hisaa
 | Attack Investigation | case S1/S2/S3/S5 chuno — drag/zoom entity graph, timeline, kill chain |
 | Cloud Forensics | AWS posture checks (moto emulator), read-only API, cloud attack stages |
 | Chain of Custody | hash-chain blocks of the ledger, 7 tamper tests |
-| MITRE ATT&CK Coverage | 57 rules → 38 techniques → 11 tactics matrix |
+| MITRE ATT&CK Coverage | 62 rules → 38 techniques → 11 tactics matrix |
 | Scalability | time vs records chart, per-stage time |
 | Real-World Validation | EVTX-ATTACK-SAMPLES, LogHub, Stratus results |
 | Evidence Explorer | S1 ke saare events, search + platform filter |
@@ -115,7 +128,7 @@ Upar ◐ button se light theme. Kisi section ko seedha kholna ho to `dashboard.h
 | 5 | **Apni logs analyze karo** |
 | 6 | Is laptop ka Windows Security log export karo (**Run as Administrator**) |
 | 7 | AWS CloudTrail events **aur account state** (IAM, access keys, S3, security groups) kheecho (AWS credentials chahiye) |
-| 8 | Unit tests (59 tests) |
+| 8 | Unit tests (62 tests) |
 | 9 | **TRIAGE**: is laptop ka live evidence (processes, sockets, accounts, persistence, files, logs) collect karo, analyze karo, report banao |
 
 Command line: `python main.py triage | collect-host | demo | evaluate | real-eval | tamper-demo | analyze --input DIR | collect-live | collect-aws | collect-linux | verify --case DIR | selftest`
@@ -128,12 +141,12 @@ Command line: `python main.py triage | collect-host | demo | evaluate | real-eva
 |---|---|---|
 | Acquisition | `collect.py`, **`hostcollect.py`, `cloudstate.py`** | Logs `evidence/` me copy (hash pehle aur baad). **Live host collector** (section 3b), Windows `wevtutil` (XML/.evtx), AWS boto3 `LookupEvents`, Linux local/SSH |
 | Normalization | `normalize.py` | Sab formats ek schema me, sab time UTC me |
-| Correlation | `correlate.py` | 57 rule types, sab MITRE ATT&CK mapped (Windows 16, Linux 2, login/brute force 2, AWS CloudTrail 11, live host 15, AWS account posture 11) + NetworkX entity graph. Har connected component jisme activity alert hai, ek incident (posture findings akele incident nahi banate) |
+| Correlation | `correlate.py` | 62 rule types, sab MITRE ATT&CK mapped (Windows 21, Linux 2, login/brute force 2, AWS CloudTrail 11, live host 15, AWS account posture 11) + NetworkX entity graph. Har connected component jisme activity alert hai, ek incident (posture findings akele incident nahi banate) |
 | Chain of Custody | `custody.py` | Har action ka SHA-256 + hash-chained ledger, **optional HMAC** (secret key se sign). File badle, entry badle, entry delete ho, last entry hate, ya poori chain rewrite ho (HMAC ke saath) to pakad leta hai |
 | Reporting | `report.py` | Self-contained HTML report (internet ya JavaScript nahi chahiye) |
 | Evaluation | `evaluate.py`, `generate_data.py` | Simulated scenarios + ground truth, tampering tests, scalability |
 | **Real-data validation** | `realdata.py` | **Asli** public logs par test (section 4) |
-| Tests | `tests/` | 59 tests (hosted-console privacy, collector package integrity, pseudonymisation aur held-out labels ke 11 naye): asli processes/sockets (Linux), AWS collectors (botocore Stubber, AWS service model se validated), SSH collector (fake runner), parsers, rules, custody |
+| Tests | `tests/` | 62 tests (Windows account / defence-tampering / service-baseline rules ke 3 naye; hosted-console privacy, collector package integrity, pseudonymisation aur held-out labels ke 11 naye): asli processes/sockets (Linux), AWS collectors (botocore Stubber, AWS service model se validated), SSH collector (fake runner), parsers, rules, custody |
 
 **Supported inputs**
 - **Windows:** `wevtutil` XML export ya binary **`.evtx`**. Security (4624, 4625, 4634, 4672, 4688, 4698, 4720, 4732, 5145, 1102), System (7045, 104), **Sysmon (1, 3, 10, 13)**, PowerShell 4104

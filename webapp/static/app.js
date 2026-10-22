@@ -74,7 +74,7 @@ document.addEventListener("keydown", e => { if (e.key === "Escape" && $("#modal"
 /* ---------------------------------------------------------------- jobs */
 async function runJob(jobId, title, after) {
   S.jobRunning = true;
-  modal(`<span class="spin" id="jsp"></span> ${esc(title)}`, `<div class="console" id="jcon"></div><div id="jres" style="margin-top:12px"></div>`,
+  modal(`<span class="spin" id="jsp"></span> ${esc(title)}`, `<div class="jprog" id="jprog"><div class="jbar"><i id="jbar" style="width:0%"></i></div><div class="jmeta"><span id="jstage">starting</span><span id="jtime">0 s</span></div></div><div class="console" id="jcon"></div><div id="jres" style="margin-top:12px"></div>`,
     `<button class="btn" id="jclose" disabled>Close</button><button class="btn pri hide" id="jview">View results</button>`, true);
   let since = 0, j;
   const con = $("#jcon");
@@ -84,6 +84,7 @@ async function runJob(jobId, title, after) {
       con.insertAdjacentHTML("beforeend", j.lines.map(l => `<span class="t">${esc(l.t)}</span>  <span class="${/ERROR|FAIL|failed/.test(l.m) ? "e" : /VERIFIED|OK\b|passed/.test(l.m) ? "ok" : ""}">${esc(l.m)}</span>\n`).join(""));
       con.scrollTop = con.scrollHeight; since = j.n;
     }
+    if (j.stage != null && $("#jbar")) { $("#jbar").style.width = (j.status === "done" ? 100 : j.pct) + "%"; $("#jstage").textContent = j.status === "running" ? `Stage ${j.stage}` : (j.status === "done" ? "Complete" : "Stopped"); $("#jtime").textContent = `${Math.round(j.elapsed)} s elapsed`; }
     if (j.status !== "running") break;
     await new Promise(r => setTimeout(r, 450));
   }
@@ -709,7 +710,7 @@ async function evalView(v, fn) {
 }
 const row2 = (a, b, c) => `<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid var(--line)"><span class="note" style="font-size:12.8px">${a}</span><b class="mono" style="text-align:right;color:${c || "var(--tx)"}">${b}</b></div>`;
 function flowSvg() {
-  const st = [["ACQUISITION", "Windows · Linux · AWS · Live host", "var(--win)"], ["NORMALIZATION", "35 event types · UTC", "var(--lin)"], ["CORRELATION", "57 rules · entity graph", "var(--aws)"], ["REPORTING", "HTML report · timeline", "var(--vi)"]];
+  const st = [["ACQUISITION", "Windows · Linux · AWS · Live host", "var(--win)"], ["NORMALIZATION", "38 event types · UTC", "var(--lin)"], ["CORRELATION", "62 rules · entity graph", "var(--aws)"], ["REPORTING", "HTML report · timeline", "var(--vi)"]];
   let s = `<svg class="flowsvg" viewBox="0 0 1100 128">`;
   st.forEach((x, i) => { const X = 12 + i * 272;
     s += `<rect x="${X}" y="18" width="232" height="66" rx="12" fill="color-mix(in srgb,${x[2]} 12%,transparent)" stroke="${x[2]}" stroke-width="1.4"/>
@@ -735,7 +736,7 @@ function eOverview(D) {
   ${kpi(K.rules, "ATT&amp;CK-mapped detection rules", `${K.techs} techniques · 6 rule families`, "var(--am)", "mit")}</div>
   <div class="g g3" style="margin-top:16px"><div class="card"><h3><i>${ic("col", 15)}</i>Evidence by platform · scenario S1</h3>${s1 ? donut(s1.sources, "events") : ""}<div class="note" style="margin-top:10px">One timeline, one schema, one incident.</div></div>
   <div class="card"><h3><i>${ic("tgt", 15)}</i>F1 score per scenario</h3>${D.scen.map(s => `<div style="display:grid;grid-template-columns:92px 1fr 48px;gap:10px;align-items:center;margin:9px 0" data-tip="<b>${esc(s.name)}</b><br>${esc(s.desc)}<br>P ${pct(s.p)} · R ${pct(s.r)} · incidents ${s.found}/${s.exp}"><span class="mono" style="font-size:12px">${esc(s.name)}</span>${hbar(s.f1, f1c(s.f1))}<b class="mono" style="color:${f1c(s.f1)}">${f3(s.f1)}</b></div>`).join("")}</div>
-  <div class="card"><h3><i>${ic("ov", 15)}</i>Framework at a glance</h3>${row2("Evidence sources", "Windows · Linux · AWS · Host")}${row2("Common event schema", "35 types · UTC")}
+  <div class="card"><h3><i>${ic("ov", 15)}</i>Framework at a glance</h3>${row2("Evidence sources", "Windows · Linux · AWS · Host")}${row2("Common event schema", "38 types · UTC")}
   ${row2("Cloud misconfigurations found", ce ? `${ce.ft}/${ce.et}` : "–", "var(--gr)")}${row2("Cloud API calls", ce ? `${ce.ops} · read-only` : "–")}${row2("Hard cases S5 · F1", f3(K.s5), "var(--am)")}
   ${row2("Real EVTX samples parsed", D.real ? `${D.real.win.samples} · ${D.real.win.errors} errors` : "–")}</div></div>
   <div class="card" style="margin-top:16px"><h3><i>${ic("col", 15)}</i>Five collectors, one forensically sound acquisition</h3>

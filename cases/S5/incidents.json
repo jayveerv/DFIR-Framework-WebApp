@@ -142,12 +142,15 @@
    "id": "INC-1"
   }
  ],
- "unlinked_alerts": [],
- "alert_events": 10,
+ "unlinked_alerts": [
+  "E000123"
+ ],
+ "alert_events": 11,
  "rules_fired": {
   "brute_force": 6,
   "brute_force_success": 1,
   "sudo_untrusted": 3,
-  "credential_access": 1
+  "credential_access": 1,
+  "privilege_group_add": 1
  }
 }

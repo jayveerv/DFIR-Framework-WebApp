@@ -57,6 +57,7 @@ DATA = os.path.abspath(os.environ.get("DFIR_DATA_DIR") or os.path.join(ROOT, "we
 CASES = os.path.join(DATA, "cases")
 TMP = os.path.join(DATA, "tmp")
 PUBLIC_MODE = os.environ.get("DFIR_PUBLIC_MODE", "") not in ("", "0", "false", "no")
+LARGE_CASE_MB = float(os.environ.get("DFIR_LARGE_CASE_MB", "20"))  # above this size the console warns that analysis will take longer
 # "Try demo" guest login (no password, cannot manage users or delete cases). On by default in public mode.
 GUEST = os.environ.get("DFIR_GUEST", "1" if PUBLIC_MODE else "0") not in ("", "0", "false", "no")
 MAX_UPLOAD = int(os.environ.get("DFIR_MAX_UPLOAD_MB", "1024")) * 1024 * 1024
@@ -710,6 +711,10 @@ def api_upload(cid):
             finally:
                 if os.path.exists(tp):
                     os.remove(tp)
+        big = [r for r in report if r.get("ok") and r.get("size", 0) > LARGE_CASE_MB * 1048576]
+        for r in big:
+            r["note"] = ((r.get("note") or "") + f" large file ({r['size'] / 1048576:.0f} MB): analysis will take longer"
+                         + (" on the hosted console; for big cases run CP-DFIR locally" if PUBLIC_MODE else "")).strip()
         if any(r["ok"] for r in report) and m.get("status") == "analyzed":
             m["status"] = "stale"
         save_meta(m)
@@ -821,6 +826,7 @@ class Job:
     def __init__(self, cid, kind, user):
         self.id, self.case, self.kind, self.user = uuid.uuid4().hex[:10], cid, kind, user
         self.status, self.lines, self.started, self.ended, self.error, self.result = "running", [], _now(), None, None, None
+        self.stage, self.pct, self.t0 = "starting", 0, time.time()
 
     def log(self, *a):
         msg = " ".join(str(x) for x in a)
@@ -830,7 +836,8 @@ class Job:
 
     def view(self, since=0):
         return {"id": self.id, "case": self.case, "kind": self.kind, "status": self.status, "started": self.started, "ended": self.ended,
-                "error": self.error, "result": self.result, "lines": self.lines[since:], "n": len(self.lines)}
+                "error": self.error, "result": self.result, "lines": self.lines[since:], "n": len(self.lines),
+                "stage": self.stage, "pct": self.pct, "elapsed": round(time.time() - self.t0, 1)}
 
 
 def _job_for(cid):
@@ -899,12 +906,27 @@ def _job_analyze(j, cid, user, **_):
     cfg = dict(fw_config.DEFAULT_CASE, **m["config"])
     cfg["case_id"], cfg["investigator"] = cid, user.get("name") or ("Guest analyst" if j.user == "guest" else j.user)
     cfg["title"] = m.get("title", "")
-    j.log("[1/5] Acquisition    copy into evidence/, SHA-256 before and after, ledger entry per file")
-    j.log("[2/5] Normalization  Windows / Linux / AWS / host / cloud state -> one schema, UTC")
-    j.log("[3/5] Correlation    57 ATT&CK-mapped rules + NetworkX entity graph")
-    j.log("[4/5] Custody        HMAC-signed hash chain, verification")
-    j.log("[5/5] Reporting      self-contained HTML report")
-    ctx = pipeline.run_case(inp, out, cfg, key=CUSTODY_KEY)
+    size = sum(os.path.getsize(os.path.join(dp, f)) for dp, _, fs in os.walk(inp) for f in fs)
+    j.log(f"      {size / 1048576:.1f} MB of evidence")
+    if size > LARGE_CASE_MB * 1048576:
+        j.log(f"NOTE: large case ({size / 1048576:.0f} MB). " + ("The hosted console has limited processor time, so this can take several "
+              "minutes; for big cases run CP-DFIR on your own machine." if PUBLIC_MODE else "Parsing binary EVTX is the slowest step."))
+    weights = {1: 5, 2: 60, 3: 20, 4: 10, 5: 5}
+    def progress(no, name, state, info):
+        done = sum(v for k, v in weights.items() if k < no)
+        if state == "start":
+            j.stage, j.pct = f"{no}/5 {name}", done
+            j.log(f"[{no}/5] {name} ...")
+        elif state == "file":
+            i, tot = (int(x) for x in info.split()[0].split("/"))
+            j.pct = done + int(weights[no] * i / max(tot, 1))
+            j.log(f"      {info}")
+        else:
+            j.pct = done + weights[no]
+            j.log(f"      done: {info}")
+    ctx = pipeline.run_case(inp, out, cfg, key=CUSTODY_KEY, progress=progress)
+    j.stage, j.pct = "5/5 Reporting", 100
+    j.log("[5/5] Reporting      self-contained HTML report written")
     corr = ctx["corr"]
     t = ctx["timings"]
     j.log("")

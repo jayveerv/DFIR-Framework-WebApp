@@ -121,7 +121,7 @@ E000119,2026-09-20T11:00:00Z,windows,SRV-FILE-01,auth_success,administrator,10.0
 E000120,2026-09-20T11:00:01Z,windows,SRV-FILE-01,priv_assign,administrator,,,success,SeDebugPrivilege,0x3e62e,,,info,,,,windows_security.xml,44
 E000121,2026-09-20T11:01:13Z,windows,WS-DEV-03,priv_assign,SYSTEM,,,success,SeTcbPrivilege,0x3e7,,,info,,,,windows_security.xml,45
 E000122,2026-09-20T11:02:00Z,windows,SRV-FILE-01,account_created,administrator,,svc_temp,success,local account created,0x3e62e,,,info,,,,windows_security.xml,46
-E000123,2026-09-20T11:02:20Z,windows,SRV-FILE-01,group_add,administrator,,Administrators,success,member CN=svc_temp,0x3e62e,,,info,,,,windows_security.xml,47
+E000123,2026-09-20T11:02:20Z,windows,SRV-FILE-01,group_add,administrator,,Administrators,success,member CN=svc_temp,0x3e62e,,,high,privilege_group_add,T1098,,windows_security.xml,47
 E000124,2026-09-20T11:06:29Z,aws,ap-south-1,api_call,devops,198.51.100.10,,success,DescribeInstances,,AKIAQ3EXAMPLEOPS0009,,info,,,,cloudtrail.json,28
 E000125,2026-09-20T11:12:02Z,windows,WS-FIN-01,logoff,dave,,,success,,0x3e7,,,info,,,,windows_security.xml,48
 E000126,2026-09-20T11:12:10Z,windows,WS-HR-02,logoff,alice,,,success,,0x4645d,,,info,,,,windows_security.xml,49

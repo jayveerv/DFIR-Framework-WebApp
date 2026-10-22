@@ -4,7 +4,7 @@
   {
    "role": "cross-acct",
    "path": "/",
-   "created": "2026-10-21T10:08:32Z",
+   "created": "2026-10-21T21:57:18Z",
    "trust": [
     {
      "principal": "arn:aws:iam::999999999999:root",
@@ -14,33 +14,9 @@
    ]
   },
   {
-   "role": "svc-role",
-   "path": "/",
-   "created": "2026-10-21T10:08:32Z",
-   "trust": [
-    {
-     "principal": "ec2.amazonaws.com",
-     "type": "Service",
-     "conditional": false
-    }
-   ]
-  },
-  {
-   "role": "same-account",
-   "path": "/",
-   "created": "2026-10-21T10:08:32Z",
-   "trust": [
-    {
-     "principal": "arn:aws:iam::123456789012:root",
-     "type": "AWS",
-     "conditional": false
-    }
-   ]
-  },
-  {
    "role": "open-but-conditioned",
    "path": "/",
-   "created": "2026-10-21T10:08:32Z",
+   "created": "2026-10-21T21:57:18Z",
    "trust": [
     {
      "principal": "*",
@@ -52,11 +28,35 @@
   {
    "role": "open-role",
    "path": "/",
-   "created": "2026-10-21T10:08:32Z",
+   "created": "2026-10-21T21:57:18Z",
    "trust": [
     {
      "principal": "*",
      "type": "*",
+     "conditional": false
+    }
+   ]
+  },
+  {
+   "role": "svc-role",
+   "path": "/",
+   "created": "2026-10-21T21:57:18Z",
+   "trust": [
+    {
+     "principal": "ec2.amazonaws.com",
+     "type": "Service",
+     "conditional": false
+    }
+   ]
+  },
+  {
+   "role": "same-account",
+   "path": "/",
+   "created": "2026-10-21T21:57:18Z",
+   "trust": [
+    {
+     "principal": "arn:aws:iam::123456789012:root",
+     "type": "AWS",
      "conditional": false
     }
    ]

@@ -1,12 +1,12 @@
 {
- "generated": "2026-10-21T09:56:28.649114+00:00",
+ "generated": "2026-10-21T21:56:59.844281+00:00",
  "windows": {
   "samples": 278,
   "records": 37364,
   "errors": 0,
-  "with_supported": 228,
-  "alerted": 85,
-  "supported_events": 3188,
+  "with_supported": 232,
+  "alerted": 90,
+  "supported_events": 3264,
   "per_tactic": {
    "AutomatedTestingTools": {
     "samples": 8,
@@ -45,13 +45,13 @@
    },
    "Other": {
     "samples": 8,
-    "with_supported": 3,
-    "alerted": 2
+    "with_supported": 7,
+    "alerted": 6
    },
    "Persistence": {
     "samples": 22,
     "with_supported": 19,
-    "alerted": 8
+    "alerted": 9
    },
    "Privilege Escalation": {
     "samples": 66,
@@ -68,15 +68,21 @@
    "registry_persistence": 9,
    "lolbin_abuse": 22,
    "lolbin_network": 6,
+   "defender_tampering": 1,
    "lsass_access": 14,
    "credential_dump_tool": 7,
-   "suspicious_powershell": 7,
+   "suspicious_powershell": 11,
    "log_cleared": 26,
    "encoded_powershell": 1,
+   "brute_force": 1,
+   "password_reset_by_other": 2,
    "admin_share_access": 5,
    "scheduled_task_created": 3,
    "remote_service_control": 4,
-   "service_installed": 2
+   "service_installed": 2,
+   "privilege_group_add": 1,
+   "delegation_or_spn_set": 2,
+   "suspicious_account_rename": 1
   },
   "top_ignored": [
    [
@@ -506,9 +512,10 @@
      "brute_force"
     ],
     "flags": [
+     "brute_force",
      "log_cleared"
     ],
-    "hit": false,
+    "hit": true,
     "hard": true
    }
   ]
@@ -745,7 +752,7 @@
    "v1": "miss"
   }
  ],
- "windows_seconds": 167.26066064834595,
+ "windows_seconds": 153.694917678833,
  "windows_rows": [
   {
    "file": "AutomatedTestingTools/Malware/DE_timestomp_and_dll_sideloading_and_RunPersist.evtx",
@@ -801,6 +808,7 @@
     "registry_persistence": 13,
     "lolbin_abuse": 16,
     "lolbin_network": 1,
+    "defender_tampering": 1,
     "lsass_access": 1,
     "credential_dump_tool": 1
    }
@@ -887,7 +895,7 @@
    "file": "Credential Access/ACL_ForcePwd_SPNAdd_User_Computer_Accounts.evtx",
    "tactic": "Credential Access",
    "records": 55,
-   "supported": 1,
+   "supported": 29,
    "errors": 0,
    "flags": {
     "log_cleared": 1
@@ -1042,7 +1050,7 @@
    "file": "Credential Access/Zerologon_VoidSec_CVE-2020-1472_4626_LT3_Anonym_follwedby_4742_DC_Anony_DC.evtx",
    "tactic": "Credential Access",
    "records": 9,
-   "supported": 8,
+   "supported": 9,
    "errors": 0,
    "flags": {
     "log_cleared": 1
@@ -1088,10 +1096,11 @@
    "file": "Credential Access/kerberos_pwd_spray_4771.evtx",
    "tactic": "Credential Access",
    "records": 12,
-   "supported": 1,
+   "supported": 12,
    "errors": 0,
    "flags": {
-    "log_cleared": 1
+    "log_cleared": 1,
+    "brute_force": 11
    }
   },
   {
@@ -1119,10 +1128,11 @@
    "file": "Credential Access/remote_pwd_reset_rpc_mimikatz_postzerologon_target_DC.evtx",
    "tactic": "Credential Access",
    "records": 7,
-   "supported": 5,
+   "supported": 6,
    "errors": 0,
    "flags": {
-    "log_cleared": 1
+    "log_cleared": 1,
+    "password_reset_by_other": 1
    }
   },
   {
@@ -2361,33 +2371,41 @@
    "file": "Other/emotet/exec_emotet_ps_800_get-item.evtx",
    "tactic": "Other",
    "records": 1,
-   "supported": 0,
+   "supported": 1,
    "errors": 0,
-   "flags": {}
+   "flags": {
+    "suspicious_powershell": 1
+   }
   },
   {
    "file": "Other/emotet/exec_emotet_ps_800_invoke-item.evtx",
    "tactic": "Other",
    "records": 1,
-   "supported": 0,
+   "supported": 1,
    "errors": 0,
-   "flags": {}
+   "flags": {
+    "suspicious_powershell": 1
+   }
   },
   {
    "file": "Other/emotet/exec_emotet_ps_800_new-item.evtx",
    "tactic": "Other",
    "records": 1,
-   "supported": 0,
+   "supported": 1,
    "errors": 0,
-   "flags": {}
+   "flags": {
+    "suspicious_powershell": 1
+   }
   },
   {
    "file": "Other/emotet/exec_emotet_ps_800_new-object.evtx",
    "tactic": "Other",
    "records": 1,
-   "supported": 0,
+   "supported": 1,
    "errors": 0,
-   "flags": {}
+   "flags": {
+    "suspicious_powershell": 1
+   }
   },
   {
    "file": "Other/emotet/exec_emotet_sysmon_1.evtx",
@@ -2419,7 +2437,7 @@
    "file": "Persistence/DACL_DCSync_Right_Powerview_ Add-DomainObjectAcl.evtx",
    "tactic": "Persistence",
    "records": 28,
-   "supported": 1,
+   "supported": 19,
    "errors": 0,
    "flags": {
     "log_cleared": 1
@@ -2431,7 +2449,9 @@
    "records": 2,
    "supported": 2,
    "errors": 0,
-   "flags": {}
+   "flags": {
+    "privilege_group_add": 2
+   }
   },
   {
    "file": "Persistence/Persistence_Shime_Microsoft-Windows-Application-Experience_Program-Telemetry_500.evtx",
@@ -2529,10 +2549,11 @@
    "file": "Persistence/persistence_security_dcshadow_4742.evtx",
    "tactic": "Persistence",
    "records": 10,
-   "supported": 1,
+   "supported": 4,
    "errors": 0,
    "flags": {
-    "log_cleared": 1
+    "log_cleared": 1,
+    "delegation_or_spn_set": 3
    }
   },
   {
@@ -2990,7 +3011,7 @@
    "file": "Privilege Escalation/privexchange_dirkjan.evtx",
    "tactic": "Privilege Escalation",
    "records": 8,
-   "supported": 3,
+   "supported": 5,
    "errors": 0,
    "flags": {}
   },
@@ -2998,10 +3019,13 @@
    "file": "Privilege Escalation/samaccount_spoofing_CVE-2021-42287_CVE-2021-42278_DC_securitylogs.evtx",
    "tactic": "Privilege Escalation",
    "records": 18,
-   "supported": 6,
+   "supported": 14,
    "errors": 0,
    "flags": {
-    "log_cleared": 1
+    "log_cleared": 1,
+    "password_reset_by_other": 1,
+    "delegation_or_spn_set": 1,
+    "suspicious_account_rename": 1
    }
   },
   {
@@ -3959,5 +3983,179 @@
    "T1562.010": 1,
    "T1563.002": 1
   }
+ },
+ "heldout_posthoc": {
+  "dataset": "Yamato-Security/hayabusa-sample-evtx@0845333ecb4a",
+  "rules_fingerprint": "5d6349a632422bd3",
+  "seconds": 166.5,
+  "excluded": {
+   "EVTX-to-MITRE-Attack/TA0004-Privilege Escalation/T1134.005-Access Token Manipulation SID-History Injection/ID 4765 - SID history added.evtx": "byte-identical to a development sample"
+  },
+  "samples": 320,
+  "records": 39836,
+  "errors": 1681,
+  "with_supported": 219,
+  "in_scope": 117,
+  "in_alerted": 68,
+  "in_exact": 55,
+  "in_parent": 57,
+  "in_alerted_pct": 58.1,
+  "in_exact_pct": 47.0,
+  "in_parent_pct": 48.7,
+  "out_scope": 181,
+  "out_alerted": 44,
+  "unlabelled": 19,
+  "unlabelled_alerted": 10,
+  "per_corpus": {
+   "DeepBlueCLI": {
+    "samples": 21,
+    "records": 28220,
+    "errors": 0,
+    "in_scope": 14,
+    "in_alerted": 14,
+    "in_exact": 7,
+    "in_parent": 8
+   },
+   "EVTX-to-MITRE-Attack": {
+    "samples": 283,
+    "records": 11337,
+    "errors": 1681,
+    "in_scope": 102,
+    "in_alerted": 53,
+    "in_exact": 48,
+    "in_parent": 48
+   },
+   "YamatoSecurity": {
+    "samples": 16,
+    "records": 279,
+    "errors": 0,
+    "in_scope": 1,
+    "in_alerted": 1,
+    "in_exact": 0,
+    "in_parent": 1
+   }
+  },
+  "per_technique": {
+   "T1021.002": {
+    "samples": 7,
+    "alerted": 4,
+    "exact": 3
+   },
+   "T1027": {
+    "samples": 8,
+    "alerted": 4,
+    "exact": 4
+   },
+   "T1053.005": {
+    "samples": 6,
+    "alerted": 4,
+    "exact": 3
+   },
+   "T1059.001": {
+    "samples": 6,
+    "alerted": 5,
+    "exact": 4
+   },
+   "T1070.001": {
+    "samples": 4,
+    "alerted": 2,
+    "exact": 2
+   },
+   "T1070.006": {
+    "samples": 1,
+    "alerted": 0,
+    "exact": 0
+   },
+   "T1078": {
+    "samples": 3,
+    "alerted": 0,
+    "exact": 0
+   },
+   "T1078.002": {
+    "samples": 1,
+    "alerted": 0,
+    "exact": 0
+   },
+   "T1098": {
+    "samples": 30,
+    "alerted": 20,
+    "exact": 20
+   },
+   "T1110": {
+    "samples": 12,
+    "alerted": 4,
+    "exact": 3
+   },
+   "T1110.001": {
+    "samples": 1,
+    "alerted": 1,
+    "exact": 0
+   },
+   "T1110.003": {
+    "samples": 1,
+    "alerted": 1,
+    "exact": 0
+   },
+   "T1136.001": {
+    "samples": 1,
+    "alerted": 1,
+    "exact": 0
+   },
+   "T1218.004": {
+    "samples": 1,
+    "alerted": 1,
+    "exact": 0
+   },
+   "T1543.003": {
+    "samples": 17,
+    "alerted": 6,
+    "exact": 4
+   },
+   "T1562.001": {
+    "samples": 9,
+    "alerted": 7,
+    "exact": 7
+   },
+   "T1569.002": {
+    "samples": 9,
+    "alerted": 8,
+    "exact": 5
+   }
+  },
+  "background": [
+   {
+    "file": "DeepBlueCLI/many-events-application.evtx",
+    "records": 2216,
+    "supported": 0,
+    "alerts": 0,
+    "flags": {},
+    "per_1000": null
+   },
+   {
+    "file": "DeepBlueCLI/many-events-security.evtx",
+    "records": 13223,
+    "supported": 9376,
+    "alerts": 56,
+    "flags": {
+     "privilege_group_add": 1,
+     "account_security_weakened": 1,
+     "password_reset_by_other": 1,
+     "suspicious_powershell": 34,
+     "credential_dump_tool": 18,
+     "encoded_powershell": 1
+    },
+    "per_1000": 5.97
+   },
+   {
+    "file": "DeepBlueCLI/many-events-system.evtx",
+    "records": 8414,
+    "supported": 61,
+    "alerts": 20,
+    "flags": {
+     "service_installed": 20
+    },
+    "per_1000": 327.87
+   }
+  ]
  }
 }

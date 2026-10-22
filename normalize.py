@@ -9,11 +9,12 @@ All timestamps are converted to UTC (Windows and CloudTrail are already UTC, Lin
 auth.log is local time without a year, so the offset and year come from case_config.json).
 
 Supported event catalogue (anything else is counted as 'ignored', not as an error):
-  Windows Security: 4624 4625 4634 4672 4688 4698 4720 4732 5145 1102
-  Windows System:   7045 104
+  Windows Security: 4624 4625 4634 4672 4688 4698 4720 4728 4732 4756 4738 4742 4781 5136 4723 4724 4768 4771 5145 1102
+  Windows System:   7045 104 (and FilterManager 1: a file-system filter driver unloaded)
+  Defender:         5001 5007 5010 5012 (protection disabled / configuration changed)
   Sysmon:           1 (process create) 3 (network) 10 (process access) 13 (registry set)
   AWS state:        trails, IAM account summary, users, access keys, roles, S3 buckets, security groups (cloudstate.py)
-  PowerShell:       4104 (script block)
+  PowerShell:       4104 (script block), 4103 (module/pipeline), 800 (classic pipeline log)
   Linux:   sshd Failed/Accepted password|publickey, sudo COMMAND, useradd
   AWS:     every CloudTrail record
 """
@@ -128,7 +129,7 @@ def parse_windows(path):
             if not channel and provider in ("Microsoft-Windows-Security-Auditing", "Microsoft-Windows-Eventlog"):
                 channel = "Security"          # exports without a Channel element (e.g. hand-made XML): trust only the Security providers
             dt = _parse_ts(ts)
-            data = {d.get("Name"): (d.text or "") for d in root.findall("EventData/Data")}
+            data = {(d.get("Name") or f"_{i}"): (d.text or "") for i, d in enumerate(root.findall("EventData/Data"))}
             ud = root.find("UserData")
             if ud is not None:
                 for child in ud:
@@ -161,9 +162,42 @@ def parse_windows(path):
         elif sec and eid == 4720:
             e.update(event_type="account_created", user=data.get("SubjectUserName"), session_id=sid("SubjectLogonId"),
                      target=data.get("TargetUserName"), outcome="success", detail="local account created")
-        elif sec and eid == 4732:
+        elif sec and eid in (4728, 4732, 4756):
             e.update(event_type="group_add", user=data.get("SubjectUserName"), session_id=sid("SubjectLogonId"),
                      target=data.get("TargetUserName"), outcome="success", detail=f"member {data.get('MemberName', '')}")
+        elif sec and eid in (4738, 4742):
+            uac = (data.get("UserAccountControl") or "").strip()
+            spn = (data.get("ServicePrincipalNames") or "").strip()
+            deleg = (data.get("AllowedToDelegateTo") or "").strip()
+            e.update(event_type="account_changed", user=data.get("SubjectUserName"), session_id=sid("SubjectLogonId"),
+                     target=data.get("TargetUserName"), outcome="success",
+                     detail=f"{'computer' if eid == 4742 else 'user'} account changed; UAC: {uac or '-'}; SPN: {spn or '-'}; delegation: {deleg or '-'}",
+                     extra={"uac": uac, "spn": spn, "delegation": deleg, "kind": "computer" if eid == 4742 else "user"})
+        elif sec and eid == 4781:
+            old_n, new_n = data.get("OldTargetUserName") or "", data.get("NewTargetUserName") or ""
+            e.update(event_type="account_changed", user=data.get("SubjectUserName"), session_id=sid("SubjectLogonId"),
+                     target=new_n, outcome="success", detail=f"account renamed {old_n} -> {new_n}",
+                     extra={"rename_old": old_n, "rename_new": new_n})
+        elif sec and eid == 5136:
+            attr = data.get("AttributeLDAPDisplayName") or ""
+            e.update(event_type="account_changed", user=data.get("SubjectUserName"), session_id=sid("SubjectLogonId"),
+                     target=data.get("ObjectDN"), outcome="success",
+                     detail=f"directory attribute {attr} = {(data.get('AttributeValue') or '')[:200]}",
+                     extra={"ldap_attr": attr, "op": data.get("OperationType")})
+        elif sec and eid in (4723, 4724):
+            e.update(event_type="password_reset", user=data.get("SubjectUserName"), session_id=sid("SubjectLogonId"),
+                     target=data.get("TargetUserName"), outcome="success",
+                     detail="password reset by another account" if eid == 4724 else "password change attempt")
+        elif sec and eid in (4768, 4771) and (data.get("Status") or "").lower() not in ("", "0x0"):
+            e.update(event_type="auth_failure", user=data.get("TargetUserName"), src_ip=_ip(data.get("IpAddress")),
+                     outcome="failure", detail=f"Kerberos {'TGT request' if eid == 4768 else 'pre-authentication'} failed, status {data.get('Status')}")
+        elif channel == "Microsoft-Windows-Windows Defender/Operational" and eid in (5001, 5007, 5010, 5012):
+            what = {5001: "real-time protection disabled", 5010: "anti-spyware scanning disabled", 5012: "anti-virus scanning disabled"}.get(eid)
+            e.update(event_type="defense_change", target="Microsoft Defender", outcome="success",
+                     detail=what or f"configuration changed: {(data.get('New Value') or data.get('NewValue') or '')[:300]}")
+        elif provider == "Microsoft-Windows-FilterManager" and eid == 1:
+            e.update(event_type="defense_change", target="file-system filter driver",
+                     outcome="success", detail=f"file-system filter unloaded: {' '.join(v for v in data.values() if v)[:200]}")
         elif sec and eid == 4698:
             e.update(event_type="scheduled_task", user=data.get("SubjectUserName"), session_id=sid("SubjectLogonId"),
                      target=data.get("TaskName"), outcome="success", detail="scheduled task created")
@@ -190,6 +224,12 @@ def parse_windows(path):
         elif channel == "Microsoft-Windows-Sysmon/Operational" and eid == 13:
             e.update(event_type="registry_set", user=data.get("User"), target=data.get("TargetObject"), outcome="success",
                      detail=data.get("Details"), extra={"image": data.get("Image")})
+        elif channel == "Microsoft-Windows-PowerShell/Operational" and eid == 4103:
+            e.update(event_type="script_block", target="PowerShell", outcome="success",
+                     detail=f"{data.get('Payload') or ''} {data.get('ContextInfo') or ''}"[:2000])
+        elif channel == "Windows PowerShell" and eid == 800:
+            e.update(event_type="script_block", target="PowerShell", outcome="success",
+                     detail=" ".join(v for v in data.values() if v)[:2000])
         elif channel == "Microsoft-Windows-PowerShell/Operational" and eid == 4104:
             e.update(event_type="script_block", target="PowerShell", outcome="success", detail=(data.get("ScriptBlockText") or "")[:2000])
         else:
@@ -500,14 +540,17 @@ def parse_cloud(cloud_dir):
     return ev, st
 
 
-def normalize_case(evidence_dir, cfg):
-    """Parse every available evidence file. Returns (sorted events, per-source stats)."""
+def normalize_case(evidence_dir, cfg, on_file=None):
+    """Parse every available evidence file. Returns (sorted events, per-source stats).
+    on_file(name, records, index, total) is called after each Windows log file (progress for long cases)."""
     events, stats = [], {}
     win_files = [f for f in sorted(os.listdir(evidence_dir)) if f == "windows_security.xml" or f.lower().endswith(".evtx")] \
         if os.path.isdir(evidence_dir) else []
-    for f in win_files:
+    for i, f in enumerate(win_files, 1):
         e, s = parse_windows(os.path.join(evidence_dir, f))
         events += e
+        if on_file:
+            on_file(f, s["records_seen"], i, len(win_files))
         agg = stats.setdefault("windows", dict(records_seen=0, normalized=0, ignored=0, errors=0))
         for k in agg:
             agg[k] += s[k]

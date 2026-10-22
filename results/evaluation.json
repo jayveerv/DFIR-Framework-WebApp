@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-21T10:08:51.652191+00:00",
+ "generated": "2026-10-21T21:57:42.458740+00:00",
  "python": "3.13.16",
  "system": "Linux",
  "scenarios": [
@@ -81,13 +81,13 @@
     }
    ],
    "timings": {
-    "acquisition": 0.0019415110000409186,
-    "normalization": 0.01381395699991117,
-    "correlation": 0.006682668000394187,
-    "output_and_custody": 0.009999200000493147,
-    "custody_verification": 0.0006473489993368275,
-    "reporting": 0.00267976000031922,
-    "total": 0.036864265999611234
+    "acquisition": 0.0015107619999525923,
+    "normalization": 0.010765808999849469,
+    "correlation": 0.004853484000022945,
+    "output_and_custody": 0.006797483000127613,
+    "custody_verification": 0.0005855909998899733,
+    "reporting": 0.0017753239999365178,
+    "total": 0.026964918999965448
    },
    "sources_processed": 3,
    "report": "../cases/S1/report.html"
@@ -170,13 +170,13 @@
     }
    ],
    "timings": {
-    "acquisition": 0.001275769000130822,
-    "normalization": 0.008999079999739479,
-    "correlation": 0.004320717999689805,
-    "output_and_custody": 0.008082471000307123,
-    "custody_verification": 0.0006061479998606956,
-    "reporting": 0.002174632000787824,
-    "total": 0.025762842999938584
+    "acquisition": 0.0009222669998507627,
+    "normalization": 0.0077857310000126745,
+    "correlation": 0.0037263520000578865,
+    "output_and_custody": 0.005711341000051107,
+    "custody_verification": 0.000541385999895283,
+    "reporting": 0.0015520590000051016,
+    "total": 0.02047601700019186
    },
    "sources_processed": 3,
    "report": "../cases/S2/report.html"
@@ -264,13 +264,13 @@
     }
    ],
    "timings": {
-    "acquisition": 0.001097655999728886,
-    "normalization": 0.009747748000336287,
-    "correlation": 0.0053058740004416904,
-    "output_and_custody": 0.00905757700002141,
-    "custody_verification": 0.0006349470004352042,
-    "reporting": 0.0024923860000853892,
-    "total": 0.028704437999294896
+    "acquisition": 0.0010706180000852328,
+    "normalization": 0.007916338999848449,
+    "correlation": 0.003978883000172573,
+    "output_and_custody": 0.006266043000096033,
+    "custody_verification": 0.0005005479999908857,
+    "reporting": 0.0017520669998702942,
+    "total": 0.02171730899999602
    },
    "sources_processed": 3,
    "report": "../cases/S3/report.html"
@@ -347,13 +347,13 @@
     }
    ],
    "timings": {
-    "acquisition": 0.0012657990000661812,
-    "normalization": 0.00860661499973503,
-    "correlation": 0.003821495999545732,
-    "output_and_custody": 0.006578902000001108,
-    "custody_verification": 0.0005323289997249958,
-    "reporting": 0.0013406569996732287,
-    "total": 0.02239842699964356
+    "acquisition": 0.0010450039999341243,
+    "normalization": 0.006971608999947421,
+    "correlation": 0.003079070000012507,
+    "output_and_custody": 0.006665965999900436,
+    "custody_verification": 0.0006008319999182277,
+    "reporting": 0.0012029080000957038,
+    "total": 0.019837690000031216
    },
    "sources_processed": 3,
    "report": "../cases/S4/report.html"
@@ -441,13 +441,13 @@
     }
    ],
    "timings": {
-    "acquisition": 0.0012763479999193805,
-    "normalization": 0.008927185000175086,
-    "correlation": 0.0035786749995168066,
-    "output_and_custody": 0.007764119999592367,
-    "custody_verification": 0.0006367199994201655,
-    "reporting": 0.001984563999940292,
-    "total": 0.02444705900052213
+    "acquisition": 0.0009540139999444364,
+    "normalization": 0.007115493000128481,
+    "correlation": 0.003148585999952047,
+    "output_and_custody": 0.005175060000055964,
+    "custody_verification": 0.0004799999999249849,
+    "reporting": 0.0013469580001128634,
+    "total": 0.018445598999960566
    },
    "sources_processed": 3,
    "report": "../cases/S5/report.html"
@@ -661,12 +661,12 @@
   {
    "records": 1067,
    "events": 913,
-   "acquisition": 0.0019783010002356605,
-   "normalization": 0.02517698500014376,
-   "correlation": 0.014564905000042927,
-   "custody": 0.024527634998776193,
-   "total": 0.06624782599919854,
-   "throughput": 16106.188903661661,
+   "acquisition": 0.002027078000082838,
+   "normalization": 0.025194537000061246,
+   "correlation": 0.014803242999960275,
+   "custody": 0.021591403999764225,
+   "total": 0.06361626199986858,
+   "throughput": 16772.440983756704,
    "f1": 1.0,
    "incidents": 1,
    "completeness": 1.0
@@ -674,12 +674,12 @@
   {
    "records": 5241,
    "events": 4428,
-   "acquisition": 0.0064004739997471916,
-   "normalization": 0.12190615300005447,
-   "correlation": 0.07093500200062408,
-   "custody": 0.1076297079998767,
-   "total": 0.30687133700030245,
-   "throughput": 17078.818931840593,
+   "acquisition": 0.006181547000096543,
+   "normalization": 0.12495839700000033,
+   "correlation": 0.07268384999997579,
+   "custody": 0.10299468199991679,
+   "total": 0.30681847599998946,
+   "throughput": 17081.761399532472,
    "f1": 1.0,
    "incidents": 1,
    "completeness": 1.0
@@ -687,12 +687,12 @@
   {
    "records": 10375,
    "events": 8692,
-   "acquisition": 0.011643275999631442,
-   "normalization": 0.2585176849997879,
-   "correlation": 0.18606060900037846,
-   "custody": 0.19974080399970262,
-   "total": 0.6559623739995004,
-   "throughput": 15816.45596033516,
+   "acquisition": 0.017465325000102894,
+   "normalization": 0.24685763499996938,
+   "correlation": 0.18944845999999416,
+   "custody": 0.29543416000001343,
+   "total": 0.7492055800000799,
+   "throughput": 13848.00150580685,
    "f1": 1.0,
    "incidents": 1,
    "completeness": 1.0
@@ -700,12 +700,12 @@
   {
    "records": 52218,
    "events": 44121,
-   "acquisition": 0.05551801399997203,
-   "normalization": 1.2338319540003795,
-   "correlation": 1.1917108490006285,
-   "custody": 0.9565267420002783,
-   "total": 3.4375875590012583,
-   "throughput": 15190.303986081213,
+   "acquisition": 0.13708916499990664,
+   "normalization": 1.321426855000027,
+   "correlation": 1.1602399050000258,
+   "custody": 1.0316184860000703,
+   "total": 3.65037441100003,
+   "throughput": 14304.834003505614,
    "f1": 1.0,
    "incidents": 1,
    "completeness": 1.0
@@ -713,12 +713,12 @@
   {
    "records": 104634,
    "events": 88584,
-   "acquisition": 0.112100934999944,
-   "normalization": 2.6205346890001238,
-   "correlation": 1.8281707360001747,
-   "custody": 1.6402126729999509,
-   "total": 6.201019033000193,
-   "throughput": 16873.67825242357,
+   "acquisition": 0.16583895000007942,
+   "normalization": 3.068507904999933,
+   "correlation": 2.118550308999829,
+   "custody": 2.360524847000079,
+   "total": 7.7134220109999205,
+   "throughput": 13565.185445679497,
    "f1": 1.0,
    "incidents": 1,
    "completeness": 1.0

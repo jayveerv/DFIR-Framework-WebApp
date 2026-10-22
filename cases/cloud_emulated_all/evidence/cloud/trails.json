@@ -11,7 +11,7 @@
    "bucket": "trail-logs-a",
    "is_logging": true,
    "stop_logging_time": null,
-   "latest_delivery": "2026-10-21T10:08:34Z",
+   "latest_delivery": "2026-10-21T21:57:20Z",
    "delivery_error": null
   },
   {
@@ -23,7 +23,7 @@
    "log_validation": true,
    "bucket": "trail-logs-b",
    "is_logging": false,
-   "stop_logging_time": "2026-10-21T10:08:32Z",
+   "stop_logging_time": "2026-10-21T21:57:18Z",
    "latest_delivery": null,
    "delivery_error": null
   },
@@ -37,7 +37,7 @@
    "bucket": "trail-logs-c",
    "is_logging": true,
    "stop_logging_time": null,
-   "latest_delivery": "2026-10-21T10:08:34Z",
+   "latest_delivery": "2026-10-21T21:57:20Z",
    "delivery_error": null
   }
  ]

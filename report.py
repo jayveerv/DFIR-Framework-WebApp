@@ -7,7 +7,7 @@ SEV_COL = {"high": "#E11D48", "medium": "#D97706", "info": "#94A3B8"}
 PLAT_NAME = {"windows": "Windows", "linux": "Linux", "aws": "AWS", "host": "Live host", "cloud": "AWS account state"}
 CLOUD_STATE_TYPES = ("trail_state", "account_state", "iam_user_state", "access_key_state", "bucket_state", "sg_state")
 
-VERSION = "1.1"
+VERSION = "1.3"
 
 # One stylesheet for every CP-DFIR report (case report, evaluation, real-data validation). Same palette as the
 # investigation console: dark by default, light on request, and always light when printed (A4, page numbers).

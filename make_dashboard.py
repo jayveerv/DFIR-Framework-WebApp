@@ -488,7 +488,7 @@ function sOverview(){
  return h;
 }
 function flowSvg(){
- const st=[["ACQUISITION","Windows · Linux · AWS · Live host","var(--win)"],["NORMALIZATION","35 event types · UTC","var(--lin)"],["CORRELATION","57 rules · entity graph","var(--aws)"],["REPORTING","HTML report · timeline","var(--vi)"]];
+ const st=[["ACQUISITION","Windows · Linux · AWS · Live host","var(--win)"],["NORMALIZATION","38 event types · UTC","var(--lin)"],["CORRELATION","62 rules · entity graph","var(--aws)"],["REPORTING","HTML report · timeline","var(--vi)"]];
  let s=`<svg class="flow" viewBox="0 0 1100 128">`;
  st.forEach((x,i)=>{const X=12+i*272;
   s+=`<rect x="${X}" y="18" width="232" height="66" rx="12" fill="color-mix(in srgb,${x[2]} 12%,transparent)" stroke="${x[2]}" stroke-width="1.4"/>
@@ -515,7 +515,7 @@ function scenBars(){
 function glance(){
  const K=D.kpi,row=(a,b,c)=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)"><span class="note" style="font-size:12.8px">${a}</span><b class="mono" style="color:${c||'var(--tx)'}">${b}</b></div>`;
  const ce=D.cloud.emu.all;
- return row("Evidence sources","Windows · Linux · AWS · Host")+row("Common event schema","35 types · UTC")+
+ return row("Evidence sources","Windows · Linux · AWS · Host")+row("Common event schema","38 types · UTC")+
   row("Cloud misconfigurations found",ce?`${ce.ft}/${ce.et}`:"–","var(--gr)")+row("Cloud API calls made",ce?`${ce.ops} · read-only`:"–")+
   row("Hard cases S5 · F1",f3(K.s5),"var(--am)")+row("Real EVTX samples parsed",D.real?`${D.real.win.samples} · ${D.real.win.errors} errors`:"–");
 }

@@ -1,32 +1,32 @@
 {
  "dataset": "Yamato-Security/hayabusa-sample-evtx@0845333ecb4a",
- "rules_fingerprint": "804638ca9a700716",
- "seconds": 177.1,
+ "rules_fingerprint": "5d6349a632422bd3",
+ "seconds": 166.5,
  "excluded": {
   "EVTX-to-MITRE-Attack/TA0004-Privilege Escalation/T1134.005-Access Token Manipulation SID-History Injection/ID 4765 - SID history added.evtx": "byte-identical to a development sample"
  },
  "samples": 320,
  "records": 39836,
  "errors": 1681,
- "with_supported": 176,
+ "with_supported": 219,
  "in_scope": 117,
- "in_alerted": 36,
- "in_exact": 24,
- "in_parent": 26,
- "in_alerted_pct": 30.8,
- "in_exact_pct": 20.5,
- "in_parent_pct": 22.2,
+ "in_alerted": 68,
+ "in_exact": 55,
+ "in_parent": 57,
+ "in_alerted_pct": 58.1,
+ "in_exact_pct": 47.0,
+ "in_parent_pct": 48.7,
  "out_scope": 181,
- "out_alerted": 43,
+ "out_alerted": 44,
  "unlabelled": 19,
- "unlabelled_alerted": 9,
+ "unlabelled_alerted": 10,
  "per_corpus": {
   "DeepBlueCLI": {
    "samples": 21,
    "records": 28220,
    "errors": 0,
    "in_scope": 14,
-   "in_alerted": 13,
+   "in_alerted": 14,
    "in_exact": 7,
    "in_parent": 8
   },
@@ -35,9 +35,9 @@
    "records": 11337,
    "errors": 1681,
    "in_scope": 102,
-   "in_alerted": 22,
-   "in_exact": 17,
-   "in_parent": 17
+   "in_alerted": 53,
+   "in_exact": 48,
+   "in_parent": 48
   },
   "YamatoSecurity": {
    "samples": 16,
@@ -57,8 +57,8 @@
   },
   "T1027": {
    "samples": 8,
-   "alerted": 3,
-   "exact": 3
+   "alerted": 4,
+   "exact": 4
   },
   "T1053.005": {
    "samples": 6,
@@ -92,13 +92,13 @@
   },
   "T1098": {
    "samples": 30,
-   "alerted": 0,
-   "exact": 0
+   "alerted": 20,
+   "exact": 20
   },
   "T1110": {
    "samples": 12,
-   "alerted": 1,
-   "exact": 0
+   "alerted": 4,
+   "exact": 3
   },
   "T1110.001": {
    "samples": 1,
@@ -112,7 +112,7 @@
   },
   "T1136.001": {
    "samples": 1,
-   "alerted": 0,
+   "alerted": 1,
    "exact": 0
   },
   "T1218.004": {
@@ -127,8 +127,8 @@
   },
   "T1562.001": {
    "samples": 9,
-   "alerted": 0,
-   "exact": 0
+   "alerted": 7,
+   "exact": 7
   },
   "T1569.002": {
    "samples": 9,
@@ -148,24 +148,27 @@
   {
    "file": "DeepBlueCLI/many-events-security.evtx",
    "records": 13223,
-   "supported": 9352,
-   "alerts": 53,
+   "supported": 9376,
+   "alerts": 56,
    "flags": {
+    "privilege_group_add": 1,
+    "account_security_weakened": 1,
+    "password_reset_by_other": 1,
     "suspicious_powershell": 34,
     "credential_dump_tool": 18,
     "encoded_powershell": 1
    },
-   "per_1000": 5.67
+   "per_1000": 5.97
   },
   {
    "file": "DeepBlueCLI/many-events-system.evtx",
    "records": 8414,
    "supported": 61,
-   "alerts": 51,
+   "alerts": 20,
    "flags": {
-    "service_installed": 51
+    "service_installed": 20
    },
-   "per_1000": 836.07
+   "per_1000": 327.87
   }
  ],
  "missed": [
@@ -197,8 +200,10 @@
   {
    "file": "DeepBlueCLI/new-user-security.evtx",
    "label": "T1136.001",
-   "supported": 3,
-   "techniques": []
+   "supported": 4,
+   "techniques": [
+    "T1098"
+   ]
   },
   {
    "file": "DeepBlueCLI/password-spray.evtx",
@@ -294,157 +299,37 @@
   {
    "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4723-5145-password reset with changeNTLM (Mimikatz).evtx",
    "label": "T1098",
-   "supported": 0,
-   "techniques": []
-  },
-  {
-   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4724-5145-password reset with setNTLM (Mimikatz).evtx",
-   "label": "T1098",
-   "supported": 6,
-   "techniques": []
-  },
-  {
-   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4728-4756-Member added to sensitive domain groups.evtx",
-   "label": "T1098",
-   "supported": 0,
+   "supported": 1,
    "techniques": []
   },
   {
    "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4728-Massive account group membership change.evtx",
    "label": "T1098",
-   "supported": 0,
+   "supported": 11,
    "techniques": []
   },
   {
    "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4728-Member adding to a group by the same account.evtx",
    "label": "T1098",
-   "supported": 0,
-   "techniques": []
-  },
-  {
-   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4732-4733-Quick added-removed user from local group.evtx",
-   "label": "T1098",
-   "supported": 3,
-   "techniques": []
-  },
-  {
-   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4732-DNSadmin new member added.evtx",
-   "label": "T1098",
    "supported": 1,
-   "techniques": []
-  },
-  {
-   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4732-User added to local admin groups.evtx",
-   "label": "T1098",
-   "supported": 3,
-   "techniques": []
-  },
-  {
-   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4738,5136-SPN set on user account.evtx",
-   "label": "T1098",
-   "supported": 0,
    "techniques": []
   },
   {
    "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4738-Account is sensitive and cannot be delegated.evtx",
    "label": "T1098",
-   "supported": 0,
-   "techniques": []
-  },
-  {
-   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4738-Account with password not required.evtx",
-   "label": "T1098",
-   "supported": 0,
-   "techniques": []
-  },
-  {
-   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4738-Do not require Kerberos preauthentication.evtx",
-   "label": "T1098",
-   "supported": 0,
+   "supported": 2,
    "techniques": []
   },
   {
    "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4738-Password cannot be changed.evtx",
    "label": "T1098",
-   "supported": 0,
-   "techniques": []
-  },
-  {
-   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4738-Password never expires.evtx",
-   "label": "T1098",
-   "supported": 0,
-   "techniques": []
-  },
-  {
-   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4738-Use only Kerberos DES encryption types.evtx",
-   "label": "T1098",
-   "supported": 0,
-   "techniques": []
-  },
-  {
-   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4738-User set with reversible psw encryption.evtx",
-   "label": "T1098",
-   "supported": 0,
-   "techniques": []
-  },
-  {
-   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4742,5136-Enable Trust this computer for delegation (to any service, Kerberos only).evtx",
-   "label": "T1098",
-   "supported": 0,
-   "techniques": []
-  },
-  {
-   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4742,5136-Enable Trust this computer for delegation (to specified service, Kerberos only).evtx",
-   "label": "T1098",
-   "supported": 0,
-   "techniques": []
-  },
-  {
-   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4742,5136-Enable Trust this computer for delegation (to specified service, any protocol).evtx",
-   "label": "T1098",
-   "supported": 0,
-   "techniques": []
-  },
-  {
-   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4742,5136-SPN set on computer account.evtx",
-   "label": "T1098",
-   "supported": 0,
-   "techniques": []
-  },
-  {
-   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4742-SPN set on computer account (DCshadow).evtx",
-   "label": "T1098",
-   "supported": 0,
-   "techniques": []
-  },
-  {
-   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4756-Exchange admin group change.evtx",
-   "label": "T1098",
-   "supported": 0,
-   "techniques": []
-  },
-  {
-   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4781-4738-User renamed to admin or likely.evtx",
-   "label": "T1098",
-   "supported": 0,
-   "techniques": []
-  },
-  {
-   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4781-Computer account renamed without a trailing $ (CVE-2021-42278).evtx",
-   "label": "T1098",
-   "supported": 0,
+   "supported": 2,
    "techniques": []
   },
   {
    "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID5136-4662 AD object owner changed.evtx",
    "label": "T1098",
-   "supported": 0,
-   "techniques": []
-  },
-  {
-   "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID5136-Computer account set for RBCD delegation.evtx",
-   "label": "T1098",
-   "supported": 0,
+   "supported": 3,
    "techniques": []
   },
   {
@@ -514,19 +399,19 @@
   {
    "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1543.003-Create or Modify System Process-Windows Service/ID800-4103-4104-Service abuse with Failure Command.evtx",
    "label": "T1543.003",
-   "supported": 2,
+   "supported": 10,
    "techniques": []
   },
   {
    "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1543.003-Create or Modify System Process-Windows Service/ID800-4103-4104-Service abuse with malicious path.evtx",
    "label": "T1543.003",
-   "supported": 2,
+   "supported": 10,
    "techniques": []
   },
   {
    "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1543.003-Create or Modify System Process-Windows Service/ID800-4103-4104-Service creation (PowerShell).evtx",
    "label": "T1543.003",
-   "supported": 4,
+   "supported": 8,
    "techniques": []
   },
   {
@@ -544,13 +429,7 @@
   {
    "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1027-Obfuscated Files or Information/ID400-800-CrackMapExec payload execution.evtx",
    "label": "T1027",
-   "supported": 0,
-   "techniques": []
-  },
-  {
-   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1027-Obfuscated Files or Information/ID4103-4104-CrackMapExec payload execution.evtx",
-   "label": "T1027",
-   "supported": 11,
+   "supported": 5,
    "techniques": []
   },
   {
@@ -568,7 +447,7 @@
   {
    "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1070.001-Clear Windows event logs/ID800-4103-4104-Clear event log attempt.evtx",
    "label": "T1070.001",
-   "supported": 2,
+   "supported": 6,
    "techniques": []
   },
   {
@@ -584,57 +463,15 @@
    "techniques": []
   },
   {
-   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.001-Impair Defenses-Disable or Modify tool/ID1-SYSMON driver unload (FilterManager).evtx",
-   "label": "T1562.001",
-   "supported": 0,
-   "techniques": []
-  },
-  {
    "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.001-Impair Defenses-Disable or Modify tool/ID13-Defender service configuration disabled.evtx",
    "label": "T1562.001",
    "supported": 2,
    "techniques": []
   },
   {
-   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.001-Impair Defenses-Disable or Modify tool/ID4688-Defender critical features disabled (command).evtx",
-   "label": "T1562.001",
-   "supported": 9,
-   "techniques": []
-  },
-  {
-   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.001-Impair Defenses-Disable or Modify tool/ID4688-Defender service deactivation attempt.evtx",
-   "label": "T1562.001",
-   "supported": 5,
-   "techniques": []
-  },
-  {
-   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.001-Impair Defenses-Disable or Modify tool/ID5007-Defender threat exclusion (native).evtx",
-   "label": "T1562.001",
-   "supported": 0,
-   "techniques": []
-  },
-  {
    "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.001-Impair Defenses-Disable or Modify tool/ID8-Module Virtualization disabled (Credential Guard).evtx",
    "label": "T1562.001",
    "supported": 0,
-   "techniques": []
-  },
-  {
-   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.001-Impair Defenses-Disable or Modify tool/ID800-4103-4104 Defender critical features disabled (PowerShell).evtx",
-   "label": "T1562.001",
-   "supported": 10,
-   "techniques": []
-  },
-  {
-   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.001-Impair Defenses-Disable or Modify tool/ID800-4103-4104 Defender default action allow any (PowerShell).evtx",
-   "label": "T1562.001",
-   "supported": 2,
-   "techniques": []
-  },
-  {
-   "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.001-Impair Defenses-Disable or Modify tool/ID800-4103-4104 Defender exclusion added (PowerShell).evtx",
-   "label": "T1562.001",
-   "supported": 4,
    "techniques": []
   },
   {
@@ -691,24 +528,6 @@
    "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1110.xxx-Brut force/ID4625-OpenSSH brutforce with valid users.evtx",
    "label": "T1110",
    "supported": 9,
-   "techniques": []
-  },
-  {
-   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1110.xxx-Brut force/ID4768-4771-Kerberos brutforce with non existing users.evtx",
-   "label": "T1110",
-   "supported": 0,
-   "techniques": []
-  },
-  {
-   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1110.xxx-Brut force/ID4768-4771-Kerberos user enumeration (Kerbrute).evtx",
-   "label": "T1110",
-   "supported": 0,
-   "techniques": []
-  },
-  {
-   "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1110.xxx-Brut force/ID4771-Kerberos brutforce with valid user.evtx",
-   "label": "T1110",
-   "supported": 0,
    "techniques": []
   },
   {
@@ -907,16 +726,20 @@
    "label": "background",
    "scope": "background",
    "records": 13223,
-   "supported": 9352,
+   "supported": 9376,
    "errors": 0,
    "flags": {
+    "privilege_group_add": 1,
+    "account_security_weakened": 1,
+    "password_reset_by_other": 1,
     "suspicious_powershell": 34,
     "credential_dump_tool": 18,
     "encoded_powershell": 1
    },
    "techniques": [
     "T1003.001",
-    "T1059.001"
+    "T1059.001",
+    "T1098"
    ],
    "alerted": true,
    "exact": false,
@@ -931,7 +754,7 @@
    "supported": 61,
    "errors": 0,
    "flags": {
-    "service_installed": 51
+    "service_installed": 20
    },
    "techniques": [
     "T1543.003"
@@ -1078,11 +901,15 @@
    "label": "T1136.001",
    "scope": "in",
    "records": 4,
-   "supported": 3,
+   "supported": 4,
    "errors": 0,
-   "flags": {},
-   "techniques": [],
-   "alerted": false,
+   "flags": {
+    "privilege_group_add": 1
+   },
+   "techniques": [
+    "T1098"
+   ],
+   "alerted": true,
    "exact": false,
    "parent_match": false
   },
@@ -1343,11 +1170,15 @@
    "label": null,
    "scope": "unlabelled",
    "records": 17,
-   "supported": 0,
+   "supported": 5,
    "errors": 0,
-   "flags": {},
-   "techniques": [],
-   "alerted": false,
+   "flags": {
+    "delegation_or_spn_set": 5
+   },
+   "techniques": [
+    "T1098"
+   ],
+   "alerted": true,
    "exact": false,
    "parent_match": false
   },
@@ -1357,14 +1188,17 @@
    "label": null,
    "scope": "unlabelled",
    "records": 40,
-   "supported": 13,
+   "supported": 20,
    "errors": 0,
    "flags": {
+    "password_reset_by_other": 1,
+    "suspicious_account_rename": 1,
     "remote_service_control": 1,
     "admin_share_access": 4
    },
    "techniques": [
     "T1021.002",
+    "T1098",
     "T1569.002"
    ],
    "alerted": true,
@@ -1631,10 +1465,10 @@
    "label": "T1059.001",
    "scope": "in",
    "records": 3,
-   "supported": 2,
+   "supported": 3,
    "errors": 0,
    "flags": {
-    "suspicious_powershell": 1
+    "suspicious_powershell": 2
    },
    "techniques": [
     "T1059.001"
@@ -1839,7 +1673,7 @@
    "label": "T1098",
    "scope": "in",
    "records": 1,
-   "supported": 0,
+   "supported": 1,
    "errors": 0,
    "flags": {},
    "techniques": [],
@@ -1853,13 +1687,17 @@
    "label": "T1098",
    "scope": "in",
    "records": 8,
-   "supported": 6,
+   "supported": 8,
    "errors": 0,
-   "flags": {},
-   "techniques": [],
-   "alerted": false,
-   "exact": false,
-   "parent_match": false
+   "flags": {
+    "password_reset_by_other": 1
+   },
+   "techniques": [
+    "T1098"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
   },
   {
    "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4728-4756-Member added to sensitive domain groups.evtx",
@@ -1867,13 +1705,17 @@
    "label": "T1098",
    "scope": "in",
    "records": 4,
-   "supported": 0,
+   "supported": 4,
    "errors": 0,
-   "flags": {},
-   "techniques": [],
-   "alerted": false,
-   "exact": false,
-   "parent_match": false
+   "flags": {
+    "privilege_group_add": 4
+   },
+   "techniques": [
+    "T1098"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
   },
   {
    "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4728-Massive account group membership change.evtx",
@@ -1881,7 +1723,7 @@
    "label": "T1098",
    "scope": "in",
    "records": 11,
-   "supported": 0,
+   "supported": 11,
    "errors": 0,
    "flags": {},
    "techniques": [],
@@ -1895,7 +1737,7 @@
    "label": "T1098",
    "scope": "in",
    "records": 1,
-   "supported": 0,
+   "supported": 1,
    "errors": 0,
    "flags": {},
    "techniques": [],
@@ -1911,11 +1753,15 @@
    "records": 5,
    "supported": 3,
    "errors": 0,
-   "flags": {},
-   "techniques": [],
-   "alerted": false,
-   "exact": false,
-   "parent_match": false
+   "flags": {
+    "privilege_group_add": 2
+   },
+   "techniques": [
+    "T1098"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
   },
   {
    "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4732-DNSadmin new member added.evtx",
@@ -1925,11 +1771,15 @@
    "records": 1,
    "supported": 1,
    "errors": 0,
-   "flags": {},
-   "techniques": [],
-   "alerted": false,
-   "exact": false,
-   "parent_match": false
+   "flags": {
+    "privilege_group_add": 1
+   },
+   "techniques": [
+    "T1098"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
   },
   {
    "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4732-User added to local admin groups.evtx",
@@ -1939,11 +1789,15 @@
    "records": 3,
    "supported": 3,
    "errors": 0,
-   "flags": {},
-   "techniques": [],
-   "alerted": false,
-   "exact": false,
-   "parent_match": false
+   "flags": {
+    "privilege_group_add": 2
+   },
+   "techniques": [
+    "T1098"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
   },
   {
    "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4738,5136-SPN set on user account.evtx",
@@ -1951,13 +1805,17 @@
    "label": "T1098",
    "scope": "in",
    "records": 4,
-   "supported": 0,
+   "supported": 4,
    "errors": 0,
-   "flags": {},
-   "techniques": [],
-   "alerted": false,
-   "exact": false,
-   "parent_match": false
+   "flags": {
+    "delegation_or_spn_set": 2
+   },
+   "techniques": [
+    "T1098"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
   },
   {
    "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4738-Account is sensitive and cannot be delegated.evtx",
@@ -1965,7 +1823,7 @@
    "label": "T1098",
    "scope": "in",
    "records": 2,
-   "supported": 0,
+   "supported": 2,
    "errors": 0,
    "flags": {},
    "techniques": [],
@@ -1979,13 +1837,17 @@
    "label": "T1098",
    "scope": "in",
    "records": 2,
-   "supported": 0,
+   "supported": 2,
    "errors": 0,
-   "flags": {},
-   "techniques": [],
-   "alerted": false,
-   "exact": false,
-   "parent_match": false
+   "flags": {
+    "account_security_weakened": 1
+   },
+   "techniques": [
+    "T1098"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
   },
   {
    "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4738-Do not require Kerberos preauthentication.evtx",
@@ -1993,13 +1855,17 @@
    "label": "T1098",
    "scope": "in",
    "records": 2,
-   "supported": 0,
+   "supported": 2,
    "errors": 0,
-   "flags": {},
-   "techniques": [],
-   "alerted": false,
-   "exact": false,
-   "parent_match": false
+   "flags": {
+    "account_security_weakened": 1
+   },
+   "techniques": [
+    "T1098"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
   },
   {
    "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4738-Password cannot be changed.evtx",
@@ -2007,7 +1873,7 @@
    "label": "T1098",
    "scope": "in",
    "records": 2,
-   "supported": 0,
+   "supported": 2,
    "errors": 0,
    "flags": {},
    "techniques": [],
@@ -2021,13 +1887,17 @@
    "label": "T1098",
    "scope": "in",
    "records": 2,
-   "supported": 0,
+   "supported": 2,
    "errors": 0,
-   "flags": {},
-   "techniques": [],
-   "alerted": false,
-   "exact": false,
-   "parent_match": false
+   "flags": {
+    "account_security_weakened": 1
+   },
+   "techniques": [
+    "T1098"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
   },
   {
    "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4738-Use only Kerberos DES encryption types.evtx",
@@ -2035,13 +1905,17 @@
    "label": "T1098",
    "scope": "in",
    "records": 2,
-   "supported": 0,
+   "supported": 2,
    "errors": 0,
-   "flags": {},
-   "techniques": [],
-   "alerted": false,
-   "exact": false,
-   "parent_match": false
+   "flags": {
+    "account_security_weakened": 1
+   },
+   "techniques": [
+    "T1098"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
   },
   {
    "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4738-User set with reversible psw encryption.evtx",
@@ -2049,13 +1923,17 @@
    "label": "T1098",
    "scope": "in",
    "records": 2,
-   "supported": 0,
+   "supported": 2,
    "errors": 0,
-   "flags": {},
-   "techniques": [],
-   "alerted": false,
-   "exact": false,
-   "parent_match": false
+   "flags": {
+    "account_security_weakened": 1
+   },
+   "techniques": [
+    "T1098"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
   },
   {
    "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4742,5136-Enable Trust this computer for delegation (to any service, Kerberos only).evtx",
@@ -2063,13 +1941,17 @@
    "label": "T1098",
    "scope": "in",
    "records": 3,
-   "supported": 0,
+   "supported": 3,
    "errors": 0,
-   "flags": {},
-   "techniques": [],
-   "alerted": false,
-   "exact": false,
-   "parent_match": false
+   "flags": {
+    "account_security_weakened": 3
+   },
+   "techniques": [
+    "T1098"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
   },
   {
    "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4742,5136-Enable Trust this computer for delegation (to specified service, Kerberos only).evtx",
@@ -2077,13 +1959,17 @@
    "label": "T1098",
    "scope": "in",
    "records": 9,
-   "supported": 0,
+   "supported": 9,
    "errors": 0,
-   "flags": {},
-   "techniques": [],
-   "alerted": false,
-   "exact": false,
-   "parent_match": false
+   "flags": {
+    "delegation_or_spn_set": 9
+   },
+   "techniques": [
+    "T1098"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
   },
   {
    "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4742,5136-Enable Trust this computer for delegation (to specified service, any protocol).evtx",
@@ -2091,13 +1977,18 @@
    "label": "T1098",
    "scope": "in",
    "records": 9,
-   "supported": 0,
+   "supported": 9,
    "errors": 0,
-   "flags": {},
-   "techniques": [],
-   "alerted": false,
-   "exact": false,
-   "parent_match": false
+   "flags": {
+    "account_security_weakened": 3,
+    "delegation_or_spn_set": 7
+   },
+   "techniques": [
+    "T1098"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
   },
   {
    "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4742,5136-SPN set on computer account.evtx",
@@ -2105,13 +1996,17 @@
    "label": "T1098",
    "scope": "in",
    "records": 2,
-   "supported": 0,
+   "supported": 2,
    "errors": 0,
-   "flags": {},
-   "techniques": [],
-   "alerted": false,
-   "exact": false,
-   "parent_match": false
+   "flags": {
+    "delegation_or_spn_set": 2
+   },
+   "techniques": [
+    "T1098"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
   },
   {
    "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4742-SPN set on computer account (DCshadow).evtx",
@@ -2119,13 +2014,17 @@
    "label": "T1098",
    "scope": "in",
    "records": 3,
-   "supported": 0,
+   "supported": 3,
    "errors": 0,
-   "flags": {},
-   "techniques": [],
-   "alerted": false,
-   "exact": false,
-   "parent_match": false
+   "flags": {
+    "delegation_or_spn_set": 3
+   },
+   "techniques": [
+    "T1098"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
   },
   {
    "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4756-Exchange admin group change.evtx",
@@ -2133,13 +2032,17 @@
    "label": "T1098",
    "scope": "in",
    "records": 15,
-   "supported": 0,
+   "supported": 15,
    "errors": 0,
-   "flags": {},
-   "techniques": [],
-   "alerted": false,
-   "exact": false,
-   "parent_match": false
+   "flags": {
+    "privilege_group_add": 1
+   },
+   "techniques": [
+    "T1098"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
   },
   {
    "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4781-4738-User renamed to admin or likely.evtx",
@@ -2147,13 +2050,17 @@
    "label": "T1098",
    "scope": "in",
    "records": 2,
-   "supported": 0,
+   "supported": 2,
    "errors": 0,
-   "flags": {},
-   "techniques": [],
-   "alerted": false,
-   "exact": false,
-   "parent_match": false
+   "flags": {
+    "suspicious_account_rename": 1
+   },
+   "techniques": [
+    "T1098"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
   },
   {
    "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID4781-Computer account renamed without a trailing $ (CVE-2021-42278).evtx",
@@ -2161,13 +2068,17 @@
    "label": "T1098",
    "scope": "in",
    "records": 2,
-   "supported": 0,
+   "supported": 2,
    "errors": 0,
-   "flags": {},
-   "techniques": [],
-   "alerted": false,
-   "exact": false,
-   "parent_match": false
+   "flags": {
+    "suspicious_account_rename": 1
+   },
+   "techniques": [
+    "T1098"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
   },
   {
    "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1098.xxx-Account manipulation/ID5136-4662 AD object owner changed.evtx",
@@ -2175,7 +2086,7 @@
    "label": "T1098",
    "scope": "in",
    "records": 9,
-   "supported": 0,
+   "supported": 3,
    "errors": 0,
    "flags": {},
    "techniques": [],
@@ -2189,13 +2100,17 @@
    "label": "T1098",
    "scope": "in",
    "records": 5,
-   "supported": 0,
+   "supported": 5,
    "errors": 0,
-   "flags": {},
-   "techniques": [],
-   "alerted": false,
-   "exact": false,
-   "parent_match": false
+   "flags": {
+    "delegation_or_spn_set": 1
+   },
+   "techniques": [
+    "T1098"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
   },
   {
    "file": "EVTX-to-MITRE-Attack/TA0003-Persistence/T1136-Create account/ID33205-SQL Server Disabled SA user activated.evtx",
@@ -2231,7 +2146,7 @@
    "label": "T1136",
    "scope": "out",
    "records": 9,
-   "supported": 4,
+   "supported": 5,
    "errors": 0,
    "flags": {},
    "techniques": [],
@@ -2245,13 +2160,17 @@
    "label": "T1136",
    "scope": "out",
    "records": 21,
-   "supported": 7,
+   "supported": 11,
    "errors": 0,
    "flags": {
-    "log_cleared": 1
+    "log_cleared": 1,
+    "account_security_weakened": 1,
+    "password_reset_by_other": 1,
+    "privilege_group_add": 1
    },
    "techniques": [
-    "T1070.001"
+    "T1070.001",
+    "T1098"
    ],
    "alerted": true,
    "exact": false,
@@ -2347,7 +2266,7 @@
    "label": "T1136",
    "scope": "out",
    "records": 3,
-   "supported": 0,
+   "supported": 2,
    "errors": 0,
    "flags": {},
    "techniques": [],
@@ -2407,10 +2326,10 @@
    "label": "T1197",
    "scope": "out",
    "records": 11,
-   "supported": 5,
+   "supported": 11,
    "errors": 0,
    "flags": {
-    "suspicious_powershell": 2
+    "suspicious_powershell": 4
    },
    "techniques": [
     "T1059.001"
@@ -2747,7 +2666,7 @@
    "label": "T1543.003",
    "scope": "in",
    "records": 10,
-   "supported": 2,
+   "supported": 10,
    "errors": 0,
    "flags": {},
    "techniques": [],
@@ -2761,7 +2680,7 @@
    "label": "T1543.003",
    "scope": "in",
    "records": 10,
-   "supported": 2,
+   "supported": 10,
    "errors": 0,
    "flags": {},
    "techniques": [],
@@ -2775,7 +2694,7 @@
    "label": "T1543.003",
    "scope": "in",
    "records": 8,
-   "supported": 4,
+   "supported": 8,
    "errors": 0,
    "flags": {},
    "techniques": [],
@@ -2837,7 +2756,7 @@
    "label": "T1546",
    "scope": "out",
    "records": 4,
-   "supported": 0,
+   "supported": 4,
    "errors": 0,
    "flags": {},
    "techniques": [],
@@ -2851,7 +2770,7 @@
    "label": "T1546",
    "scope": "out",
    "records": 2,
-   "supported": 0,
+   "supported": 2,
    "errors": 0,
    "flags": {},
    "techniques": [],
@@ -3077,7 +2996,7 @@
    "label": "T1484",
    "scope": "out",
    "records": 6,
-   "supported": 0,
+   "supported": 1,
    "errors": 0,
    "flags": {},
    "techniques": [],
@@ -3091,7 +3010,7 @@
    "label": "T1484.001",
    "scope": "out",
    "records": 11,
-   "supported": 0,
+   "supported": 2,
    "errors": 0,
    "flags": {},
    "techniques": [],
@@ -3273,7 +3192,7 @@
    "label": "T1027",
    "scope": "in",
    "records": 13,
-   "supported": 0,
+   "supported": 5,
    "errors": 0,
    "flags": {},
    "techniques": [],
@@ -3287,13 +3206,19 @@
    "label": "T1027",
    "scope": "in",
    "records": 24,
-   "supported": 11,
+   "supported": 24,
    "errors": 0,
-   "flags": {},
-   "techniques": [],
-   "alerted": false,
-   "exact": false,
-   "parent_match": false
+   "flags": {
+    "suspicious_powershell": 1,
+    "credential_dump_tool": 1
+   },
+   "techniques": [
+    "T1003.001",
+    "T1059.001"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
   },
   {
    "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1027-Obfuscated Files or Information/ID4688-Obfuscated payload transfer via service name - Tchopper.evtx",
@@ -3365,7 +3290,7 @@
    "label": "T1070.001",
    "scope": "in",
    "records": 6,
-   "supported": 2,
+   "supported": 6,
    "errors": 0,
    "flags": {},
    "techniques": [],
@@ -3439,7 +3364,7 @@
    "label": "T1112",
    "scope": "out",
    "records": 132,
-   "supported": 2,
+   "supported": 132,
    "errors": 0,
    "flags": {},
    "techniques": [],
@@ -3515,7 +3440,7 @@
    "label": "T1222.001",
    "scope": "out",
    "records": 3,
-   "supported": 0,
+   "supported": 2,
    "errors": 0,
    "flags": {},
    "techniques": [],
@@ -3529,7 +3454,7 @@
    "label": "T1222.001",
    "scope": "out",
    "records": 2,
-   "supported": 0,
+   "supported": 2,
    "errors": 0,
    "flags": {},
    "techniques": [],
@@ -3543,7 +3468,7 @@
    "label": "T1222.001",
    "scope": "out",
    "records": 7,
-   "supported": 0,
+   "supported": 2,
    "errors": 0,
    "flags": {},
    "techniques": [],
@@ -3557,7 +3482,7 @@
    "label": "T1222.001",
    "scope": "out",
    "records": 3,
-   "supported": 0,
+   "supported": 2,
    "errors": 0,
    "flags": {},
    "techniques": [],
@@ -3617,13 +3542,17 @@
    "label": "T1562.001",
    "scope": "in",
    "records": 1,
-   "supported": 0,
+   "supported": 1,
    "errors": 0,
-   "flags": {},
-   "techniques": [],
-   "alerted": false,
-   "exact": false,
-   "parent_match": false
+   "flags": {
+    "defender_tampering": 1
+   },
+   "techniques": [
+    "T1562.001"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
   },
   {
    "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.001-Impair Defenses-Disable or Modify tool/ID13-Defender service configuration disabled.evtx",
@@ -3647,11 +3576,15 @@
    "records": 9,
    "supported": 9,
    "errors": 0,
-   "flags": {},
-   "techniques": [],
-   "alerted": false,
-   "exact": false,
-   "parent_match": false
+   "flags": {
+    "defender_tampering": 2
+   },
+   "techniques": [
+    "T1562.001"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
   },
   {
    "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.001-Impair Defenses-Disable or Modify tool/ID4688-Defender service deactivation attempt.evtx",
@@ -3661,11 +3594,15 @@
    "records": 5,
    "supported": 5,
    "errors": 0,
-   "flags": {},
-   "techniques": [],
-   "alerted": false,
-   "exact": false,
-   "parent_match": false
+   "flags": {
+    "defender_tampering": 3
+   },
+   "techniques": [
+    "T1562.001"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
   },
   {
    "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.001-Impair Defenses-Disable or Modify tool/ID5007-Defender threat exclusion (native).evtx",
@@ -3673,13 +3610,17 @@
    "label": "T1562.001",
    "scope": "in",
    "records": 4,
-   "supported": 0,
+   "supported": 4,
    "errors": 0,
-   "flags": {},
-   "techniques": [],
-   "alerted": false,
-   "exact": false,
-   "parent_match": false
+   "flags": {
+    "defender_tampering": 3
+   },
+   "techniques": [
+    "T1562.001"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
   },
   {
    "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.001-Impair Defenses-Disable or Modify tool/ID8-Module Virtualization disabled (Credential Guard).evtx",
@@ -3701,13 +3642,17 @@
    "label": "T1562.001",
    "scope": "in",
    "records": 50,
-   "supported": 10,
+   "supported": 50,
    "errors": 0,
-   "flags": {},
-   "techniques": [],
-   "alerted": false,
-   "exact": false,
-   "parent_match": false
+   "flags": {
+    "defender_tampering": 10
+   },
+   "techniques": [
+    "T1562.001"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
   },
   {
    "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.001-Impair Defenses-Disable or Modify tool/ID800-4103-4104 Defender default action allow any (PowerShell).evtx",
@@ -3715,13 +3660,17 @@
    "label": "T1562.001",
    "scope": "in",
    "records": 10,
-   "supported": 2,
+   "supported": 10,
    "errors": 0,
-   "flags": {},
-   "techniques": [],
-   "alerted": false,
-   "exact": false,
-   "parent_match": false
+   "flags": {
+    "defender_tampering": 2
+   },
+   "techniques": [
+    "T1562.001"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
   },
   {
    "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.001-Impair Defenses-Disable or Modify tool/ID800-4103-4104 Defender exclusion added (PowerShell).evtx",
@@ -3729,13 +3678,17 @@
    "label": "T1562.001",
    "scope": "in",
    "records": 20,
-   "supported": 4,
+   "supported": 20,
    "errors": 0,
-   "flags": {},
-   "techniques": [],
-   "alerted": false,
-   "exact": false,
-   "parent_match": false
+   "flags": {
+    "defender_tampering": 4
+   },
+   "techniques": [
+    "T1562.001"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
   },
   {
    "file": "EVTX-to-MITRE-Attack/TA0005-Defense Evasion/T1562.002-Disable Windows Event Logging/ID33205-SQL Server  audit object disabled.evtx",
@@ -4283,11 +4236,15 @@
    "label": "T1003",
    "scope": "out",
    "records": 3,
-   "supported": 0,
+   "supported": 3,
    "errors": 0,
-   "flags": {},
-   "techniques": [],
-   "alerted": false,
+   "flags": {
+    "privilege_group_add": 3
+   },
+   "techniques": [
+    "T1098"
+   ],
+   "alerted": true,
    "exact": false,
    "parent_match": false
   },
@@ -4311,10 +4268,10 @@
    "label": "T1003",
    "scope": "out",
    "records": 56,
-   "supported": 43,
+   "supported": 47,
    "errors": 0,
    "flags": {
-    "credential_dump_tool": 1
+    "credential_dump_tool": 5
    },
    "techniques": [
     "T1003.001"
@@ -4473,13 +4430,17 @@
    "label": "T1110",
    "scope": "in",
    "records": 52,
-   "supported": 0,
+   "supported": 52,
    "errors": 0,
-   "flags": {},
-   "techniques": [],
-   "alerted": false,
-   "exact": false,
-   "parent_match": false
+   "flags": {
+    "brute_force": 51
+   },
+   "techniques": [
+    "T1110"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
   },
   {
    "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1110.xxx-Brut force/ID4768-4771-Kerberos user enumeration (Kerbrute).evtx",
@@ -4487,13 +4448,17 @@
    "label": "T1110",
    "scope": "in",
    "records": 42,
-   "supported": 0,
+   "supported": 42,
    "errors": 0,
-   "flags": {},
-   "techniques": [],
-   "alerted": false,
-   "exact": false,
-   "parent_match": false
+   "flags": {
+    "brute_force": 42
+   },
+   "techniques": [
+    "T1110"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
   },
   {
    "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1110.xxx-Brut force/ID4771-Kerberos brutforce with valid user.evtx",
@@ -4501,13 +4466,17 @@
    "label": "T1110",
    "scope": "in",
    "records": 54,
-   "supported": 0,
+   "supported": 54,
    "errors": 0,
-   "flags": {},
-   "techniques": [],
-   "alerted": false,
-   "exact": false,
-   "parent_match": false
+   "flags": {
+    "brute_force": 54
+   },
+   "techniques": [
+    "T1110"
+   ],
+   "alerted": true,
+   "exact": true,
+   "parent_match": true
   },
   {
    "file": "EVTX-to-MITRE-Attack/TA0006-Credential Access/T1552.004-Unsecured Credentials-Private Keys/ID70-CAPI-Private key accessed Mimikatz.evtx",
@@ -4591,7 +4560,7 @@
    "label": "T1558",
    "scope": "out",
    "records": 2,
-   "supported": 0,
+   "supported": 1,
    "errors": 0,
    "flags": {},
    "techniques": [],
@@ -4605,7 +4574,7 @@
    "label": "T1558",
    "scope": "out",
    "records": 1,
-   "supported": 0,
+   "supported": 1,
    "errors": 0,
    "flags": {},
    "techniques": [],
@@ -4717,7 +4686,7 @@
    "label": "T1016",
    "scope": "out",
    "records": 694,
-   "supported": 338,
+   "supported": 694,
    "errors": 0,
    "flags": {},
    "techniques": [],
@@ -4851,7 +4820,7 @@
    "label": "T1069",
    "scope": "out",
    "records": 10,
-   "supported": 2,
+   "supported": 10,
    "errors": 0,
    "flags": {},
    "techniques": [],
@@ -4865,7 +4834,7 @@
    "label": "T1069",
    "scope": "out",
    "records": 10,
-   "supported": 2,
+   "supported": 10,
    "errors": 0,
    "flags": {},
    "techniques": [],
@@ -4893,7 +4862,7 @@
    "label": "T1087",
    "scope": "out",
    "records": 21,
-   "supported": 6,
+   "supported": 20,
    "errors": 0,
    "flags": {},
    "techniques": [],
@@ -4977,7 +4946,7 @@
    "label": "T1087",
    "scope": "out",
    "records": 21,
-   "supported": 0,
+   "supported": 14,
    "errors": 0,
    "flags": {},
    "techniques": [],
@@ -5069,7 +5038,7 @@
    "label": "T1482",
    "scope": "out",
    "records": 8,
-   "supported": 2,
+   "supported": 8,
    "errors": 0,
    "flags": {},
    "techniques": [],
@@ -5241,7 +5210,7 @@
    "label": "T1021.003",
    "scope": "out",
    "records": 5,
-   "supported": 2,
+   "supported": 5,
    "errors": 0,
    "flags": {},
    "techniques": [],
@@ -5283,7 +5252,7 @@
    "label": "T1021.004",
    "scope": "out",
    "records": 240,
-   "supported": 103,
+   "supported": 240,
    "errors": 0,
    "flags": {},
    "techniques": [],
@@ -5297,7 +5266,7 @@
    "label": "T1021.004",
    "scope": "out",
    "records": 30,
-   "supported": 4,
+   "supported": 27,
    "errors": 0,
    "flags": {},
    "techniques": [],
@@ -5437,7 +5406,7 @@
    "label": "T1490",
    "scope": "out",
    "records": 7,
-   "supported": 3,
+   "supported": 7,
    "errors": 0,
    "flags": {},
    "techniques": [],
@@ -5465,7 +5434,7 @@
    "label": "T1558.003",
    "scope": "out",
    "records": 6,
-   "supported": 3,
+   "supported": 4,
    "errors": 0,
    "flags": {
     "log_cleared": 1
@@ -5483,7 +5452,7 @@
    "label": "T1558.004",
    "scope": "out",
    "records": 43,
-   "supported": 39,
+   "supported": 40,
    "errors": 0,
    "flags": {
     "log_cleared": 1
@@ -5533,7 +5502,7 @@
    "label": "T1562.010",
    "scope": "out",
    "records": 26,
-   "supported": 0,
+   "supported": 1,
    "errors": 0,
    "flags": {},
    "techniques": [],
@@ -5589,7 +5558,7 @@
    "label": "T1210",
    "scope": "out",
    "records": 35,
-   "supported": 30,
+   "supported": 31,
    "errors": 0,
    "flags": {
     "log_cleared": 1
@@ -5607,7 +5576,7 @@
    "label": "T1210",
    "scope": "out",
    "records": 14,
-   "supported": 10,
+   "supported": 11,
    "errors": 0,
    "flags": {
     "log_cleared": 1

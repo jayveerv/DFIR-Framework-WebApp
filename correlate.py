@@ -45,6 +45,11 @@ FLAGS = {
     "admin_share_access": ("T1021.002", "Remote Services: SMB/Windows Admin Shares", "medium"),
     "remote_service_control": ("T1569.002", "System Services: Service Execution (remote, over SMB pipe)", "high"),
     "registry_persistence": ("T1547.001", "Boot or Logon Autostart Execution: Registry Run Keys / Winlogon", "high"),
+    "account_security_weakened": ("T1098", "Account Manipulation (account protection weakened: no pre-auth, no password, reversible or DES, delegation)", "high"),
+    "delegation_or_spn_set": ("T1098", "Account Manipulation (SPN or Kerberos delegation set on an account)", "medium"),
+    "suspicious_account_rename": ("T1098", "Account Manipulation (account renamed to look privileged, or computer name without $)", "high"),
+    "password_reset_by_other": ("T1098", "Account Manipulation (password of another account reset)", "medium"),
+    "defender_tampering": ("T1562.001", "Impair Defenses: Disable or Modify Tools (Microsoft Defender / Sysmon)", "high"),
     # ---- Linux
     "sudo_untrusted": ("T1548.003", "Sudo and Sudo Caching (untrusted session)", "medium"),
     "credential_access": ("T1552.001", "Unsecured Credentials: Credentials In Files", "high"),
@@ -98,7 +103,8 @@ RULE_FAMILIES = {
     "Authentication (all platforms)": ("brute_force", "brute_force_success"),
     "Windows": ("privileged_session", "privileged_logon_unexpected_source", "account_created", "privilege_group_add", "log_cleared",
                 "encoded_powershell", "suspicious_powershell", "lolbin_abuse", "lolbin_network", "credential_dump_tool", "lsass_access",
-                "service_installed", "scheduled_task_created", "admin_share_access", "remote_service_control", "registry_persistence"),
+                "service_installed", "scheduled_task_created", "admin_share_access", "remote_service_control", "registry_persistence",
+                "account_security_weakened", "delegation_or_spn_set", "suspicious_account_rename", "password_reset_by_other", "defender_tampering"),
     "Linux": ("sudo_untrusted", "credential_access"),
     "AWS CloudTrail": ("external_api_use", "access_key_created", "iam_change_external", "logging_disabled", "monitoring_disabled",
                        "bulk_download", "secrets_bulk_retrieval", "snapshot_shared", "user_data_modified", "bucket_policy_changed_external",
@@ -174,6 +180,25 @@ EXEC_MAGIC = {"ELF", "PE", "Mach-O"}
 SCRIPT_EXT_RE = re.compile(r"\.(?:exe|dll|scr|bat|cmd|ps1|vbs|vbe|js|jse|wsf|hta|com|pif)$", _I)
 ADMIN_SHARE_RE = re.compile(r"\\\\[^\\]*\\(?:ADMIN\$|[A-Z]\$)$", _I)
 REMOTE_PIPES = {"svcctl", "atsvc", "\\svcctl", "\\atsvc"}
+
+# Windows account manipulation (Microsoft message codes in 4738/4742 UserAccountControl: risky flags switched ON)
+UAC_RISKY = {"%%2082": "Password Not Required", "%%2089": "Don't Expire Password", "%%2091": "Encrypted Text Password Allowed",
+             "%%2093": "Trusted For Delegation", "%%2095": "Use DES Key Only", "%%2096": "Don't Require Preauth",
+             "%%2098": "Trusted To Authenticate For Delegation"}
+UAC_RISKY_TEXT = re.compile(r"'(?:Password Not Required|Don't Expire Password|Encrypted Text Password Allowed|Trusted For Delegation|"
+                            r"Use DES Key Only|Don't Require Preauth|Trusted To Authenticate For Delegation)'\s*-\s*Enabled", _I)
+UAC_RISKY_BITS = 0x20 | 0x80 | 0x10000 | 0x80000 | 0x200000 | 0x400000 | 0x1000000
+DELEG_ATTRS = {"serviceprincipalname", "msds-allowedtodelegateto", "msds-allowedtoactonbehalfofotheridentity"}
+SENSITIVE_GROUP_RE = re.compile(r"^(?:Domain Admins|Enterprise Admins|Schema Admins|Administrators|Account Operators|Backup Operators|"
+                                r"Server Operators|Print Operators|DnsAdmins|Group Policy Creator Owners|Key Admins|Enterprise Key Admins|"
+                                r"Organization Management|Exchange (?:Trusted Subsystem|Windows Permissions|Servers)|Remote Desktop Users|"
+                                r"Remote Management Users|Hyper-V Administrators|Cert Publishers)$", _I)
+DEFENDER_RE = re.compile(r"(?:Set|Add)-MpPreference\b[^\n]*?-(?:Disable\w+\s+(?:\$true|1)\b|\w+\s+(?:Disabled?|0)\b|Exclusion(?:Path|Process|Extension|IpAddress)\b|"
+                         r"\w*ThreatDefaultAction\s+(?:6|9)\b|\w*ThreatDefaultAction_Actions\s+(?:6|9)\b)|"
+                         r"\bsc(?:\.exe)?\s+(?:config|stop|delete)\s+(?:WinDefend|WdNisSvc|WdBoot|WdFilter|Sense|mpssvc|Sysmon\w*)\b|"
+                         r"\bfltmc(?:\.exe)?\s+unload\s+(?:SysmonDrv|WdFilter)|MpCmdRun(?:\.exe)?\s.*-RemoveDefinitions|"
+                         r"Uninstall-WindowsFeature\s+.*Defender|DisableAntiSpyware|DisableRealtimeMonitoring\s+(?:\$true|1)", _I)
+DEFENDER_REG_RE = re.compile(r"\\Windows Defender\\.*\\Disable\w+$|\\Services\\(?:WinDefend|WdBoot|WdFilter|WdNisSvc|Sense|SysmonDrv|Sysmon\d*)\\Start$", _I)
 
 AWS_LOGGING = {"StopLogging", "DeleteTrail", "UpdateTrail"}
 AWS_MONITORING = {"DeleteDetector", "UpdateDetector", "DisassociateFromMasterAccount", "DeleteFlowLogs", "StopConfigurationRecorder",
@@ -300,8 +325,33 @@ def detect(events, cfg):
                 _flag(e, "privileged_session")
             elif t == "account_created" and sip:
                 _flag(e, "account_created")
-            elif t == "group_add" and sip:
+            elif t == "group_add" and (sip or SENSITIVE_GROUP_RE.search((e["target"] or "").strip())):
                 _flag(e, "privilege_group_add")
+            elif t == "account_changed":
+                uac = x.get("uac") or ""
+                if any(c in uac for c in UAC_RISKY) or UAC_RISKY_TEXT.search(uac):
+                    _flag(e, "account_security_weakened")
+                attr = (x.get("ldap_attr") or "").lower()
+                if attr == "useraccountcontrol":
+                    try:
+                        val = int(re.search(r"\d+", cmd.split("=", 1)[-1]).group(0))
+                    except (AttributeError, ValueError):
+                        val = 0
+                    if val & UAC_RISKY_BITS:
+                        _flag(e, "account_security_weakened")
+                spn, deleg = (x.get("spn") or "-").strip(), (x.get("delegation") or "-").strip()
+                if spn not in ("", "-") or deleg not in ("", "-") or attr in DELEG_ATTRS:
+                    _flag(e, "delegation_or_spn_set")
+                old_n, new_n = x.get("rename_old") or "", x.get("rename_new") or ""
+                if new_n and (re.search(r"adm", new_n, _I) and not re.search(r"adm", old_n, _I) or (old_n.endswith("$") and not new_n.endswith("$"))):
+                    _flag(e, "suspicious_account_rename")
+            elif t == "password_reset":
+                if (e["detail"] or "").startswith("password reset by another"):
+                    _flag(e, "password_reset_by_other")
+            elif t == "defense_change":
+                d_ = e["detail"] or ""
+                if "disabled" in d_ or re.search(r"Exclusions|Disable|SysmonDrv|WdFilter", d_, _I):
+                    _flag(e, "defender_tampering")
             elif t == "log_cleared":
                 _flag(e, "log_cleared")
             elif t == "process_create":
@@ -314,11 +364,15 @@ def detect(events, cfg):
                     _flag(e, "lolbin_abuse")
                 if CRED_TOOL_RE.search(full):
                     _flag(e, "credential_dump_tool")
+                if DEFENDER_RE.search(cmd):
+                    _flag(e, "defender_tampering")
             elif t == "script_block":
                 if SUSP_PS_RE.search(cmd):
                     _flag(e, "suspicious_powershell")
                 if CRED_TOOL_RE.search(cmd):
                     _flag(e, "credential_dump_tool")
+                if DEFENDER_RE.search(cmd):
+                    _flag(e, "defender_tampering")
             elif t == "process_access":
                 src = x.get("source") or e["detail"] or ""
                 if _base(e["target"]) == "lsass.exe" and not LSASS_BENIGN.search(src):
@@ -337,11 +391,15 @@ def detect(events, cfg):
             elif t == "registry_set":
                 if REG_PERSIST_RE.search(e["target"] or ""):
                     _flag(e, "registry_persistence")
+                if DEFENDER_REG_RE.search(e["target"] or "") and re.search(r"0x0000000[134]\b|DWORD \(0x0000000[134]\)", cmd):
+                    _flag(e, "defender_tampering")
             elif t == "service_install":
                 img = cmd
                 benign = re.search(r"\\Program Files( \(x86\))?\\|\\System32\\drivers\\|^\"?\\?SystemRoot\\System32\\drivers\\|"
-                                   r"\\Windows\\System32\\svchost\.exe\s+-k\s|\\Windows Defender\\|\\Microsoft\\Windows Defender", img, _I)
-                if not benign or SUSP_CMD_RE.search(img):
+                                   r"\\Windows\\System32\\svchost\.exe\s+-k\s|\\Windows Defender\\|\\Microsoft\\Windows Defender|"
+                                   r"^\"?(?:%SystemRoot%\\|\\SystemRoot\\|[A-Z]:\\Windows\\)?System32\\|^\"?[A-Z]:\\Windows\\Microsoft\.NET\\", img, _I)
+                shell = re.search(r"%COMSPEC%|\bcmd(?:\.exe)?\b|powershell|pwsh|rundll32|mshta|regsvr32|\\\\", img, _I)
+                if not benign or shell or SUSP_CMD_RE.search(img):
                     _flag(e, "service_installed")
             elif t == "scheduled_task":
                 _flag(e, "scheduled_task_created")

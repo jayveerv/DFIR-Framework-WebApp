@@ -4,16 +4,16 @@
  ],
  "items": [
   {
-   "group_id": "sg-7c70fdd8c9f5dc705",
+   "group_id": "sg-a2aa1fb3ca373d496",
    "name": "default",
-   "vpc": "vpc-42d8994716954c750",
+   "vpc": "vpc-df2805ebd573e2097",
    "region": "us-east-1",
    "rules": []
   },
   {
-   "group_id": "sg-c4bc39cda50ef2eaf",
+   "group_id": "sg-cbf1946bfedc5c43b",
    "name": "ssh-world",
-   "vpc": "vpc-42d8994716954c750",
+   "vpc": "vpc-df2805ebd573e2097",
    "region": "us-east-1",
    "rules": [
     {
@@ -28,9 +28,9 @@
    ]
   },
   {
-   "group_id": "sg-60b4d11a6d4341946",
+   "group_id": "sg-aba1dccad7ecb0642",
    "name": "rdp-world",
-   "vpc": "vpc-42d8994716954c750",
+   "vpc": "vpc-df2805ebd573e2097",
    "region": "us-east-1",
    "rules": [
     {
@@ -45,9 +45,9 @@
    ]
   },
   {
-   "group_id": "sg-46c4676f1e2108725",
+   "group_id": "sg-957c35f42c86038ca",
    "name": "all-open",
-   "vpc": "vpc-42d8994716954c750",
+   "vpc": "vpc-df2805ebd573e2097",
    "region": "us-east-1",
    "rules": [
     {
@@ -62,9 +62,9 @@
    ]
   },
   {
-   "group_id": "sg-181f17dfb15d56b8f",
+   "group_id": "sg-39a114312c049e135",
    "name": "web-443",
-   "vpc": "vpc-42d8994716954c750",
+   "vpc": "vpc-df2805ebd573e2097",
    "region": "us-east-1",
    "rules": [
     {
@@ -79,9 +79,9 @@
    ]
   },
   {
-   "group_id": "sg-05f04ecd5905993d8",
+   "group_id": "sg-b820e3c2bbab04c0f",
    "name": "db-internal",
-   "vpc": "vpc-42d8994716954c750",
+   "vpc": "vpc-df2805ebd573e2097",
    "region": "us-east-1",
    "rules": [
     {
